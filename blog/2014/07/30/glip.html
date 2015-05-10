@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Switching Host-Communication to GLIP</title>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <!-- external CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+
+  <!-- our own CSS (must be include after bootstrap.css!) -->
+  <link rel="stylesheet" href="/css/optimsoc.css"/>
+
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+    <script src="/js/html5shiv.js"></script>
+    <script src="/js/respond.min.js"></script>
+  <![endif]-->
+
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="http://www.optimsoc.org/feed.xml" />
+
+  <!-- Google Web Fonts -->
+  <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,400italic,600,700,900" rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=Source+Code+Pro:400,500,600,700" rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=Fredericka+the+Great" rel="stylesheet" type="text/css">
+</head>
+<body  data-offset='50' data-spy="scroll" data-target="#optimsoc-doc-subnav-nav">
+  <!-- top navigation bar -->
+  <nav class="navbar navbar-fixed-top optimsoc-nav" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/index.html" alt="OpTiMSoC"><span class="wordmark">OpTiMSoC</span></a>
+      </div>
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          <li><a href="/download.html">Get it</a></li>
+          <li><a href="/docs/index.html">Documentation</a></li>
+          <li><a href="/getinvolved.html">Get involved</a></li>
+          <li><a href="/about.html">About</a></li>
+          <li><a href="/blog">Blog</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container" id="maincontent">
+  
+
+  
+<h1>Switching Host-Communication to GLIP</h1>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-10">
+      <p>Since its beginning, OpTiMSoC contained a method for communication between a 
+PC and an FPGA board. For the ZTEX 1.15 boards we used the USB 2.0 interface, 
+based on the Cypress FX2 chip available on those boards. As we continued the 
+development, we realized that this connectivity functionality is not only 
+useful in OpTiMSoC, but in other projects as well. </p>
+
+<p>We now finally got around to factor the communication interface out of OpTiMSoC 
+and to moved it into a new project, which we named the &ldquo;Generic Logic Interface 
+Project&rdquo;, or in short, GLIP. It provides generic, FIFO-based communication 
+between a host and a target, abstracting away all the nitty gritty details and 
+protocols in between. It lets you simply focus on the data you want to transfer, 
+handling everything else for you.</p>
+
+<p>As of now GLIP contains a cleaned-up and improved version of the Cypress 
+FX2-based USB 2.0 backend, reaching up to 21 MByte/s bi-directional transfer 
+rate (close to the achievable maximum of the USB 2.0 interface), and a 
+host-only TCP backend for communication between a simulated system (e.g. in 
+ModelSim) and a controller.</p>
+
+<p>In the near future, other backends for JTAG and possibly PCIe are planned.</p>
+
+<p>We provide GLIP with an extensive set of documentation under the MIT license, 
+check it out!</p>
+
+<ul>
+<li><a href="http://lis.ei.tum.de/glip/">Project page and documentation</a></li>
+<li><a href="https://github.com/TUM-LIS/glip">Source code on GitHub</a></li>
+</ul>
+
+<p>With the newest latest trunk version of OpTiMSoC liboptimsochost uses GLIP for 
+all Debug NoC based communications, so you need to have GLIP installed if you 
+want to use those as of now.</p>
+
+<p>Enjoy!</p>
+
+    </div>
+    <div class="col-md-2 optimsoc-blog-meta">
+      <p>by Philipp Wagner <br/>on 30 July 2014</p>
+      <img class="img-rounded" src="/img/people/philipp.jpg"/>
+    </div>
+  </div>
+</div>
+</div>
+
+
+  <!-- footer -->
+  <hr>
+  <footer class="optimsoc-footer">
+    <p>OpTiMSoC &copy; 2012-2014 Lehrstuhl für Integrierte Systeme, TUM &middot; <a href="http://www.lis.ei.tum.de/index.php?id=11">Imprint</a></p>
+  </footer>
+
+  <script src="/js/jquery.min.js"></script>
+  <script src="/js/bootstrap.min.js"></script>
+
+  <!-- Piwik -->
+  <script type="text/javascript">
+  var _paq = _paq || [];
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u=(("https:" == document.location.protocol) ? "https" : "http") + "://lis.ei.tum.de/admin/piwik/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', 1]);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0]; g.type='text/javascript';
+    g.defer=true; g.async=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+
+  </script>
+  <noscript><p><img src="http://lis.ei.tum.de/admin/piwik/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
+  <!-- End Piwik Code -->
+</body>
+</html>
+

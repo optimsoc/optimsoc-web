@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>OpTiMSoC Reference Manual</title>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <!-- external CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+
+  <!-- our own CSS (must be include after bootstrap.css!) -->
+  <link rel="stylesheet" href="/css/optimsoc.css"/>
+
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+    <script src="/js/html5shiv.js"></script>
+    <script src="/js/respond.min.js"></script>
+  <![endif]-->
+
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="http://www.optimsoc.org/feed.xml" />
+
+  <!-- Google Web Fonts -->
+  <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,400italic,600,700,900" rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=Source+Code+Pro:400,500,600,700" rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=Fredericka+the+Great" rel="stylesheet" type="text/css">
+</head>
+<body  data-offset='50' data-spy="scroll" data-target="#optimsoc-doc-subnav-nav">
+  <!-- top navigation bar -->
+  <nav class="navbar navbar-fixed-top optimsoc-nav" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/index.html" alt="OpTiMSoC"><span class="wordmark">OpTiMSoC</span></a>
+      </div>
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          <li><a href="/download.html">Get it</a></li>
+          <li><a href="/docs/index.html">Documentation</a></li>
+          <li><a href="/getinvolved.html">Get involved</a></li>
+          <li><a href="/about.html">About</a></li>
+          <li><a href="/blog">Blog</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container" id="maincontent">
+  
+  <div class="optimsoc-section-header">
+    <h1>Reference Manual</h1>
+  </div>
+  <hr/>
+  
+
+      <div class="col-md-3">
+<div class="optimsoc-doc-mainnav"><ul class="nav">
+<li><a href="chap_toolchain.html" title="Chapter&nbsp;1 Toolchain &#8227; OpTiMSoC Reference Manual">Toolchain</a></li>
+<li><a href="" title="Chapter&nbsp;2 System Software &#8227; OpTiMSoC Reference Manual">System Software</a></li>
+<li><a href="chap_system-configuration.html" title="Chapter&nbsp;3 System Configuration &#8227; OpTiMSoC Reference Manual">System Configuration</a></li>
+<li><a href="Ch4.html" title="Chapter&nbsp;4 Trace Debugging &#8227; OpTiMSoC Reference Manual">Trace Debugging</a></li>
+</ul></div>
+<div id="optimsoc-doc-subnav-nav" class="optimsoc-doc-subnav hidden-print" data-spy="affix" data-offset-top="200" role="complementary"><ul class="nav">
+<li class=""><a href="#S1" title="2.1 System Libraries &#8227; Chapter&nbsp;2 System Software &#8227; OpTiMSoC Reference Manual">System Libraries</a></li>
+<li class=""><a href="#S2" title="2.2 Building and Installing the System Libraries &#8227; Chapter&nbsp;2 System Software &#8227; OpTiMSoC Reference Manual">Building and Installing the System Libraries</a></li>
+<li class=""><a href="#S3" title="2.3 Building Software &#8227; Chapter&nbsp;2 System Software &#8227; OpTiMSoC Reference Manual">Building Software</a></li>
+</ul></div>
+</div><div class="col-md-9 optimsoc-doc-body">
+<div class="ltx_page_main">
+<div class="ltx_page_content">
+<div class="ltx_chapter">
+<h1 class="ltx_title ltx_title_chapter">
+<span class="ltx_tag ltx_tag_chapter">Chapter&nbsp;2 </span>System Software</h1>
+<div class="ltx_date ltx_role_creation"></div>
+
+<div id="S1" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">2.1 </span>System Libraries</h2>
+
+<div id="S1.p1" class="ltx_para">
+<p class="ltx_p">The system libraries are build in a unified environment, that means
+all libraries are build together and managed by one build system. When
+checking out an empty directory, the clean directory structure at base
+level (that is <code class="ltx_verbatim ltx_font_typewriter">src/sw/system/dm</code>) looks like:</p>
+</div>
+<div id="S1.p2" class="ltx_para">
+<pre class="ltx_verbatim ltx_font_typewriter">
+apps/
+<span class="ltx_text" style="color:#BFBFBF;">autogen.sh</span>
+bootrom/
+<span class="ltx_text" style="color:#BFBFBF;">configure.ac</span>
+doc/
+<span class="ltx_text" style="color:#BFBFBF;">m4/</span>
+<span class="ltx_text" style="color:#BFBFBF;">Makefile.am</span>
+src/
+</pre>
+</div>
+<div id="S1.p3" class="ltx_para">
+<p class="ltx_p">The grey folders and files are part of the (autotools) build
+structure. The libraries can be found in <code class="ltx_verbatim ltx_font_typewriter">src</code> and will be
+discussed below. The <code class="ltx_verbatim ltx_font_typewriter">apps</code> folder contains (example)
+applications that are shipped with the distribution. They will
+actually not be build in place but together with a system
+configuration in your system&rsquo;s environment.</p>
+</div>
+<div id="S1.p4" class="ltx_para">
+<p class="ltx_p">The <code class="ltx_verbatim ltx_font_typewriter">doc</code> folder contains the Doxygen configuration to build the
+API documentation (pdf and html) you can also find online. Finally,
+<code class="ltx_verbatim ltx_font_typewriter">bootrom</code> contains the bootcode and the necessary programs to
+translate the binary to verilog code to include in the hardware.</p>
+</div>
+</div>
+<div id="S2" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">2.2 </span>Building and Installing the System Libraries</h2>
+
+<div id="S2.p1" class="ltx_para">
+<p class="ltx_p">The system software build system is based on autotools (autoconf,
+automake) and libtool. Make sure you have the necessary tools
+installed.</p>
+</div>
+<div id="S2.p2" class="ltx_para">
+<p class="ltx_p">In the current system state we encourage you to build and install the
+system libraries in place. Most of the descriptions and tutorial parts
+relate to that scheme. When doing so (as described below) you will
+install libraries, headers and scripts needed for building software in
+the system software folder in <code class="ltx_verbatim ltx_font_typewriter">lib/</code>, <code class="ltx_verbatim ltx_font_typewriter">include/</code> and
+<code class="ltx_verbatim ltx_font_typewriter">share/</code>.</p>
+</div>
+<div id="S2.SS1" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">2.2.1 </span>Generate the <span class="ltx_text ltx_font_typewriter">configure</span> script</h3>
+
+<div id="S2.SS1.p1" class="ltx_para">
+<p class="ltx_p">Although the autotools are complex, generating the <code class="ltx_verbatim ltx_font_typewriter">configure</code>
+script is easily done running the <code class="ltx_verbatim ltx_font_typewriter">autogen.sh</code> script. Just run
+the command in place:</p>
+</div>
+<div id="S2.SS1.p2" class="ltx_para">
+<pre class="ltx_verbatim ltx_font_typewriter">
+./autogen.sh
+</pre>
+</div>
+<div id="S2.SS1.p3" class="ltx_para">
+<p class="ltx_p">Afterwards, the <code class="ltx_verbatim ltx_font_typewriter">configure</code> script will be present. As mentioned
+above, you should not run it in place but create a separate building
+directory:</p>
+</div>
+<div id="S2.SS1.p4" class="ltx_para">
+<pre class="ltx_verbatim ltx_font_typewriter">
+mkdir build
+cd build
+</pre>
+</div>
+<div id="S2.SS1.p5" class="ltx_para">
+<p class="ltx_p">The <code class="ltx_verbatim ltx_font_typewriter">autogen.sh</code> script already gave you the commonly used
+configure command line:</p>
+</div>
+<div id="S2.SS1.p6" class="ltx_para">
+<pre class="ltx_verbatim ltx_font_typewriter">
+../configure CFLAGS='-g -O0' --prefix=`pwd`/.. --host=or32 \
+  CC=or32-elf-gcc
+</pre>
+</div>
+<div id="S2.SS1.p7" class="ltx_para">
+<p class="ltx_p">This assumes you have an environment variable <code class="ltx_verbatim ltx_font_typewriter">OPTIMSOC_NEWLIB</code>
+set. Alternatively you can set the path using
+<code class="ltx_verbatim ltx_font_typewriter">--with-optimsoc-newlib</code>. You can also change the compiler if
+necessary. The Makefile templates for libraries are also built based
+on the <code class="ltx_verbatim ltx_font_typewriter">CC</code> setting. As they also contain calls to <code class="ltx_verbatim ltx_font_typewriter">objdump</code>
+and <code class="ltx_verbatim ltx_font_typewriter">objcopy</code>, the script tries to replace gcc in the <code class="ltx_verbatim ltx_font_typewriter">CC</code>
+variable with those values. In case the programs are called different
+you can set <code class="ltx_verbatim ltx_font_typewriter">OR32OBJDUMP</code> and <code class="ltx_verbatim ltx_font_typewriter">OR32OBJCOPY</code> environment
+variables in the configure run accordingly.</p>
+</div>
+</div>
+<div id="S2.SS2" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">2.2.2 </span>Build and Install</h3>
+
+<div id="S2.SS2.p1" class="ltx_para">
+<p class="ltx_p">Afterwards you are ready to build your software</p>
+</div>
+<div id="S2.SS2.p2" class="ltx_para">
+<pre class="ltx_verbatim ltx_font_typewriter">
+make
+</pre>
+</div>
+<div id="S2.SS2.p3" class="ltx_para">
+<p class="ltx_p">and then install it</p>
+</div>
+<div id="S2.SS2.p4" class="ltx_para">
+<pre class="ltx_verbatim ltx_font_typewriter">
+make install
+</pre>
+</div>
+<div id="S2.SS2.p5" class="ltx_para">
+<p class="ltx_p">Afterwards you will find the libraries in <code class="ltx_verbatim ltx_font_typewriter">$(prefix)/lib</code> (in
+most cases directly in the system software base folder). Furthermore
+the headers plus extra build files are installed.</p>
+</div>
+</div>
+<div id="S2.SS3" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">2.2.3 </span>Develop System Libraries</h3>
+
+<div id="S2.SS3.p1" class="ltx_para">
+<p class="ltx_p">Development</p>
+</div>
+</div>
+</div>
+<div id="S3" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">2.3 </span>Building Software</h2>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+
+
+  <!-- footer -->
+  <hr>
+  <footer class="optimsoc-footer">
+    <p>OpTiMSoC &copy; 2012-2014 Lehrstuhl für Integrierte Systeme, TUM &middot; <a href="http://www.lis.ei.tum.de/index.php?id=11">Imprint</a></p>
+  </footer>
+
+  <script src="/js/jquery.min.js"></script>
+  <script src="/js/bootstrap.min.js"></script>
+
+  <!-- Piwik -->
+  <script type="text/javascript">
+  var _paq = _paq || [];
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u=(("https:" == document.location.protocol) ? "https" : "http") + "://lis.ei.tum.de/admin/piwik/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', 1]);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0]; g.type='text/javascript';
+    g.defer=true; g.async=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+
+  </script>
+  <noscript><p><img src="http://lis.ei.tum.de/admin/piwik/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
+  <!-- End Piwik Code -->
+</body>
+</html>
+
