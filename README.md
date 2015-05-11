@@ -7,7 +7,7 @@
 
 Installing on Ubuntu 14.04
 
-   sudo apt-get install jekyll
+    sudo apt-get install jekyll
 
 openSUSE 12.3
 
