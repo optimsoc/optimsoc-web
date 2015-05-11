@@ -1,0 +1,236 @@
+body {
+  background: none repeat scroll 0 0 rgba(0, 0, 0, 0.02);
+  color: rgba(0, 0, 0, 0.75);
+  font-family: "Source Sans Pro",sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  /* this should solve the jump label problem (see below and bootstrap docs),
+   * but it actually does not work */
+  padding-top: 50px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Source Sans Pro",sans-serif;
+}
+
+.optimsoc-doc-body h1,
+.optimsoc-doc-body h2,
+.optimsoc-doc-body h3,
+.optimsoc-doc-body h4,
+.optimsoc-doc-body h5,
+.optimsoc-doc-body h6 {
+  /* ensure that the jump targets don't end up behind the main navigation bar */
+  padding-top: 50px;
+  margin-top: -50px;
+}
+
+h1 {
+  color: rgba(0, 0, 0, 0.75);
+  color: #a2ad00;
+  font-weight: 600;
+  /*text-shadow: 0 1px 0 #FFFFFF;*/
+}
+h2 {
+  /*color: #419EDA;*/
+  color: #4187c1;
+  font-weight: 400;
+  text-shadow: 0 1px 0 #FFFFFF;
+}
+h3 {
+  color: #F04C5C;
+  font-weight: 400;
+  text-shadow: 0 1px 0 #FFFFFF;
+}
+h4 {
+  font-weight: 600;
+  text-shadow: 0 1px 0 #FFFFFF;
+}
+pre, code {
+  border-radius: 3px 3px 3px 3px;
+  color: #000000;
+  font-family: "Source Code Pro",Menlo,monospace;
+  font-size: 14px;
+}
+pre {
+  background: none repeat scroll 0 0 rgba(0, 0, 0, 0.05);
+  border: medium none;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.075) inset;
+}
+code {
+  background: none repeat scroll 0 0 rgba(0, 0, 0, 0.03);
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.075) inset;
+  display: inline-block;
+}
+pre code {
+  background: none repeat scroll 0 0 transparent;
+  box-shadow: none;
+}
+
+/* top navigation bar */
+.optimsoc-nav {
+  background: none repeat scroll 0 0 #FFFFFF;
+  box-shadow: 0 0 3px rgba(153, 153, 153, 0.75);
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.optimsoc-nav .navbar-brand {
+  background: url("../img/optimsoc_logo.png") no-repeat scroll left center transparent;
+  display: inline-block;
+  font-size: 25px;
+  margin-left: 0;
+  padding-left: 45px;
+}
+
+.navbar-toggle {
+  border-color: #AAAAAA;
+}
+.navbar-toggle .icon-bar {
+  background-color: #AAAAAA;
+}
+
+.wordmark {
+  font-family: 'Fredericka the Great', cursive;
+  color: #333333;
+  text-shadow: 0 1px 0 white;
+}
+
+/* footer */
+.optimsoc-footer {
+  color: rgba(77, 77, 77, 0.75);
+  font-weight: 300;
+  text-align: center;
+}
+
+.optimsoc-section-header h1 {
+  font-size: 50px;
+  color: #F04C5C;
+  font-weight: 600;
+  text-shadow: 0 1px 0 #FFFFFF;
+}
+
+/* ================== HOMEPAGE ================== */
+.optimsoc-claim {
+    background-color: #003359;
+    background: url("../img/grid-large.jpg") repeat scroll left center transparent;
+    text-align: center;
+    padding-top: 30px;
+    padding-bottom: 30px;
+
+    vertical-align: middle;
+}
+
+.optimsoc-claim h1 {
+  font-weight: normal;
+}
+
+.optimsoc-claim .lead {
+  color: #FFFFFF;
+}
+
+.optimsoc-claim-img {
+  border-radius: 20px;
+  border: 2px solid #ccc;
+  box-shadow: 2px 2px 3px 3px #666;
+}
+
+/* ================== ABOUT PAGE ================== */
+.optimsoc-about-people {
+  margin-top: 10px;
+}
+
+/* ================== BLOG ================== */
+.optimsoc-blog-meta {
+  color: rgba(77, 77, 77, 0.75);
+  font-weight: 300;
+}
+
+/* ================== DOCUMENTATION ================== */
+/* documentation main navigation (chapters) */
+.optimsoc-doc-mainnav .nav > li > a {
+  padding: 0;
+}
+
+/* documentation subnavigation (inside the chapter) */
+.optimsoc-doc-subnav.affix {
+    position: static;
+}
+.optimsoc-doc-subnav.affix-top {
+    top: 50px;
+}
+@media screen and (min-width: 992px) {
+  .optimsoc-doc-subnav.affix-bottom, .optimsoc-doc-subnav.affix {
+      width: 213px;
+  }
+  .optimsoc-doc-subnav.affix {
+      position: fixed;
+      top: 80px;
+  }
+  .optimsoc-doc-subnav.affix-bottom {
+      position: absolute;
+  }
+}
+@media screen and (min-width: 1200px) {
+  .optimsoc-doc-subnav.affix-bottom, .optimsoc-doc-subnav.affix {
+      width: 263px;
+  }
+}
+.optimsoc-doc-subnav {
+    background-color: #FFFFFF;
+    margin-bottom: 30px;
+    margin-top: 30px;
+    padding-bottom: 15px;
+    padding-top: 15px;
+}
+
+.optimsoc-doc-subnav .nav > li > a {
+    display: block;
+    padding: 4px 20px;
+}
+.optimsoc-doc-subnav .nav > li > a:hover,
+.optimsoc-docs-sidebar .nav > li > a:focus {
+    text-decoration: none;
+}
+.optimsoc-doc-subnav .nav > .active > a,
+.optimsoc-docs-sidebar .nav > .active:hover > a,
+.optimsoc-docs-sidebar .nav > .active:focus > a {
+    background-color: rgba(0, 0, 0, 0);
+    color: #F04C5C;
+    font-weight: 500;
+}
+.optimsoc-doc-subnav .nav .nav {
+    display: none;
+    margin-bottom: 5px;
+}
+.optimsoc-doc-subnav .nav > .active > ul {
+    display: block;
+}
+.optimsoc-doc-subnav .nav .nav > li > a {
+    font-size: 90%;
+    padding-bottom: 2px;
+    padding-left: 30px;
+    padding-top: 2px;
+}
+
+/* latexml-generated styles */
+/* itemized lists with non-standard bullets */
+li.ltx_item > .ltx_tag {
+    display: inline;
+    margin-left: -1.5em;
+}
+.ltx_item .ltx_tag + .ltx_para, .ltx_item .ltx_tag + .ltx_para .ltx_p {
+    display: inline;
+}
+
+/* footnotes */
+.optimsoc-doc-footnote-full > sup {
+  padding-right: 10px;
+}
+
+hr.optimsoc-doc-sep-footnotes {
+  width: 50%;
+  border-color: #999999;
+  margin: 30px auto 0 0;
+  display: block;
+}

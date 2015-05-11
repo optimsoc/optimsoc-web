@@ -1,0 +1,17 @@
+---
+layout: default
+---
+{% assign author = site.authors[page.author] %}
+<h1>{{ page.title }}</h1>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-10">
+      {{ content }}
+    </div>
+    <div class="col-md-2 optimsoc-blog-meta">
+      <p>by {{ author.display_name }} <br/>on {{ page.date | date_to_long_string }}</p>
+      <img class="img-rounded" src="{{ author.picture }}"/>
+    </div>
+  </div>
+</div>

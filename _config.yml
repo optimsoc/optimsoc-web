@@ -1,0 +1,19 @@
+name: OpTiMSoC
+markdown: redcarpet
+redcarpet:
+  extensions: [smart]
+highlighter: pygments
+permalink: /blog/:year/:month/:day/:title.html
+
+url: http://www.optimsoc.org/blog
+description: OpTiMSoC project blog
+
+# blog authors
+authors:
+  philipp:
+    display_name: Philipp Wagner
+    picture: /img/people/philipp.jpg
+  stefan:
+    display_name: Stefan Wallentowitz
+    picture: /img/people/stefan.jpg
+
