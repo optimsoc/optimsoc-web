@@ -1,0 +1,174 @@
+---
+layout: default
+title: OpTiMSoC Reference Manual
+sectiontitle: Reference Manual
+---
+    <div class="col-md-3">
+<div class="optimsoc-doc-mainnav"><ul class="nav">
+<li><a href="chap_toolchain.html" title="Chapter&nbsp;1 Toolchain &#8227; OpTiMSoC Reference Manual">Toolchain</a></li>
+<li><a href="chap_systemsoftware.html" title="Chapter&nbsp;2 System Software &#8227; OpTiMSoC Reference Manual">System Software</a></li>
+<li><a href="chap_system-configuration.html" title="Chapter&nbsp;3 System Configuration &#8227; OpTiMSoC Reference Manual">System Configuration</a></li>
+<li><a href="" title="Chapter&nbsp;4 Trace Debugging &#8227; OpTiMSoC Reference Manual">Trace Debugging</a></li>
+</ul></div>
+<div id="optimsoc-doc-subnav-nav" class="optimsoc-doc-subnav hidden-print" data-spy="affix" data-offset-top="200" role="complementary"><ul class="nav"><li class=""><a href="#S1" title="4.1 Software Trace &#8227; Chapter&nbsp;4 Trace Debugging &#8227; OpTiMSoC Reference Manual">Software Trace</a></li></ul></div>
+</div><div class="col-md-9 optimsoc-doc-body">
+<div class="ltx_page_main">
+<div class="ltx_page_content">
+<div class="ltx_chapter">
+<h1 class="ltx_title ltx_title_chapter">
+<span class="ltx_tag ltx_tag_chapter">Chapter&nbsp;4 </span>Trace Debugging</h1>
+<div class="ltx_date ltx_role_creation"></div>
+
+<div id="S1" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">4.1 </span>Software Trace</h2>
+
+<div id="S1.p1" class="ltx_para">
+<p class="ltx_p">The most convenient way to debug a system are software traces. A
+software trace is a stream of events which are mainly triggered by the
+software. A trace event is defined by an <code class="ltx_verbatim ltx_font_typewriter">index</code> and a
+<code class="ltx_verbatim ltx_font_typewriter">value</code>. Complex events can be defined as sequences of single
+events (see discussion below).</p>
+</div>
+<div id="S1.SS1" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">4.1.1 </span>Software Instrumentation</h3>
+
+<div id="S1.SS1.p1" class="ltx_para">
+<p class="ltx_p">The OpenRISC architecture defines the no operation instruction
+(<code class="ltx_verbatim ltx_font_typewriter">l.nop</code>) with a 24-bit operand. Inspired by the OpenRISC
+testbenches and simulator, we use this minimally intrusive way to
+instrument the source code. A trace event can be defined in assembly
+as</p>
+</div>
+<div id="S1.SS1.p2" class="ltx_para">
+<pre class="ltx_verbatim ltx_font_typewriter">
+l.nop <em class="ltx_emph">&lt;index&gt;</em>
+</pre>
+</div>
+<div id="S1.SS1.p3" class="ltx_para">
+<p class="ltx_p">The <code class="ltx_verbatim ltx_font_typewriter">value</code> parameter is handled with general purpose register 3.
+The current value at the <code class="ltx_verbatim ltx_font_typewriter">nop</code> execution is emitted. So, three
+instructions are required:</p>
+</div>
+<div id="S1.SS1.p4" class="ltx_para">
+<pre class="ltx_verbatim ltx_font_typewriter">
+l.movhi r3, hi(<em class="ltx_emph">&lt;value&gt;</em>)
+l.ori r3, r3, lo(<em class="ltx_emph">&lt;value&gt;</em>)
+l.nop <em class="ltx_emph">&lt;index&gt;</em>
+</pre>
+</div>
+<div id="S1.SS1.p5" class="ltx_para">
+<p class="ltx_p">For convenience a macro is defined for use in C code:</p>
+</div>
+<div id="S1.SS1.p6" class="ltx_para">
+<pre class="ltx_verbatim ltx_font_typewriter">
+OPTIMSOC_TRACE(<em class="ltx_emph">&lt;index&gt;</em>, <em class="ltx_emph">&lt;value</em>)
+</pre>
+</div>
+<div id="S1.SS1.p7" class="ltx_para">
+<p class="ltx_p">The C library and the OpTiMSoC libraries use trace events to ease
+debugging, the debugging infrastructure allows to trace the events or
+filter them. The debugging events are grouped and one group of indexes
+(<code class="ltx_verbatim ltx_font_typewriter">0x1500</code> and above) are defined for users.</p>
+</div>
+<div id="S1.SS1.SSS1" class="ltx_subsubsection">
+<h4 class="ltx_title ltx_title_subsubsection">Basic Trace Events</h4>
+
+<div id="S1.SS1.SSS1.P1" class="ltx_paragraph">
+<h5 class="ltx_title ltx_title_paragraph">Exit (0x1)</h5>
+
+<div id="S1.SS1.SSS1.P1.p1" class="ltx_para">
+<p class="ltx_p">The library has terminated (either main
+returned or exit has been called). The value contains the exit code as
+returned by main or passed to the exit call.</p>
+</div>
+</div>
+<div id="S1.SS1.SSS1.P2" class="ltx_paragraph">
+<h5 class="ltx_title ltx_title_paragraph">Printf (0x4)</h5>
+
+<div id="S1.SS1.SSS1.P2.p1" class="ltx_para">
+<p class="ltx_p">Characters are printed directly from the
+library by using sequences of the trace events. Each of the events
+contains a character.</p>
+</div>
+</div>
+<div id="S1.SS1.SSS1.P3" class="ltx_paragraph">
+<h5 class="ltx_title ltx_title_paragraph">Exception (0x10)</h5>
+
+<div id="S1.SS1.SSS1.P3.p1" class="ltx_para">
+<p class="ltx_p">An exception occured (program counter
+observed). The exception vector number is given as value (1: Reset, 2:
+Bus fault, 3: Data page fault, 4: Instruction page fault, 5: Timer, 6:
+Alignment Error, 7: Illegal instruction, 8: Interrupt, 9: Data TLB
+miss, 10: Instruction TLB miss, 11: Range Exception, 12: System call)</p>
+</div>
+</div>
+<div id="S1.SS1.SSS1.P4" class="ltx_paragraph">
+<h5 class="ltx_title ltx_title_paragraph">Return from exception (0x11)</h5>
+
+<div id="S1.SS1.SSS1.P4.p1" class="ltx_para">
+<p class="ltx_p">The <code class="ltx_verbatim ltx_font_typewriter">l.rfe</code> instruction
+was executed.</p>
+</div>
+</div>
+</div>
+<div id="S1.SS1.SSS2" class="ltx_subsubsection">
+<h4 class="ltx_title ltx_title_subsubsection">Trace Sections</h4>
+
+<div id="S1.SS1.SSS2.p1" class="ltx_para">
+<p class="ltx_p">For display in the user interface and to distinct difference phases of
+an applications execution (such as threads), sections can be used. A
+section is first defined by a name. Later a section is entered with a
+trace event which terminates the previous section.</p>
+</div>
+<div id="S1.SS1.SSS2.P1" class="ltx_paragraph">
+<h5 class="ltx_title ltx_title_paragraph">Start Section Definition (0x20)</h5>
+
+<div id="S1.SS1.SSS2.P1.p1" class="ltx_para">
+<p class="ltx_p">Start the definition of
+the section identified by <code class="ltx_verbatim ltx_font_typewriter">value</code>.</p>
+</div>
+</div>
+<div id="S1.SS1.SSS2.P2" class="ltx_paragraph">
+<h5 class="ltx_title ltx_title_paragraph">Section Definition (0x21)</h5>
+
+<div id="S1.SS1.SSS2.P2.p1" class="ltx_para">
+<p class="ltx_p">A sequence of characters that
+identify the secquence.
+</p>
+</div>
+</div>
+<div id="S1.SS1.SSS2.P3" class="ltx_paragraph">
+<h5 class="ltx_title ltx_title_paragraph">Section Enter (0x22)</h5>
+
+<div id="S1.SS1.SSS2.P3.p1" class="ltx_para">
+<p class="ltx_p">Enter the section with identifier
+<code class="ltx_verbatim ltx_font_typewriter">&lt;value&gt;</code>.</p>
+</div>
+</div>
+<div id="S1.SS1.SSS2.P4" class="ltx_paragraph">
+<h5 class="ltx_title ltx_title_paragraph">Activate Exceptions (0x23)</h5>
+
+<div id="S1.SS1.SSS2.P4.p1" class="ltx_para">
+<p class="ltx_p">Trigger this event to preserve
+sections during exceptions (in user interface). When an exception
+occurs, this is accordingly displayed and after the exception ends,
+the previous section is restored.</p>
+</div>
+</div>
+<div id="S1.SS1.SSS2.P5" class="ltx_paragraph">
+<h5 class="ltx_title ltx_title_paragraph">Global Section Definition (0x25)</h5>
+
+<div id="S1.SS1.SSS2.P5.p1" class="ltx_para">
+<p class="ltx_p">Used instead of 0x21 to
+define a section globally.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
