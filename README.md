@@ -6,9 +6,11 @@
 - LaTeXML
 
 Installing on Ubuntu 14.04
-    sudo apt-get install jekyll
+
+   sudo apt-get install jekyll
 
 openSUSE 12.3
+
     sudo zypper install ruby ruby-devel
     sudo gem install jekyll
 
@@ -18,6 +20,7 @@ in /opt is extremely annoying because perl/tex search paths need to be
 adopted. Ubuntu 15.04's latexml packet works fine
 
 dependencies for Ubuntu 12.04/14.04
+
     sudo apt-get install libxml2 libxml-libxml-perl \
     libxslt1.1 libxml-libxslt-perl  \
     libparse-recdescent-perl libfile-which-perl \
@@ -27,6 +30,7 @@ dependencies for Ubuntu 12.04/14.04
     imagemagick perlmagick
 
 dependencies for openSUSE 12.3
+
     sudo zypper install perl-PerlMagick perl-IO-String \
     perl-JSON-XS perl-XML-LibXSLT
 
