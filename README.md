@@ -1,71 +1,65 @@
-OpTiMSoC Web Site
-=================
+# OpTiMSoC Web Site
 
-Required Software
------------------
+## Required Software
 
 - Jekyll (if you want to preview)
 - LaTeXML
 
-Installing on Ubuntu 12.04/14.04
-# Jekyll
-# Ubuntu 12.04/14.04
-$> sudo apt-get install ruby1.9.1-dev ruby1.9.1
-$> sudo gem install jekyll
-# TODO: this does not work with sudo :(
-# TODO: execjs is also needed
+Installing on Ubuntu 14.04
+    sudo apt-get install jekyll
 
-# openSUSE 12.3
-$> sudo zypper install ruby ruby-devel
-$> sudo gem install jekyll
+openSUSE 12.3
+    sudo zypper install ruby ruby-devel
+    sudo gem install jekyll
 
+Install LaTeXML from source (it's either outdated or not available)
+the installation will go to /usr/local; trying to install it somewhere
+in /opt is extremely annoying because perl/tex search paths need to be
+adopted. Ubuntu 15.04's latexml packet works fine
 
-# Install LaTeXML from source (it's either outdated or not available)
-# the installation will go to /usr/local; trying to install it somewhere in /opt
-# is extremely annoying because perl/tex search paths need to be adopted
+dependencies for Ubuntu 12.04/14.04
+    sudo apt-get install libxml2 libxml-libxml-perl \
+    libxslt1.1 libxml-libxslt-perl  \
+    libparse-recdescent-perl libfile-which-perl \
+    liburi-perl libio-string-perl libwww-perl \
+    libjson-xs-perl libarchive-zip-perl \
+    libimage-size-perl \
+    imagemagick perlmagick
 
-# dependencies for Ubuntu 12.04/14.04
-$> sudo apt-get install libxml2 libxml-libxml-perl \
-      libxslt1.1 libxml-libxslt-perl  \
-      libparse-recdescent-perl libfile-which-perl \
-      liburi-perl libio-string-perl libwww-perl \
-      libjson-xs-perl libarchive-zip-perl \
-      libimage-size-perl \
-      imagemagick perlmagick
+dependencies for openSUSE 12.3
+    sudo zypper install perl-PerlMagick perl-IO-String \
+    perl-JSON-XS perl-XML-LibXSLT
 
-# dependencies for openSUSE 12.3
-$> sudo zypper install perl-PerlMagick perl-IO-String  perl-JSON-XS perl-XML-LibXSLT
+actual installation
 
-# actual installation
-$> cd ~/src
-$> git clone https://github.com/brucemiller/LaTeXML.git latexml
-$> perl Makefile.PL
-$> make
-$> sudo make install
+    cd ~/src
+    git clone https://github.com/brucemiller/LaTeXML.git latexml
+    perl Makefile.PL
+    make
+    sudo make install
 
-Development
------------
+## Development
 
 To test the site on your local machine run
-$> jekyll serve
 
-And then point your browser to http://localhost:4000 to view the page.
+    jekyll serve
 
-Re-build documentation
-----------
+And then point your browser to `http://localhost:4000` to view the page.
+
+## Re-build documentation
 
 To build the documentation from the repository:
-$> ./build-docs.sh
 
-Stock photos
-------------
+     ./build-docs.sh
+
+## Stock photos
 
 blocks on front page
+
 - URL: http://www.sxc.hu/browse.phtml?f=view&id=308460
 - License: http://www.sxc.hu/help/7_2
 
-Third-Party Code
-----------------
+## Third-Party Code
 
 html5shiv
 - Version: v3.7.0
