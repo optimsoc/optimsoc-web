@@ -13,13 +13,15 @@ sectiontitle: User Guide
 <div id="optimsoc-doc-subnav-nav" class="optimsoc-doc-subnav hidden-print" data-spy="affix" data-offset-top="200" role="complementary"><ul class="nav">
 <li class=""><a href="#S1" title="2.1 Prerequisites &#8227; Chapter&nbsp;2 Installation &amp; Configuration &#8227; OpTiMSoC User Guide">Prerequisites</a></li>
 <li class=""><a href="#S2" title="2.2 Get OpTiMSoC &#8227; Chapter&nbsp;2 Installation &amp; Configuration &#8227; OpTiMSoC User Guide">Get OpTiMSoC</a></li>
-<li class=""><a href="#S3" title="2.3 OpTiMSoC Installation Path &#8227; Chapter&nbsp;2 Installation &amp; Configuration &#8227; OpTiMSoC User Guide">OpTiMSoC Installation Path</a></li>
-<li class=""><a href="#S4" title="2.4 OpTiMSoC Toolchain &#8227; Chapter&nbsp;2 Installation &amp; Configuration &#8227; OpTiMSoC User Guide">OpTiMSoC Toolchain</a></li>
-<li class=""><a href="#S5" title="2.5 Host Software &#8227; Chapter&nbsp;2 Installation &amp; Configuration &#8227; OpTiMSoC User Guide">Host Software</a></li>
-<li class=""><a href="#S6" title="2.6 ZTEX Tools &#8227; Chapter&nbsp;2 Installation &amp; Configuration &#8227; OpTiMSoC User Guide">ZTEX Tools</a></li>
-<li class=""><a href="#S7" title="2.7 SystemC, Verilator and SystemC Libraries &#8227; Chapter&nbsp;2 Installation &amp; Configuration &#8227; OpTiMSoC User Guide">SystemC, Verilator and SystemC Libraries</a></li>
-<li class=""><a href="#S8" title="2.8 Configuration Summary &#8227; Chapter&nbsp;2 Installation &amp; Configuration &#8227; OpTiMSoC User Guide">Configuration Summary</a></li>
-<li class=""><a href="#S9" title="2.9 Upgrade from rel-20130620 &#8227; Chapter&nbsp;2 Installation &amp; Configuration &#8227; OpTiMSoC User Guide">Upgrade from rel-20130620</a></li>
+<li class=""><a href="#S3" title="2.3 Basic Environment Configuration &#8227; Chapter&nbsp;2 Installation &amp; Configuration &#8227; OpTiMSoC User Guide">Basic Environment Configuration</a></li>
+<li class=""><a href="#S4" title="2.4 OpTiMSoC Installation Path &#8227; Chapter&nbsp;2 Installation &amp; Configuration &#8227; OpTiMSoC User Guide">OpTiMSoC Installation Path</a></li>
+<li class=""><a href="#S5" title="2.5 OpTiMSoC Toolchain &#8227; Chapter&nbsp;2 Installation &amp; Configuration &#8227; OpTiMSoC User Guide">OpTiMSoC Toolchain</a></li>
+<li class=""><a href="#S6" title="2.6 TCL Environment &amp; Additional Scripts &#8227; Chapter&nbsp;2 Installation &amp; Configuration &#8227; OpTiMSoC User Guide">TCL Environment &amp; Additional Scripts</a></li>
+<li class=""><a href="#S7" title="2.7 System Software &#8227; Chapter&nbsp;2 Installation &amp; Configuration &#8227; OpTiMSoC User Guide">System Software</a></li>
+<li class=""><a href="#S8" title="2.8 Host Software &#8227; Chapter&nbsp;2 Installation &amp; Configuration &#8227; OpTiMSoC User Guide">Host Software</a></li>
+<li class=""><a href="#S9" title="2.9 ZTEX Tools &#8227; Chapter&nbsp;2 Installation &amp; Configuration &#8227; OpTiMSoC User Guide">ZTEX Tools</a></li>
+<li class=""><a href="#S10" title="2.10 SystemC, Verilator and SystemC Libraries &#8227; Chapter&nbsp;2 Installation &amp; Configuration &#8227; OpTiMSoC User Guide">SystemC, Verilator and SystemC Libraries</a></li>
+<li class=""><a href="#S11" title="2.11 Configuration Summary &#8227; Chapter&nbsp;2 Installation &amp; Configuration &#8227; OpTiMSoC User Guide">Configuration Summary</a></li>
 </ul></div>
 </div><div class="col-md-9 optimsoc-doc-body">
 <div class="ltx_page_main">
@@ -57,7 +59,7 @@ packages to be installed:</p>
 </div>
 <div id="S1.p3" class="ltx_para">
 <pre class="ltx_verbatim ltx_font_typewriter">
-$&gt; sudo apt-get -y install git g++ python libtool automake autoconf \   libusb-1.0-0-dev libreadline6-dev cmake sdcc
+sudo apt-get -y install git g++ python libtool automake autoconf \    libusb-1.0-0-dev libreadline6-dev cmake sdcc
 </pre>
 </div>
 </div>
@@ -66,186 +68,157 @@ $&gt; sudo apt-get -y install git g++ python libtool automake autoconf \   libus
 <span class="ltx_tag ltx_tag_section">2.2 </span>Get OpTiMSoC</h2>
 
 <div id="S2.p1" class="ltx_para">
-<p class="ltx_p">OpTiMSoC does not come as an installation package, but is distributed
-as a git<a href="#optimsoc-doc-footnote-2"><sup>2</sup></a> repository. The repository
-is needed for two purposes. First, it is the installation source for
-tools and libraries. Second, the hardware sources, applications
-etc. are contained there to create your OpTiMSoC systems.</p>
+<p class="ltx_p">OpTiMSoC does not (yet) come as an installation package, but is
+distributed as a set of git<a href="#optimsoc-doc-footnote-2"><sup>2</sup></a>
+repositories. The repositories are needed for two purposes. First,
+they are the installation source for tools and libraries. Second, the
+hardware sources, applications etc. are contained there to create your
+OpTiMSoC systems.</p>
 </div>
 <div id="S2.p2" class="ltx_para">
 <p class="ltx_p">It is generally a good idea to understand git, especially when you
 plan to contribute to OpTiMSoC. Nevertheless, we will give a more
 detailed explanation of how to get your personal copies of OpTiMSoC
-and (potentially) update them.</p>
+and (potentially) update them. To ease the entry and handling of all
+the repositories, we use Google repo. It is a wrapper around git
+developed for the Android development. Despite we have not employed
+such a sophisticated workflow we make use of some important parts of
+it, like tracking releases etc.</p>
 </div>
 <div id="S2.p3" class="ltx_para">
-<p class="ltx_p">Before you get started, you should clone the LISNoC and OpTiMSoC
-repository:</p>
+<p class="ltx_p">The steps to clone the basic OpTiMSoC environment from the server are</p>
 </div>
 <div id="S2.p4" class="ltx_para">
 <pre class="ltx_verbatim ltx_font_typewriter">
-$&gt; git clone https://github.com/TUM-LIS/lisnoc.git
-$&gt; git clone https://github.com/TUM-LIS/optimsoc.git
+mkdir optimsoc
+cd optimsoc
+wget https://storage.googleapis.com/git-repo-downloads/repo
+chmod a+x repo
+./repo init -u https://github.com/optimsoc/optimsoc-repo
+./repo sync
 </pre>
 </div>
 <div id="S2.p5" class="ltx_para">
-<p class="ltx_p">After cloning you will have the main branch at its latest state. This
-should in general work then, but to ensure you are on a certain
-release you can set the state of the repository accordingly.</p>
+<p class="ltx_p">This loads the current stable development branches. Especially when
+you are new we are recommending to use releases. A release is just a
+combination of commits from the repositories. You can find a list of
+all releases as xml files under
+<a href="https://github.com/optimsoc/optimsoc-repo" title="" class="ltx_ref ltx_url"><span class="ltx_text ltx_font_typewriter">https://github.com/optimsoc/optimsoc-repo</span></a>. You can then
+initialize all repositories to the specified release as for example
+for the latest <code class="ltx_verbatim ltx_font_typewriter">rel-current</code>:</p>
 </div>
 <div id="S2.p6" class="ltx_para">
-<p class="ltx_p">You can list all releases:</p>
+<pre class="ltx_verbatim ltx_font_typewriter">
+./repo init -u https://github.com/optimsoc/optimsoc-repo -m \    rel-current.xml
+</pre>
 </div>
 <div id="S2.p7" class="ltx_para">
-<pre class="ltx_verbatim ltx_font_typewriter">
-$&gt; git tag
-</pre>
-</div>
-<div id="S2.p8" class="ltx_para">
-<p class="ltx_p">The release tags have the form <span class="ltx_text ltx_font_typewriter">rel<em class="ltx_emph">yyyymmdd</em></span> where
-<em class="ltx_emph ltx_font_typewriter">yyyy</em> is the year, <em class="ltx_emph ltx_font_typewriter">mm</em> is the month and
-<em class="ltx_emph ltx_font_typewriter">dd</em> is the day of the release.</p>
-</div>
-<div id="S2.p9" class="ltx_para">
-<p class="ltx_p">You can set each of the repositories to a certain release, e.g.,</p>
-</div>
-<div id="S2.p10" class="ltx_para">
-<pre class="ltx_verbatim ltx_font_typewriter">
-$&gt; git checkout rel<em class="ltx_emph">yyyymmdd</em>
-</pre>
-</div>
-<div id="S2.p11" class="ltx_para">
-<p class="ltx_p">As a starter, it is recommended that you set your repositories to the
-latest release, which is always available as <span class="ltx_text ltx_font_typewriter">rel-current</span>:</p>
-</div>
-<div id="S2.p12" class="ltx_para">
-<pre class="ltx_verbatim ltx_font_typewriter">$&gt; git checkout rel-current
-</pre>
-</div>
-<div id="S2.p13" class="ltx_para">
-<p class="ltx_p">For all work with OpTiMSoC you will need to have both repositories
-available.</p>
-</div>
-<div id="S2.p14" class="ltx_para">
-<p class="ltx_p">In the future it is necessary for some scripts to know where to find
-everything. Therefore you need to set the following environment
-variables (e.g., in your <code class="ltx_verbatim ltx_font_typewriter">.bashrc</code>):</p>
-</div>
-<div id="S2.p15" class="ltx_para">
-<pre class="ltx_verbatim ltx_font_typewriter">
-export LISNOC=<em class="ltx_emph">/path/to/lisnoc/clone</em>
-export LISNOC_RTL=$<span class="ltx_text ltx_font_serif">{</span>LISNOC<span class="ltx_text ltx_font_serif">}</span>/rtl
-export OPTIMSOC=<em class="ltx_emph">/path/to/optimsoc/clone</em>
-export OPTIMSOC_RTL=$<span class="ltx_text ltx_font_serif">{</span>OPTIMSOC<span class="ltx_text ltx_font_serif">}</span>/src/rtl
-export OPTIMSOC_SYSC=$<span class="ltx_text ltx_font_serif">{</span>OPTIMSOC<span class="ltx_text ltx_font_serif">}</span>/src/sysc
-</pre>
-</div>
-<div id="S2.p16" class="ltx_para">
-<p class="ltx_p">With the environment variables set, you can start using OpTiMSoC.</p>
+<p class="ltx_p">As long as you don&rsquo;t change files from the repositories you can simply
+change versions without even knowing git.</p>
 </div>
 </div>
 <div id="S3" class="ltx_section">
 <h2 class="ltx_title ltx_title_section">
-<span class="ltx_tag ltx_tag_section">2.3 </span>OpTiMSoC Installation Path</h2>
+<span class="ltx_tag ltx_tag_section">2.3 </span>Basic Environment Configuration</h2>
 
 <div id="S3.p1" class="ltx_para">
+<p class="ltx_p">You need to set the following basic environment variables (e.g., in your
+<code class="ltx_verbatim ltx_font_typewriter">.bashrc</code>):</p>
+</div>
+<div id="S3.p2" class="ltx_para">
+<pre class="ltx_verbatim ltx_font_typewriter">
+export OPTIMSOC=<em class="ltx_emph">/path/to/optimsoc/</em>
+export OPTIMSOC_RTL=$<span class="ltx_text ltx_font_serif">{</span>OPTIMSOC<span class="ltx_text ltx_font_serif">}</span>/src/rtl
+export OPTIMSOC_SYSC=$<span class="ltx_text ltx_font_serif">{</span>OPTIMSOC<span class="ltx_text ltx_font_serif">}</span>/src/sysc
+export LISNOC=$<span class="ltx_text ltx_font_serif">{</span>OPTIMSOC<span class="ltx_text ltx_font_serif">}</span>/ext/lisnoc
+export LISNOC_RTL=$<span class="ltx_text ltx_font_serif">{</span>LISNOC<span class="ltx_text ltx_font_serif">}</span>/rtl
+</pre>
+</div>
+<div id="S3.p3" class="ltx_para">
+<p class="ltx_p">With the environment variables set, you can start using OpTiMSoC.</p>
+</div>
+</div>
+<div id="S4" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">2.4 </span>OpTiMSoC Installation Path</h2>
+
+<div id="S4.p1" class="ltx_para">
 <p class="ltx_p">As mentioned before, some parts of OpTiMSoC (libraries and tools) need
 to be built and then also installed. Those are common for different
 platforms you create.</p>
 </div>
-<div id="S3.p2" class="ltx_para">
+<div id="S4.p2" class="ltx_para">
 <p class="ltx_p">You can install the files whereever you want as some environment
 variables (<code class="ltx_verbatim ltx_font_typewriter">PATH</code>, <code class="ltx_verbatim ltx_font_typewriter">PKG_CONFIG_PATH</code>, etc.) help finding
 them. Throughout this document we use the environment variable
 <code class="ltx_verbatim ltx_font_typewriter">OPTIMSOC_INSTALLATION</code>, which we recommend to be set to</p>
 </div>
-<div id="S3.p3" class="ltx_para">
+<div id="S4.p3" class="ltx_para">
 <pre class="ltx_verbatim ltx_font_typewriter">
 export OPTIMSOC_INSTALLATION=/opt/optimsoc
 </pre>
 </div>
-<div id="S3.p4" class="ltx_para">
+<div id="S4.p4" class="ltx_para">
 <p class="ltx_p">as installation path.</p>
 </div>
 </div>
-<div id="S4" class="ltx_section">
+<div id="S5" class="ltx_section">
 <h2 class="ltx_title ltx_title_section">
-<span class="ltx_tag ltx_tag_section">2.4 </span>OpTiMSoC Toolchain</h2>
+<span class="ltx_tag ltx_tag_section">2.5 </span>OpTiMSoC Toolchain</h2>
 
-<div id="S4.p1" class="ltx_para">
-<p class="ltx_p">The toolchain of OpTiMSoC currently consists of the standard OpenRISC
-crosscompiler with multicore extensions plus a few small utility
-programs and scripts.</p>
+<div id="S5.p1" class="ltx_para">
+<p class="ltx_p">There are two basic toolchains. You will always need the
+<em class="ltx_emph">baremetal toolchain</em> (<code class="ltx_verbatim ltx_font_typewriter">or1k-elf</code>) for compiling C files to
+be executed on OpTiMSoC. Beside this, there is the <em class="ltx_emph">gzll
+toolchain</em> (<code class="ltx_verbatim ltx_font_typewriter">or1k-gzll</code>) if you want to run the gzll Kernel and
+compile user space applications for it.</p>
 </div>
-<div id="S4.SS1" class="ltx_subsection">
+<div id="S5.SS1" class="ltx_subsection">
 <h3 class="ltx_title ltx_title_subsection">
-<span class="ltx_tag ltx_tag_subsection">2.4.1 </span>Prerequisites</h3>
+<span class="ltx_tag ltx_tag_subsection">2.5.1 </span>Baremetal Toolchain (or1k-elf)</h3>
 
-<div id="S4.SS1.p1" class="ltx_para">
-<p class="ltx_p">In Ubuntu 12.04 LTS (and of course anywhere else) you will need
-libgmp, install</p>
+<div id="S5.SS1.p1" class="ltx_para">
+<p class="ltx_p">In most cases you will not need to build the entire OpenRISC toolchain
+from scratch, but download the pre-compiled toolchain. It is the
+standard or1k-elf toolchain with multicore extension as found on
+<a href="https://openrisc.github.io/newlib/multicore.html" title="" class="ltx_ref ltx_url"><span class="ltx_text ltx_font_typewriter">https://openrisc.github.io/newlib/multicore.html</span></a>. Just download
+the latest toolchain and extract it to
+<code class="ltx_verbatim ltx_font_typewriter">/opt/or1k-elf-multicore</code>. In case you need to use another folder
+you may need to build the toolchain yourself as described on the
+toolchain website.</p>
 </div>
-<div id="S4.SS1.p2" class="ltx_para">
+<div id="S5.SS1.p2" class="ltx_para">
+<p class="ltx_p">In any case you need to add the toolchain to your path (e.g., in
+<code class="ltx_verbatim ltx_font_typewriter">~/.bashrc</code>):</p>
+</div>
+<div id="S5.SS1.p3" class="ltx_para">
 <pre class="ltx_verbatim ltx_font_typewriter">
-$&gt; sudo apt-get install libgmp3c2
+export PATH=/opt/or1k-elf-multicore/bin
 </pre>
 </div>
 </div>
-<div id="S4.SS2" class="ltx_subsection">
+<div id="S5.SS2" class="ltx_subsection">
 <h3 class="ltx_title ltx_title_subsection">
-<span class="ltx_tag ltx_tag_subsection">2.4.2 </span>Compiler and C Library</h3>
+<span class="ltx_tag ltx_tag_subsection">2.5.2 </span>gzll Toolchain (or1k-gzll)</h3>
 
-<div id="S4.SS2.p1" class="ltx_para">
-<p class="ltx_p">In most cases you will not need to build the entire toolchain from
-scratch, but download the pre-compiled toolchain.</p>
+<div id="S5.SS2.p1" class="ltx_para">
+<p class="ltx_p">The gzll toolchain is still work in progress and needs to be built
+manually as described on the toolchain website
+<a href="http://www.optimsoc.org/gzll-newlib/" title="" class="ltx_ref ltx_url"><span class="ltx_text ltx_font_typewriter">http://www.optimsoc.org/gzll-newlib/</span></a>. Afterwards you also need
+it in your environment:</p>
 </div>
-<div id="S4.SS2.SSS1" class="ltx_subsubsection">
-<h4 class="ltx_title ltx_title_subsubsection">Option 1: Download the entire toolchain</h4>
-
-<div id="S4.SS2.SSS1.p1" class="ltx_para">
-<p class="ltx_p">You can download pre-built packages with the crosscompiler toolchain
-from <a href="http://lis.ei.tum.de/pub-download/optimsoc/toolchain" title="" class="ltx_ref ltx_url"><span class="ltx_text ltx_font_typewriter">http://lis.ei.tum.de/pub-download/optimsoc/toolchain</span></a>. The
-standard installation directory is <code class="ltx_verbatim ltx_font_typewriter">/opt/optimsoc/toolchain</code> to
-where you need to unzip the latest toolchain. To change the
-installation path you can either build it manually as described in the
-reference manual, or you can relocate the installation that contains
-static references (untested).</p>
-</div>
-<div id="S4.SS2.SSS1.p2" class="ltx_para">
-<p class="ltx_p">Follow these steps:</p>
-</div>
-<div id="S4.SS2.SSS1.p3" class="ltx_para">
+<div id="S5.SS2.p2" class="ltx_para">
 <pre class="ltx_verbatim ltx_font_typewriter">
-$&gt; cd /opt/optimsoc
-$&gt; mkdir toolchain
-$&gt; cd toolchain
-$&gt; wget http://lis.ei.tum.de/pub-download/optimsoc/toolchain/optimsoc-toolchain-current.tgz
-$&gt; tar -xjf optimsoc-toolchain-current.tgz
-</pre>
-</div>
-<div id="S4.SS2.SSS1.p4" class="ltx_para">
-<p class="ltx_p">Set your environment (e.g., in <code class="ltx_verbatim ltx_font_typewriter">~/.bashrc</code>):</p>
-</div>
-<div id="S4.SS2.SSS1.p5" class="ltx_para">
-<pre class="ltx_verbatim ltx_font_typewriter">
-export PATH=$OPTIMSOC_INSTALLATION/toolchain/bin:$<span class="ltx_text ltx_font_serif">{</span>PATH<span class="ltx_text ltx_font_serif">}</span>
+export PATH=$PATH:/opt/or1k-gzll/bin
 </pre>
 </div>
 </div>
-<div id="S4.SS2.SSS2" class="ltx_subsubsection">
-<h4 class="ltx_title ltx_title_subsubsection">Option 2: Build the whole toolchain</h4>
+</div>
+<div id="S6" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">2.6 </span>TCL Environment &amp; Additional Scripts</h2>
 
-<div id="S4.SS2.SSS2.p1" class="ltx_para">
-<p class="ltx_p">Please consider the Reference Guide for information how to build the
-toolchain manually.</p>
-</div>
-</div>
-</div>
-<div id="S4.SS3" class="ltx_subsection">
-<h3 class="ltx_title ltx_title_subsection">
-<span class="ltx_tag ltx_tag_subsection">2.4.3 </span>TCL Environment &amp; Additional Scripts</h3>
-
-<div id="S4.SS3.p1" class="ltx_para">
+<div id="S6.p1" class="ltx_para">
 <p class="ltx_p">In the EDA field TCL is still the scripting language of choice.
 Fortunately, all of the EDA tools have a TCL scripting interface. To
 allow for easier creation of projects and compile RTL sources we added
@@ -253,95 +226,93 @@ some TCL scripts for all modules and targets. Beside the TCL scripts
 some Python scripts and utility programs are required by the OpTiMSoC
 platforms.</p>
 </div>
-<div id="S4.SS3.p2" class="ltx_para">
+<div id="S6.p2" class="ltx_para">
 <p class="ltx_p">To install the tools simply run</p>
 </div>
-<div id="S4.SS3.p3" class="ltx_para">
+<div id="S6.p3" class="ltx_para">
 <pre class="ltx_verbatim ltx_font_typewriter">
-$&gt; $OPTIMSOC/tools/install.sh $OPTIMSOC_INSTALLATION
+$OPTIMSOC/tools/install.sh $OPTIMSOC_INSTALLATION
 </pre>
 </div>
-<div id="S4.SS3.p4" class="ltx_para">
-<p class="ltx_p">or replace your installation path accordingly.</p>
+<div id="S6.p4" class="ltx_para">
+<p class="ltx_p">and then set the environment:</p>
 </div>
-<div id="S4.SS3.p5" class="ltx_para">
+<div id="S6.p5" class="ltx_para">
 <pre class="ltx_verbatim ltx_font_typewriter">
 OPTIMSOC_TCL=$OPTIMSOC_INSTALLATION/tools/tcl
 PATH=$PATH:$OPTIMSOC_INSTALLATION/tools/utils
 </pre>
 </div>
 </div>
-<div id="S4.SS4" class="ltx_subsection">
-<h3 class="ltx_title ltx_title_subsection">
-<span class="ltx_tag ltx_tag_subsection">2.4.4 </span>System Software</h3>
+<div id="S7" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">2.7 </span>System Software</h2>
 
-<div id="S4.SS4.p1" class="ltx_para">
+<div id="S7.p1" class="ltx_para">
 <p class="ltx_p">There are essential two different ways to develop software for
 OpTiMSoC, either as baremetal software or using the compute node
 operating system gzll. For both ways you need to compile a set of
 libraries that help you developing software for OpTiMSoC.</p>
 </div>
-<div id="S4.SS4.SSS1" class="ltx_subsubsection">
-<h4 class="ltx_title ltx_title_subsubsection">Baremetal System Software</h4>
+<div id="S7.SS1" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">2.7.1 </span>Baremetal Libraries</h3>
 
-<div id="S4.SS4.SSS1.p1" class="ltx_para">
+<div id="S7.SS1.p1" class="ltx_para">
 <p class="ltx_p">There are a set of libraries you build in one run, most important the
 baremetal drivers, some support for runtime systems (scheduler,
 virtual memory) and message passing support. The installation consist
 of the libraries themselves and build infrastructure for your
-applications.
-</p>
+applications.</p>
 </div>
-<div id="S4.SS4.SSS1.p2" class="ltx_para">
-<p class="ltx_p">The installation of the baremetal system software starts in the base
-folder (relative to the OpTiMSoC root)
-<code class="ltx_verbatim ltx_font_typewriter">src/sw/system/baremetal-libs</code>.</p>
+<div id="S7.SS1.p2" class="ltx_para">
+<p class="ltx_p">The baremetal libraries are hosted at
+<a href="https://github.com/optimsoc/baremetal-libraries" title="" class="ltx_ref ltx_url"><span class="ltx_text ltx_font_typewriter">https://github.com/optimsoc/baremetal-libraries</span></a>. You need this
+repository and the <code class="ltx_verbatim ltx_font_typewriter">or1k-elf</code> toolchain in your path to build and
+install the libraries. The repository is part of the repo tree.</p>
 </div>
-<div id="S4.SS4.SSS1.p3" class="ltx_para">
+<div id="S7.SS1.p3" class="ltx_para">
 <p class="ltx_p">To perform the installation run:</p>
 </div>
-<div id="S4.SS4.SSS1.p4" class="ltx_para">
+<div id="S7.SS1.p4" class="ltx_para">
 <pre class="ltx_verbatim ltx_font_typewriter">
-$&gt; mkdir build
-$&gt; cd build
-$&gt; ../configure --prefix=$OPTIMSOC_INSTALLATION/systemsw/ --host=or1k-elf
-$&gt; make
-$&gt; make install
+mkdir build
+cd build
+../configure --prefix=$OPTIMSOC_INSTALLATION/sw/ --host=or1k-elf
+make
+make install
 </pre>
 </div>
 </div>
-<div id="S4.SS4.SSS2" class="ltx_subsubsection">
-<h4 class="ltx_title ltx_title_subsubsection">gzll Kernel and Libraries</h4>
+<div id="S7.SS2" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">2.7.2 </span>gzll Kernel and Libraries</h3>
 
-<div id="S4.SS4.SSS2.p1" class="ltx_para">
+<div id="S7.SS2.p1" class="ltx_para">
 <p class="ltx_p">(todo)</p>
 </div>
 </div>
-</div>
-<div id="S4.SS5" class="ltx_subsection">
+<div id="S7.SS3" class="ltx_subsection">
 <h3 class="ltx_title ltx_title_subsection">
-<span class="ltx_tag ltx_tag_subsection">2.4.5 </span>Configuration</h3>
+<span class="ltx_tag ltx_tag_subsection">2.7.3 </span>Configuration</h3>
 
-<div id="S4.SS5.p1" class="ltx_para">
-<p class="ltx_p">After you installed the toolchain and compiled additional scripts, you
-need to enable them in your system. When you followed the steps above
-you will have to add the environment variables as (example for bash):</p>
+<div id="S7.SS3.p1" class="ltx_para">
+<p class="ltx_p">After you installed the librariees you need to enable them in your
+system. When you followed the steps above you will have to add the
+environment variables as (example for bash):</p>
 </div>
-<div id="S4.SS5.p2" class="ltx_para">
+<div id="S7.SS3.p2" class="ltx_para">
 <pre class="ltx_verbatim ltx_font_typewriter">
-# OpTiMSoC toolchain
-export PATH=$OPTIMSOC_INSTALLATION/toolchain/bin:$OPTIMSOC_INSTALLATION/tools/utils:$<span class="ltx_text ltx_font_serif">{</span>PATH<span class="ltx_text ltx_font_serif">}</span>
-export OPTIMSOC_TCL=$OPTIMSOC_INSTALLATION/tools/tcl
-export PKG_CONFIG_PATH=$OPTIMSOC_INSTALLATION/systemsw/share/pkgconfig
+export PKG_CONFIG_PATH=$OPTIMSOC_INSTALLATION/sw/share/pkgconfig
 </pre>
 </div>
 </div>
 </div>
-<div id="S5" class="ltx_section">
+<div id="S8" class="ltx_section">
 <h2 class="ltx_title ltx_title_section">
-<span class="ltx_tag ltx_tag_section">2.5 </span>Host Software</h2>
+<span class="ltx_tag ltx_tag_section">2.8 </span>Host Software</h2>
 
-<div id="S5.p1" class="ltx_para">
+<div id="S8.p1" class="ltx_para">
 <p class="ltx_p">The host software allows you to communicate with the system for
 control and debugging/diagnosis. <code class="ltx_verbatim ltx_font_typewriter">liboptimsochost</code> is the basic
 library, which also has a command line interface. A graphical user
@@ -349,362 +320,1393 @@ interface complements this for easier visualization of the system. All
 communication between the target and the host is done by a generic communication
 library called &ldquo;GLIP&rdquo;.</p>
 </div>
-<div id="S5.p2" class="ltx_para">
+<div id="S8.p2" class="ltx_para">
 <p class="ltx_p">Before you start, set the <code class="ltx_verbatim ltx_font_typewriter">PKG_CONFIG_PATH</code> for the host software, which
 will contain the glip and liboptimsochost pkgconfig files.</p>
 </div>
-<div id="S5.p3" class="ltx_para">
+<div id="S8.p3" class="ltx_para">
 <pre class="ltx_verbatim ltx_font_typewriter">
 export PKG_CONFIG_PATH=$OPTIMSOC_INSTALLATION/host/lib/pkgconfig:$PKG_CONFIG_PATH
 </pre>
 </div>
-<div id="S5.SS1" class="ltx_subsection">
+<div id="S8.SS1" class="ltx_subsection">
 <h3 class="ltx_title ltx_title_subsection">
-<span class="ltx_tag ltx_tag_subsection">2.5.1 </span>GLIP</h3>
+<span class="ltx_tag ltx_tag_subsection">2.8.1 </span>GLIP</h3>
 
-<div id="S5.SS1.p1" class="ltx_para">
+<div id="S8.SS1.p1" class="ltx_para">
 <p class="ltx_p">GLIP is an independent project and the sources need to be obtained separately
 from OpTiMSoC.</p>
 </div>
-<div id="S5.SS1.p2" class="ltx_para">
+<div id="S8.SS1.p2" class="ltx_para">
 <pre class="ltx_verbatim ltx_font_typewriter">
-$&gt; git clone https://github.com/tum-lis/glip.git
-$&gt; cd glip
-$&gt; ./autogen.sh
-$&gt; mkdir build
-$&gt; cd build
-$&gt; ../configure --enable-cypressfx2 --enable-tcp --prefix=$OPTIMSOC_INSTALLATION/host
-$&gt; make
-$&gt; make install
+git clone https://github.com/tum-lis/glip.git
+cd glip
+./autogen.sh
+mkdir build
+cd build
+../configure --enable-cypressfx2 --enable-tcp --prefix=$OPTIMSOC_INSTALLATION/host
+make
+make install
 </pre>
 </div>
 </div>
-<div id="S5.SS2" class="ltx_subsection">
+<div id="S8.SS2" class="ltx_subsection">
 <h3 class="ltx_title ltx_title_subsection">
-<span class="ltx_tag ltx_tag_subsection">2.5.2 </span>liboptimsochost</h3>
+<span class="ltx_tag ltx_tag_subsection">2.8.2 </span>liboptimsochost</h3>
 
-<div id="S5.SS2.p1" class="ltx_para">
-<p class="ltx_p">The library is found in <code class="ltx_verbatim ltx_font_typewriter">src/sw/host/liboptimsochost</code>. Some
-tools are included with the library, the most important is the command
-line interface <code class="ltx_verbatim ltx_font_typewriter">optimsoc_cli</code>. It can be used to communicate with
-the OpTiMSoC debug system on the command line. Recently, a Python
-scripting interface has been added. You will need the python
-development libraries for this to work when enabled via
-<code class="ltx_verbatim ltx_font_typewriter">--enable-python-interface</code>.</p>
+<div id="S8.SS2.p1" class="ltx_para">
+<p class="ltx_p">The library is found in the repository at
+<a href="https://github.com/optimsoc/host" title="" class="ltx_ref ltx_url"><span class="ltx_text ltx_font_typewriter">https://github.com/optimsoc/host</span></a> (repo tree <code class="ltx_verbatim ltx_font_typewriter">src/host</code>) in
+<code class="ltx_verbatim ltx_font_typewriter">liboptimsochost</code>. Some tools are included with the library, the
+most important is the command line interface <code class="ltx_verbatim ltx_font_typewriter">optimsoc_cli</code>. It
+can be used to communicate with the OpTiMSoC debug system on the
+command line. Recently, a Python scripting interface has been
+added. You will need the python development libraries for this to work
+when enabled via <code class="ltx_verbatim ltx_font_typewriter">--enable-python-interface</code>.</p>
 </div>
-<div id="S5.SS2.p2" class="ltx_para">
+<div id="S8.SS2.p2" class="ltx_para">
 <p class="ltx_p">Build, make and install:</p>
 </div>
-<div id="S5.SS2.p3" class="ltx_para">
+<div id="S8.SS2.p3" class="ltx_para">
 <pre class="ltx_verbatim ltx_font_typewriter">
-$&gt; mkdir build
-$&gt; cd build
-$&gt; ../configure --prefix=$OPTIMSOC_INSTALLATION/host --enable-python-interface
-$&gt; make
-$&gt; make install
+mkdir build
+cd build
+../configure --prefix=$OPTIMSOC_INSTALLATION/host --enable-python-interface
+make
+make install
 </pre>
 </div>
-<div id="S5.SS2.p4" class="ltx_para">
+<div id="S8.SS2.p4" class="ltx_para">
 <p class="ltx_p">Before proceeding you will need to set the correct paths:</p>
 </div>
-<div id="S5.SS2.p5" class="ltx_para">
+<div id="S8.SS2.p5" class="ltx_para">
 <pre class="ltx_verbatim ltx_font_typewriter">
 export LD_LIBRARY_PATH=$OPTIMSOC_INSTALLATION/host/lib:${LD_LIBRARY_PATH}
 export PATH=$OPTIMSOC_INSTALLATION/host/bin:${PATH}
 </pre>
 </div>
 </div>
-<div id="S5.SS3" class="ltx_subsection">
+<div id="S8.SS3" class="ltx_subsection">
 <h3 class="ltx_title ltx_title_subsection">
-<span class="ltx_tag ltx_tag_subsection">2.5.3 </span>Graphical User Interface</h3>
+<span class="ltx_tag ltx_tag_subsection">2.8.3 </span>Graphical User Interface</h3>
 
-<div id="S5.SS3.SSS1" class="ltx_subsubsection">
+<div id="S8.SS3.SSS1" class="ltx_subsubsection">
 <h4 class="ltx_title ltx_title_subsubsection">Prerequisites</h4>
 
-<div id="S5.SS3.SSS1.p1" class="ltx_para">
+<div id="S8.SS3.SSS1.p1" class="ltx_para">
 <p class="ltx_p">For building you will need Qt:</p>
 </div>
-<div id="S5.SS3.SSS1.p2" class="ltx_para">
+<div id="S8.SS3.SSS1.p2" class="ltx_para">
 <pre class="ltx_verbatim ltx_font_typewriter">
 $&gt; sudo apt-get install libqt4-dev
 </pre>
 </div>
-<div id="S5.SS3.SSS1.p3" class="ltx_para">
+<div id="S8.SS3.SSS1.p3" class="ltx_para">
 <p class="ltx_p">In case you want to develop the GUI, install qtcreator:</p>
 </div>
-<div id="S5.SS3.SSS1.p4" class="ltx_para">
+<div id="S8.SS3.SSS1.p4" class="ltx_para">
 <pre class="ltx_verbatim ltx_font_typewriter">
 $&gt; sudo apt-get install qtcreator
 </pre>
 </div>
 </div>
-<div id="S5.SS3.SSS2" class="ltx_subsubsection">
+<div id="S8.SS3.SSS2" class="ltx_subsubsection">
 <h4 class="ltx_title ltx_title_subsubsection">Building</h4>
 
-<div id="S5.SS3.SSS2.p1" class="ltx_para">
-<p class="ltx_p">The graphical user interface resides in
-<code class="ltx_verbatim ltx_font_typewriter">src/sw/host/optimsocgui</code>. We use cmake here as it better
-integrates with the Qt toolchain (which is used for the GUI).</p>
+<div id="S8.SS3.SSS2.p1" class="ltx_para">
+<p class="ltx_p">The graphical user interface resides in <code class="ltx_verbatim ltx_font_typewriter">optimsocgui</code> in the host
+repository. We use cmake here as it better integrates with the Qt
+toolchain (which is used for the GUI).</p>
 </div>
-<div id="S5.SS3.SSS2.p2" class="ltx_para">
+<div id="S8.SS3.SSS2.p2" class="ltx_para">
 <p class="ltx_p">To build it:</p>
 </div>
-<div id="S5.SS3.SSS2.p3" class="ltx_para">
+<div id="S8.SS3.SSS2.p3" class="ltx_para">
 <pre class="ltx_verbatim ltx_font_typewriter">
-$&gt; mkdir build
-$&gt; cd build
-$&gt; cmake -DCMAKE_INSTALL_PREFIX:PATH=$OPTIMSOC_INSTALLATION/host ..
-$&gt; make
-$&gt; make install
+mkdir build
+cd build
+cmake -DCMAKE_INSTALL_PREFIX:PATH=$OPTIMSOC_INSTALLATION/host ..
+make
+make install
 </pre>
 </div>
-<div id="S5.SS3.SSS2.p4" class="ltx_para">
-<p class="ltx_p">Afterwards you will find <code class="ltx_verbatim ltx_font_typewriter">optimsocgui</code> in
-<code class="ltx_verbatim ltx_font_typewriter">src/sw/host/optimsocgui/bin</code>.</p>
+<div id="S8.SS3.SSS2.p4" class="ltx_para">
+<p class="ltx_p">Afterwards add the path</p>
+</div>
+<div id="S8.SS3.SSS2.p5" class="ltx_para">
+<pre class="ltx_verbatim ltx_font_typewriter">
+export PATH=$PATH:$OPTIMSOC_INSTALLATION/host/bin
+</pre>
 </div>
 </div>
 </div>
 </div>
-<div id="S6" class="ltx_section">
+<div id="S9" class="ltx_section">
 <h2 class="ltx_title ltx_title_section">
-<span class="ltx_tag ltx_tag_section">2.6 </span>ZTEX Tools</h2>
+<span class="ltx_tag ltx_tag_section">2.9 </span>ZTEX Tools</h2>
 
-<div id="S6.p1" class="ltx_para">
-<p class="ltx_p">In case you are running the bitstreams on the FPGA you will need the
-ZTEX toolchain as it can be downloaded at <a href="http://www.ztex.de" title="" class="ltx_ref ltx_url"><span class="ltx_text ltx_font_typewriter">http://www.ztex.de</span></a>. We
-will in the following assume you downloaded it and unpacked it to
-<code class="ltx_verbatim ltx_font_typewriter">/opt/ztex/</code> so that the folder <code class="ltx_verbatim ltx_font_typewriter">/opt/ztex/java</code> exists. You
-will need to set the path accordingly:</p>
+<div id="S9.p1" class="ltx_para">
+<p class="ltx_p">In case you are running the bitstreams on the ZTEX FPGAs (and only
+then) you will need the ZTEX toolchain as it can be downloaded at
+<a href="http://www.ztex.de" title="" class="ltx_ref ltx_url"><span class="ltx_text ltx_font_typewriter">http://www.ztex.de</span></a>. We will in the following assume you
+downloaded it and unpacked it to <code class="ltx_verbatim ltx_font_typewriter">/opt/ztex/</code> so that the folder
+<code class="ltx_verbatim ltx_font_typewriter">/opt/ztex/java</code> exists. You will need to set the path
+accordingly:</p>
 </div>
-<div id="S6.p2" class="ltx_para">
+<div id="S9.p2" class="ltx_para">
 <pre class="ltx_verbatim ltx_font_typewriter">
 export PATH=/opt/ztex/bin:/opt/ztex/java/FWLoader:$<span class="ltx_text ltx_font_serif">{</span>PATH<span class="ltx_text ltx_font_serif">}</span>
 </pre>
 </div>
-<div id="S6.p3" class="ltx_para">
+<div id="S9.p3" class="ltx_para">
 <p class="ltx_p">Furthermore you will need the small device compiler <code class="ltx_verbatim ltx_font_typewriter">sdcc</code>.</p>
 </div>
 </div>
-<div id="S7" class="ltx_section">
+<div id="S10" class="ltx_section">
 <h2 class="ltx_title ltx_title_section">
-<span class="ltx_tag ltx_tag_section">2.7 </span>SystemC, Verilator and SystemC Libraries</h2>
+<span class="ltx_tag ltx_tag_section">2.10 </span>SystemC, Verilator and SystemC Libraries</h2>
 
-<div id="S7.p1" class="ltx_para">
+<div id="S10.p1" class="ltx_para">
 <p class="ltx_p">SystemC<a href="#optimsoc-doc-footnote-3"><sup>3</sup></a> is used as simulation
 library for both full system simulation based on Verilator and in
 future for abstracted simulations. In case you want to use either of
 them, you will therefore need to download, compile and install
 SystemC.</p>
 </div>
-<div id="S7.p2" class="ltx_para">
+<div id="S10.p2" class="ltx_para">
 <p class="ltx_p">In case you want to run the Verilator-based simulation examples or
 develop software using the Verilator-based simulation, you will need
 to download and compile Verilator too.</p>
 </div>
-<div id="S7.p3" class="ltx_para">
+<div id="S10.p3" class="ltx_para">
 <p class="ltx_p">In the following the installation to <code class="ltx_verbatim ltx_font_typewriter">/opt</code> is assumed, change
 the folder if necessary.</p>
 </div>
-<div id="S7.SS1" class="ltx_subsection">
+<div id="S10.SS1" class="ltx_subsection">
 <h3 class="ltx_title ltx_title_subsection">
-<span class="ltx_tag ltx_tag_subsection">2.7.1 </span>SystemC</h3>
+<span class="ltx_tag ltx_tag_subsection">2.10.1 </span>SystemC</h3>
 
-<div id="S7.SS1.p1" class="ltx_para">
+<div id="S10.SS1.p1" class="ltx_para">
 <p class="ltx_p">In case you already have SystemC installed (e.g., in the latest
 version 2.3.1), you simply need to set the <code class="ltx_verbatim ltx_font_typewriter">PKG_CONFIG_PATH</code>
 properly to where the <code class="ltx_verbatim ltx_font_typewriter">systemc.pc</code> file is found. In the latest
 version this is for example:</p>
 </div>
-<div id="S7.SS1.p2" class="ltx_para">
+<div id="S10.SS1.p2" class="ltx_para">
 <pre class="ltx_verbatim ltx_font_typewriter">
 export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:$SYSTEMC/lib-linux64/pkgconfig
 </pre>
 </div>
-<div id="S7.SS1.p3" class="ltx_para">
-<p class="ltx_p">If you don&rsquo;t have SystemC installed, first you need to register at the
-SystemC website and download the SystemC package
-(<code class="ltx_verbatim ltx_font_typewriter">systemc-2.3.1.tgz</code>). For installation create the base folder
-and build directory:</p>
+<div id="S10.SS1.p3" class="ltx_para">
+<p class="ltx_p">If you don&rsquo;t have SystemC installed, please download the SystemC
+package (<code class="ltx_verbatim ltx_font_typewriter">systemc-2.3.1.tgz</code>) from
+<a href="http://accellera.org/downloads/standards/systemc" title="" class="ltx_ref ltx_url"><span class="ltx_text ltx_font_typewriter">http://accellera.org/downloads/standards/systemc</span></a>. Extract the
+file and go to the folder <span class="ltx_text ltx_font_typewriter">systemc-2.3.1</span>. Build and install
+SystemC (we use <span class="ltx_text ltx_font_typewriter">/opt/systemc</span> here).</p>
 </div>
-<div id="S7.SS1.p4" class="ltx_para">
+<div id="S10.SS1.p4" class="ltx_para">
 <pre class="ltx_verbatim ltx_font_typewriter">
-$&gt; sudo mkdir /opt/systemc
-$&gt; sudo mkdir /opt/systemc/2.3.1
-$&gt; sudo mkdir /opt/systemc/build
+mkdir build
+cd build
+../configure --prefix=/opt/systemc
+make
+sudo make install
 </pre>
 </div>
-<div id="S7.SS1.p5" class="ltx_para">
-<p class="ltx_p">Copy the gzip file from above to the build dir, become superuser, move
-there and extract it:</p>
+<div id="S10.SS1.p5" class="ltx_para">
+<p class="ltx_p">You will now find SystemC in <code class="ltx_verbatim ltx_font_typewriter">/opt/systemc</code> and need to set
+<code class="ltx_verbatim ltx_font_typewriter">PKG_CONFIG_PATH</code> as described above:</p>
 </div>
-<div id="S7.SS1.p6" class="ltx_para">
+<div id="S10.SS1.p6" class="ltx_para">
 <pre class="ltx_verbatim ltx_font_typewriter">
-$&gt; sudo cp systemc-2.3.1.tgz /opt/systemc/build
-$&gt; cd /opt/systemc/build
-$&gt; sudo tar -xzf systemc-2.3.1.tgz
+export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/opt/systemc/lib-linux64/pkgconfig
 </pre>
 </div>
-<div id="S7.SS1.p7" class="ltx_para">
-<p class="ltx_p">Create a build object directory, configure in there, build, install,
-done!</p>
 </div>
-<div id="S7.SS1.p8" class="ltx_para">
-<pre class="ltx_verbatim ltx_font_typewriter">$&gt; cd systemc-2.3.1
-$&gt; sudo mkdir objdir
-$&gt; sudo cd objdir
-$&gt; sudo ../configure --prefix=/opt/systemc/2.3.1
-$&gt; sudo make
-$&gt; sudo make install
-</pre>
-</div>
-<div id="S7.SS1.p9" class="ltx_para">
-<p class="ltx_p">You will now find SystemC in <code class="ltx_verbatim ltx_font_typewriter">/opt/systemc/2.3.1</code> and need to set
-<code class="ltx_verbatim ltx_font_typewriter">PKG_CONFIG_PATH</code> as described above.</p>
-</div>
-</div>
-<div id="S7.SS2" class="ltx_subsection">
+<div id="S10.SS2" class="ltx_subsection">
 <h3 class="ltx_title ltx_title_subsection">
-<span class="ltx_tag ltx_tag_subsection">2.7.2 </span>Verilator</h3>
+<span class="ltx_tag ltx_tag_subsection">2.10.2 </span>Verilator</h3>
 
-<div id="S7.SS2.p1" class="ltx_para">
-<p class="ltx_p">First clone the Verilator repository in <code class="ltx_verbatim ltx_font_typewriter">/opt</code>.</p>
+<div id="S10.SS2.p1" class="ltx_para">
+<p class="ltx_p">Verilator is part of Debian/Ubuntu-based distributions nowadays and it
+should work fine from the repositories. Unfortunately, it just
+recently creates a pkgconfig file and there is a steady deveopment
+although regarding the performance. So we recommend building the most
+recent version, which is actually quite straigt forward.</p>
 </div>
-<div id="S7.SS2.p2" class="ltx_para">
+<div id="S10.SS2.p2" class="ltx_para">
 <pre class="ltx_verbatim ltx_font_typewriter">
-$&gt; cd /opt
-$&gt; sudo git clone http://git.veripool.org/git/verilator
+git clone http://git.veripool.org/git/verilator
+autoconf
+./configure
+make
+sudo make install
 </pre>
 </div>
-<div id="S7.SS2.p3" class="ltx_para">
-<p class="ltx_p">Switch to the Verilator directory, prepare the build in place and make:</p>
-</div>
-<div id="S7.SS2.p4" class="ltx_para">
-<pre class="ltx_verbatim ltx_font_typewriter">
-$&gt; sudo -s
-$&gt; cd verilator
-$&gt; sudo aclocal
-$&gt; autoconf
-$&gt; ./configure
-$&gt; make
-$&gt; exit
-</pre>
+<div id="S10.SS2.p3" class="ltx_para">
+<p class="ltx_p">This will install Verilator to /usr/local. Your system should usually
+find the binary and pkgconfig file.
+</p>
 </div>
 </div>
-<div id="S7.SS3" class="ltx_subsection">
+<div id="S10.SS3" class="ltx_subsection">
 <h3 class="ltx_title ltx_title_subsection">
-<span class="ltx_tag ltx_tag_subsection">2.7.3 </span>OpTiMSoC SystemC library</h3>
+<span class="ltx_tag ltx_tag_subsection">2.10.3 </span>OpTiMSoC SystemC library</h3>
 
-<div id="S7.SS3.p1" class="ltx_para">
+<div id="S10.SS3.p1" class="ltx_para">
 <p class="ltx_p">The OpTiMSoC SystemC library contains SystemC modules for Debugging of
-Verilated Systems, Simulations and other. It can be found in
-<code class="ltx_verbatim ltx_font_typewriter">src/sysc/</code>. The build is identical to the other libraries</p>
+Verilator simulations and other. It can be found in the repository at
+<a href="https://github.com/optimsoc/systemc" title="" class="ltx_ref ltx_url"><span class="ltx_text ltx_font_typewriter">https://github.com/optimsoc/systemc</span></a> or in <span class="ltx_text ltx_font_typewriter">src/systemc</span>
+in the repo. The build is identical to the other libraries</p>
 </div>
-<div id="S7.SS3.p2" class="ltx_para">
+<div id="S10.SS3.p2" class="ltx_para">
 <pre class="ltx_verbatim ltx_font_typewriter">
-$&gt; ./autogen.sh
-$&gt; mkdir build
-$&gt; cd build
-$&gt; ../configure --prefix=$OPTIMSOC_INSTALLATION/sysc
-$&gt; make
-$&gt; make install
+./autogen.sh
+mkdir build
+cd build
+../configure --prefix=$OPTIMSOC_INSTALLATION/systemc
+make
+sudo make install
 </pre>
 </div>
-<div id="S7.SS3.p3" class="ltx_para">
+<div id="S10.SS3.p3" class="ltx_para">
 <p class="ltx_p">When SystemC is not found, make sure <code class="ltx_verbatim ltx_font_typewriter">PKG_CONFIG_PATH</code> is
 correctly set.</p>
 </div>
 </div>
-<div id="S7.SS4" class="ltx_subsection">
+<div id="S10.SS4" class="ltx_subsection">
 <h3 class="ltx_title ltx_title_subsection">
-<span class="ltx_tag ltx_tag_subsection">2.7.4 </span>Configuration</h3>
+<span class="ltx_tag ltx_tag_subsection">2.10.4 </span>Configuration</h3>
 
-<div id="S7.SS4.p1" class="ltx_para">
+<div id="S10.SS4.p1" class="ltx_para">
 <p class="ltx_p">You will need the following environment variables (e.g., in bash):</p>
 </div>
-<div id="S7.SS4.p2" class="ltx_para">
-<pre class="ltx_verbatim ltx_font_typewriter">
-# SystemC environment
-export SYSTEMC=/opt/systemc/2.3.0
-# Verilator environment
-export VERILATOR_ROOT=/opt/verilator
-export PATH=$<span class="ltx_text ltx_font_serif">{</span>VERILATOR_ROOT<span class="ltx_text ltx_font_serif">}</span>/bin:$<span class="ltx_text ltx_font_serif">{</span>PATH<span class="ltx_text ltx_font_serif">}</span>
+<div id="S10.SS4.p2" class="ltx_para">
+<pre class="ltx_verbatim ltx_font_typewriter"># SystemC environment
+export SYSTEMC=/opt/systemc
+export PKG_CONFIG_PATH=$SYSTEMC/lib-linux64/pkgconfig
 </pre>
 </div>
 </div>
 </div>
-<div id="S8" class="ltx_section">
+<div id="S11" class="ltx_section">
 <h2 class="ltx_title ltx_title_section">
-<span class="ltx_tag ltx_tag_section">2.8 </span>Configuration Summary</h2>
+<span class="ltx_tag ltx_tag_section">2.11 </span>Configuration Summary</h2>
 
-<div id="S8.p1" class="ltx_para">
+<div id="S11.p1" class="ltx_para">
 <p class="ltx_p">Check that you have the following environment variables set at this
 point (or a subset depending on your requirements):</p>
 </div>
-<div id="S8.p2" class="ltx_para">
+<div id="S11.p2" class="ltx_para">
 <pre class="ltx_verbatim ltx_font_typewriter">
-export LISNOC=<em class="ltx_emph">/path/to/lisnoc/clone</em>
-export LISNOC_RTL=$<span class="ltx_text ltx_font_serif">{</span>LISNOC<span class="ltx_text ltx_font_serif">}</span>/rtl
 export OPTIMSOC=<em class="ltx_emph">/path/to/optimsoc/clone</em>
 export OPTIMSOC_RTL=$<span class="ltx_text ltx_font_serif">{</span>OPTIMSOC<span class="ltx_text ltx_font_serif">}</span>/src/rtl
 export OPTIMSOC_SYSC=$<span class="ltx_text ltx_font_serif">{</span>OPTIMSOC<span class="ltx_text ltx_font_serif">}</span>/src/sysc
+export LISNOC=$<span class="ltx_text ltx_font_serif">{</span>OPTIMSOC<span class="ltx_text ltx_font_serif">}</span>/external/lisnoc
+export LISNOC_RTL=$<span class="ltx_text ltx_font_serif">{</span>LISNOC<span class="ltx_text ltx_font_serif">}</span>/rtl
 # Your OpTiMSoC installation path
 export OPTIMSOC_INSTALLATION=/opt/optimsoc
-# OpTiMSoC toolchain
-export PATH=/opt/openrisc/toolchain/bin:$<span class="ltx_text ltx_font_serif">{</span>OPTIMSOC_INSTALLATION<span class="ltx_text ltx_font_serif">}</span>/tools/utils:$<span class="ltx_text ltx_font_serif">{</span>PATH<span class="ltx_text ltx_font_serif">}</span>
-export OPTIMSOC_NEWLIB=$<span class="ltx_text ltx_font_serif">{</span>OPTIMSOC_INSTALLATION<span class="ltx_text ltx_font_serif">}</span>/newlib/
+# Baremetal toolchain
+export PATH=/opt/or1k-elf/bin:$PATH<span class="ltx_text ltx_font_serif">}</span>
 # TCL scripting
 export OPTIMSOC_TCL=$<span class="ltx_text ltx_font_serif">{</span>OPTIMSOC_INSTALLATION<span class="ltx_text ltx_font_serif">}</span>/tools/tcl
 # SystemC environment
 export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:$SYSTEMC/lib-linux64/pkgconfig
-# Verilator environment
-export VERILATOR_ROOT=/opt/verilator
-export PATH=$<span class="ltx_text ltx_font_serif">{</span>VERILATOR_ROOT<span class="ltx_text ltx_font_serif">}</span>/bin:$<span class="ltx_text ltx_font_serif">{</span>PATH<span class="ltx_text ltx_font_serif">}</span>
 # System software
-export PKG_CONFIG_PATH=$<span class="ltx_text ltx_font_serif">{</span>OPTIMSOC_INSTALLATION<span class="ltx_text ltx_font_serif">}</span>/systemsw/share/pkgconfig:$PKG_CONFIG_PATH
+export PKG_CONFIG_PATH=$<span class="ltx_text ltx_font_serif">{</span>OPTIMSOC_INSTALLATION<span class="ltx_text ltx_font_serif">}</span>/sw/share/pkgconfig:$PKG_CONFIG_PATH
 # Host library, tools and GUI
 export PKG_CONFIG_PATH=$<span class="ltx_text ltx_font_serif">{</span>OPTIMSOC_INSTALLATION<span class="ltx_text ltx_font_serif">}</span>/host/lib/pkgconfig:$PKG_CONFIG_PATH
 export LD_LIBRARY_PATH=$<span class="ltx_text ltx_font_serif">{</span>OPTIMSOC_INSTALLATION<span class="ltx_text ltx_font_serif">}</span>/host/lib:$<span class="ltx_text ltx_font_serif">{</span>LD_LIBRARY_PATH<span class="ltx_text ltx_font_serif">}</span>
 export PATH=$<span class="ltx_text ltx_font_serif">{</span>OPTIMSOC_INSTALLATION<span class="ltx_text ltx_font_serif">}</span>/host/bin:$<span class="ltx_text ltx_font_serif">{</span>PATH<span class="ltx_text ltx_font_serif">}</span>
+
+
+
+<div class="ltx_chapter">
+<h1 class="ltx_title ltx_title_chapter">
+<span class="ltx_tag ltx_tag_chapter">Chapter&nbsp;3 </span>Tutorials</h1>
+
+<div id="p1" class="ltx_para">
+<p class="ltx_p">The best way to get started with OpTiMSoC after you've prepared your
+system as described in the previous chapter is to follow some of our
+tutorials. They are written with two goals in mind: to introduce some
+of the basic concepts and nomenclature of manycore SoC, and to show
+you how those are implemented and can be used in OpTiMSoC.</p>
+</div>
+<div id="p2" class="ltx_para">
+<p class="ltx_p">Some of the tutorials (especially the first ones) build on top of each
+other, so it's recommended to do them in order. Simply stop if you
+think you know enough to implement your own ideas!</p>
+</div>
+<div id="S1" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">3.1 </span>RTL Simulation: Compute Tile and Software</h2>
+
+<div id="S1.p1" class="ltx_para">
+<p class="ltx_p">It is a good starting point to simulate a single compute tile of a
+distributed memory system. Therefore a simple testbench is included
+and demonstrates the general simulation approach and gives an insight
+in the software building process.</p>
+</div>
+<div id="S1.p2" class="ltx_para">
+<p class="ltx_p">Simulating only a single compute tile is essentially an OpenRISC core
+plus memory and the network adapter, where all I/O of the network
+adapter is not functional in this test case. It can therefore only be
+used to simulate local software.
+</p>
+</div>
+<div id="S1.p3" class="ltx_para">
+<p class="ltx_p">You can find this example in <code class="ltx_verbatim">tbench/rtl/dm/compute_tile</code>. You
+need to have Modelsim installed before you run:</p>
+</div>
+<div id="S1.p4" class="ltx_para">
+<pre class="ltx_verbatim">
+&gt; make build
 </pre>
 </div>
+<div id="S1.p5" class="ltx_para">
+<p class="ltx_p">The output should be as follows:</p>
 </div>
-<div id="S9" class="ltx_section">
-<h2 class="ltx_title ltx_title_section">
-<span class="ltx_tag ltx_tag_section">2.9 </span>Upgrade from rel-20130620</h2>
+<div id="S1.p6" class="ltx_para">
+<pre class="ltx_verbatim">
+Model Technology ModelSim SE-64 vlog 10.1b Compiler 2012.04 Apr 26 2012
+-- Compiling module tb_compute_tile
+-- Compiling module trace_monitor
+[..]
+-- Compiling module lisnoc_mp_simple
+-- Compiling module lisnoc_mp_simple_wb
 
-<div id="S9.p1" class="ltx_para">
+Top level modules:
+	tb_compute_tile
+</pre>
+</div>
+<div id="S1.p7" class="ltx_para">
+<p class="ltx_p">In case you see errors check that the environment variables are set
+correctly.</p>
+</div>
+<div id="S1.p8" class="ltx_para">
+<p class="ltx_p">The testbench can now be started in the Modelsim user interface or can
+be executed in command line mode using <code class="ltx_verbatim">make sim</code>, but there is
+no software loaded to the memory, what results in a warning:</p>
+</div>
+<div id="S1.p9" class="ltx_para">
+<pre class="ltx_verbatim">
+# ** Warning: (vsim-7) Failed to open readmem file "ct.vmem" in read mode.
+</pre>
+</div>
+<div id="S1.p10" class="ltx_para">
+<p class="ltx_p">The simulations always expect vmem files that initialize the memories.
+This needs to be generated from the compiled source code. Before you
+build your own software you will need the support libraries. You can
+find all system software and example codes in
+<code class="ltx_verbatim">src/sw/system/dm/</code>.</p>
+</div>
+<div id="S1.p11" class="ltx_para">
+<p class="ltx_p">In the system software folder you will find the <code class="ltx_verbatim">libbaremetal</code>
+library. Go to the <code class="ltx_verbatim">build</code> directory of the library and
+<code class="ltx_verbatim">make</code> it. The code should compile without errors and warnings.</p>
+</div>
+<div id="S1.p12" class="ltx_para">
+<p class="ltx_p">The library contains many necessary functions, the boot code and
+helper macros. Two versions are build: <code class="ltx_verbatim">libbaremetal.a</code> is the
+normal distributed memory baremetal software and
+<code class="ltx_verbatim">libbaremetal-paging.a</code> is required when the local tile memory
+needs to be initialized from global memory, e.g., on an FPGA. This
+will later be extended to support smaller tile memories and do page
+swapping etc. This partially works, but an alternative approach to
+initialization and paging is described below with the PGAS system.</p>
+</div>
+<div id="S1.p13" class="ltx_para">
+<p class="ltx_p">When you link the library to your own code, you need to link some
+external symbols as described in <code class="ltx_verbatim">sysconfig.h</code>. Those are
+definitions specific to a certain system instance, such as the
+dimensions, the presence of I/O, the distribution of compute
+ressources, etc.</p>
+</div>
+<div id="S1.p14" class="ltx_para">
+<p class="ltx_p">Therefore you will always need to link your system-specific
+<code class="ltx_verbatim">optimsoc-sysconfig.o</code> to the library and your application
+objects, what we will describe in the following. The
+<code class="ltx_verbatim">optimsoc-sysconfig.c</code> can be found as part of the compute tile
+testbench (<code class="ltx_verbatim">tbench/rtl/dm/compute_tile</code>) under <code class="ltx_verbatim">sw</code>.</p>
+</div>
+<div id="S1.p15" class="ltx_para">
+<p class="ltx_p">To build a simple ``Hello World'' example, simply switch to <code class="ltx_verbatim">sw</code>.
+The example application can be found in the software path. You should
+copy the whole path</p>
+</div>
+<div id="S1.p16" class="ltx_para">
+<pre class="ltx_verbatim">
+$&gt; optimsoc-app-link dm baremetal/hello_simple
+</pre>
+</div>
+<div id="S1.p17" class="ltx_para">
+<p class="ltx_p">Inside the <code class="ltx_verbatim">hello_simple.lnk</code> folder you can find the
+<code class="ltx_verbatim">hello_simple.c</code> and the <code class="ltx_verbatim">Makefile</code>. Now <code class="ltx_verbatim">make</code> the
+example. This will automatically also build the sysconfig.o and link
+all together to the elf file. Furthermore some other files are build:</p>
+</div>
+<div id="S1.p18" class="ltx_para">
 <ul id="I1" class="ltx_itemize">
 <li id="I1.i1" class="ltx_item">
 <div id="I1.i1.p1" class="ltx_para">
-<p class="ltx_p">The in-place installation has been changed to a unified
-installation tree. You should reinstall.</p>
+<p class="ltx_p"><code class="ltx_verbatim">hello_world.dis</code> is the disassembly of the file</p>
 </div>
 </li>
 <li id="I1.i2" class="ltx_item">
 <div id="I1.i2.p1" class="ltx_para">
-<p class="ltx_p">The newlib has been removed.</p>
+<p class="ltx_p"><code class="ltx_verbatim">hello_world.bin</code> is the elf file als loaded binary file</p>
 </div>
 </li>
 <li id="I1.i3" class="ltx_item">
 <div id="I1.i3.p1" class="ltx_para">
-<p class="ltx_p">The system software structure has been changed. We removed the
-distinction between distributed and shared memory. Furthermore we
-have baremetal and virtualapps here also. You need to rebuild.</p>
-</div>
-</li>
-<li id="I1.i4" class="ltx_item">
-<div id="I1.i4.p1" class="ltx_para">
-<p class="ltx_p">The TCL interface has been added. Set <code class="ltx_verbatim ltx_font_typewriter">OPTIMSOC_TCL</code> as
-described above.</p>
-</div>
-</li>
-<li id="I1.i5" class="ltx_item">
-<div id="I1.i5.p1" class="ltx_para">
-<p class="ltx_p">The previous liboptimsochost examples are now part of the
-distribution as &ldquo;tools&rdquo;. Please rebuild the library.</p>
+<p class="ltx_p"><code class="ltx_verbatim">hello_world.vmem</code> is a textual copy of the binary file</p>
 </div>
 </li>
 </ul>
+</div>
+<div id="S1.p19" class="ltx_para">
+<p class="ltx_p">(Note: If the latter is not build, ensure you have <code class="ltx_verbatim">bin2vmem</code> in
+your <code class="ltx_verbatim">PATH</code>, see
+<span class="ltx_ref ltx_ref_self"><span class="ltx_text ltx_ref_tag">2</span></span>).</p>
+</div>
+<div id="S1.p20" class="ltx_para">
+<p class="ltx_p">You can now run the example. First go back to the compute tile
+testbench main folder. Before the simulation warned that
+<code class="ltx_verbatim">ct.vmem</code> cannot be found. Therefore we simply link the software
+to this filename</p>
+</div>
+<div id="S1.p21" class="ltx_para">
+<pre class="ltx_verbatim">
+&gt; ln -s sw/hello_simple.lnk/hello_simple.vmem ct.vmem
+</pre>
+</div>
+<div id="S1.p22" class="ltx_para">
+<p class="ltx_p">If you now run the software (<code class="ltx_verbatim">make sim</code>), the simulation should
+terminate with:</p>
+</div>
+<div id="S1.p23" class="ltx_para">
+<pre class="ltx_verbatim">
+# [               52500, 0] Software reset
+# [            57480000, 0] Terminated at address 0x00008080
+</pre>
+</div>
+<div id="S1.p24" class="ltx_para">
+<p class="ltx_p"><code class="ltx_verbatim">0x00008080</code> is the program counter (can vary depending on your cross
+compiler version) the simulation terminated. This is correct behavior
+and will be explained below. Furthermore you will find a file called
+<code class="ltx_verbatim">stdout</code> which shows the actual output:</p>
+</div>
+<div id="S1.p25" class="ltx_para">
+<pre class="ltx_verbatim">
+[            51185000, 0] Hello World!
+</pre>
+</div>
+<div id="S1.p26" class="ltx_para">
+<p class="ltx_p">The <code class="ltx_verbatim">[..]</code> part is the time stamp and core id. But how does the
+actual printf-output get there when there is no UART or similar?</p>
+</div>
+<div id="S1.p27" class="ltx_para">
+<p class="ltx_p">OpTiMSoC software (especially in future releases) makes excessive use
+of a tricky part of the OpenRISC ISA. The ``no operation'' instruction
+<code class="ltx_verbatim">l.nop</code> has a paramter <code class="ltx_verbatim">K</code> in assembly. This can be used for
+simulation purposes. It can be used for instrumentation, tracing or
+special purposes as writing characters with minimal intrusion or
+simulation termination.</p>
+</div>
+<div id="S1.p28" class="ltx_para">
+<p class="ltx_p">The termination is forced with <code class="ltx_verbatim">l.nop 0x1</code>. If you have a look at
+the disassembly <code class="ltx_verbatim">hello_simple.dis</code> at instruction <code class="ltx_verbatim">0x8080</code>
+(see above) you exactly find this instruction. The actual action is
+then done with the trace monitor.</p>
+</div>
+<div id="S1.p29" class="ltx_para">
+<p class="ltx_p">With this method you can simply provide constants to your simulation
+environments. For variables this method is extended by putting data in
+further registers (often <code class="ltx_verbatim">r3</code>). This still is minimally intrusive
+and allows you to trace values. The printf is also done that way (see
+newlib):</p>
+</div>
+<div id="S1.p30" class="ltx_para">
+<pre class="ltx_verbatim">
+void sim_putc(unsigned char c) {
+  asm("l.addi\tr3,%0,0": :"r" (c));
+  asm("l.nop %0": :"K" (NOP_PUTC));
+}
+</pre>
+</div>
+<div id="S1.p31" class="ltx_para">
+<p class="ltx_p">This function is called from printf as write function. The trace
+monitor captures theses characters and puts them to the stdout file.</p>
+</div>
+<div id="S1.p32" class="ltx_para">
+<p class="ltx_p">You can easily add your own ``traces'' using a macro defined in
+<code class="ltx_verbatim">optimsoc.h</code>:</p>
+</div>
+<div id="S1.p33" class="ltx_para">
+<pre class="ltx_verbatim">
+#define OPTIMSOC_TRACE(id,v)                \
+   asm("l.addi\tr3,%0,0": :"r" (v) : "r3"); \
+   asm("l.nop %0": :"K" (id));
+</pre>
+</div>
+<div id="S1.p34" class="ltx_para">
+<p class="ltx_p">This feature is used extensively by current and future OpTiMSoC software.</p>
+</div>
+</div>
+<div id="S2" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">3.2 </span>Going Multicore: Simulate Small 2x2 Distributed Memory
+  System</h2>
+
+<div id="S2.p1" class="ltx_para">
+<p class="ltx_p">Next you might want to build an actual multicore system. You can find
+such a system in <code class="ltx_verbatim">tbench/rtl/dm</code> directory as
+<code class="ltx_verbatim">system_2x2_cccc</code>. The nomenclature in all pre-packed systems
+first denotes the dimensions and then the instantiated tiles, here
+<code class="ltx_verbatim">cccc</code> as four compute tiles.</p>
+</div>
+<div id="S2.p2" class="ltx_para">
+<p class="ltx_p">When you switch to this directory, you can build the system using
+<code class="ltx_verbatim">make</code>. In the following build the <code class="ltx_verbatim">hello_simple</code> software
+identical to the description above. After running <code class="ltx_verbatim">make sim</code> you
+will find the files <code class="ltx_verbatim">stdout.0</code> to <code class="ltx_verbatim">stdout.3</code>, each
+containing ``Hello World''.</p>
+</div>
+<div id="S2.p3" class="ltx_para">
+<p class="ltx_p">There is a second ``hello world'' example available:
+<code class="ltx_verbatim">hello_simplemp</code>. This program uses the simple message passing
+facilities of the network adapter to send messages. In that example
+all cores send a message to core 0, that prints a message when
+receiving the packets. When all cores sent their messags, the core
+acknowledges this by printing its own ``Hello World'' message.</p>
+</div>
+<div id="S2.p4" class="ltx_para">
+<p class="ltx_p">The simulation should output:</p>
+</div>
+<div id="S2.p5" class="ltx_para">
+<pre class="ltx_verbatim">
+# [               52500, 0] Software reset
+# [               52500, 1] Software reset
+# [               52500, 2] Software reset
+# [               52500, 3] Software reset
+# [            46585000, 1] Event 0x0100: 0x00000000
+# [            46617500, 1] Event 0x0100: 0x00000001
+# [            46627500, 2] Event 0x0100: 0x00000000
+# [            46652500, 1] Event 0x0100: 0x000fffec
+# [            46660000, 2] Event 0x0100: 0x00000001
+# [            46670000, 3] Event 0x0100: 0x00000000
+# [            46695000, 2] Event 0x0100: 0x000fffec
+# [            46702500, 3] Event 0x0100: 0x00000001
+# [            46737500, 3] Event 0x0100: 0x000fffec
+# [            47272500, 0] Exception # 8 occured
+# [            48292500, 1] Terminated at address 0x0000dd5c
+# [            48335000, 2] Terminated at address 0x0000dd5c
+# [            48377500, 3] Terminated at address 0x0000dd5c
+# [            48835000, 0] Event 0x0102: 0x00000001
+# [            48867500, 0] Event 0x0102: 0x00000000
+# [            48895000, 0] Event 0x0102: 0x00000001
+# [            65855000, 0] Event 0x0103: 0x00000000
+# [            66337500, 0] Event 0x0102: 0x00000002
+# [            66352500, 0] Event 0x0102: 0x00000000
+# [            66360000, 0] Event 0x0102: 0x00000001
+# [            75940000, 0] Event 0x0103: 0x00000000
+# [            76420000, 0] Event 0x0102: 0x00000003
+# [            76435000, 0] Event 0x0102: 0x00000000
+# [            76442500, 0] Event 0x0102: 0x00000001
+# [            85920000, 0] Event 0x0103: 0x00000000
+# [           100387500, 0] Terminated at address 0x0000dd5c
+</pre>
+</div>
+<div id="S2.p6" class="ltx_para">
+<p class="ltx_p">After each core is reset they start their execution and after a
+certain time emit events. We will have a more detailed view on the
+events in the remaining tutorial. For the moment, you should know that
+the <code class="ltx_verbatim">0x100</code> events describe that the processors send their
+messages. <code class="ltx_verbatim">Exception # 8</code> is the interrupt exception, that occurs
+when data arrives at the network adapter. Core 0 then receives all of
+the messages (event <code class="ltx_verbatim">0x102</code>).</p>
+</div>
+<div id="S2.p7" class="ltx_para">
+<p class="ltx_p">Finally, a real world example is given by <code class="ltx_verbatim">heat</code>. Link this
+example similar as above (do not forget to link the correct ct.vmem at
+all time!). This example calculates the heat distribution in a
+distributed manner. The cores coordinate their boundary regions by
+sending messages around. With the debug infrastructure below the trace
+events will be much easier to understand.</p>
+</div>
+</div>
+<div id="S3" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">3.3 </span>The Look Inside: Introducing the Debug System</h2>
+
+<div id="S3.p1" class="ltx_para">
+<p class="ltx_p">In the previous tutorials you have seen some software running on a simple
+OpTiMSoC system. Until now, you have only seen the output of the applications,
+not how it works on the inside.</p>
+</div>
+<div id="S3.p2" class="ltx_para">
+<p class="ltx_p">This problem is one of the major problems in embedded systems: you cannot
+easily look inside (especially as soon as you run on real hardware as opposed
+to simulation). In more technical terms, the system's observability is
+limited. A common way to overcome this is to add a debug and diagnosis
+infrastructure to the SoC which transfers data from the system to the outside
+world, usually to a PC of a developer.</p>
+</div>
+<div id="S3.p3" class="ltx_para">
+<p class="ltx_p">OpTiMSoC also comes with an extensive debug system. In this section, we'll have
+a look at this system, how it works and how you can use it to debug your
+applications. But before diving into the details, we'll have a short discussion
+of the basics which are necesssary to understand the system.</p>
+</div>
+<div id="S3.p4" class="ltx_para">
+<p class="ltx_p">Many developers know debugging from their daily work. Most of the time it
+involves running a program inside a debugger like GDB or Microsoft Visual
+Studio, setting a breakpoint at the right line of code, and stepping through the
+program from there on, running one instruction (or one line of code) at a time.
+</p>
+</div>
+<div id="S3.p5" class="ltx_para">
+<p class="ltx_p">This technique is what we call run-control debugging. While it works great for
+single-threaded programs, it cannot easily be applied to debugging parallel
+software running on possibly heterogenous many-core SoC. Instead, our solution
+is solely based on tracing, i.e. collecting information from the system while
+it is running and then being able to look at this data later to figure out the
+root cause of a problem.</p>
+</div>
+<div id="S3.p6" class="ltx_para">
+<p class="ltx_p">The debug system consists of two main parts: the hardware part runs on the
+OpTiMSoC system itself and collects all data. The other part runs on a
+developer's PC (often also called host PC) and controls the debugging process
+and displays the collected data. Both parts are connected using either a USB
+connection (e.g. when running on the ZTEX boards), or a TCP connection (when
+running OpTiMSoC in simulations).</p>
+</div>
+</div>
+<div id="S4" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">3.4 </span>Verilator: Compiled Verilog simulation</h2>
+
+<div id="S4.p1" class="ltx_para">
+<p class="ltx_p">At the moment running ``verilated'' simulations is the best supported
+way of observing the system traces. We will therefore run the examples
+from before using a verilated simulation and observing the system in
+the graphical user interface.</p>
+</div>
+<div id="S4.p2" class="ltx_para">
+<p class="ltx_p">In the following we will have a look at building such a system and how
+to observe it with the GUI. In <code class="ltx_verbatim">tbench/verilator/dm</code> you find
+systems identical to the RTL simulation. We will directly start with
+the <code class="ltx_verbatim">system_2x2_cccc</code>. In the base folder you should simply make
+it:</p>
+</div>
+<div id="S4.p3" class="ltx_para">
+<pre class="ltx_verbatim">
+$&gt; make
+</pre>
+</div>
+<div id="S4.p4" class="ltx_para">
+<p class="ltx_p">The command will first generate the verilated version of the 2x2
+system. Finally it builds the toplevel files and links to
+<code class="ltx_verbatim">tb_system_2x2_cccc</code> and <code class="ltx_verbatim">tb_system_2x2_cccc-vcd</code>. The
+latter generates a full VCD trace file of the hardware, which is
+much slower and also easily takes up tens of GB.</p>
+</div>
+<div id="S4.p5" class="ltx_para">
+<p class="ltx_p">Similar to the steps described above you will need to build the
+software, e.g., the heat example. Again you need to link the
+<code class="ltx_verbatim">vmem</code> file. Now start the simulation:</p>
+</div>
+<div id="S4.p6" class="ltx_para">
+<pre class="ltx_verbatim">
+$&gt; ./tb_system_2x2_cccc
+</pre>
+</div>
+<div id="S4.p7" class="ltx_para">
+<p class="ltx_p">It will start a debug server and wait for connections:</p>
+</div>
+<div id="S4.p8" class="ltx_para">
+<pre class="ltx_verbatim">             SystemC 2.3.0-ASI --- Feb 11 2013 12:54:17
+        Copyright (c) 1996-2012 by all Contributors,
+        ALL RIGHTS RESERVED
+Listening on port 22000
+</pre>
+</div>
+<div id="S4.p9" class="ltx_para">
+<p class="ltx_p">In another console now start the OpTiMSoC GUI:</p>
+</div>
+<div id="S4.p10" class="ltx_para">
+<pre class="ltx_verbatim">
+$&gt; optimsocgui
+</pre>
+</div>
+<div id="S4.p11" class="ltx_para">
+<p class="ltx_p">In the first dialog window you need to set the debug backend to
+<em class="ltx_emph">Simulation TCP Interface</em> and proceed then. After the GUI
+started you need to connect using <em class="ltx_emph">Target
+  System</em>$&rarr;$<em class="ltx_emph">Connect</em>. The system view should change to
+a 2x2 system.</p>
+</div>
+<div id="S4.p12" class="ltx_para">
+<p class="ltx_p">The last step is to run the system by <em class="ltx_emph">Target
+  System</em>$&rarr;$<em class="ltx_emph">Start CPUs</em>. The execution trace on the
+bottom of the window will start showing execution sections and events.
+By moving the mouse over the section you will find the description of
+the section. Similarly for the events you find a short description of
+the event.
+</p>
+</div>
+</div>
+<div id="S5" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">3.5 </span>Going to the FPGA: ZTEX Boards</h2>
+
+<div id="S5.p1" class="ltx_para">
+<p class="ltx_p">The recommended platform for software development or any other system
+which needs no I/O is the ZTEX boards<a href="#optimsoc-doc-footnote-4"><sup>4</sup></a>. Various variants exist, the supported boards
+are the 1.15 series version b and d, where the latter is twice as
+large as the former and can therefore contain more processor cores.
+The 2x2 example works with both boards.</p>
+</div>
+<div id="S5.SS1" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">3.5.1 </span>Prepare: Simulate the Complete System</h3>
+
+<div id="S5.SS1.p1" class="ltx_para">
+<p class="ltx_p">Before we go to the actual board we want to simulate the entire system
+on the FPGA to see if the debug system works correctly and the
+clocks works correct.</p>
+</div>
+<div id="S5.SS1.p2" class="ltx_para">
+<p class="ltx_p">The distribution therefore contains a SystemC module that functionally
+behaves like the USB chip on the ZTEX boards. The host tools can
+connect to the debug system via this module using a TCP socket.</p>
+</div>
+<div id="S5.SS1.p3" class="ltx_para">
+<p class="ltx_p">The system can be found at <code class="ltx_verbatim">tbench/rtl/dm/system_2x2_cccc_ztex</code>.
+Build the system running <code class="ltx_verbatim">make</code>. Before you simulate the system
+you will now need to provide a <code class="ltx_verbatim">modelsim.ini</code> either globally or
+in the system's folder that contains the Xilinx libraries. Once you
+have it, you can start the system using</p>
+</div>
+<div id="S5.SS1.p4" class="ltx_para">
+<pre class="ltx_verbatim">
+$&gt; make sim-noninteractive
+</pre>
+</div>
+<div id="S5.SS1.p5" class="ltx_para">
+<p class="ltx_p">The simulation will start and you can now connect
+to the system in a different shell by using the command line
+interface:</p>
+</div>
+<div id="S5.SS1.p6" class="ltx_para">
+<pre class="ltx_verbatim">
+$&gt; optimsoc_cli -bdbgnoc -oconn=tcp,host=localhost,port=23000
+</pre>
+</div>
+<div id="S5.SS1.p7" class="ltx_para">
+<p class="ltx_p">The command line interface will connect to the system and enumerate
+all debug modules:</p>
+</div>
+<div id="S5.SS1.p8" class="ltx_para">
+<pre class="ltx_verbatim">
+Connected to system.
+System ID: 0x0000ce75
+Module summary:
+addr. type version name
+0x02 0x02 0x00 ITM
+0x03 0x02 0x00 ITM
+0x04 0x02 0x00 ITM
+0x05 0x02 0x00 ITM
+0x06 0x05 0x00 STM
+0x07 0x05 0x00 STM
+0x08 0x05 0x00 STM
+0x09 0x05 0x00 STM
+0x0a 0x07 0x00 MAM
+0x0b 0x07 0x00 MAM
+0x0c 0x07 0x00 MAM
+0x0d 0x07 0x00 MAM
+</pre>
+</div>
+<div id="S5.SS1.p9" class="ltx_para">
+<p class="ltx_p">The modules are the <em class="ltx_emph">Instruction Trace Module (ITM)</em>,
+<em class="ltx_emph">Software Trace Module (STM)</em> and <em class="ltx_emph">Memory Access Module
+  (MAM)</em> for each of the four cores.</p>
+</div>
+<div id="S5.SS1.p10" class="ltx_para">
+<p class="ltx_p">Before debugging now, you will need to build the software as described
+before in the <code class="ltx_verbatim">sw</code> subfolder. Once you have build
+<code class="ltx_verbatim">hello_simplemp</code> you can execute it in the simulation.</p>
+</div>
+<div id="S5.SS1.p11" class="ltx_para">
+<p class="ltx_p">First you enter interactive mode:</p>
+</div>
+<div id="S5.SS1.p12" class="ltx_para">
+<pre class="ltx_verbatim">
+$&gt; optimsoc_cli -bdbgnoc -oconn=tcp,host=localhost,port=23000
+</pre>
+</div>
+<div id="S5.SS1.p13" class="ltx_para">
+<p class="ltx_p">After enumeration you will get an <code class="ltx_verbatim">OpTiMSoC&gt;</code> shell. First you
+can initialize the memories:</p>
+</div>
+<div id="S5.SS1.p14" class="ltx_para">
+<pre class="ltx_verbatim">
+OpTiMSoC&gt; mem_init hello_simplemp.bin 0-3
+</pre>
+</div>
+<div id="S5.SS1.p15" class="ltx_para">
+<p class="ltx_p">Next you need to enable logging of the software trace events to a
+file:</p>
+</div>
+<div id="S5.SS1.p16" class="ltx_para">
+<pre class="ltx_verbatim">
+OpTiMSoC&gt; log_stm_trace strace
+</pre>
+</div>
+<div id="S5.SS1.p17" class="ltx_para">
+<p class="ltx_p">Then start the system:
+<pre class="ltx_verbatim">
+OpTiMSoC&gt; start
+</pre></p>
+</div>
+<div id="S5.SS1.p18" class="ltx_para">
+<p class="ltx_p">Let it run for a while (1 minute) and then leave the command line
+interface:
+<pre class="ltx_verbatim">
+OpTiMSoC&gt; quit
+</pre></p>
+</div>
+<div id="S5.SS1.p19" class="ltx_para">
+<p class="ltx_p">After that you will find the expected output of the trace events in
+<code class="ltx_verbatim">strace</code>.</p>
+</div>
+</div>
+<div id="S5.SS2" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">3.5.2 </span>Synthesis</h3>
+
+<div id="S5.SS2.p1" class="ltx_para">
+<p class="ltx_p">Once you have checked the correct functionality of the system (or
+alter your extensions) you can go over to system synthesis for the
+FPGA. At the moment we support the Synopsys FPGA flow (Synplify).</p>
+</div>
+<div id="S5.SS2.p2" class="ltx_para">
+<p class="ltx_p">You can find the system synthesis in the folder
+<code class="ltx_verbatim">syn/dm/system_2x2_cccc_ztex/</code>. A Makefile is used to build the
+systems.</p>
+</div>
+<div id="S5.SS2.p3" class="ltx_para">
+<p class="ltx_p">To generate the system first create the project file:</p>
+</div>
+<div id="S5.SS2.p4" class="ltx_para">
+<pre class="ltx_verbatim">
+$&gt; make synplify.prj
+</pre>
+</div>
+<div id="S5.SS2.p5" class="ltx_para">
+<p class="ltx_p">Now the Synplify project file has been generated and you're ready to start the
+synthesis.</p>
+</div>
+<div id="S5.SS2.p6" class="ltx_para">
+<p class="ltx_p">If you want to have the output of the synthesis in a folder different from your
+source folder (the one where you just ran <code class="ltx_verbatim">make</code> in), you can set the
+environment variable <code class="ltx_verbatim">OPTIMSOC_SYN_OUTDIR</code> to any path you like, e.g. put
+<pre class="ltx_verbatim">
+export OPTIMSOC_SYN_OUTDIR=$HOME/syn
+</pre>
+in your profile script (e.g. your <code class="ltx_verbatim">.bashrc</code> file) and reload it.</p>
+</div>
+<div id="S5.SS2.p7" class="ltx_para">
+<p class="ltx_p">Run the synthesis afterwards (for the ZTEX 1.15b or d board):</p>
+</div>
+<div id="S5.SS2.p8" class="ltx_para">
+<pre class="ltx_verbatim">
+$&gt; make synplify_115b_ddr
+</pre>
+</div>
+<div id="S5.SS2.p9" class="ltx_para">
+<p class="ltx_p">Once the synthesis is finished you can generate the bitstream:</p>
+</div>
+<div id="S5.SS2.p10" class="ltx_para">
+<pre class="ltx_verbatim">
+$&gt; make bitgen_115d_ddr
+</pre>
+</div>
+</div>
+<div id="S5.SS3" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">3.5.3 </span>Testing on the FPGA</h3>
+
+<div id="S5.SS3.p1" class="ltx_para">
+<p class="ltx_p">Now that you have generated a bitstream we're ready to upload it to the FPGA.
+Connect the ZTEX 1.15 board to your PC via USB.</p>
+</div>
+<div id="S5.SS3.p2" class="ltx_para">
+<p class="ltx_p">If you run <code class="ltx_verbatim">lsusb</code> the board identifies itself as:</p>
+</div>
+<div id="S5.SS3.p3" class="ltx_para">
+<pre class="ltx_verbatim">
+Bus 001 Device 004: ID 221a:0100
+</pre>
+</div>
+<div id="S5.SS3.p4" class="ltx_para">
+<p class="ltx_p">There is no manufacturer or further information displayed. The reason
+is, that OpTiMSoC otherwise may require to buy a set of USB
+identifiers. Instead, all ZTEX boards share the same identifier and
+the following command is used to find out details on the Firmware,
+Board and Capabilities:</p>
+</div>
+<div id="S5.SS3.p5" class="ltx_para">
+<pre class="ltx_verbatim">
+$&gt; FWLoader -c -ii
+</pre>
+</div>
+<div id="S5.SS3.p6" class="ltx_para">
+<p class="ltx_p">To use the ZTEX boards as a user, it is recommended to add the following
+udev rule</p>
+</div>
+<div id="S5.SS3.p7" class="ltx_para">
+<pre class="ltx_verbatim">
+SUBSYSTEM=="usb", ATTRidVendor=="221a", ATTRidProduct=="0100", MODE="0666"
+</pre>
+</div>
+<div id="S5.SS3.p8" class="ltx_para">
+<p class="ltx_p">for example in <code class="ltx_verbatim">/etc/udev/rules.d/60-usb.rules</code>.</p>
+</div>
+<div id="S5.SS3.p9" class="ltx_para">
+<p class="ltx_p">If you are running OpTiMSoC on the board for the first time you need to update
+the firmware on the board. To do that, switch to the folder
+<code class="ltx_verbatim">src/sw/firmware/ztex_usbfpga_1_15_fx2_fw</code> in your OpTiMSoC source tree.
+Follow the instructions inside the provided <code class="ltx_verbatim">README</code> file to build and
+flash the board with the required firmware. All of this only needs to be done
+once for each board (until the firmware changes).</p>
+</div>
+<div id="S5.SS3.p10" class="ltx_para">
+<p class="ltx_p">Now the board will identify itself using <code class="ltx_verbatim">FWLoader -c -ii</code>:</p>
+</div>
+<div id="S5.SS3.p11" class="ltx_para">
+<pre class="ltx_verbatim">
+bus=001  device=4 (`004')  ID=221a:100
+   Manufacturer="TUM LIS"  Product="OpTiMSoC - ZTEX USB 1.15"    SerialNumber="04A32DBCFA"
+   productID=10.13.0.0  fwVer=0  ifVer=1
+   FPGA configured
+   Capabilities:
+      EEPROM read/write
+      FPGA configuration
+      Flash memory support
+      High speed FPGA configuration
+      MAC EEPROM read/write
+</pre>
+</div>
+<div id="S5.SS3.p12" class="ltx_para">
+<p class="ltx_p">Everything ready to go? Then upload the bitstream to the FPGA by running</p>
+</div>
+<div id="S5.SS3.p13" class="ltx_para">
+<pre class="ltx_verbatim">
+$&gt; make flash_115d_ddr
+</pre>
+</div>
+<div id="S5.SS3.p14" class="ltx_para">
+<p class="ltx_p">in the same folder where you have been running <code class="ltx_verbatim">make bitstream_...</code> etc.
+in the previous section. The output should be something like</p>
+</div>
+<div id="S5.SS3.p15" class="ltx_para">
+<pre class="ltx_verbatim">
+FWLoader -v 0x221a 0x100 -f -uf /[somepath]/system_2x2_cccc_ztex.bit
+FPGA configuration time: 194 ms
+</pre>
+</div>
+<div id="S5.SS3.p16" class="ltx_para">
+<p class="ltx_p">As the FPGA is now ready you can use the same method to connect to the
+FPGA and load software on it as you've done in the Section
+<a href="chap_tutorials.html#S5.SS1" title="3.5.1 Prepare: Simulate the Complete System &#8227; 3.5 Going to the FPGA: ZTEX Boards &#8227; Chapter&nbsp;3 Tutorials &#8227; OpTiMSoC User Guide" class="ltx_ref"><span class="ltx_text ltx_ref_tag">3.5.1</span></a>, just this time the
+connection paramters used in <code class="ltx_verbatim">optimsoc_cli</code> are a bit different.</p>
+</div>
+<div id="S5.SS3.p17" class="ltx_para">
+<p class="ltx_p">Run
+<pre class="ltx_verbatim">
+$&gt; optimsoc_cli -i -bdbgnoc -oconn=usb
+</pre></p>
+</div>
+<div id="S5.SS3.p18" class="ltx_para">
+<p class="ltx_p">to connect to the FPGA board over USB. You should again be presented with a
+listing of all available debug modules. Now you can continue just as you did
+before by calling <code class="ltx_verbatim">mem_init</code> to load some software onto the FPGA, etc.</p>
+</div>
+<div id="S5.SS3.p19" class="ltx_para">
+<p class="ltx_p">Congratulations, you've run OpTiMSoC on real hardware for the first
+time! You can now develop software and explore OpTiMSoC. A handy
+utility is the python interface to the command line interface. Instead
+of running the interactive mode you can run the script interface like:
+</p>
+</div>
+<div id="S5.SS3.p20" class="ltx_para">
+<pre class="ltx_verbatim">
+$&gt; optimsoc_cli -s &lt;script.py&gt; -bdbgnoc -oconn=usb
+</pre>
+</div>
+<div id="S5.SS3.p21" class="ltx_para">
+<p class="ltx_p">An example python script:</p>
+</div>
+<div id="S5.SS3.p22" class="ltx_para">
+<pre class="ltx_verbatim">
+mem_init(2,"hello_simple.bin")
+log_stm_trace("strace")
+start()
+</pre>
+</div>
+<div id="S5.SS3.p23" class="ltx_para">
+<p class="ltx_p">You can also connect to the USB now using the GUI. Now you're ready to
+explore and customize OpTiMSoC for yourself. Have fun!
+
+
+<div class="ltx_chapter">
+<h1 class="ltx_title ltx_title_chapter">
+<span class="ltx_tag ltx_tag_chapter">Chapter&nbsp;4 </span>Develop OpTiMSoC</h1>
+
+</div></p>
+</div>
+<div id="S5.SS3.p24" class="ltx_para">
+<p class="ltx_p">After you have worked through some, or even all, of the tutorials in the
+previous chapter, you're now ready to bring your own ideas to live using
+OpTiMSoC. This chapter gives you a quick introduction on how to setup your
+development environment, like editors and the revision control system, and how
+to contribute back to the OpTiMSoC project.</p>
+</div>
+<div id="S5.SS3.p25" class="ltx_para">
+<p class="ltx_p">We assumed in this whole tutorial that you are working on Linux. While it is
+certainly possible to use Windows or OS~X for development, we cannot provide
+help for those systems and you're on your own.</p>
+</div>
+</div>
+</div>
+<div id="Ch4.S1" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">4.1 </span>Choosing an Editor/IDE</h2>
+
+<div id="Ch4.S1.p1" class="ltx_para">
+<p class="ltx_p">When editing code, an editor or IDE usually comes handy. While there is clearly
+no ``best'' or even ``recommended'' editor or IDE, we will present two or our
+choices here, together with some settings that make working on OpTiMSoC a
+pleasant experience. Feel free to adapt these recommendations to your personal
+preferences!</p>
+</div>
+<div id="Ch4.S1.SS1" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">4.1.1 </span>Eclipse</h3>
+
+<div id="Ch4.S1.SS1.p1" class="ltx_para">
+<p class="ltx_p">Eclipse gives you a nice and integrated development across the different parts
+of the code base by using a couple of plugins. But be aware, Eclipse likes
+memory and is not exactly ``lightweight'', but if you have enough memory
+available (in the area of 500~MB for Eclipse) it can be a very powerful and
+productive choice.</p>
+</div>
+<div id="Ch4.S1.SS1.SSS1" class="ltx_subsubsection">
+<h4 class="ltx_title ltx_title_subsubsection">Installation and Basic Setup</h4>
+
+<div id="Ch4.S1.SS1.SSS1.p1" class="ltx_para">
+<p class="ltx_p">First of all, get Eclipse itself. Go to <a href="http://www.eclipse.org/downloads/" title="" class="ltx_ref ltx_url">http://www.eclipse.org/downloads/</a>
+and get the ``Eclipse IDE for C/C++ Developers'' package or install it from
+your distribution's package manager. All the following steps were tested with
+Eclipse Kepler (4.3).</p>
+</div>
+<div id="Ch4.S1.SS1.SSS1.p2" class="ltx_para">
+<p class="ltx_p">Now start Eclipse and first go to <em class="ltx_emph">Help $&rarr;$ Check for Updates</em>.
+Install all available updates.</p>
+</div>
+<div id="Ch4.S1.SS1.SSS1.p3" class="ltx_para">
+<p class="ltx_p">For Verilog syntax highlighting we use a plugin called ``VEditor''. Go to
+<em class="ltx_emph">Help $&rarr;$ Install New Software...</em> In the field <em class="ltx_emph">Work with</em>
+enter the URL of the installation site,
+<code class="ltx_verbatim">http://veditor.sourceforge.net/update</code>. Now press the return key and after
+a couple of seconds, the entry <em class="ltx_emph">VEditor Plugin</em> appears below. Select it
+and click on the <em class="ltx_emph">Next</em> button until the installation is finished. To
+complete the process you need to restart Eclipse.</p>
+</div>
+<div id="Ch4.S1.SS1.SSS1.p4" class="ltx_para">
+<p class="ltx_p">Every project has different preferences regarding the styling of the code.
+Therefore every editor can be configured to some extend. First, we'll set the
+general settings for Eclipse, and then for Verilog and C.
+</p>
+</div>
+<div id="Ch4.S1.SS1.SSS1.p5" class="ltx_para">
+<p class="ltx_p">Start by clicking on <em class="ltx_emph">Window $&rarr;$ Preferences</em> inside Eclipse.
+There, choose <em class="ltx_emph">Editors $&rarr;$ Text Editors</em>. You should set the
+following settings:</p>
+</div>
+<div id="Ch4.S1.SS1.SSS1.p6" class="ltx_para">
+<ul id="Ch4.I1" class="ltx_itemize">
+<li id="Ch4.I1.i1" class="ltx_item">
+<div id="Ch4.I1.i1.p1" class="ltx_para">
+<p class="ltx_p">Check <em class="ltx_emph">Insert spaces for tabs</em></p>
+</div>
+</li>
+<li id="Ch4.I1.i2" class="ltx_item">
+<div id="Ch4.I1.i2.p1" class="ltx_para">
+<p class="ltx_p">Check <em class="ltx_emph">Show print margin</em></p>
+</div>
+</li>
+<li id="Ch4.I1.i3" class="ltx_item">
+<div id="Ch4.I1.i3.p1" class="ltx_para">
+<p class="ltx_p">Set the <em class="ltx_emph">Print margin column</em> to 80</p>
+</div>
+</li>
+<li id="Ch4.I1.i4" class="ltx_item">
+<div id="Ch4.I1.i4.p1" class="ltx_para">
+<p class="ltx_p">Check <em class="ltx_emph">Show line numbers</em></p>
+</div>
+</li>
+</ul>
+</div>
+<div id="Ch4.S1.SS1.SSS1.p7" class="ltx_para">
+<p class="ltx_p">Just leave the other settings as they are, or change them to your liking.</p>
+</div>
+<div id="Ch4.S1.SS1.SSS1.p8" class="ltx_para">
+<p class="ltx_p">For the Verilog settings, go to <em class="ltx_emph">Verilog/VHDL Editor $&rarr;$ Code
+Style</em>. There, select <em class="ltx_emph">Space as Indent Character</em> and set the <em class="ltx_emph">Indent
+Size</em> to 3.</p>
+</div>
+<div id="Ch4.S1.SS1.SSS1.p9" class="ltx_para">
+<p class="ltx_p">For the C style used in liboptimsochost and other libraries we have prepared a
+settings file. Go to <em class="ltx_emph">C/C++ $&rarr;$ Code Style $&rarr;$
+Formatter</em> and click on <em class="ltx_emph">Import...</em>, choose the settings file
+<code class="ltx_verbatim">doc/resources/optimsoc-eclipse-cdt-codestyle.xml</code> inside the OpTiMSoC
+source tree. Now you should have a new profile ``OpTiMSoC'' in the list of
+profiles. Choose this one for all work on the C code.</p>
+</div>
+</div>
+<div id="Ch4.S1.SS1.SSS2" class="ltx_subsubsection">
+<h4 class="ltx_title ltx_title_subsubsection">Creating the OpTiMSoC HDL Project</h4>
+
+<div id="Ch4.S1.SS1.SSS2.p1" class="ltx_para">
+<p class="ltx_p">Now that all the basic settings are in place, we can create the projects inside
+Eclipse. First, we will create a project for editing the HDL (Verilog) code.</p>
+</div>
+<div id="Ch4.S1.SS1.SSS2.p2" class="ltx_para">
+<p class="ltx_p">In the <em class="ltx_emph">Project Explorer</em> (on the left side), right click and select
+<em class="ltx_emph">New $&rarr;$ Project...</em>. A new dialog window shows. In this window,
+select <em class="ltx_emph">Verilog/VHDL $&rarr;$ Verilog/VHDL project</em> and click
+<em class="ltx_emph">Next</em>. Now enter a project name, e.g. ``OpTiMSoC''. Uncheck the option
+<em class="ltx_emph">Use default location</em> and click on <em class="ltx_emph">Browse</em> to choose your OpTiMSoC
+source directory (the location where you cloned the Git repository to).</p>
+</div>
+<div id="Ch4.S1.SS1.SSS2.p3" class="ltx_para">
+<p class="ltx_p">The OpTiMSoC source tree not only contains RTL code, but also the necessary
+software components like liboptimsochost and the OpTiMSoC GUI. This code is
+better edited in a separate project and should be excluded from the project you
+just created. To do that, choose <em class="ltx_emph">Project $&rarr;$
+Properties</em> from the main menu. Navigate to <em class="ltx_emph">Resource $&rarr;$
+Resource Filters</em> and click on the <em class="ltx_emph">Add...</em> button. There, choose the
+following settings:</p>
+<ul id="Ch4.I2" class="ltx_itemize">
+<li id="Ch4.I2.i1" class="ltx_item">
+<div id="Ch4.I2.i1.p1" class="ltx_para">
+<p class="ltx_p">Choose <em class="ltx_emph">Exclude all</em> in the group <em class="ltx_emph">Filter type</em></p>
+</div>
+</li>
+<li id="Ch4.I2.i2" class="ltx_item">
+<div id="Ch4.I2.i2.p1" class="ltx_para">
+<p class="ltx_p">Choose <em class="ltx_emph">Folders</em> in the group <em class="ltx_emph">Applies to</em></p>
+</div>
+</li>
+<li id="Ch4.I2.i3" class="ltx_item">
+<div id="Ch4.I2.i3.p1" class="ltx_para">
+<p class="ltx_p">Check <em class="ltx_emph">All children (recursive)</em></p>
+</div>
+</li>
+<li id="Ch4.I2.i4" class="ltx_item">
+<div id="Ch4.I2.i4.p1" class="ltx_para">
+<p class="ltx_p">In the group <em class="ltx_emph">File and Folder Attributes</em> select
+<em class="ltx_emph">Project Relative Path</em> <em class="ltx_emph">matches</em> <code class="ltx_verbatim">src/sw</code>.
+</p>
+</div>
+</li>
+</ul>
+<p class="ltx_p">Now click on <em class="ltx_emph">OK</em> to finish editing the filter.</p>
+</div>
+<div id="Ch4.S1.SS1.SSS2.p4" class="ltx_para">
+<p class="ltx_p">Then repeat the steps above to create a new resource filter but as path
+use <code class="ltx_verbatim">src/sysc</code> this time.</p>
+</div>
+<div id="Ch4.S1.SS1.SSS2.p5" class="ltx_para">
+<p class="ltx_p">After you're done with the second filter, click <em class="ltx_emph">OK</em> again to
+close the dialog.</p>
+</div>
+</div>
+<div id="Ch4.S1.SS1.SSS3" class="ltx_subsubsection">
+<h4 class="ltx_title ltx_title_subsubsection">Creating a C Project</h4>
+
+<div id="Ch4.S1.SS1.SSS3.p1" class="ltx_para">
+<p class="ltx_p">Eclipse is also a great choice for editing C code. As an example, we'll setup
+Eclipse for the OpTiMSoC host library, liboptimsochost.</p>
+</div>
+<div id="Ch4.S1.SS1.SSS3.p2" class="ltx_para">
+<p class="ltx_p">In the main menu, click on <em class="ltx_emph">File $&rarr;$ New $&rarr;$ Project</em>.
+A dialog window is shown. There, nagivate to <em class="ltx_emph">C/C++ $&rarr;$ Makefile
+Project with Existing Code</em> and click on the <em class="ltx_emph">Next</em> button. Type
+<code class="ltx_verbatim">liboptimsochost</code> as <em class="ltx_emph">Project Name</em> and click on <em class="ltx_emph">Browse...</em> to
+select the source code location of the library. It should be inside your
+OpTiMSoC code in the folder <code class="ltx_verbatim">src/sw/host/liboptimsochost</code>. Uncheck
+<em class="ltx_emph">C++</em> in the <em class="ltx_emph">Languages</em> group and select <em class="ltx_emph">GNU Autotools
+Toolchain</em> in the box below. Now click on <em class="ltx_emph">Finish</em> to close the dialog.</p>
+</div>
+<div id="Ch4.S1.SS1.SSS3.p3" class="ltx_para">
+<p class="ltx_p">Before you start coding, double-check if the code style settings are correct.
+Select the newly created liboptimsochost project from the <em class="ltx_emph">Project
+Navigator</em> on the left, right-click and choose <em class="ltx_emph">Properties</em>. Nagivate to
+<em class="ltx_emph">C/C++ General $&rarr;$ Formatter</em> and check if <code class="ltx_verbatim">OpTiMSoC</code> is
+selected as style. If not, click on <em class="ltx_emph">Enable project specific settings</em> and
+choose <code class="ltx_verbatim">OpTiMSoC</code> from the list. (If there is no such entry, go back to the
+basic Eclipse setup and import the style file properly.)</p>
+</div>
+<div id="Ch4.S1.SS1.SSS3.p4" class="ltx_para">
+<p class="ltx_p">You can use the Eclipse GUI to build and run liboptimsochost, but this feature
+is currently not used by any of the developers. Instead, we only use Eclipse
+for code editing, and build and debug the software using the regular commands
+on the console.</p>
+</div>
+</div>
+</div>
+<div id="Ch4.S1.SS2" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">4.1.2 </span>Emacs</h3>
+
+<div id="Ch4.S1.SS2.p1" class="ltx_para">
+<p class="ltx_p"><em class="ltx_emph">This section will be added shortly.</em>
+% TODO: Stefan</p>
+</div>
+</div>
+<div id="Ch4.S1.SS3" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">4.1.3 </span>Verilog-mode</h3>
+
+<div id="Ch4.S1.SS3.p1" class="ltx_para">
+<p class="ltx_p">Sometimes, writing Verilog means writing the same information twice in
+different places of a source file, one example being the port of a module. To
+save you as developer some typing time, a tool called ``Verilog-mode'' has been
+invented. It allows you to specify comments inside your code where information
+should be placed, and this information is then calculated and inserted
+automatically. For more information about what it is and how it works, see
+<a href="http://www.veripool.org/wiki/verilog-mode/" title="" class="ltx_ref ltx_url">http://www.veripool.org/wiki/verilog-mode/</a>.
+</p>
+</div>
+<div id="Ch4.S1.SS3.p2" class="ltx_para">
+<p class="ltx_p">Verilog-mode is used extensively throughout the project. Even though using it
+is not required (the sources can be edited and compiled without it just fine),
+it will save you a lot of time during development and is highly recommended.</p>
+</div>
+<div id="Ch4.S1.SS3.p3" class="ltx_para">
+<p class="ltx_p">Installation is rather easy, as it comes bundled with GNU Emacs. Simply install
+Emacs as described above and you're ready to go. To support our coding style,
+you will need to adjust the Emacs configuration (even though it is the Emacs
+configuration, it also configures Verilog-mode).</p>
+</div>
+<div id="Ch4.S1.SS3.p4" class="ltx_para">
+<p class="ltx_p">Open the file <code class="ltx_verbatim">~/.emacs</code> and add the following lines at the end:</p>
+<pre class="ltx_verbatim">
+(add-hook 'verilog-mode-hook '(lambda ()
+  ;; Don't auto-insert spaces after ";"
+  (setq verilog-auto-newline nil)
+  ;; Don't indent with tabs!
+  (setq indent-tabs-mode nil)))
+(add-hook 'verilog-mode-hook '(lambda ()
+  ;; Remove any tabs from file when saving
+  (add-hook 'write-file-functions (lambda()
+    (untabify (point-min) (point-max))
+    nil))))
+</pre>
+</div>
+<div id="Ch4.S1.SS3.p5" class="ltx_para">
+<p class="ltx_p">If you also use Emacs as your code editor,
+Verilog-mode is already enabled and you can read through the
+<a href="http://www.veripool.org/wiki/verilog-mode/Documentation" title="" class="ltx_ref">documentation</a> to
+learn how to use it.</p>
+</div>
+<div id="Ch4.S1.SS3.SSS1" class="ltx_subsubsection">
+<h4 class="ltx_title ltx_title_subsubsection">Verilog-mode in Eclipse</h4>
+
+<div id="Ch4.S1.SS3.SSS1.p1" class="ltx_para">
+<p class="ltx_p">Even if you use Eclipse, you do not need to switch editors to get the
+benefits of Verilog-mode; you can run Verilog-mode in batch mode to
+resolve all the AUTO comments. This will require some manual setup, but
+afterwards it can be used quite easily.</p>
+</div>
+<div id="Ch4.S1.SS3.SSS1.p2" class="ltx_para">
+<p class="ltx_p">First, you need to figure out where your <code class="ltx_verbatim">verilog-mode.el</code> or
+<code class="ltx_verbatim">verilog-mode.elc</code> file is located. If you want to use the
+Verilog-mode which is part of your Emacs installation, it is probably located
+somewhere in <code class="ltx_verbatim">/usr/share/emacs</code>, e.g.
+<code class="ltx_verbatim">/usr/share/emacs/24.3/lisp/progmodes/verilog-mode.elc</code> on Ubuntu 14.04.
+You can run</p>
+<pre class="ltx_verbatim">
+$&gt; find /usr/share/emacs -name 'verilog-mode.el*'
+</pre>
+<p class="ltx_p">to search for it. If you found it, write down the path as we'll need it later.
+If you installed Verilog-mode from source, just note the path where you put
+your <code class="ltx_verbatim">verilog-mode.el</code> file (e.g. somewhere in your home directory).</p>
+</div>
+<div id="Ch4.S1.SS3.SSS1.p3" class="ltx_para">
+<p class="ltx_p">In Eclipse, we will setup Verilog-mode as ``Builder''. To do so, click in the
+main menu on <em class="ltx_emph">Project $&rarr;$ Properties</em> and nagivate to
+<em class="ltx_emph">Builders</em>. There, click on the <em class="ltx_emph">New...</em> button and select
+<em class="ltx_emph">Program</em> as configuration type in the shown dialog. After pressing
+<em class="ltx_emph">OK</em>, enter ``verilog-mode'' into the field <em class="ltx_emph">Name</em>. In the <em class="ltx_emph">Main</em>
+tab, write <code class="ltx_verbatim">/usr/bin/emacs</code> into the field <em class="ltx_emph">Location</em>. Leave the field
+<em class="ltx_emph">Working Directory</em> empty and enter the following string into the field
+<em class="ltx_emph">Arguments</em>:</p>
+<pre class="ltx_verbatim">
+--batch --no-site-file -u ${env_var:USER}
+-l /usr/share/emacs/24.3/lisp/progmodes/verilog-mode.elc
+"${selected_resource_loc}" -f verilog-auto -f save-buffer
+</pre>
+</div>
+<div id="Ch4.S1.SS3.SSS1.p4" class="ltx_para">
+<p class="ltx_p">Replace the path to the verilog-mode.el or verilog-mode.elc file with your own
+path you found out above.</p>
+</div>
+<div id="Ch4.S1.SS3.SSS1.p5" class="ltx_para">
+<p class="ltx_p">Now, switch to the tab <em class="ltx_emph">Refresh</em>, check the box <em class="ltx_emph">Refresh resources
+upon completion</em> and select <em class="ltx_emph">The selected resource</em>. Since we don't need
+to change anything in the last two tabs, you can now close the dialog by
+clicking on the <em class="ltx_emph">OK</em> button and on <em class="ltx_emph">OK</em> again to close the project
+properties dialog.</p>
+</div>
+<div id="Ch4.S1.SS3.SSS1.p6" class="ltx_para">
+<p class="ltx_p">To test if it all works, navigate to
+<code class="ltx_verbatim">src/rtl/compute_tile_dm/verilog/compute_tile_dm.v</code> and change the word
+``Outputs'' in the comment right at the beginning of the file to something
+else. Then press CTRL-B (or go to <em class="ltx_emph">Project $&rarr;$ Build All</em>) and
+after a couple of seconds, you should see the word ``Outputs'' restored and
+some output messages in the <em class="ltx_emph">Console</em> view at the bottom. Also check if
+there were no tabs inserted (e.g. at the instantiation of <code class="ltx_verbatim">u_core0</code>). If
+there are tabs then you probably did not setup your <code class="ltx_verbatim">~/.emacs</code> file
+correctly.</p>
+</div>
+</div>
+</div>
+<div id="Ch4.S1.SS4" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">4.1.4 </span>Qt Creator for GUI Development</h3>
+
+<div id="Ch4.S1.SS4.p1" class="ltx_para">
+<p class="ltx_p">Developing the OpTiMSoC GUI requires an IDE which understands the used Qt
+framework. The most popular choice among the developers is Qt~Creator.</p>
+</div>
+<div id="Ch4.S1.SS4.p2" class="ltx_para">
+<p class="ltx_p">To start editing, open Qt~Creator and click on <em class="ltx_emph">File $&rarr;$ Open
+File or Project</em>. Now nagivate to <code class="ltx_verbatim">src/sw/host/optimsocgui</code> inside your
+OpTiMSoC source directory and open the file <code class="ltx_verbatim">CMakeLists.txt</code>. In the
+following dialog you can specify a build directory (or just leave the default).
+After clicking on <em class="ltx_emph">Next</em>, a dialog with the title <em class="ltx_emph">Run CMake</em>
+appears. Type <code class="ltx_verbatim">-DCMAKE_BUILD_TYPE=Debug</code> into the field
+<em class="ltx_emph">Arguments</em> and click on the <em class="ltx_emph">Run CMake</em> button. CMake is now run and
+if everything works as expected you can click on <em class="ltx_emph">Finish</em> to close the
+project creation wizzard and start hacking on the source code.</p>
+</div>
+</div>
+</div>
+</div></pre>
 </div>
 </div>
 </div>
@@ -716,4 +1718,7 @@ distribution as &ldquo;tools&rdquo;. Please rebuild the library.</p>
 <div class="optimsoc-doc-footnote-full" id="optimsoc-doc-footnote-3">
 <sup>3</sup><a href="http://www.systemc.org" title="" class="ltx_ref ltx_url"><span class="ltx_text ltx_font_typewriter">http://www.systemc.org</span></a>
 </div>
+<div class="optimsoc-doc-footnote-full" id="optimsoc-doc-footnote-4">
+<sup>4</sup>See
+  http://www.ztex.de</div>
 </div>
