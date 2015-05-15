@@ -153,33 +153,39 @@ pre code {
 }
 
 /* documentation subnavigation (inside the chapter) */
-.optimsoc-doc-subnav.affix {
+.optimsoc-doc-mainnav.affix {
     position: static;
 }
-.optimsoc-doc-subnav.affix-top {
+.optimsoc-doc-mainnav.affix-top {
     top: 50px;
 }
 @media screen and (min-width: 992px) {
-  .optimsoc-doc-subnav.affix-bottom, .optimsoc-doc-subnav.affix {
+  .optimsoc-doc-mainnav.affix-bottom, .optimsoc-doc-mainnav.affix {
       width: 213px;
   }
-  .optimsoc-doc-subnav.affix {
+  .optimsoc-doc-mainnav.affix {
       position: fixed;
       top: 80px;
   }
-  .optimsoc-doc-subnav.affix-bottom {
+  .optimsoc-doc-mainnav.affix-bottom {
       position: absolute;
   }
 }
 @media screen and (min-width: 1200px) {
-  .optimsoc-doc-subnav.affix-bottom, .optimsoc-doc-subnav.affix {
+  .optimsoc-doc-mainnav.affix-bottom, .optimsoc-doc-mainnav.affix {
       width: 263px;
   }
 }
+
+.optimsoc-doc-mainnav li div.active {
+  color: #F04C5C;
+  font-weight: bold;
+}
+
 .optimsoc-doc-subnav {
     background-color: #FFFFFF;
-    margin-bottom: 30px;
-    margin-top: 30px;
+    margin-bottom: 5px;
+    margin-top: 5px;
     padding-bottom: 15px;
     padding-top: 15px;
 }

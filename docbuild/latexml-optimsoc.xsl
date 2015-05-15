@@ -13,18 +13,8 @@ Original work is public domain by Bruce Miller <bruce.miller@nist.gov>
     exclude-result-prefixes = "ltx f"
     extension-element-prefixes="string f">
 
-  <!-- import other latexml stylesheets -->
-  <xsl:import href="urn:x-LaTeXML:XSLT:LaTeXML-common.xsl"/>
-  <xsl:import href="urn:x-LaTeXML:XSLT:LaTeXML-inline-xhtml.xsl"/>
-  <xsl:import href="urn:x-LaTeXML:XSLT:LaTeXML-block-xhtml.xsl"/>
-  <xsl:import href="urn:x-LaTeXML:XSLT:LaTeXML-misc-xhtml.xsl"/>
-  <xsl:import href="urn:x-LaTeXML:XSLT:LaTeXML-meta-xhtml.xsl"/>
-  <xsl:import href="urn:x-LaTeXML:XSLT:LaTeXML-para-xhtml.xsl"/>
-  <xsl:import href="urn:x-LaTeXML:XSLT:LaTeXML-math-xhtml.xsl"/>
-  <xsl:import href="urn:x-LaTeXML:XSLT:LaTeXML-tabular-xhtml.xsl"/>
-  <xsl:import href="urn:x-LaTeXML:XSLT:LaTeXML-picture-xhtml.xsl"/>
-  <xsl:import href="urn:x-LaTeXML:XSLT:LaTeXML-structure-xhtml.xsl"/>
-  <xsl:import href="urn:x-LaTeXML:XSLT:LaTeXML-bib-xhtml.xsl"/>
+  <!-- Include all LaTeXML to xhtml modules -->
+  <xsl:import href="urn:x-LaTeXML:XSLT:LaTeXML-all-xhtml.xsl"/>
 
   <!-- Override the output method & parameters -->
   <xsl:output
@@ -35,8 +25,8 @@ Original work is public domain by Bruce Miller <bruce.miller@nist.gov>
       media-type     = 'text/html'/>
 
   <!-- No namespaces; DO use HTML5 elements (include MathML & SVG) -->
-  <xsl:param name="USE_NAMESPACES"></xsl:param>
-  <xsl:param name="USE_HTML5"></xsl:param>
+  <xsl:param name="USE_NAMESPACES"  ></xsl:param>
+  <xsl:param name="USE_HTML5"       >true</xsl:param>
 
   <xsl:template match="/">
     <xsl:apply-templates select="." mode="yamlheader"/>
@@ -44,16 +34,9 @@ Original work is public domain by Bruce Miller <bruce.miller@nist.gov>
 
     <div class="col-md-3">
       <!-- main navigation (only chapters) -->
-      <div class="optimsoc-doc-mainnav">
+      <div class="optimsoc-doc-mainnav" data-spy="affix" data-offset-top="50" >
         <ul class="nav">
-          <xsl:apply-templates select="//ltx:navigation/ltx:TOC//ltx:toclist[@class='ltx_toc_document']/ltx:tocentry" mode="nav-toplevel"/>
-        </ul>
-      </div>
-
-      <!-- sub navigation (inside the chapter) -->
-      <div id="optimsoc-doc-subnav-nav" class="optimsoc-doc-subnav hidden-print" data-spy="affix" data-offset-top="200" role="complementary">
-        <ul class="nav">
-          <xsl:apply-templates select="//ltx:navigation/ltx:TOC//ltx:tocentry[@class='ltx_ref_self']/ltx:toclist/ltx:tocentry" mode="nav-chapter"/>
+          <xsl:apply-templates select="//ltx:navigation/ltx:TOC//ltx:toclist[@class='ltx_toc_document' or @class='ltx_toclist_document']/ltx:tocentry" mode="nav-toplevel"/>
         </ul>
       </div>
     </div>
@@ -64,6 +47,23 @@ Original work is public domain by Bruce Miller <bruce.miller@nist.gov>
     </div>
   </xsl:template>
 
+  <!-- current chapter -->
+  <xsl:template match="ltx:tocentry[contains(concat(' ', @class, ' '), ' ltx_ref_self ')]"
+    mode="nav-toplevel">
+    <li class="active">
+      <div class="active"><xsl:value-of select="ltx:ref/ltx:text/text()"/></div>
+
+      <!-- sub navigation (inside the chapter) -->
+      <div id="optimsoc-doc-subnav-nav" class="optimsoc-doc-subnav hidden-print" role="complementary">
+        <ul class="nav">
+          <xsl:apply-templates select="ltx:toclist/ltx:tocentry" mode="nav-chapter"/>
+        </ul>
+      </div>
+
+    </li>
+  </xsl:template>
+
+  <!-- other chapter -->
   <xsl:template match="ltx:tocentry" mode="nav-toplevel">
     <li>
       <a>
@@ -86,7 +86,7 @@ Original work is public domain by Bruce Miller <bruce.miller@nist.gov>
 
   <!--
   This is mostly copied from LaTeXML-block-xhtml.xsl, but modified to use a
-  regular html:li item with the default bullets instead of a self-build
+  regular html:li item with the default bullets instead of a customized
   version. This makes the resulting HTML much nicer.
   -->
   <xsl:template match="ltx:item">
