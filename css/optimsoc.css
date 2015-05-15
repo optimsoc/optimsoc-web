@@ -220,6 +220,16 @@ pre code {
 }
 
 /* latexml-generated styles */
+/* basic font styling */
+.ltx_font_serif      { font-family: serif; }
+.ltx_font_sansserif  { font-family: sans-serif; }
+.ltx_font_bold       { font-weight: bold; }
+.ltx_font_medium     { font-weight: normal; }
+.ltx_font_italic     { font-style: italic; }
+.ltx_font_upright    { font-style: normal; }
+.ltx_font_slanted    { font-style: oblique; }
+.ltx_font_smallcaps  { font-variant: small-caps; }
+
 /* itemized lists with non-standard bullets */
 li.ltx_item > .ltx_tag {
     display: inline;
@@ -239,4 +249,32 @@ hr.optimsoc-doc-sep-footnotes {
   border-color: #999999;
   margin: 30px auto 0 0;
   display: block;
+}
+
+/* listings */
+.ltx_listingblock {
+  font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+
+  padding: 9.5px;
+  margin: 0 0 10px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #333;
+  word-break: break-all;
+  word-wrap: break-word;
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.ltx_listing_data {
+  float:right;
+}
+.ltx_listing_data a {
+  text-decoration:none;
+}
+
+.ltx_listing td.ltx_linenumber,
+.ltx_listingblock td.ltx_linenumber {
+  width:3em; text-align:right;
 }
