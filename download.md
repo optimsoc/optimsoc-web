@@ -1,9 +1,9 @@
 ---
 layout: default
-title: Get OpTiMSoC
+title: Download OpTiMSoC
 ---
 
-# Get OpTiMSoC
+# Download OpTiMSoC
 
 <div class="panel panel-danger">
   <div class="panel-heading">
