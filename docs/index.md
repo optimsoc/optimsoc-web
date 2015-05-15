@@ -8,8 +8,9 @@ title: OpTiMSoC Documentation Overview
 OpTiMSoC comes with an ever growing set of documentation, consisting of
 
 * the [User Guide](/docs/user-guide/chap_introduction.html)
-* the [Reference Manual](/docs/refman/chap_systemsoftware.html)
-* API documentation for the GUI and the host library, which can be built from the sources
+* the [Reference Manual](/docs/refman/chap_toolchain.html)
+* API documentation for the GUI and the host library, which can be built
+  from the sources
 
 ## Talks
 
@@ -22,8 +23,8 @@ All talks are obviously a snapshot of the project state at the time of
 presentation, so be aware that some information might have changed in the
 meantime.
 
- * ORCONF 2014 (October 4th 2014): A update to the ORCONF 2013 talk, also 
-   including more details about the debug system. A video recording and slides 
+ * ORCONF 2014 (October 4th 2014): A update to the ORCONF 2013 talk, also
+   including more details about the debug system. A video recording and slides
    are available, see [the blog post]({% post_url 2014-10-12-orconf2014 %}) for
    details.
 
