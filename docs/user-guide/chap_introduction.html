@@ -3,14 +3,10 @@ layout: default
 title: OpTiMSoC User Guide
 sectiontitle: User Guide
 ---
-    <div class="col-md-3">
-<div class="optimsoc-doc-mainnav"><ul class="nav">
-<li><a href="" title="Chapter&nbsp;1 Introduction &#8227; OpTiMSoC User Guide">Introduction</a></li>
-<li><a href="chap_installation.html" title="Chapter&nbsp;2 Installation &amp; Configuration &#8227; OpTiMSoC User Guide">Installation &amp; Configuration</a></li>
-<li><a href="chap_tutorials.html" title="Chapter&nbsp;3 Tutorials &#8227; OpTiMSoC User Guide">Tutorials</a></li>
-<li><a href="Ch4.html" title="Chapter&nbsp;4 Develop OpTiMSoC &#8227; OpTiMSoC User Guide">Develop OpTiMSoC</a></li>
-</ul></div>
-<div id="optimsoc-doc-subnav-nav" class="optimsoc-doc-subnav hidden-print" data-spy="affix" data-offset-top="200" role="complementary"><ul class="nav">
+    <div class="col-md-3"><div class="optimsoc-doc-mainnav" data-spy="affix" data-offset-top="50"><ul class="nav">
+<li class="active">
+<div class="active">Introduction</div>
+<div id="optimsoc-doc-subnav-nav" class="optimsoc-doc-subnav hidden-print" role="complementary"><ul class="nav">
 <li class=""><a href="#S0.SSx1" title="OpTiMSoC Toolchain &#8227; Chapter&nbsp;1 Introduction &#8227; OpTiMSoC User Guide">OpTiMSoC Toolchain</a></li>
 <li class=""><a href="#S0.SSx2" title="System Libraries &#8227; Chapter&nbsp;1 Introduction &#8227; OpTiMSoC User Guide">System Libraries</a></li>
 <li class=""><a href="#S0.SSx3" title="RTL Simulation &#8227; Chapter&nbsp;1 Introduction &#8227; OpTiMSoC User Guide">RTL Simulation</a></li>
@@ -19,10 +15,14 @@ sectiontitle: User Guide
 <li class=""><a href="#S0.SSx6" title="Host Software &#8227; Chapter&nbsp;1 Introduction &#8227; OpTiMSoC User Guide">Host Software</a></li>
 <li class=""><a href="#S0.SSx7" title="Host GUI &#8227; Chapter&nbsp;1 Introduction &#8227; OpTiMSoC User Guide">Host GUI</a></li>
 </ul></div>
-</div><div class="col-md-9 optimsoc-doc-body">
+</li>
+<li><a href="chap_installation.html" title="Chapter&nbsp;2 Installation &amp; Configuration &#8227; OpTiMSoC User Guide">Installation &amp; Configuration</a></li>
+<li><a href="chap_tutorials.html" title="Chapter&nbsp;3 Tutorials &#8227; OpTiMSoC User Guide">Tutorials</a></li>
+<li><a href="Ch4.html" title="Chapter&nbsp;4 Develop OpTiMSoC &#8227; OpTiMSoC User Guide">Develop OpTiMSoC</a></li>
+</ul></div></div><div class="col-md-9 optimsoc-doc-body">
 <div class="ltx_page_main">
 <div class="ltx_page_content">
-<div class="ltx_chapter">
+<section class="ltx_chapter">
 <h1 class="ltx_title ltx_title_chapter">
 <span class="ltx_tag ltx_tag_chapter">Chapter&nbsp;1 </span>Introduction</h1>
 <div class="ltx_date ltx_role_creation"></div>
@@ -58,7 +58,7 @@ tutorials.</p>
 components that are part of OpTiMSoC.
 </p>
 </div>
-<div id="S0.SSx1" class="ltx_subsection">
+<section id="S0.SSx1" class="ltx_subsection">
 <h2 class="ltx_title ltx_title_subsection">OpTiMSoC Toolchain</h2>
 
 <div id="S0.SSx1.p1" class="ltx_para">
@@ -70,8 +70,8 @@ plus a few small utility programs and scripts.</p>
 <p class="ltx_p">You will need to have it installed in most cases as it is necessary to
 build all the software running on the OpTiMSoC systems.</p>
 </div>
-</div>
-<div id="S0.SSx2" class="ltx_subsection">
+</section>
+<section id="S0.SSx2" class="ltx_subsection">
 <h2 class="ltx_title ltx_title_subsection">System Libraries</h2>
 
 <div id="S0.SSx2.p1" class="ltx_para">
@@ -79,8 +79,8 @@ build all the software running on the OpTiMSoC systems.</p>
 platforms to the applications. This includes hardware drivers, runtime
 support, communication APIs and task management APIs.</p>
 </div>
-</div>
-<div id="S0.SSx3" class="ltx_subsection">
+</section>
+<section id="S0.SSx3" class="ltx_subsection">
 <h2 class="ltx_title ltx_title_subsection">RTL Simulation</h2>
 
 <div id="S0.SSx3.p1" class="ltx_para">
@@ -94,8 +94,8 @@ and the runtime system.</p>
 simulation tool, so that we here rely on commercial EDA tools. At the
 moment this is Mentor&rsquo;s Modelsim.</p>
 </div>
-</div>
-<div id="S0.SSx4" class="ltx_subsection">
+</section>
+<section id="S0.SSx4" class="ltx_subsection">
 <h2 class="ltx_title ltx_title_subsection">Verilator</h2>
 
 <div id="S0.SSx4.p1" class="ltx_para">
@@ -103,8 +103,8 @@ moment this is Mentor&rsquo;s Modelsim.</p>
 and allows users without a commercial RTL simulator license to run
 system simulations.</p>
 </div>
-</div>
-<div id="S0.SSx5" class="ltx_subsection">
+</section>
+<section id="S0.SSx5" class="ltx_subsection">
 <h2 class="ltx_title ltx_title_subsection">Synthesis</h2>
 
 <div id="S0.SSx5.p1" class="ltx_para">
@@ -117,24 +117,24 @@ this.</p>
 <p class="ltx_p">Beside Xilinx tools, we also support Synopsys Synplify as this a more
 sophisticated synthesis tool.</p>
 </div>
-</div>
-<div id="S0.SSx6" class="ltx_subsection">
+</section>
+<section id="S0.SSx6" class="ltx_subsection">
 <h2 class="ltx_title ltx_title_subsection">Host Software</h2>
 
 <div id="S0.SSx6.p1" class="ltx_para">
 <p class="ltx_p">Host software is needed for control and diagnosis/debug of the running
 systems.</p>
 </div>
-</div>
-<div id="S0.SSx7" class="ltx_subsection">
+</section>
+<section id="S0.SSx7" class="ltx_subsection">
 <h2 class="ltx_title ltx_title_subsection">Host GUI</h2>
 
 <div id="S0.SSx7.p1" class="ltx_para">
 <p class="ltx_p">A graphical user interface provides easy control and observability of
 the running systems.</p>
 </div>
-</div>
-</div>
+</section>
+</section>
 </div>
 </div>
 <hr class="optimsoc-doc-sep-footnotes">
