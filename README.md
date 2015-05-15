@@ -85,22 +85,22 @@ blocks on front page
 ## Third-Party Code
 
 html5shiv
-- Version: v3.7.0
-- URL: http://code.google.com/p/html5shiv/
+- Version: v3.7.2
+- URL: https://github.com/afarkas/html5shiv
 - License: Dual licensed under the MIT or GPL Version 2 licenses
 
 Respond.js
-- Version: 1.4.1
+- Version: 1.4.2
 - URL: https://github.com/scottjehl/Respond
 - License: Dual licensed under the MIT or GPL Version 2 licenses.
 
-bootstrap 3.0
-- Version 3.0.3
+bootstrap 3
+- Version 3.3.4
 - URL: http://getbootstrap.com
 - License: Apache 2
 
 jQuery 1
-- Version: 1.10.2
+- Version: 1.11.3
 - URL: http://jquery.com/
 - License: MIT License
 
