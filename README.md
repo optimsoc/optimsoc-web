@@ -1,52 +1,71 @@
 # OpTiMSoC Web Site
 
+The OpTiMSoC web site consists of two parts:
+
+1. The site itself, written mostly in Markdown and transformed into static
+   HTML Jekyll (as provided by Github pages). This also includes the blog.
+2. The documentation, which is generated from the LaTeX sources by
+   LaTeXML and custom XSLT stylesheets.
+
 ## Required Software
 
 - Jekyll (if you want to preview)
-- LaTeXML
+- LaTeXML v0.8.1
 
-Installing on Ubuntu 14.04
+### Jekyll
+#### Ubuntu 14.04
 
     sudo apt-get install jekyll
 
-openSUSE 12.3
+#### openSUSE 12.3
 
     sudo zypper install ruby ruby-devel
     sudo gem install jekyll
 
-Install LaTeXML from source (it's either outdated or not available)
-the installation will go to /usr/local; trying to install it somewhere
+### LaTeXML
+LaTeXML undergoes quite some changes over time which affect the output. Since
+our style sheets are picky, you should really use the exact same version as
+listed here and build it from source.
+
+#### Building from source
+The installation will go to /usr/local; trying to install it somewhere
 in /opt is extremely annoying because perl/tex search paths need to be
-adopted. Ubuntu 15.04's latexml packet works fine
+adopted.
 
-dependencies for Ubuntu 12.04/14.04
+Dependencies for Ubuntu
 
-    sudo apt-get install libxml2 libxml-libxml-perl \
+```
+sudo apt-get install libxml2 libxml-libxml-perl \
     libxslt1.1 libxml-libxslt-perl  \
     libparse-recdescent-perl libfile-which-perl \
     liburi-perl libio-string-perl libwww-perl \
     libjson-xs-perl libarchive-zip-perl \
     libimage-size-perl \
     imagemagick perlmagick
+```
 
-dependencies for openSUSE 12.3
-
-    sudo zypper install perl-PerlMagick perl-IO-String \
+Dependencies for openSUSE 12.3
+```
+sudo zypper install perl-PerlMagick perl-IO-String \
     perl-JSON-XS perl-XML-LibXSLT
+```
 
-actual installation
+Build and compile
 
-    cd ~/src
-    git clone https://github.com/brucemiller/LaTeXML.git latexml
-    perl Makefile.PL
-    make
-    sudo make install
+```
+cd ~/src
+git clone https://github.com/brucemiller/LaTeXML.git latexml
+git checkout v0.8.1
+perl Makefile.PL
+make
+sudo make install
+```
 
 ## Development
 
 To test the site on your local machine run
 
-    jekyll serve
+    jekyll serve -w
 
 And then point your browser to `http://localhost:4000` to view the page.
 
@@ -68,12 +87,12 @@ blocks on front page
 html5shiv
 - Version: v3.7.0
 - URL: http://code.google.com/p/html5shiv/
-- License: Dual licensed under the MIT or GPL Version 2 licenses 
+- License: Dual licensed under the MIT or GPL Version 2 licenses
 
 Respond.js
 - Version: 1.4.1
 - URL: https://github.com/scottjehl/Respond
-- License: Dual licensed under the MIT or GPL Version 2 licenses. 
+- License: Dual licensed under the MIT or GPL Version 2 licenses.
 
 bootstrap 3.0
 - Version 3.0.3
