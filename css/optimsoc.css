@@ -278,3 +278,13 @@ hr.optimsoc-doc-sep-footnotes {
 .ltx_listingblock td.ltx_linenumber {
   width:3em; text-align:right;
 }
+
+/* social media */
+ul.share-buttons{
+  list-style: none;
+  padding: 0;
+}
+
+ul.share-buttons li{
+  display: inline;
+}
