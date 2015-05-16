@@ -62,32 +62,14 @@ OpTiMSoC is developed mainly by a research group at the [Lehrstuhl für Integrie
   </div>
 </div>
 
-<div class="row optimsoc-about-people">
-  <div class="col-md-2">
-    <img class="img-rounded" src="/img/people/michael.jpg"/>
+<div class="row optimsoc-about-people"> <div class="col-md-2"> <img
+  class="img-rounded" src="/img/people/no-image.png"/> </div> <div
+  class="col-md-10"> <h3>Stefan Rösch</h3> Stefan joined the OpTiMSoC
+  team in 2014 for his master thesis. He works afterwards joined the
+  institute and now researches on dependable computing. Contact him by
+  mail at <a
+  href="mailto:stefan.roesch@tum.de">stefan.roesch@tum.de</a>.</div>
   </div>
-  <div class="col-md-10">
-    <h3>Michael Tempelmeier</h3>
-    Michael joined in 2011 and is mainly working on the NoC infrastructure
-    and on inter-task communication. He is a student assistant at LIS and
-    currently writing his Master Thesis. Contact him by mail at
-    <a href="mailto:michael.tempelmeier@tum.de">michael.tempelmeier@tum.de</a>.
-  </div>
-</div>
-
-<div class="row optimsoc-about-people">
-  <div class="col-md-2">
-    <img class="img-rounded" src="/img/people/simon.jpg"/>
-  </div>
-  <div class="col-md-10">
-    <h3>Simon Schulze</h3>
-    Simon has joined the OpTiMSoC team in 2012. He's working on cache coherency
-    and synchronization.
-    After already finishing his Research Practise and his Master Thesis about
-    this topic at LIS, he now continues working there as employee for a couple
-    of months. Contact him by mail at <a href="mailto:Simon.Schulze@tum.de">Simon.Schulze@tum.de</a>
-  </div>
-</div>
 
 <div class="row optimsoc-about-people">
   <div class="col-md-2">
