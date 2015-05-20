@@ -40,8 +40,8 @@ other, so it&rsquo;s recommended to do them in order. Simply stop if you
 think you know enough to implement your own ideas!</p>
 </div>
 <section id="S1" class="ltx_section">
-<h1 class="ltx_title ltx_title_section">
-<span class="ltx_tag ltx_tag_section">3.1 </span>RTL Simulation: Compute Tile and Software</h1>
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">3.1 </span>RTL Simulation: Compute Tile and Software</h2>
 
 <div id="S1.p1" class="ltx_para">
 <p class="ltx_p">It is a good starting point to simulate a single compute tile of a
@@ -57,248 +57,286 @@ used to simulate local software.
 </p>
 </div>
 <div id="S1.p3" class="ltx_para">
-<p class="ltx_p">You can find this example in <code class="ltx_verbatim ltx_font_typewriter">tbench/rtl/dm/compute_tile</code>. You
-need to have Modelsim installed before you run:</p>
+<p class="ltx_p">You can find this example in <code class="ltx_verbatim ltx_font_typewriter">tbench/dm/compute_tile</code>. You
+need to have Verilator installed before you run:</p>
 </div>
 <div id="S1.p4" class="ltx_para">
-<div id="LSTx28" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div id="LSTx30" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div class="ltx_listing_data"><a href="data:text/plain,make%20build-verilator">&#11015;</a></div>
 <table class="ltx_tabular">
+<tr class="ltx_tr">
+<td class="ltx_td">
+                <span class="ltx_text ltx_lst_line ltx_font_typewriter">make<span class="ltx_text ltx_lst_space">&nbsp;</span>build-verilator</span>
+              </td>
+</tr>
 </table>
 </div>
 </div>
 <div id="S1.p5" class="ltx_para">
-<p class="ltx_p">The output should be as follows:</p>
+<p class="ltx_p">In case you see errors check that the environment variables are set
+correctly. The build creates two files: <code class="ltx_verbatim ltx_font_typewriter">tb_compute_tile</code> and
+<code class="ltx_verbatim ltx_font_typewriter">t_compute_tile-vcd</code>. Both run the RTL simulation in a testbench,
+but the latter also writes the waveform to <code class="ltx_verbatim ltx_font_typewriter">sim.vcd</code>.</p>
 </div>
 <div id="S1.p6" class="ltx_para">
-<div id="LSTx29" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<p class="ltx_p">In default mode they start a server to connect the host software to,
+but you can use the parameter <code class="ltx_verbatim ltx_font_typewriter">standalone</code> to run them in
+standalone. If you start the simulation now</p>
+</div>
+<div id="S1.p7" class="ltx_para">
+<div id="LSTx31" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div class="ltx_listing_data"><a href="data:text/plain,./tb_compute_tile%20standalone">&#11015;</a></div>
 <table class="ltx_tabular">
 <tr class="ltx_tr">
-<td class="ltx_td"><span class="ltx_text ltx_lst_line ltx_font_typewriter">--<span class="ltx_text ltx_lst_space">&nbsp;</span>Compiling<span class="ltx_text ltx_lst_space">&nbsp;</span>module<span class="ltx_text ltx_lst_space">&nbsp;</span>tb_compute_tile</span></td>
-</tr>
-<tr class="ltx_tr">
-<td class="ltx_td"><span class="ltx_text ltx_lst_line ltx_font_typewriter">--<span class="ltx_text ltx_lst_space">&nbsp;</span>Compiling<span class="ltx_text ltx_lst_space">&nbsp;</span>module<span class="ltx_text ltx_lst_space">&nbsp;</span>trace_monitor</span></td>
-</tr>
-<tr class="ltx_tr">
-<td class="ltx_td"><span class="ltx_text ltx_lst_line ltx_font_typewriter">[..]</span></td>
-</tr>
-<tr class="ltx_tr">
-<td class="ltx_td"><span class="ltx_text ltx_lst_line ltx_font_typewriter">--<span class="ltx_text ltx_lst_space">&nbsp;</span>Compiling<span class="ltx_text ltx_lst_space">&nbsp;</span>module<span class="ltx_text ltx_lst_space">&nbsp;</span>lisnoc_mp_simple</span></td>
-</tr>
-<tr class="ltx_tr">
-<td class="ltx_td"><span class="ltx_text ltx_lst_line ltx_font_typewriter">--<span class="ltx_text ltx_lst_space">&nbsp;</span>Compiling<span class="ltx_text ltx_lst_space">&nbsp;</span>module<span class="ltx_text ltx_lst_space">&nbsp;</span>lisnoc_mp_simple_wb</span></td>
-</tr>
-<tr class="ltx_tr">
-<td class="ltx_td"><span class="ltx_text ltx_lst_line"></span></td>
-</tr>
-<tr class="ltx_tr">
-<td class="ltx_td"><span class="ltx_text ltx_lst_line ltx_font_typewriter">Top<span class="ltx_text ltx_lst_space">&nbsp;</span>level<span class="ltx_text ltx_lst_space">&nbsp;</span>modules:</span></td>
-</tr>
-<tr class="ltx_tr">
-<td class="ltx_td"><span class="ltx_text ltx_lst_line ltx_font_typewriter"><span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>tb_compute_tile</span></td>
+<td class="ltx_td">
+                <span class="ltx_text ltx_lst_line ltx_font_typewriter">./tb_compute_tile<span class="ltx_text ltx_lst_space">&nbsp;</span>standalone</span>
+              </td>
 </tr>
 </table>
 </div>
 </div>
-<div id="S1.p7" class="ltx_para">
-<p class="ltx_p">In case you see errors check that the environment variables are set
-correctly.</p>
-</div>
 <div id="S1.p8" class="ltx_para">
-<p class="ltx_p">The testbench can now be started in the Modelsim user interface or can
-be executed in command line mode using <code class="ltx_verbatim ltx_font_typewriter">make sim</code>, but there is
-no software loaded to the memory, what results in a warning:</p>
+<p class="ltx_p">you will get this output</p>
 </div>
 <div id="S1.p9" class="ltx_para">
-<div id="LSTx30" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div id="LSTx32" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div class="ltx_listing_data"><a href="data:text/plain,%Error:%20ct.vmem:0:%20%24readmem%20file%20not%20found%0AAborting...%0AAborted%20(core%20dumped)">&#11015;</a></div>
 <table class="ltx_tabular">
+<tr class="ltx_tr">
+<td class="ltx_td">
+                <span class="ltx_text ltx_lst_line ltx_font_typewriter">%Error:<span class="ltx_text ltx_lst_space">&nbsp;</span>ct.vmem:0:<span class="ltx_text ltx_lst_space">&nbsp;</span>$readmem<span class="ltx_text ltx_lst_space">&nbsp;</span>file<span class="ltx_text ltx_lst_space">&nbsp;</span>not<span class="ltx_text ltx_lst_space">&nbsp;</span>found</span>
+              </td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td">
+                <span class="ltx_text ltx_lst_line ltx_font_typewriter">Aborting...</span>
+              </td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td">
+                <span class="ltx_text ltx_lst_line ltx_font_typewriter">Aborted<span class="ltx_text ltx_lst_space">&nbsp;</span>(core<span class="ltx_text ltx_lst_space">&nbsp;</span>dumped)</span>
+              </td>
+</tr>
 </table>
 </div>
 </div>
 <div id="S1.p10" class="ltx_para">
 <p class="ltx_p">The simulations always expect vmem files that initialize the memories.
 This needs to be generated from the compiled source code. Before you
-build your own software you will need the support libraries. You can
-find all system software and example codes in
-<code class="ltx_verbatim ltx_font_typewriter">src/sw/system/dm/</code>.</p>
+build your own software you will need the support libraries as
+described in the installation procedures.</p>
 </div>
 <div id="S1.p11" class="ltx_para">
-<p class="ltx_p">In the system software folder you will find the <code class="ltx_verbatim ltx_font_typewriter">libbaremetal</code>
-library. Go to the <code class="ltx_verbatim ltx_font_typewriter">build</code> directory of the library and
-<code class="ltx_verbatim ltx_font_typewriter">make</code> it. The code should compile without errors and warnings.</p>
+<p class="ltx_p">The demonstration software is bundled in the <code class="ltx_verbatim ltx_font_typewriter">optimsoc/apps</code>
+repository. First, you should create an environment variable to point
+to the base:</p>
 </div>
 <div id="S1.p12" class="ltx_para">
-<p class="ltx_p">The library contains many necessary functions, the boot code and
-helper macros. Two versions are build: <code class="ltx_verbatim ltx_font_typewriter">libbaremetal.a</code> is the
-normal distributed memory baremetal software and
-<code class="ltx_verbatim ltx_font_typewriter">libbaremetal-paging.a</code> is required when the local tile memory
-needs to be initialized from global memory, e.g., on an FPGA. This
-will later be extended to support smaller tile memories and do page
-swapping etc. This partially works, but an alternative approach to
-initialization and paging is described below with the PGAS system.</p>
-</div>
-<div id="S1.p13" class="ltx_para">
-<p class="ltx_p">When you link the library to your own code, you need to link some
-external symbols as described in <code class="ltx_verbatim ltx_font_typewriter">sysconfig.h</code>. Those are
-definitions specific to a certain system instance, such as the
-dimensions, the presence of I/O, the distribution of compute
-ressources, etc.</p>
-</div>
-<div id="S1.p14" class="ltx_para">
-<p class="ltx_p">Therefore you will always need to link your system-specific
-<code class="ltx_verbatim ltx_font_typewriter">optimsoc-sysconfig.o</code> to the library and your application
-objects, what we will describe in the following. The
-<code class="ltx_verbatim ltx_font_typewriter">optimsoc-sysconfig.c</code> can be found as part of the compute tile
-testbench (<code class="ltx_verbatim ltx_font_typewriter">tbench/rtl/dm/compute_tile</code>) under <code class="ltx_verbatim ltx_font_typewriter">sw</code>.</p>
-</div>
-<div id="S1.p15" class="ltx_para">
-<p class="ltx_p">To build a simple &ldquo;Hello World&rdquo; example, simply switch to <code class="ltx_verbatim ltx_font_typewriter">sw</code>.
-The example application can be found in the software path. You should
-copy the whole path</p>
-</div>
-<div id="S1.p16" class="ltx_para">
-<div id="LSTx31" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div id="LSTx33" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div class="ltx_listing_data"><a href="data:text/plain,export%20OPTIMSOC_APPS=%24%7BOPTIMSOC%7D/apps">&#11015;</a></div>
 <table class="ltx_tabular">
+<tr class="ltx_tr">
+<td class="ltx_td">
+                <span class="ltx_text ltx_lst_line ltx_font_typewriter">export<span class="ltx_text ltx_lst_space">&nbsp;</span>OPTIMSOC_APPS=$OPTIMSOC}/apps</span>
+              </td>
+</tr>
 </table>
 </div>
 </div>
-<div id="S1.p17" class="ltx_para">
-<p class="ltx_p">Inside the <code class="ltx_verbatim ltx_font_typewriter">hello_simple.lnk</code> folder you can find the
-<code class="ltx_verbatim ltx_font_typewriter">hello_simple.c</code> and the <code class="ltx_verbatim ltx_font_typewriter">Makefile</code>. Now <code class="ltx_verbatim ltx_font_typewriter">make</code> the
-example. This will automatically also build the sysconfig.o and link
-all together to the elf file. Furthermore some other files are build:</p>
+<div id="S1.p13" class="ltx_para">
+<p class="ltx_p">Build a simple &ldquo;Hello World&rdquo; example:</p>
 </div>
-<div id="S1.p18" class="ltx_para">
+<div id="S1.p14" class="ltx_para">
+<div id="LSTx34" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div class="ltx_listing_data"><a href="data:text/plain,make%20-C%20%24%7BOPTIMSOC_APPS%7D/baremetal/hello">&#11015;</a></div>
+<table class="ltx_tabular">
+<tr class="ltx_tr">
+<td class="ltx_td">
+                <span class="ltx_text ltx_lst_line ltx_font_typewriter">make<span class="ltx_text ltx_lst_space">&nbsp;</span>-C<span class="ltx_text ltx_lst_space">&nbsp;</span>$OPTIMSOC_APPS}/baremetal/hello</span>
+              </td>
+</tr>
+</table>
+</div>
+</div>
+<div id="S1.p15" class="ltx_para">
+<p class="ltx_p">You will then find the executable elf file as
+<code class="ltx_verbatim ltx_font_typewriter">${OPTIMSOC_APPS}/baremetal/hello/hello.elf</code>.
+Furthermore some other files are build:</p>
+</div>
+<div id="S1.p16" class="ltx_para">
 <ul id="I1" class="ltx_itemize">
 <li id="I1.i1" class="ltx_item">
 <div id="I1.i1.p1" class="ltx_para">
-<p class="ltx_p"><code class="ltx_verbatim ltx_font_typewriter">hello_world.dis</code> is the disassembly of the file</p>
+<p class="ltx_p"><code class="ltx_verbatim ltx_font_typewriter">hello.dis</code> is the disassembly of the file</p>
 </div>
 </li>
 <li id="I1.i2" class="ltx_item">
 <div id="I1.i2.p1" class="ltx_para">
-<p class="ltx_p"><code class="ltx_verbatim ltx_font_typewriter">hello_world.bin</code> is the elf file als loaded binary file</p>
+<p class="ltx_p"><code class="ltx_verbatim ltx_font_typewriter">hello.bin</code> is the elf file als loaded binary file</p>
 </div>
 </li>
 <li id="I1.i3" class="ltx_item">
 <div id="I1.i3.p1" class="ltx_para">
-<p class="ltx_p"><code class="ltx_verbatim ltx_font_typewriter">hello_world.vmem</code> is a textual copy of the binary file</p>
+<p class="ltx_p"><code class="ltx_verbatim ltx_font_typewriter">hello.vmem</code> is a textual copy of the binary file</p>
 </div>
 </li>
 </ul>
 </div>
-<div id="S1.p19" class="ltx_para">
+<div id="S1.p17" class="ltx_para">
 <p class="ltx_p">(Note: If the latter is not build, ensure you have <code class="ltx_verbatim ltx_font_typewriter">bin2vmem</code> in
 your <code class="ltx_verbatim ltx_font_typewriter">PATH</code>, see
 <a href="chap_installation.html" title="Chapter&nbsp;2 Installation &amp; Configuration &#8227; OpTiMSoC User Guide" class="ltx_ref"><span class="ltx_text ltx_ref_tag">2</span></a>).</p>
 </div>
-<div id="S1.p20" class="ltx_para">
+<div id="S1.p18" class="ltx_para">
 <p class="ltx_p">You can now run the example. First go back to the compute tile
 testbench main folder. Before the simulation warned that
 <code class="ltx_verbatim ltx_font_typewriter">ct.vmem</code> cannot be found. Therefore we simply link the software
 to this filename</p>
 </div>
-<div id="S1.p21" class="ltx_para">
-<div id="LSTx32" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div id="S1.p19" class="ltx_para">
+<div id="LSTx35" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div class="ltx_listing_data"><a href="data:text/plain,ln%20-s%20%24%7BOPTIMSOC_APPS%7D/baremetal/hello/hello.vmem%20ct.vmem">&#11015;</a></div>
 <table class="ltx_tabular">
+<tr class="ltx_tr">
+<td class="ltx_td">
+                <span class="ltx_text ltx_lst_line ltx_font_typewriter">ln<span class="ltx_text ltx_lst_space">&nbsp;</span>-s<span class="ltx_text ltx_lst_space">&nbsp;</span>$OPTIMSOC_APPS}/baremetal/hello/hello.vmem<span class="ltx_text ltx_lst_space">&nbsp;</span>ct.vmem</span>
+              </td>
+</tr>
+</table>
+</div>
+</div>
+<div id="S1.p20" class="ltx_para">
+<p class="ltx_p">If you now run the software again, the simulation should
+terminate with:</p>
+</div>
+<div id="S1.p21" class="ltx_para">
+<div id="LSTx36" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div class="ltx_listing_data"><a href="data:text/plain,%5B178512%5D%20Core%200%20has%20terminated%0A%5B178512%5D%20All%20cores%20terminated.%20Exiting..">&#11015;</a></div>
+<table class="ltx_tabular">
+<tr class="ltx_tr">
+<td class="ltx_td">
+                <span class="ltx_text ltx_lst_line ltx_font_typewriter">[178512]<span class="ltx_text ltx_lst_space">&nbsp;</span>Core<span class="ltx_text ltx_lst_space">&nbsp;</span>0<span class="ltx_text ltx_lst_space">&nbsp;</span>has<span class="ltx_text ltx_lst_space">&nbsp;</span>terminated</span>
+              </td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td">
+                <span class="ltx_text ltx_lst_line ltx_font_typewriter">[178512]<span class="ltx_text ltx_lst_space">&nbsp;</span>All<span class="ltx_text ltx_lst_space">&nbsp;</span>cores<span class="ltx_text ltx_lst_space">&nbsp;</span>terminated.<span class="ltx_text ltx_lst_space">&nbsp;</span>Exiting..</span>
+              </td>
+</tr>
 </table>
 </div>
 </div>
 <div id="S1.p22" class="ltx_para">
-<p class="ltx_p">If you now run the software (<code class="ltx_verbatim ltx_font_typewriter">make sim</code>), the simulation should
-terminate with:</p>
+<p class="ltx_p">Further you will find a file called <code class="ltx_verbatim ltx_font_typewriter">stdout.000</code> which shows the
+actual output:</p>
 </div>
 <div id="S1.p23" class="ltx_para">
-<div id="LSTx33" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div id="LSTx37" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div class="ltx_listing_data"><a href="data:text/plain,Hello%20World!%20Core%200%20of%201%20in%20tile%200,%20my%20absolute%20core%20id%20is:%200%0AThere%20are%201%20compute%20tiles:%0A%20rank%200%20is%20tile%200">&#11015;</a></div>
 <table class="ltx_tabular">
 <tr class="ltx_tr">
-<td class="ltx_td"><span class="ltx_text ltx_lst_line ltx_font_typewriter">#<span class="ltx_text ltx_lst_space">&nbsp;</span>[<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>57480000,<span class="ltx_text ltx_lst_space">&nbsp;</span>0]<span class="ltx_text ltx_lst_space">&nbsp;</span>Terminated<span class="ltx_text ltx_lst_space">&nbsp;</span>at<span class="ltx_text ltx_lst_space">&nbsp;</span>address<span class="ltx_text ltx_lst_space">&nbsp;</span>0x00008080</span></td>
+<td class="ltx_td">
+                <span class="ltx_text ltx_lst_line ltx_font_typewriter">Hello<span class="ltx_text ltx_lst_space">&nbsp;</span>World!<span class="ltx_text ltx_lst_space">&nbsp;</span>Core<span class="ltx_text ltx_lst_space">&nbsp;</span>0<span class="ltx_text ltx_lst_space">&nbsp;</span>of<span class="ltx_text ltx_lst_space">&nbsp;</span>1<span class="ltx_text ltx_lst_space">&nbsp;</span>in<span class="ltx_text ltx_lst_space">&nbsp;</span>tile<span class="ltx_text ltx_lst_space">&nbsp;</span>0,<span class="ltx_text ltx_lst_space">&nbsp;</span>my<span class="ltx_text ltx_lst_space">&nbsp;</span>absolute<span class="ltx_text ltx_lst_space">&nbsp;</span>core<span class="ltx_text ltx_lst_space">&nbsp;</span>id<span class="ltx_text ltx_lst_space">&nbsp;</span>is:<span class="ltx_text ltx_lst_space">&nbsp;</span>0</span>
+              </td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td">
+                <span class="ltx_text ltx_lst_line ltx_font_typewriter">There<span class="ltx_text ltx_lst_space">&nbsp;</span>are<span class="ltx_text ltx_lst_space">&nbsp;</span>1<span class="ltx_text ltx_lst_space">&nbsp;</span>compute<span class="ltx_text ltx_lst_space">&nbsp;</span>tiles:</span>
+              </td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td">
+                <span class="ltx_text ltx_lst_line ltx_font_typewriter"><span class="ltx_text ltx_lst_space">&nbsp;</span>rank<span class="ltx_text ltx_lst_space">&nbsp;</span>0<span class="ltx_text ltx_lst_space">&nbsp;</span>is<span class="ltx_text ltx_lst_space">&nbsp;</span>tile<span class="ltx_text ltx_lst_space"></span></span>
+              </td>
 </tr>
 </table>
 </div>
 </div>
 <div id="S1.p24" class="ltx_para">
-<p class="ltx_p"><code class="ltx_verbatim ltx_font_typewriter">0x00008080</code> is the program counter (can vary depending on your cross
-compiler version) the simulation terminated. This is correct behavior
-and will be explained below. Furthermore you will find a file called
-<code class="ltx_verbatim ltx_font_typewriter">stdout</code> which shows the actual output:</p>
+<p class="ltx_p">But how does the actual printf-output get there when there is no UART
+or similar?</p>
 </div>
 <div id="S1.p25" class="ltx_para">
-<div id="LSTx34" class="ltx_listingblock ltx_lstlisting ltx_listing">
-<table class="ltx_tabular">
-</table>
-</div>
-</div>
-<div id="S1.p26" class="ltx_para">
-<p class="ltx_p">The <code class="ltx_verbatim ltx_font_typewriter">[..]</code> part is the time stamp and core id. But how does the
-actual printf-output get there when there is no UART or similar?</p>
-</div>
-<div id="S1.p27" class="ltx_para">
 <p class="ltx_p">OpTiMSoC software (especially in future releases) makes excessive use
-of a tricky part of the OpenRISC ISA. The &ldquo;no operation&rdquo; instruction
+of a useful part of the OpenRISC ISA. The &ldquo;no operation&rdquo; instruction
 <code class="ltx_verbatim ltx_font_typewriter">l.nop</code> has a paramter <code class="ltx_verbatim ltx_font_typewriter">K</code> in assembly. This can be used for
 simulation purposes. It can be used for instrumentation, tracing or
 special purposes as writing characters with minimal intrusion or
 simulation termination.</p>
 </div>
-<div id="S1.p28" class="ltx_para">
+<div id="S1.p26" class="ltx_para">
 <p class="ltx_p">The termination is forced with <code class="ltx_verbatim ltx_font_typewriter">l.nop 0x1</code>. If you have a look at
 the disassembly <code class="ltx_verbatim ltx_font_typewriter">hello_simple.dis</code> at instruction <code class="ltx_verbatim ltx_font_typewriter">0x8080</code>
 (see above) you exactly find this instruction. The actual action is
 then done with the trace monitor.</p>
 </div>
-<div id="S1.p29" class="ltx_para">
+<div id="S1.p27" class="ltx_para">
 <p class="ltx_p">With this method you can simply provide constants to your simulation
 environments. For variables this method is extended by putting data in
 further registers (often <code class="ltx_verbatim ltx_font_typewriter">r3</code>). This still is minimally intrusive
 and allows you to trace values. The printf is also done that way (see
 newlib):</p>
 </div>
-<div id="S1.p30" class="ltx_para">
-<div id="LSTx35" class="ltx_listingblock ltx_lstlisting ltx_lst_language_C ltx_listing">
+<div id="S1.p28" class="ltx_para">
+<div id="LSTx38" class="ltx_listingblock ltx_lstlisting ltx_lst_language_C ltx_listing">
+<div class="ltx_listing_data"><a href="data:text/plain,void%20sim_putc(unsigned%20char%20c)%20%7B%0A%20%20asm(%22l.addi%5Ctr3,%0,0%22:%20:%22r%22%20(c));%0A%20%20asm(%22l.nop%20%0%22:%20:%22K%22%20(NOP_PUTC));%0A%7D">&#11015;</a></div>
 <table class="ltx_tabular">
 <tr class="ltx_tr">
-<td class="ltx_td"><span class="ltx_text ltx_lst_line ltx_font_typewriter"><span class="ltx_text ltx_lst_keyword ltx_font_bold">void</span><span class="ltx_text ltx_lst_space">&nbsp;</span>sim_putc(<span class="ltx_text ltx_lst_keyword ltx_font_bold">unsigned</span><span class="ltx_text ltx_lst_space">&nbsp;</span><span class="ltx_text ltx_lst_keyword ltx_font_bold">char</span><span class="ltx_text ltx_lst_space">&nbsp;</span>c)<span class="ltx_text ltx_lst_space">&nbsp;</span>asm"l.addi\tr3,%0,0":<span class="ltx_text ltx_lst_space">&nbsp;</span>:"r"<span class="ltx_text ltx_lst_space">&nbsp;</span>(c));</span></td>
+<td class="ltx_td">
+                <span class="ltx_text ltx_lst_line ltx_font_typewriter"><span class="ltx_text ltx_lst_keyword ltx_font_bold">void</span><span class="ltx_text ltx_lst_space">&nbsp;</span>sim_putc(<span class="ltx_text ltx_lst_keyword ltx_font_bold">unsigned</span><span class="ltx_text ltx_lst_space">&nbsp;</span><span class="ltx_text ltx_lst_keyword ltx_font_bold">char</span><span class="ltx_text ltx_lst_space">&nbsp;</span>c)<span class="ltx_text ltx_lst_space">&nbsp;</span>asm"l.addi\tr3,%0,0":<span class="ltx_text ltx_lst_space">&nbsp;</span>:"r"<span class="ltx_text ltx_lst_space">&nbsp;</span>(c));</span>
+              </td>
 </tr>
 <tr class="ltx_tr">
-<td class="ltx_td"><span class="ltx_text ltx_lst_line ltx_font_typewriter"><span class="ltx_text ltx_lst_space">&nbsp;&nbsp;</span>asm("l.nop<span class="ltx_text ltx_lst_space">&nbsp;</span>%0":<span class="ltx_text ltx_lst_space">&nbsp;</span>:"K"<span class="ltx_text ltx_lst_space">&nbsp;</span>(NOP_PUTC));</span></td>
+<td class="ltx_td">
+                <span class="ltx_text ltx_lst_line ltx_font_typewriter"><span class="ltx_text ltx_lst_space">&nbsp;&nbsp;</span>asm("l.nop<span class="ltx_text ltx_lst_space">&nbsp;</span>%0":<span class="ltx_text ltx_lst_space">&nbsp;</span>:"K"<span class="ltx_text ltx_lst_space">&nbsp;</span>(NOP_PUTC));</span>
+              </td>
 </tr>
 <tr class="ltx_tr">
-<td class="ltx_td"><span class="ltx_text ltx_lst_line ltx_font_typewriter">}</span></td>
+<td class="ltx_td">
+                <span class="ltx_text ltx_lst_line ltx_font_typewriter">}</span>
+              </td>
 </tr>
 </table>
 </div>
 </div>
-<div id="S1.p31" class="ltx_para">
+<div id="S1.p29" class="ltx_para">
 <p class="ltx_p">This function is called from printf as write function. The trace
 monitor captures theses characters and puts them to the stdout file.</p>
 </div>
-<div id="S1.p32" class="ltx_para">
+<div id="S1.p30" class="ltx_para">
 <p class="ltx_p">You can easily add your own &ldquo;traces&rdquo; using a macro defined in
 <code class="ltx_verbatim ltx_font_typewriter">optimsoc.h</code>:</p>
 </div>
-<div id="S1.p33" class="ltx_para">
-<div id="LSTx36" class="ltx_listingblock ltx_lstlisting ltx_lst_language_C ltx_listing">
+<div id="S1.p31" class="ltx_para">
+<div id="LSTx39" class="ltx_listingblock ltx_lstlisting ltx_lst_language_C ltx_listing">
+<div class="ltx_listing_data"><a href="data:text/plain,#define%20OPTIMSOC_TRACE(id,v)%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%5C%0A%20%20%20asm(%22l.addi%5Ctr3,%0,0%22:%20:%22r%22%20(v)%20:%20%22r3%22);%20%5C%0A%20%20%20asm(%22l.nop%20%0%22:%20:%22K%22%20(id));">&#11015;</a></div>
 <table class="ltx_tabular">
 <tr class="ltx_tr">
-<td class="ltx_td"><span class="ltx_text ltx_lst_line ltx_font_typewriter">define<span class="ltx_text ltx_lst_space">&nbsp;</span>OPTIMSOC_TRACE(id,v)<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>\</span></td>
+<td class="ltx_td">
+                <span class="ltx_text ltx_lst_line ltx_font_typewriter">define<span class="ltx_text ltx_lst_space">&nbsp;</span>OPTIMSOC_TRACE(id,v)<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>\</span>
+              </td>
 </tr>
 <tr class="ltx_tr">
-<td class="ltx_td"><span class="ltx_text ltx_lst_line ltx_font_typewriter"><span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;</span>asm("l.addi\tr3,%0,0":<span class="ltx_text ltx_lst_space">&nbsp;</span>:"r"<span class="ltx_text ltx_lst_space">&nbsp;</span>(v)<span class="ltx_text ltx_lst_space">&nbsp;</span>:<span class="ltx_text ltx_lst_space">&nbsp;</span>"r3");<span class="ltx_text ltx_lst_space">&nbsp;</span>\</span></td>
+<td class="ltx_td">
+                <span class="ltx_text ltx_lst_line ltx_font_typewriter"><span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;</span>asm("l.addi\tr3,%0,0":<span class="ltx_text ltx_lst_space">&nbsp;</span>:"r"<span class="ltx_text ltx_lst_space">&nbsp;</span>(v)<span class="ltx_text ltx_lst_space">&nbsp;</span>:<span class="ltx_text ltx_lst_space">&nbsp;</span>"r3");<span class="ltx_text ltx_lst_space">&nbsp;</span>\</span>
+              </td>
 </tr>
 <tr class="ltx_tr">
-<td class="ltx_td"><span class="ltx_text ltx_lst_line ltx_font_typewriter"><span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;</span>asm("l.nop<span class="ltx_text ltx_lst_space">&nbsp;</span>%0":<span class="ltx_text ltx_lst_space">&nbsp;</span>:"K"<span class="ltx_text ltx_lst_space">&nbsp;</span>(id));</span></td>
+<td class="ltx_td">
+                <span class="ltx_text ltx_lst_line ltx_font_typewriter"><span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;</span>asm("l.nop<span class="ltx_text ltx_lst_space">&nbsp;</span>%0":<span class="ltx_text ltx_lst_space">&nbsp;</span>:"K"<span class="ltx_text ltx_lst_space">&nbsp;</span>(id));</span>
+              </td>
 </tr>
 </table>
 </div>
 </div>
-<div id="S1.p34" class="ltx_para">
+<div id="S1.p32" class="ltx_para">
 <p class="ltx_p">This feature is used extensively by current and future OpTiMSoC software.</p>
 </div>
 </section>
 <section id="S2" class="ltx_section">
-<h1 class="ltx_title ltx_title_section">
+<h2 class="ltx_title ltx_title_section">
 <span class="ltx_tag ltx_tag_section">3.2 </span>Going Multicore: Simulate Small 2x2 Distributed Memory
-System</h1>
+System</h2>
 
 <div id="S2.p1" class="ltx_para">
 <p class="ltx_p">Next you might want to build an actual multicore system. You can find
@@ -326,94 +364,158 @@ acknowledges this by printing its own &ldquo;Hello World&rdquo; message.</p>
 <p class="ltx_p">The simulation should output:</p>
 </div>
 <div id="S2.p5" class="ltx_para">
-<div id="LSTx37" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div id="LSTx40" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div class="ltx_listing_data"><a href="data:text/plain,#%20%5B%20%20%20%20%20%20%20%20%20%20%20%20%20%20%2052500,%200%5D%20Software%20reset%0A#%20%5B%20%20%20%20%20%20%20%20%20%20%20%20%20%20%2052500,%201%5D%20Software%20reset%0A#%20%5B%20%20%20%20%20%20%20%20%20%20%20%20%20%20%2052500,%202%5D%20Software%20reset%0A#%20%5B%20%20%20%20%20%20%20%20%20%20%20%20%20%20%2052500,%203%5D%20Software%20reset%0A#%20%5B%20%20%20%20%20%20%20%20%20%20%20%2046585000,%201%5D%20Event%200x0100:%200x00000000%0A#%20%5B%20%20%20%20%20%20%20%20%20%20%20%2046617500,%201%5D%20Event%200x0100:%200x00000001%0A#%20%5B%20%20%20%20%20%20%20%20%20%20%20%2046627500,%202%5D%20Event%200x0100:%200x00000000%0A#%20%5B%20%20%20%20%20%20%20%20%20%20%20%2046652500,%201%5D%20Event%200x0100:%200x000fffec%0A#%20%5B%20%20%20%20%20%20%20%20%20%20%20%2046660000,%202%5D%20Event%200x0100:%200x00000001%0A#%20%5B%20%20%20%20%20%20%20%20%20%20%20%2046670000,%203%5D%20Event%200x0100:%200x00000000%0A#%20%5B%20%20%20%20%20%20%20%20%20%20%20%2046695000,%202%5D%20Event%200x0100:%200x000fffec%0A#%20%5B%20%20%20%20%20%20%20%20%20%20%20%2046702500,%203%5D%20Event%200x0100:%200x00000001%0A#%20%5B%20%20%20%20%20%20%20%20%20%20%20%2046737500,%203%5D%20Event%200x0100:%200x000fffec%0A#%20%5B%20%20%20%20%20%20%20%20%20%20%20%2047272500,%200%5D%20Exception%20#%208%20occured%0A#%20%5B%20%20%20%20%20%20%20%20%20%20%20%2048292500,%201%5D%20Terminated%20at%20address%200x0000dd5c%0A#%20%5B%20%20%20%20%20%20%20%20%20%20%20%2048335000,%202%5D%20Terminated%20at%20address%200x0000dd5c%0A#%20%5B%20%20%20%20%20%20%20%20%20%20%20%2048377500,%203%5D%20Terminated%20at%20address%200x0000dd5c%0A#%20%5B%20%20%20%20%20%20%20%20%20%20%20%2048835000,%200%5D%20Event%200x0102:%200x00000001%0A#%20%5B%20%20%20%20%20%20%20%20%20%20%20%2048867500,%200%5D%20Event%200x0102:%200x00000000%0A#%20%5B%20%20%20%20%20%20%20%20%20%20%20%2048895000,%200%5D%20Event%200x0102:%200x00000001%0A#%20%5B%20%20%20%20%20%20%20%20%20%20%20%2065855000,%200%5D%20Event%200x0103:%200x00000000%0A#%20%5B%20%20%20%20%20%20%20%20%20%20%20%2066337500,%200%5D%20Event%200x0102:%200x00000002%0A#%20%5B%20%20%20%20%20%20%20%20%20%20%20%2066352500,%200%5D%20Event%200x0102:%200x00000000%0A#%20%5B%20%20%20%20%20%20%20%20%20%20%20%2066360000,%200%5D%20Event%200x0102:%200x00000001%0A#%20%5B%20%20%20%20%20%20%20%20%20%20%20%2075940000,%200%5D%20Event%200x0103:%200x00000000%0A#%20%5B%20%20%20%20%20%20%20%20%20%20%20%2076420000,%200%5D%20Event%200x0102:%200x00000003%0A#%20%5B%20%20%20%20%20%20%20%20%20%20%20%2076435000,%200%5D%20Event%200x0102:%200x00000000%0A#%20%5B%20%20%20%20%20%20%20%20%20%20%20%2076442500,%200%5D%20Event%200x0102:%200x00000001%0A#%20%5B%20%20%20%20%20%20%20%20%20%20%20%2085920000,%200%5D%20Event%200x0103:%200x00000000%0A#%20%5B%20%20%20%20%20%20%20%20%20%20%20100387500,%200%5D%20Terminated%20at%20address%200x0000dd5c">&#11015;</a></div>
 <table class="ltx_tabular">
 <tr class="ltx_tr">
-<td class="ltx_td"><span class="ltx_text ltx_lst_line ltx_font_typewriter">#<span class="ltx_text ltx_lst_space">&nbsp;</span>[<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>52500,<span class="ltx_text ltx_lst_space">&nbsp;</span>1]<span class="ltx_text ltx_lst_space">&nbsp;</span>Software<span class="ltx_text ltx_lst_space">&nbsp;</span>reset</span></td>
+<td class="ltx_td">
+                <span class="ltx_text ltx_lst_line ltx_font_typewriter">#<span class="ltx_text ltx_lst_space">&nbsp;</span>[<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>52500,<span class="ltx_text ltx_lst_space">&nbsp;</span>0]<span class="ltx_text ltx_lst_space">&nbsp;</span>Software<span class="ltx_text ltx_lst_space">&nbsp;</span>reset</span>
+              </td>
 </tr>
 <tr class="ltx_tr">
-<td class="ltx_td"><span class="ltx_text ltx_lst_line ltx_font_typewriter">#<span class="ltx_text ltx_lst_space">&nbsp;</span>[<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>52500,<span class="ltx_text ltx_lst_space">&nbsp;</span>2]<span class="ltx_text ltx_lst_space">&nbsp;</span>Software<span class="ltx_text ltx_lst_space">&nbsp;</span>reset</span></td>
+<td class="ltx_td">
+                <span class="ltx_text ltx_lst_line ltx_font_typewriter">#<span class="ltx_text ltx_lst_space">&nbsp;</span>[<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>52500,<span class="ltx_text ltx_lst_space">&nbsp;</span>1]<span class="ltx_text ltx_lst_space">&nbsp;</span>Software<span class="ltx_text ltx_lst_space">&nbsp;</span>reset</span>
+              </td>
 </tr>
 <tr class="ltx_tr">
-<td class="ltx_td"><span class="ltx_text ltx_lst_line ltx_font_typewriter">#<span class="ltx_text ltx_lst_space">&nbsp;</span>[<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>52500,<span class="ltx_text ltx_lst_space">&nbsp;</span>3]<span class="ltx_text ltx_lst_space">&nbsp;</span>Software<span class="ltx_text ltx_lst_space">&nbsp;</span>reset</span></td>
+<td class="ltx_td">
+                <span class="ltx_text ltx_lst_line ltx_font_typewriter">#<span class="ltx_text ltx_lst_space">&nbsp;</span>[<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>52500,<span class="ltx_text ltx_lst_space">&nbsp;</span>2]<span class="ltx_text ltx_lst_space">&nbsp;</span>Software<span class="ltx_text ltx_lst_space">&nbsp;</span>reset</span>
+              </td>
 </tr>
 <tr class="ltx_tr">
-<td class="ltx_td"><span class="ltx_text ltx_lst_line ltx_font_typewriter">#<span class="ltx_text ltx_lst_space">&nbsp;</span>[<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>46585000,<span class="ltx_text ltx_lst_space">&nbsp;</span>1]<span class="ltx_text ltx_lst_space">&nbsp;</span>Event<span class="ltx_text ltx_lst_space">&nbsp;</span>0x0100:<span class="ltx_text ltx_lst_space">&nbsp;</span>0x00000000</span></td>
+<td class="ltx_td">
+                <span class="ltx_text ltx_lst_line ltx_font_typewriter">#<span class="ltx_text ltx_lst_space">&nbsp;</span>[<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>52500,<span class="ltx_text ltx_lst_space">&nbsp;</span>3]<span class="ltx_text ltx_lst_space">&nbsp;</span>Software<span class="ltx_text ltx_lst_space">&nbsp;</span>reset</span>
+              </td>
 </tr>
 <tr class="ltx_tr">
-<td class="ltx_td"><span class="ltx_text ltx_lst_line ltx_font_typewriter">#<span class="ltx_text ltx_lst_space">&nbsp;</span>[<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>46617500,<span class="ltx_text ltx_lst_space">&nbsp;</span>1]<span class="ltx_text ltx_lst_space">&nbsp;</span>Event<span class="ltx_text ltx_lst_space">&nbsp;</span>0x0100:<span class="ltx_text ltx_lst_space">&nbsp;</span>0x00000001</span></td>
+<td class="ltx_td">
+                <span class="ltx_text ltx_lst_line ltx_font_typewriter">#<span class="ltx_text ltx_lst_space">&nbsp;</span>[<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>46585000,<span class="ltx_text ltx_lst_space">&nbsp;</span>1]<span class="ltx_text ltx_lst_space">&nbsp;</span>Event<span class="ltx_text ltx_lst_space">&nbsp;</span>0x0100:<span class="ltx_text ltx_lst_space">&nbsp;</span>0x00000000</span>
+              </td>
 </tr>
 <tr class="ltx_tr">
-<td class="ltx_td"><span class="ltx_text ltx_lst_line ltx_font_typewriter">#<span class="ltx_text ltx_lst_space">&nbsp;</span>[<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>46627500,<span class="ltx_text ltx_lst_space">&nbsp;</span>2]<span class="ltx_text ltx_lst_space">&nbsp;</span>Event<span class="ltx_text ltx_lst_space">&nbsp;</span>0x0100:<span class="ltx_text ltx_lst_space">&nbsp;</span>0x00000000</span></td>
+<td class="ltx_td">
+                <span class="ltx_text ltx_lst_line ltx_font_typewriter">#<span class="ltx_text ltx_lst_space">&nbsp;</span>[<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>46617500,<span class="ltx_text ltx_lst_space">&nbsp;</span>1]<span class="ltx_text ltx_lst_space">&nbsp;</span>Event<span class="ltx_text ltx_lst_space">&nbsp;</span>0x0100:<span class="ltx_text ltx_lst_space">&nbsp;</span>0x00000001</span>
+              </td>
 </tr>
 <tr class="ltx_tr">
-<td class="ltx_td"><span class="ltx_text ltx_lst_line ltx_font_typewriter">#<span class="ltx_text ltx_lst_space">&nbsp;</span>[<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>46652500,<span class="ltx_text ltx_lst_space">&nbsp;</span>1]<span class="ltx_text ltx_lst_space">&nbsp;</span>Event<span class="ltx_text ltx_lst_space">&nbsp;</span>0x0100:<span class="ltx_text ltx_lst_space">&nbsp;</span>0x000fffec</span></td>
+<td class="ltx_td">
+                <span class="ltx_text ltx_lst_line ltx_font_typewriter">#<span class="ltx_text ltx_lst_space">&nbsp;</span>[<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>46627500,<span class="ltx_text ltx_lst_space">&nbsp;</span>2]<span class="ltx_text ltx_lst_space">&nbsp;</span>Event<span class="ltx_text ltx_lst_space">&nbsp;</span>0x0100:<span class="ltx_text ltx_lst_space">&nbsp;</span>0x00000000</span>
+              </td>
 </tr>
 <tr class="ltx_tr">
-<td class="ltx_td"><span class="ltx_text ltx_lst_line ltx_font_typewriter">#<span class="ltx_text ltx_lst_space">&nbsp;</span>[<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>46660000,<span class="ltx_text ltx_lst_space">&nbsp;</span>2]<span class="ltx_text ltx_lst_space">&nbsp;</span>Event<span class="ltx_text ltx_lst_space">&nbsp;</span>0x0100:<span class="ltx_text ltx_lst_space">&nbsp;</span>0x00000001</span></td>
+<td class="ltx_td">
+                <span class="ltx_text ltx_lst_line ltx_font_typewriter">#<span class="ltx_text ltx_lst_space">&nbsp;</span>[<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>46652500,<span class="ltx_text ltx_lst_space">&nbsp;</span>1]<span class="ltx_text ltx_lst_space">&nbsp;</span>Event<span class="ltx_text ltx_lst_space">&nbsp;</span>0x0100:<span class="ltx_text ltx_lst_space">&nbsp;</span>0x000fffec</span>
+              </td>
 </tr>
 <tr class="ltx_tr">
-<td class="ltx_td"><span class="ltx_text ltx_lst_line ltx_font_typewriter">#<span class="ltx_text ltx_lst_space">&nbsp;</span>[<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>46670000,<span class="ltx_text ltx_lst_space">&nbsp;</span>3]<span class="ltx_text ltx_lst_space">&nbsp;</span>Event<span class="ltx_text ltx_lst_space">&nbsp;</span>0x0100:<span class="ltx_text ltx_lst_space">&nbsp;</span>0x00000000</span></td>
+<td class="ltx_td">
+                <span class="ltx_text ltx_lst_line ltx_font_typewriter">#<span class="ltx_text ltx_lst_space">&nbsp;</span>[<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>46660000,<span class="ltx_text ltx_lst_space">&nbsp;</span>2]<span class="ltx_text ltx_lst_space">&nbsp;</span>Event<span class="ltx_text ltx_lst_space">&nbsp;</span>0x0100:<span class="ltx_text ltx_lst_space">&nbsp;</span>0x00000001</span>
+              </td>
 </tr>
 <tr class="ltx_tr">
-<td class="ltx_td"><span class="ltx_text ltx_lst_line ltx_font_typewriter">#<span class="ltx_text ltx_lst_space">&nbsp;</span>[<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>46695000,<span class="ltx_text ltx_lst_space">&nbsp;</span>2]<span class="ltx_text ltx_lst_space">&nbsp;</span>Event<span class="ltx_text ltx_lst_space">&nbsp;</span>0x0100:<span class="ltx_text ltx_lst_space">&nbsp;</span>0x000fffec</span></td>
+<td class="ltx_td">
+                <span class="ltx_text ltx_lst_line ltx_font_typewriter">#<span class="ltx_text ltx_lst_space">&nbsp;</span>[<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>46670000,<span class="ltx_text ltx_lst_space">&nbsp;</span>3]<span class="ltx_text ltx_lst_space">&nbsp;</span>Event<span class="ltx_text ltx_lst_space">&nbsp;</span>0x0100:<span class="ltx_text ltx_lst_space">&nbsp;</span>0x00000000</span>
+              </td>
 </tr>
 <tr class="ltx_tr">
-<td class="ltx_td"><span class="ltx_text ltx_lst_line ltx_font_typewriter">#<span class="ltx_text ltx_lst_space">&nbsp;</span>[<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>46702500,<span class="ltx_text ltx_lst_space">&nbsp;</span>3]<span class="ltx_text ltx_lst_space">&nbsp;</span>Event<span class="ltx_text ltx_lst_space">&nbsp;</span>0x0100:<span class="ltx_text ltx_lst_space">&nbsp;</span>0x00000001</span></td>
+<td class="ltx_td">
+                <span class="ltx_text ltx_lst_line ltx_font_typewriter">#<span class="ltx_text ltx_lst_space">&nbsp;</span>[<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>46695000,<span class="ltx_text ltx_lst_space">&nbsp;</span>2]<span class="ltx_text ltx_lst_space">&nbsp;</span>Event<span class="ltx_text ltx_lst_space">&nbsp;</span>0x0100:<span class="ltx_text ltx_lst_space">&nbsp;</span>0x000fffec</span>
+              </td>
 </tr>
 <tr class="ltx_tr">
-<td class="ltx_td"><span class="ltx_text ltx_lst_line ltx_font_typewriter">#<span class="ltx_text ltx_lst_space">&nbsp;</span>[<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>46737500,<span class="ltx_text ltx_lst_space">&nbsp;</span>3]<span class="ltx_text ltx_lst_space">&nbsp;</span>Event<span class="ltx_text ltx_lst_space">&nbsp;</span>0x0100:<span class="ltx_text ltx_lst_space">&nbsp;</span>0x000fffec</span></td>
+<td class="ltx_td">
+                <span class="ltx_text ltx_lst_line ltx_font_typewriter">#<span class="ltx_text ltx_lst_space">&nbsp;</span>[<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>46702500,<span class="ltx_text ltx_lst_space">&nbsp;</span>3]<span class="ltx_text ltx_lst_space">&nbsp;</span>Event<span class="ltx_text ltx_lst_space">&nbsp;</span>0x0100:<span class="ltx_text ltx_lst_space">&nbsp;</span>0x00000001</span>
+              </td>
 </tr>
 <tr class="ltx_tr">
-<td class="ltx_td"><span class="ltx_text ltx_lst_line ltx_font_typewriter">#<span class="ltx_text ltx_lst_space">&nbsp;</span>[<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>47272500,<span class="ltx_text ltx_lst_space">&nbsp;</span>0]<span class="ltx_text ltx_lst_space">&nbsp;</span>Exception<span class="ltx_text ltx_lst_space">&nbsp;</span>#<span class="ltx_text ltx_lst_space">&nbsp;</span>8<span class="ltx_text ltx_lst_space">&nbsp;</span>occured</span></td>
+<td class="ltx_td">
+                <span class="ltx_text ltx_lst_line ltx_font_typewriter">#<span class="ltx_text ltx_lst_space">&nbsp;</span>[<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>46737500,<span class="ltx_text ltx_lst_space">&nbsp;</span>3]<span class="ltx_text ltx_lst_space">&nbsp;</span>Event<span class="ltx_text ltx_lst_space">&nbsp;</span>0x0100:<span class="ltx_text ltx_lst_space">&nbsp;</span>0x000fffec</span>
+              </td>
 </tr>
 <tr class="ltx_tr">
-<td class="ltx_td"><span class="ltx_text ltx_lst_line ltx_font_typewriter">#<span class="ltx_text ltx_lst_space">&nbsp;</span>[<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>48292500,<span class="ltx_text ltx_lst_space">&nbsp;</span>1]<span class="ltx_text ltx_lst_space">&nbsp;</span>Terminated<span class="ltx_text ltx_lst_space">&nbsp;</span>at<span class="ltx_text ltx_lst_space">&nbsp;</span>address<span class="ltx_text ltx_lst_space">&nbsp;</span>0x0000dd5c</span></td>
+<td class="ltx_td">
+                <span class="ltx_text ltx_lst_line ltx_font_typewriter">#<span class="ltx_text ltx_lst_space">&nbsp;</span>[<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>47272500,<span class="ltx_text ltx_lst_space">&nbsp;</span>0]<span class="ltx_text ltx_lst_space">&nbsp;</span>Exception<span class="ltx_text ltx_lst_space">&nbsp;</span>#<span class="ltx_text ltx_lst_space">&nbsp;</span>8<span class="ltx_text ltx_lst_space">&nbsp;</span>occured</span>
+              </td>
 </tr>
 <tr class="ltx_tr">
-<td class="ltx_td"><span class="ltx_text ltx_lst_line ltx_font_typewriter">#<span class="ltx_text ltx_lst_space">&nbsp;</span>[<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>48335000,<span class="ltx_text ltx_lst_space">&nbsp;</span>2]<span class="ltx_text ltx_lst_space">&nbsp;</span>Terminated<span class="ltx_text ltx_lst_space">&nbsp;</span>at<span class="ltx_text ltx_lst_space">&nbsp;</span>address<span class="ltx_text ltx_lst_space">&nbsp;</span>0x0000dd5c</span></td>
+<td class="ltx_td">
+                <span class="ltx_text ltx_lst_line ltx_font_typewriter">#<span class="ltx_text ltx_lst_space">&nbsp;</span>[<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>48292500,<span class="ltx_text ltx_lst_space">&nbsp;</span>1]<span class="ltx_text ltx_lst_space">&nbsp;</span>Terminated<span class="ltx_text ltx_lst_space">&nbsp;</span>at<span class="ltx_text ltx_lst_space">&nbsp;</span>address<span class="ltx_text ltx_lst_space">&nbsp;</span>0x0000dd5c</span>
+              </td>
 </tr>
 <tr class="ltx_tr">
-<td class="ltx_td"><span class="ltx_text ltx_lst_line ltx_font_typewriter">#<span class="ltx_text ltx_lst_space">&nbsp;</span>[<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>48377500,<span class="ltx_text ltx_lst_space">&nbsp;</span>3]<span class="ltx_text ltx_lst_space">&nbsp;</span>Terminated<span class="ltx_text ltx_lst_space">&nbsp;</span>at<span class="ltx_text ltx_lst_space">&nbsp;</span>address<span class="ltx_text ltx_lst_space">&nbsp;</span>0x0000dd5c</span></td>
+<td class="ltx_td">
+                <span class="ltx_text ltx_lst_line ltx_font_typewriter">#<span class="ltx_text ltx_lst_space">&nbsp;</span>[<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>48335000,<span class="ltx_text ltx_lst_space">&nbsp;</span>2]<span class="ltx_text ltx_lst_space">&nbsp;</span>Terminated<span class="ltx_text ltx_lst_space">&nbsp;</span>at<span class="ltx_text ltx_lst_space">&nbsp;</span>address<span class="ltx_text ltx_lst_space">&nbsp;</span>0x0000dd5c</span>
+              </td>
 </tr>
 <tr class="ltx_tr">
-<td class="ltx_td"><span class="ltx_text ltx_lst_line ltx_font_typewriter">#<span class="ltx_text ltx_lst_space">&nbsp;</span>[<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>48835000,<span class="ltx_text ltx_lst_space">&nbsp;</span>0]<span class="ltx_text ltx_lst_space">&nbsp;</span>Event<span class="ltx_text ltx_lst_space">&nbsp;</span>0x0102:<span class="ltx_text ltx_lst_space">&nbsp;</span>0x00000001</span></td>
+<td class="ltx_td">
+                <span class="ltx_text ltx_lst_line ltx_font_typewriter">#<span class="ltx_text ltx_lst_space">&nbsp;</span>[<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>48377500,<span class="ltx_text ltx_lst_space">&nbsp;</span>3]<span class="ltx_text ltx_lst_space">&nbsp;</span>Terminated<span class="ltx_text ltx_lst_space">&nbsp;</span>at<span class="ltx_text ltx_lst_space">&nbsp;</span>address<span class="ltx_text ltx_lst_space">&nbsp;</span>0x0000dd5c</span>
+              </td>
 </tr>
 <tr class="ltx_tr">
-<td class="ltx_td"><span class="ltx_text ltx_lst_line ltx_font_typewriter">#<span class="ltx_text ltx_lst_space">&nbsp;</span>[<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>48867500,<span class="ltx_text ltx_lst_space">&nbsp;</span>0]<span class="ltx_text ltx_lst_space">&nbsp;</span>Event<span class="ltx_text ltx_lst_space">&nbsp;</span>0x0102:<span class="ltx_text ltx_lst_space">&nbsp;</span>0x00000000</span></td>
+<td class="ltx_td">
+                <span class="ltx_text ltx_lst_line ltx_font_typewriter">#<span class="ltx_text ltx_lst_space">&nbsp;</span>[<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>48835000,<span class="ltx_text ltx_lst_space">&nbsp;</span>0]<span class="ltx_text ltx_lst_space">&nbsp;</span>Event<span class="ltx_text ltx_lst_space">&nbsp;</span>0x0102:<span class="ltx_text ltx_lst_space">&nbsp;</span>0x00000001</span>
+              </td>
 </tr>
 <tr class="ltx_tr">
-<td class="ltx_td"><span class="ltx_text ltx_lst_line ltx_font_typewriter">#<span class="ltx_text ltx_lst_space">&nbsp;</span>[<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>48895000,<span class="ltx_text ltx_lst_space">&nbsp;</span>0]<span class="ltx_text ltx_lst_space">&nbsp;</span>Event<span class="ltx_text ltx_lst_space">&nbsp;</span>0x0102:<span class="ltx_text ltx_lst_space">&nbsp;</span>0x00000001</span></td>
+<td class="ltx_td">
+                <span class="ltx_text ltx_lst_line ltx_font_typewriter">#<span class="ltx_text ltx_lst_space">&nbsp;</span>[<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>48867500,<span class="ltx_text ltx_lst_space">&nbsp;</span>0]<span class="ltx_text ltx_lst_space">&nbsp;</span>Event<span class="ltx_text ltx_lst_space">&nbsp;</span>0x0102:<span class="ltx_text ltx_lst_space">&nbsp;</span>0x00000000</span>
+              </td>
 </tr>
 <tr class="ltx_tr">
-<td class="ltx_td"><span class="ltx_text ltx_lst_line ltx_font_typewriter">#<span class="ltx_text ltx_lst_space">&nbsp;</span>[<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>65855000,<span class="ltx_text ltx_lst_space">&nbsp;</span>0]<span class="ltx_text ltx_lst_space">&nbsp;</span>Event<span class="ltx_text ltx_lst_space">&nbsp;</span>0x0103:<span class="ltx_text ltx_lst_space">&nbsp;</span>0x00000000</span></td>
+<td class="ltx_td">
+                <span class="ltx_text ltx_lst_line ltx_font_typewriter">#<span class="ltx_text ltx_lst_space">&nbsp;</span>[<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>48895000,<span class="ltx_text ltx_lst_space">&nbsp;</span>0]<span class="ltx_text ltx_lst_space">&nbsp;</span>Event<span class="ltx_text ltx_lst_space">&nbsp;</span>0x0102:<span class="ltx_text ltx_lst_space">&nbsp;</span>0x00000001</span>
+              </td>
 </tr>
 <tr class="ltx_tr">
-<td class="ltx_td"><span class="ltx_text ltx_lst_line ltx_font_typewriter">#<span class="ltx_text ltx_lst_space">&nbsp;</span>[<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>66337500,<span class="ltx_text ltx_lst_space">&nbsp;</span>0]<span class="ltx_text ltx_lst_space">&nbsp;</span>Event<span class="ltx_text ltx_lst_space">&nbsp;</span>0x0102:<span class="ltx_text ltx_lst_space">&nbsp;</span>0x00000002</span></td>
+<td class="ltx_td">
+                <span class="ltx_text ltx_lst_line ltx_font_typewriter">#<span class="ltx_text ltx_lst_space">&nbsp;</span>[<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>65855000,<span class="ltx_text ltx_lst_space">&nbsp;</span>0]<span class="ltx_text ltx_lst_space">&nbsp;</span>Event<span class="ltx_text ltx_lst_space">&nbsp;</span>0x0103:<span class="ltx_text ltx_lst_space">&nbsp;</span>0x00000000</span>
+              </td>
 </tr>
 <tr class="ltx_tr">
-<td class="ltx_td"><span class="ltx_text ltx_lst_line ltx_font_typewriter">#<span class="ltx_text ltx_lst_space">&nbsp;</span>[<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>66352500,<span class="ltx_text ltx_lst_space">&nbsp;</span>0]<span class="ltx_text ltx_lst_space">&nbsp;</span>Event<span class="ltx_text ltx_lst_space">&nbsp;</span>0x0102:<span class="ltx_text ltx_lst_space">&nbsp;</span>0x00000000</span></td>
+<td class="ltx_td">
+                <span class="ltx_text ltx_lst_line ltx_font_typewriter">#<span class="ltx_text ltx_lst_space">&nbsp;</span>[<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>66337500,<span class="ltx_text ltx_lst_space">&nbsp;</span>0]<span class="ltx_text ltx_lst_space">&nbsp;</span>Event<span class="ltx_text ltx_lst_space">&nbsp;</span>0x0102:<span class="ltx_text ltx_lst_space">&nbsp;</span>0x00000002</span>
+              </td>
 </tr>
 <tr class="ltx_tr">
-<td class="ltx_td"><span class="ltx_text ltx_lst_line ltx_font_typewriter">#<span class="ltx_text ltx_lst_space">&nbsp;</span>[<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>66360000,<span class="ltx_text ltx_lst_space">&nbsp;</span>0]<span class="ltx_text ltx_lst_space">&nbsp;</span>Event<span class="ltx_text ltx_lst_space">&nbsp;</span>0x0102:<span class="ltx_text ltx_lst_space">&nbsp;</span>0x00000001</span></td>
+<td class="ltx_td">
+                <span class="ltx_text ltx_lst_line ltx_font_typewriter">#<span class="ltx_text ltx_lst_space">&nbsp;</span>[<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>66352500,<span class="ltx_text ltx_lst_space">&nbsp;</span>0]<span class="ltx_text ltx_lst_space">&nbsp;</span>Event<span class="ltx_text ltx_lst_space">&nbsp;</span>0x0102:<span class="ltx_text ltx_lst_space">&nbsp;</span>0x00000000</span>
+              </td>
 </tr>
 <tr class="ltx_tr">
-<td class="ltx_td"><span class="ltx_text ltx_lst_line ltx_font_typewriter">#<span class="ltx_text ltx_lst_space">&nbsp;</span>[<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>75940000,<span class="ltx_text ltx_lst_space">&nbsp;</span>0]<span class="ltx_text ltx_lst_space">&nbsp;</span>Event<span class="ltx_text ltx_lst_space">&nbsp;</span>0x0103:<span class="ltx_text ltx_lst_space">&nbsp;</span>0x00000000</span></td>
+<td class="ltx_td">
+                <span class="ltx_text ltx_lst_line ltx_font_typewriter">#<span class="ltx_text ltx_lst_space">&nbsp;</span>[<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>66360000,<span class="ltx_text ltx_lst_space">&nbsp;</span>0]<span class="ltx_text ltx_lst_space">&nbsp;</span>Event<span class="ltx_text ltx_lst_space">&nbsp;</span>0x0102:<span class="ltx_text ltx_lst_space">&nbsp;</span>0x00000001</span>
+              </td>
 </tr>
 <tr class="ltx_tr">
-<td class="ltx_td"><span class="ltx_text ltx_lst_line ltx_font_typewriter">#<span class="ltx_text ltx_lst_space">&nbsp;</span>[<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>76420000,<span class="ltx_text ltx_lst_space">&nbsp;</span>0]<span class="ltx_text ltx_lst_space">&nbsp;</span>Event<span class="ltx_text ltx_lst_space">&nbsp;</span>0x0102:<span class="ltx_text ltx_lst_space">&nbsp;</span>0x00000003</span></td>
+<td class="ltx_td">
+                <span class="ltx_text ltx_lst_line ltx_font_typewriter">#<span class="ltx_text ltx_lst_space">&nbsp;</span>[<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>75940000,<span class="ltx_text ltx_lst_space">&nbsp;</span>0]<span class="ltx_text ltx_lst_space">&nbsp;</span>Event<span class="ltx_text ltx_lst_space">&nbsp;</span>0x0103:<span class="ltx_text ltx_lst_space">&nbsp;</span>0x00000000</span>
+              </td>
 </tr>
 <tr class="ltx_tr">
-<td class="ltx_td"><span class="ltx_text ltx_lst_line ltx_font_typewriter">#<span class="ltx_text ltx_lst_space">&nbsp;</span>[<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>76435000,<span class="ltx_text ltx_lst_space">&nbsp;</span>0]<span class="ltx_text ltx_lst_space">&nbsp;</span>Event<span class="ltx_text ltx_lst_space">&nbsp;</span>0x0102:<span class="ltx_text ltx_lst_space">&nbsp;</span>0x00000000</span></td>
+<td class="ltx_td">
+                <span class="ltx_text ltx_lst_line ltx_font_typewriter">#<span class="ltx_text ltx_lst_space">&nbsp;</span>[<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>76420000,<span class="ltx_text ltx_lst_space">&nbsp;</span>0]<span class="ltx_text ltx_lst_space">&nbsp;</span>Event<span class="ltx_text ltx_lst_space">&nbsp;</span>0x0102:<span class="ltx_text ltx_lst_space">&nbsp;</span>0x00000003</span>
+              </td>
 </tr>
 <tr class="ltx_tr">
-<td class="ltx_td"><span class="ltx_text ltx_lst_line ltx_font_typewriter">#<span class="ltx_text ltx_lst_space">&nbsp;</span>[<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>76442500,<span class="ltx_text ltx_lst_space">&nbsp;</span>0]<span class="ltx_text ltx_lst_space">&nbsp;</span>Event<span class="ltx_text ltx_lst_space">&nbsp;</span>0x0102:<span class="ltx_text ltx_lst_space">&nbsp;</span>0x00000001</span></td>
+<td class="ltx_td">
+                <span class="ltx_text ltx_lst_line ltx_font_typewriter">#<span class="ltx_text ltx_lst_space">&nbsp;</span>[<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>76435000,<span class="ltx_text ltx_lst_space">&nbsp;</span>0]<span class="ltx_text ltx_lst_space">&nbsp;</span>Event<span class="ltx_text ltx_lst_space">&nbsp;</span>0x0102:<span class="ltx_text ltx_lst_space">&nbsp;</span>0x00000000</span>
+              </td>
 </tr>
 <tr class="ltx_tr">
-<td class="ltx_td"><span class="ltx_text ltx_lst_line ltx_font_typewriter">#<span class="ltx_text ltx_lst_space">&nbsp;</span>[<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>85920000,<span class="ltx_text ltx_lst_space">&nbsp;</span>0]<span class="ltx_text ltx_lst_space">&nbsp;</span>Event<span class="ltx_text ltx_lst_space">&nbsp;</span>0x0103:<span class="ltx_text ltx_lst_space">&nbsp;</span>0x00000000</span></td>
+<td class="ltx_td">
+                <span class="ltx_text ltx_lst_line ltx_font_typewriter">#<span class="ltx_text ltx_lst_space">&nbsp;</span>[<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>76442500,<span class="ltx_text ltx_lst_space">&nbsp;</span>0]<span class="ltx_text ltx_lst_space">&nbsp;</span>Event<span class="ltx_text ltx_lst_space">&nbsp;</span>0x0102:<span class="ltx_text ltx_lst_space">&nbsp;</span>0x00000001</span>
+              </td>
 </tr>
 <tr class="ltx_tr">
-<td class="ltx_td"><span class="ltx_text ltx_lst_line ltx_font_typewriter">#<span class="ltx_text ltx_lst_space">&nbsp;</span>[<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>100387500,<span class="ltx_text ltx_lst_space">&nbsp;</span>0]<span class="ltx_text ltx_lst_space">&nbsp;</span>Terminated<span class="ltx_text ltx_lst_space">&nbsp;</span>at<span class="ltx_text ltx_lst_space">&nbsp;</span>address<span class="ltx_text ltx_lst_space">&nbsp;</span>0x0000dd5c</span></td>
+<td class="ltx_td">
+                <span class="ltx_text ltx_lst_line ltx_font_typewriter">#<span class="ltx_text ltx_lst_space">&nbsp;</span>[<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>85920000,<span class="ltx_text ltx_lst_space">&nbsp;</span>0]<span class="ltx_text ltx_lst_space">&nbsp;</span>Event<span class="ltx_text ltx_lst_space">&nbsp;</span>0x0103:<span class="ltx_text ltx_lst_space">&nbsp;</span>0x00000000</span>
+              </td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td">
+                <span class="ltx_text ltx_lst_line ltx_font_typewriter">#<span class="ltx_text ltx_lst_space">&nbsp;</span>[<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>100387500,<span class="ltx_text ltx_lst_space">&nbsp;</span>0]<span class="ltx_text ltx_lst_space">&nbsp;</span>Terminated<span class="ltx_text ltx_lst_space">&nbsp;</span>at<span class="ltx_text ltx_lst_space">&nbsp;</span>address<span class="ltx_text ltx_lst_space">&nbsp;</span>0x0000dd5c</span>
+              </td>
 </tr>
 </table>
 </div>
@@ -437,8 +539,8 @@ events will be much easier to understand.</p>
 </div>
 </section>
 <section id="S3" class="ltx_section">
-<h1 class="ltx_title ltx_title_section">
-<span class="ltx_tag ltx_tag_section">3.3 </span>The Look Inside: Introducing the Debug System</h1>
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">3.3 </span>The Look Inside: Introducing the Debug System</h2>
 
 <div id="S3.p1" class="ltx_para">
 <p class="ltx_p">In the previous tutorials you have seen some software running on a simple
@@ -463,8 +565,7 @@ of the basics which are necesssary to understand the system.</p>
 <p class="ltx_p">Many developers know debugging from their daily work. Most of the time it
 involves running a program inside a debugger like GDB or Microsoft Visual
 Studio, setting a breakpoint at the right line of code, and stepping through the
-program from there on, running one instruction (or one line of code) at a time.
-</p>
+program from there on, running one instruction (or one line of code) at a time.</p>
 </div>
 <div id="S3.p5" class="ltx_para">
 <p class="ltx_p">This technique is what we call run-control debugging. While it works great for
@@ -484,8 +585,8 @@ running OpTiMSoC in simulations).</p>
 </div>
 </section>
 <section id="S4" class="ltx_section">
-<h1 class="ltx_title ltx_title_section">
-<span class="ltx_tag ltx_tag_section">3.4 </span>Verilator: Compiled Verilog simulation</h1>
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">3.4 </span>Verilator: Compiled Verilog simulation</h2>
 
 <div id="S4.p1" class="ltx_para">
 <p class="ltx_p">At the moment running &ldquo;verilated&rdquo; simulations is the best supported
@@ -501,8 +602,14 @@ the <code class="ltx_verbatim ltx_font_typewriter">system_2x2_cccc</code>. In th
 it:</p>
 </div>
 <div id="S4.p3" class="ltx_para">
-<div id="LSTx38" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div id="LSTx41" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div class="ltx_listing_data"><a href="data:text/plain,%24&gt;%20make">&#11015;</a></div>
 <table class="ltx_tabular">
+<tr class="ltx_tr">
+<td class="ltx_td">
+                <span class="ltx_text ltx_lst_line ltx_font_typewriter">$&gt;<span class="ltx_text ltx_lst_space">&nbsp;</span>make</span>
+              </td>
+</tr>
 </table>
 </div>
 </div>
@@ -519,8 +626,14 @@ software, e.g., the heat example. Again you need to link the
 <code class="ltx_verbatim ltx_font_typewriter">vmem</code> file. Now start the simulation:</p>
 </div>
 <div id="S4.p6" class="ltx_para">
-<div id="LSTx39" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div id="LSTx42" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div class="ltx_listing_data"><a href="data:text/plain,%24&gt;%20./tb_system_2x2_cccc">&#11015;</a></div>
 <table class="ltx_tabular">
+<tr class="ltx_tr">
+<td class="ltx_td">
+                <span class="ltx_text ltx_lst_line ltx_font_typewriter">$&gt;<span class="ltx_text ltx_lst_space">&nbsp;</span>./tb_system_2x2_cccc</span>
+              </td>
+</tr>
 </table>
 </div>
 </div>
@@ -528,22 +641,38 @@ software, e.g., the heat example. Again you need to link the
 <p class="ltx_p">It will start a debug server and wait for connections:</p>
 </div>
 <div id="S4.p8" class="ltx_para">
-<div id="LSTx40" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div id="LSTx43" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div class="ltx_listing_data"><a href="data:text/plain,%0A%20%20%20%20%20%20%20%20%20%20%20%20%20SystemC%202.3.0-ASI%20---%20Feb%2011%202013%2012:54:17%0A%20%20%20%20%20%20%20%20Copyright%20(c)%201996-2012%20by%20all%20Contributors,%0A%20%20%20%20%20%20%20%20ALL%20RIGHTS%20RESERVED%0A%0AListening%20on%20port%2022000">&#11015;</a></div>
 <table class="ltx_tabular">
 <tr class="ltx_tr">
-<td class="ltx_td"><span class="ltx_text ltx_lst_line ltx_font_typewriter"><span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>SystemC<span class="ltx_text ltx_lst_space">&nbsp;</span>2.3.0-ASI<span class="ltx_text ltx_lst_space">&nbsp;</span>---<span class="ltx_text ltx_lst_space">&nbsp;</span>Feb<span class="ltx_text ltx_lst_space">&nbsp;</span>11<span class="ltx_text ltx_lst_space">&nbsp;</span>2013<span class="ltx_text ltx_lst_space">&nbsp;</span>12:54:17</span></td>
+<td class="ltx_td">
+                <span class="ltx_text ltx_lst_line"></span>
+              </td>
 </tr>
 <tr class="ltx_tr">
-<td class="ltx_td"><span class="ltx_text ltx_lst_line ltx_font_typewriter"><span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>Copyright<span class="ltx_text ltx_lst_space">&nbsp;</span>(c)<span class="ltx_text ltx_lst_space">&nbsp;</span>1996-2012<span class="ltx_text ltx_lst_space">&nbsp;</span>by<span class="ltx_text ltx_lst_space">&nbsp;</span>all<span class="ltx_text ltx_lst_space">&nbsp;</span>Contributors,</span></td>
+<td class="ltx_td">
+                <span class="ltx_text ltx_lst_line ltx_font_typewriter"><span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>SystemC<span class="ltx_text ltx_lst_space">&nbsp;</span>2.3.0-ASI<span class="ltx_text ltx_lst_space">&nbsp;</span>---<span class="ltx_text ltx_lst_space">&nbsp;</span>Feb<span class="ltx_text ltx_lst_space">&nbsp;</span>11<span class="ltx_text ltx_lst_space">&nbsp;</span>2013<span class="ltx_text ltx_lst_space">&nbsp;</span>12:54:17</span>
+              </td>
 </tr>
 <tr class="ltx_tr">
-<td class="ltx_td"><span class="ltx_text ltx_lst_line ltx_font_typewriter"><span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>ALL<span class="ltx_text ltx_lst_space">&nbsp;</span>RIGHTS<span class="ltx_text ltx_lst_space">&nbsp;</span>RESERVED</span></td>
+<td class="ltx_td">
+                <span class="ltx_text ltx_lst_line ltx_font_typewriter"><span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>Copyright<span class="ltx_text ltx_lst_space">&nbsp;</span>(c)<span class="ltx_text ltx_lst_space">&nbsp;</span>1996-2012<span class="ltx_text ltx_lst_space">&nbsp;</span>by<span class="ltx_text ltx_lst_space">&nbsp;</span>all<span class="ltx_text ltx_lst_space">&nbsp;</span>Contributors,</span>
+              </td>
 </tr>
 <tr class="ltx_tr">
-<td class="ltx_td"><span class="ltx_text ltx_lst_line"></span></td>
+<td class="ltx_td">
+                <span class="ltx_text ltx_lst_line ltx_font_typewriter"><span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>ALL<span class="ltx_text ltx_lst_space">&nbsp;</span>RIGHTS<span class="ltx_text ltx_lst_space">&nbsp;</span>RESERVED</span>
+              </td>
 </tr>
 <tr class="ltx_tr">
-<td class="ltx_td"><span class="ltx_text ltx_lst_line ltx_font_typewriter">Listening<span class="ltx_text ltx_lst_space">&nbsp;</span>on<span class="ltx_text ltx_lst_space">&nbsp;</span>port<span class="ltx_text ltx_lst_space">&nbsp;</span>2200</span></td>
+<td class="ltx_td">
+                <span class="ltx_text ltx_lst_line"></span>
+              </td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td">
+                <span class="ltx_text ltx_lst_line ltx_font_typewriter">Listening<span class="ltx_text ltx_lst_space">&nbsp;</span>on<span class="ltx_text ltx_lst_space">&nbsp;</span>port<span class="ltx_text ltx_lst_space">&nbsp;</span>2200</span>
+              </td>
 </tr>
 </table>
 </div>
@@ -552,8 +681,14 @@ software, e.g., the heat example. Again you need to link the
 <p class="ltx_p">In another console now start the OpTiMSoC GUI:</p>
 </div>
 <div id="S4.p10" class="ltx_para">
-<div id="LSTx41" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div id="LSTx44" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div class="ltx_listing_data"><a href="data:text/plain,%24&gt;%20optimsocgui">&#11015;</a></div>
 <table class="ltx_tabular">
+<tr class="ltx_tr">
+<td class="ltx_td">
+                <span class="ltx_text ltx_lst_line ltx_font_typewriter">$&gt;<span class="ltx_text ltx_lst_space">&nbsp;</span>optimsocgui</span>
+              </td>
+</tr>
 </table>
 </div>
 </div>
@@ -561,22 +696,21 @@ software, e.g., the heat example. Again you need to link the
 <p class="ltx_p">In the first dialog window you need to set the debug backend to
 <em class="ltx_emph">Simulation TCP Interface</em> and proceed then. After the GUI
 started you need to connect using <em class="ltx_emph">Target
-System</em><math id="S4.p11.m1" class="ltx_Math" alttext="\rightarrow" display="inline"><semantics><mo>&rarr;</mo><annotation encoding="application/x-tex">\rightarrow</annotation></semantics></math><em class="ltx_emph">Connect</em>. The system view should change to
+System</em><math id="S4.p11.m1" class="ltx_Math" alttext="\rightarrow" display="inline"><mo>&rarr;</mo></math><em class="ltx_emph">Connect</em>. The system view should change to
 a 2x2 system.</p>
 </div>
 <div id="S4.p12" class="ltx_para">
 <p class="ltx_p">The last step is to run the system by <em class="ltx_emph">Target
-System</em><math id="S4.p12.m1" class="ltx_Math" alttext="\rightarrow" display="inline"><semantics><mo>&rarr;</mo><annotation encoding="application/x-tex">\rightarrow</annotation></semantics></math><em class="ltx_emph">Start CPUs</em>. The execution trace on the
+System</em><math id="S4.p12.m1" class="ltx_Math" alttext="\rightarrow" display="inline"><mo>&rarr;</mo></math><em class="ltx_emph">Start CPUs</em>. The execution trace on the
 bottom of the window will start showing execution sections and events.
 By moving the mouse over the section you will find the description of
 the section. Similarly for the events you find a short description of
-the event.
-</p>
+the event.</p>
 </div>
 </section>
 <section id="S5" class="ltx_section">
-<h1 class="ltx_title ltx_title_section">
-<span class="ltx_tag ltx_tag_section">3.5 </span>Going to the FPGA: ZTEX Boards</h1>
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">3.5 </span>Going to the FPGA: ZTEX Boards</h2>
 
 <div id="S5.p1" class="ltx_para">
 <p class="ltx_p">The recommended platform for software development or any other system
@@ -586,8 +720,8 @@ large as the former and can therefore contain more processor cores.
 The 2x2 example works with both boards.</p>
 </div>
 <section id="S5.SS1" class="ltx_subsection">
-<h1 class="ltx_title ltx_title_subsection">
-<span class="ltx_tag ltx_tag_subsection">3.5.1 </span>Prepare: Simulate the Complete System</h1>
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">3.5.1 </span>Prepare: Simulate the Complete System</h3>
 
 <div id="S5.SS1.p1" class="ltx_para">
 <p class="ltx_p">Before we go to the actual board we want to simulate the entire system
@@ -604,11 +738,18 @@ connect to the debug system via this module using a TCP socket.</p>
 Build the system running <code class="ltx_verbatim ltx_font_typewriter">make</code>. Before you simulate the system
 you will now need to provide a <code class="ltx_verbatim ltx_font_typewriter">modelsim.ini</code> either globally or
 in the system&rsquo;s folder that contains the Xilinx libraries. Once you
-have it, you can start the system using</p>
+have it, you can start the system using
+</p>
 </div>
 <div id="S5.SS1.p4" class="ltx_para">
-<div id="LSTx42" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div id="LSTx45" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div class="ltx_listing_data"><a href="data:text/plain,%24&gt;%20make%20sim-noninteractive">&#11015;</a></div>
 <table class="ltx_tabular">
+<tr class="ltx_tr">
+<td class="ltx_td">
+                  <span class="ltx_text ltx_lst_line ltx_font_typewriter">$&gt;<span class="ltx_text ltx_lst_space">&nbsp;</span>make<span class="ltx_text ltx_lst_space">&nbsp;</span>sim-noninteractive</span>
+                </td>
+</tr>
 </table>
 </div>
 </div>
@@ -618,8 +759,14 @@ to the system in a different shell by using the command line
 interface:</p>
 </div>
 <div id="S5.SS1.p6" class="ltx_para">
-<div id="LSTx43" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div id="LSTx46" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div class="ltx_listing_data"><a href="data:text/plain,%24&gt;%20optimsoc_cli%20-bdbgnoc%20-oconn=tcp,host=localhost,port=23000">&#11015;</a></div>
 <table class="ltx_tabular">
+<tr class="ltx_tr">
+<td class="ltx_td">
+                  <span class="ltx_text ltx_lst_line ltx_font_typewriter">$&gt;<span class="ltx_text ltx_lst_space">&nbsp;</span>optimsoc_cli<span class="ltx_text ltx_lst_space">&nbsp;</span>-bdbgnoc<span class="ltx_text ltx_lst_space">&nbsp;</span>-oconn=tcp,host=localhost,port=2300</span>
+                </td>
+</tr>
 </table>
 </div>
 </div>
@@ -628,52 +775,88 @@ interface:</p>
 all debug modules:</p>
 </div>
 <div id="S5.SS1.p8" class="ltx_para">
-<div id="LSTx44" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div id="LSTx47" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div class="ltx_listing_data"><a href="data:text/plain,Connected%20to%20system.%0ASystem%20ID:%200x0000ce75%0AModule%20summary:%0Aaddr.%09type%09version%09name%0A0x02%090x02%090x00%09ITM%0A0x03%090x02%090x00%09ITM%0A0x04%090x02%090x00%09ITM%0A0x05%090x02%090x00%09ITM%0A0x06%090x05%090x00%09STM%0A0x07%090x05%090x00%09STM%0A0x08%090x05%090x00%09STM%0A0x09%090x05%090x00%09STM%0A0x0a%090x07%090x00%09MAM%0A0x0b%090x07%090x00%09MAM%0A0x0c%090x07%090x00%09MAM%0A0x0d%090x07%090x00%09MAM">&#11015;</a></div>
 <table class="ltx_tabular">
 <tr class="ltx_tr">
-<td class="ltx_td"><span class="ltx_text ltx_lst_line ltx_font_typewriter">System<span class="ltx_text ltx_lst_space">&nbsp;</span>ID:<span class="ltx_text ltx_lst_space">&nbsp;</span>0x0000ce75</span></td>
+<td class="ltx_td">
+                  <span class="ltx_text ltx_lst_line ltx_font_typewriter">Connected<span class="ltx_text ltx_lst_space">&nbsp;</span>to<span class="ltx_text ltx_lst_space">&nbsp;</span>system.</span>
+                </td>
 </tr>
 <tr class="ltx_tr">
-<td class="ltx_td"><span class="ltx_text ltx_lst_line ltx_font_typewriter">Module<span class="ltx_text ltx_lst_space">&nbsp;</span>summary:</span></td>
+<td class="ltx_td">
+                  <span class="ltx_text ltx_lst_line ltx_font_typewriter">System<span class="ltx_text ltx_lst_space">&nbsp;</span>ID:<span class="ltx_text ltx_lst_space">&nbsp;</span>0x0000ce75</span>
+                </td>
 </tr>
 <tr class="ltx_tr">
-<td class="ltx_td"><span class="ltx_text ltx_lst_line ltx_font_typewriter">addr.<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>type<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>version<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>name</span></td>
+<td class="ltx_td">
+                  <span class="ltx_text ltx_lst_line ltx_font_typewriter">Module<span class="ltx_text ltx_lst_space">&nbsp;</span>summary:</span>
+                </td>
 </tr>
 <tr class="ltx_tr">
-<td class="ltx_td"><span class="ltx_text ltx_lst_line ltx_font_typewriter">0x02<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>0x02<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>0x00<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>ITM</span></td>
+<td class="ltx_td">
+                  <span class="ltx_text ltx_lst_line ltx_font_typewriter">addr.<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;</span>type<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;</span>version<span class="ltx_text ltx_lst_space">&nbsp;</span>name</span>
+                </td>
 </tr>
 <tr class="ltx_tr">
-<td class="ltx_td"><span class="ltx_text ltx_lst_line ltx_font_typewriter">0x03<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>0x02<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>0x00<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>ITM</span></td>
+<td class="ltx_td">
+                  <span class="ltx_text ltx_lst_line ltx_font_typewriter">0x02<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;</span>0x02<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;</span>0x00<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;</span>ITM</span>
+                </td>
 </tr>
 <tr class="ltx_tr">
-<td class="ltx_td"><span class="ltx_text ltx_lst_line ltx_font_typewriter">0x04<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>0x02<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>0x00<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>ITM</span></td>
+<td class="ltx_td">
+                  <span class="ltx_text ltx_lst_line ltx_font_typewriter">0x03<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;</span>0x02<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;</span>0x00<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;</span>ITM</span>
+                </td>
 </tr>
 <tr class="ltx_tr">
-<td class="ltx_td"><span class="ltx_text ltx_lst_line ltx_font_typewriter">0x05<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>0x02<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>0x00<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>ITM</span></td>
+<td class="ltx_td">
+                  <span class="ltx_text ltx_lst_line ltx_font_typewriter">0x04<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;</span>0x02<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;</span>0x00<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;</span>ITM</span>
+                </td>
 </tr>
 <tr class="ltx_tr">
-<td class="ltx_td"><span class="ltx_text ltx_lst_line ltx_font_typewriter">0x06<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>0x05<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>0x00<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>STM</span></td>
+<td class="ltx_td">
+                  <span class="ltx_text ltx_lst_line ltx_font_typewriter">0x05<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;</span>0x02<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;</span>0x00<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;</span>ITM</span>
+                </td>
 </tr>
 <tr class="ltx_tr">
-<td class="ltx_td"><span class="ltx_text ltx_lst_line ltx_font_typewriter">0x07<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>0x05<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>0x00<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>STM</span></td>
+<td class="ltx_td">
+                  <span class="ltx_text ltx_lst_line ltx_font_typewriter">0x06<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;</span>0x05<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;</span>0x00<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;</span>STM</span>
+                </td>
 </tr>
 <tr class="ltx_tr">
-<td class="ltx_td"><span class="ltx_text ltx_lst_line ltx_font_typewriter">0x08<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>0x05<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>0x00<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>STM</span></td>
+<td class="ltx_td">
+                  <span class="ltx_text ltx_lst_line ltx_font_typewriter">0x07<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;</span>0x05<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;</span>0x00<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;</span>STM</span>
+                </td>
 </tr>
 <tr class="ltx_tr">
-<td class="ltx_td"><span class="ltx_text ltx_lst_line ltx_font_typewriter">0x09<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>0x05<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>0x00<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>STM</span></td>
+<td class="ltx_td">
+                  <span class="ltx_text ltx_lst_line ltx_font_typewriter">0x08<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;</span>0x05<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;</span>0x00<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;</span>STM</span>
+                </td>
 </tr>
 <tr class="ltx_tr">
-<td class="ltx_td"><span class="ltx_text ltx_lst_line ltx_font_typewriter">0x0a<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>0x07<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>0x00<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>MAM</span></td>
+<td class="ltx_td">
+                  <span class="ltx_text ltx_lst_line ltx_font_typewriter">0x09<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;</span>0x05<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;</span>0x00<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;</span>STM</span>
+                </td>
 </tr>
 <tr class="ltx_tr">
-<td class="ltx_td"><span class="ltx_text ltx_lst_line ltx_font_typewriter">0x0b<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>0x07<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>0x00<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>MAM</span></td>
+<td class="ltx_td">
+                  <span class="ltx_text ltx_lst_line ltx_font_typewriter">0x0a<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;</span>0x07<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;</span>0x00<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;</span>MAM</span>
+                </td>
 </tr>
 <tr class="ltx_tr">
-<td class="ltx_td"><span class="ltx_text ltx_lst_line ltx_font_typewriter">0x0c<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>0x07<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>0x00<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>MAM</span></td>
+<td class="ltx_td">
+                  <span class="ltx_text ltx_lst_line ltx_font_typewriter">0x0b<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;</span>0x07<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;</span>0x00<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;</span>MAM</span>
+                </td>
 </tr>
 <tr class="ltx_tr">
-<td class="ltx_td"><span class="ltx_text ltx_lst_line ltx_font_typewriter">0x0d<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>0x07<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>0x00<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>MAM</span></td>
+<td class="ltx_td">
+                  <span class="ltx_text ltx_lst_line ltx_font_typewriter">0x0c<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;</span>0x07<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;</span>0x00<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;</span>MAM</span>
+                </td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td">
+                  <span class="ltx_text ltx_lst_line ltx_font_typewriter">0x0d<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;</span>0x07<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;</span>0x00<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;</span>MAM</span>
+                </td>
 </tr>
 </table>
 </div>
@@ -692,8 +875,14 @@ before in the <code class="ltx_verbatim ltx_font_typewriter">sw</code> subfolder
 <p class="ltx_p">First you enter interactive mode:</p>
 </div>
 <div id="S5.SS1.p12" class="ltx_para">
-<div id="LSTx45" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div id="LSTx48" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div class="ltx_listing_data"><a href="data:text/plain,%24&gt;%20optimsoc_cli%20-bdbgnoc%20-oconn=tcp,host=localhost,port=23000">&#11015;</a></div>
 <table class="ltx_tabular">
+<tr class="ltx_tr">
+<td class="ltx_td">
+                  <span class="ltx_text ltx_lst_line ltx_font_typewriter">$&gt;<span class="ltx_text ltx_lst_space">&nbsp;</span>optimsoc_cli<span class="ltx_text ltx_lst_space">&nbsp;</span>-bdbgnoc<span class="ltx_text ltx_lst_space">&nbsp;</span>-oconn=tcp,host=localhost,port=2300</span>
+                </td>
+</tr>
 </table>
 </div>
 </div>
@@ -702,8 +891,14 @@ before in the <code class="ltx_verbatim ltx_font_typewriter">sw</code> subfolder
 can initialize the memories:</p>
 </div>
 <div id="S5.SS1.p14" class="ltx_para">
-<div id="LSTx46" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div id="LSTx49" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div class="ltx_listing_data"><a href="data:text/plain,OpTiMSoC&gt;%20mem_init%20hello_simplemp.bin%200-3">&#11015;</a></div>
 <table class="ltx_tabular">
+<tr class="ltx_tr">
+<td class="ltx_td">
+                  <span class="ltx_text ltx_lst_line ltx_font_typewriter">OpTiMSoC&gt;<span class="ltx_text ltx_lst_space">&nbsp;</span>mem_init<span class="ltx_text ltx_lst_space">&nbsp;</span>hello_simplemp.bin<span class="ltx_text ltx_lst_space">&nbsp;</span>0-3</span>
+                </td>
+</tr>
 </table>
 </div>
 </div>
@@ -712,23 +907,41 @@ can initialize the memories:</p>
 file:</p>
 </div>
 <div id="S5.SS1.p16" class="ltx_para">
-<div id="LSTx47" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div id="LSTx50" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div class="ltx_listing_data"><a href="data:text/plain,OpTiMSoC&gt;%20log_stm_trace%20strace">&#11015;</a></div>
 <table class="ltx_tabular">
+<tr class="ltx_tr">
+<td class="ltx_td">
+                  <span class="ltx_text ltx_lst_line ltx_font_typewriter">OpTiMSoC&gt;<span class="ltx_text ltx_lst_space">&nbsp;</span>log_stm_trace<span class="ltx_text ltx_lst_space">&nbsp;</span>strace</span>
+                </td>
+</tr>
 </table>
 </div>
 </div>
 <div id="S5.SS1.p17" class="ltx_para">
 <p class="ltx_p">Then start the system:</p>
-<div id="LSTx48" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div id="LSTx51" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div class="ltx_listing_data"><a href="data:text/plain,OpTiMSoC&gt;%20start">&#11015;</a></div>
 <table class="ltx_tabular">
+<tr class="ltx_tr">
+<td class="ltx_td">
+                  <span class="ltx_text ltx_lst_line ltx_font_typewriter">OpTiMSoC&gt;<span class="ltx_text ltx_lst_space">&nbsp;</span>start</span>
+                </td>
+</tr>
 </table>
 </div>
 </div>
 <div id="S5.SS1.p18" class="ltx_para">
 <p class="ltx_p">Let it run for a while (1 minute) and then leave the command line
 interface:</p>
-<div id="LSTx49" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div id="LSTx52" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div class="ltx_listing_data"><a href="data:text/plain,OpTiMSoC&gt;%20quit">&#11015;</a></div>
 <table class="ltx_tabular">
+<tr class="ltx_tr">
+<td class="ltx_td">
+                  <span class="ltx_text ltx_lst_line ltx_font_typewriter">OpTiMSoC&gt;<span class="ltx_text ltx_lst_space">&nbsp;</span>quit</span>
+                </td>
+</tr>
 </table>
 </div>
 </div>
@@ -738,8 +951,8 @@ interface:</p>
 </div>
 </section>
 <section id="S5.SS2" class="ltx_subsection">
-<h1 class="ltx_title ltx_title_subsection">
-<span class="ltx_tag ltx_tag_subsection">3.5.2 </span>Synthesis</h1>
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">3.5.2 </span>Synthesis</h3>
 
 <div id="S5.SS2.p1" class="ltx_para">
 <p class="ltx_p">Once you have checked the correct functionality of the system (or
@@ -755,8 +968,14 @@ systems.</p>
 <p class="ltx_p">To generate the system first create the project file:</p>
 </div>
 <div id="S5.SS2.p4" class="ltx_para">
-<div id="LSTx50" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div id="LSTx53" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div class="ltx_listing_data"><a href="data:text/plain,%24&gt;%20make%20synplify.prj">&#11015;</a></div>
 <table class="ltx_tabular">
+<tr class="ltx_tr">
+<td class="ltx_td">
+                  <span class="ltx_text ltx_lst_line ltx_font_typewriter">$&gt;<span class="ltx_text ltx_lst_space">&nbsp;</span>make<span class="ltx_text ltx_lst_space">&nbsp;</span>synplify.prj</span>
+                </td>
+</tr>
 </table>
 </div>
 </div>
@@ -767,10 +986,15 @@ synthesis.</p>
 <div id="S5.SS2.p6" class="ltx_para">
 <p class="ltx_p">If you want to have the output of the synthesis in a folder different from your
 source folder (the one where you just ran <code class="ltx_verbatim ltx_font_typewriter">make</code> in), you can set the
-environment variable <code class="ltx_verbatim ltx_font_typewriter">OPTIMSOC_SYN_OUTDIR</code> to any path you like, e.g. put
-</p>
-<div id="LSTx51" class="ltx_listingblock ltx_lstlisting ltx_listing">
+environment variable <code class="ltx_verbatim ltx_font_typewriter">OPTIMSOC_SYN_OUTDIR</code> to any path you like, e.g. put</p>
+<div id="LSTx54" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div class="ltx_listing_data"><a href="data:text/plain,export%20OPTIMSOC_SYN_OUTDIR=%24HOME/syn">&#11015;</a></div>
 <table class="ltx_tabular">
+<tr class="ltx_tr">
+<td class="ltx_td">
+                  <span class="ltx_text ltx_lst_line ltx_font_typewriter">export<span class="ltx_text ltx_lst_space">&nbsp;</span>OPTIMSOC_SYN_OUTDIR=$HOME/syn</span>
+                </td>
+</tr>
 </table>
 </div>
 <p class="ltx_p">in your profile script (e.g. your <code class="ltx_verbatim ltx_font_typewriter">.bashrc</code> file) and reload it.</p>
@@ -779,8 +1003,14 @@ environment variable <code class="ltx_verbatim ltx_font_typewriter">OPTIMSOC_SYN
 <p class="ltx_p">Run the synthesis afterwards (for the ZTEX 1.15b or d board):</p>
 </div>
 <div id="S5.SS2.p8" class="ltx_para">
-<div id="LSTx52" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div id="LSTx55" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div class="ltx_listing_data"><a href="data:text/plain,%24&gt;%20make%20synplify_115b_ddr">&#11015;</a></div>
 <table class="ltx_tabular">
+<tr class="ltx_tr">
+<td class="ltx_td">
+                  <span class="ltx_text ltx_lst_line ltx_font_typewriter">$&gt;<span class="ltx_text ltx_lst_space">&nbsp;</span>make<span class="ltx_text ltx_lst_space">&nbsp;</span>synplify_115b_ddr</span>
+                </td>
+</tr>
 </table>
 </div>
 </div>
@@ -788,15 +1018,21 @@ environment variable <code class="ltx_verbatim ltx_font_typewriter">OPTIMSOC_SYN
 <p class="ltx_p">Once the synthesis is finished you can generate the bitstream:</p>
 </div>
 <div id="S5.SS2.p10" class="ltx_para">
-<div id="LSTx53" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div id="LSTx56" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div class="ltx_listing_data"><a href="data:text/plain,%24&gt;%20make%20bitgen_115d_ddr">&#11015;</a></div>
 <table class="ltx_tabular">
+<tr class="ltx_tr">
+<td class="ltx_td">
+                  <span class="ltx_text ltx_lst_line ltx_font_typewriter">$&gt;<span class="ltx_text ltx_lst_space">&nbsp;</span>make<span class="ltx_text ltx_lst_space">&nbsp;</span>bitgen_115d_ddr</span>
+                </td>
+</tr>
 </table>
 </div>
 </div>
 </section>
 <section id="S5.SS3" class="ltx_subsection">
-<h1 class="ltx_title ltx_title_subsection">
-<span class="ltx_tag ltx_tag_subsection">3.5.3 </span>Testing on the FPGA</h1>
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">3.5.3 </span>Testing on the FPGA</h3>
 
 <div id="S5.SS3.p1" class="ltx_para">
 <p class="ltx_p">Now that you have generated a bitstream we&rsquo;re ready to upload it to the FPGA.
@@ -806,8 +1042,14 @@ Connect the ZTEX 1.15 board to your PC via USB.</p>
 <p class="ltx_p">If you run <code class="ltx_verbatim ltx_font_typewriter">lsusb</code> the board identifies itself as:</p>
 </div>
 <div id="S5.SS3.p3" class="ltx_para">
-<div id="LSTx54" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div id="LSTx57" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div class="ltx_listing_data"><a href="data:text/plain,Bus%20001%20Device%20004:%20ID%20221a:0100">&#11015;</a></div>
 <table class="ltx_tabular">
+<tr class="ltx_tr">
+<td class="ltx_td">
+                  <span class="ltx_text ltx_lst_line ltx_font_typewriter">Bus<span class="ltx_text ltx_lst_space">&nbsp;</span>001<span class="ltx_text ltx_lst_space">&nbsp;</span>Device<span class="ltx_text ltx_lst_space">&nbsp;</span>004:<span class="ltx_text ltx_lst_space">&nbsp;</span>ID<span class="ltx_text ltx_lst_space">&nbsp;</span>221a:010</span>
+                </td>
+</tr>
 </table>
 </div>
 </div>
@@ -819,8 +1061,14 @@ the following command is used to find out details on the Firmware,
 Board and Capabilities:</p>
 </div>
 <div id="S5.SS3.p5" class="ltx_para">
-<div id="LSTx55" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div id="LSTx58" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div class="ltx_listing_data"><a href="data:text/plain,%24&gt;%20FWLoader%20-c%20-ii">&#11015;</a></div>
 <table class="ltx_tabular">
+<tr class="ltx_tr">
+<td class="ltx_td">
+                  <span class="ltx_text ltx_lst_line ltx_font_typewriter">$&gt;<span class="ltx_text ltx_lst_space">&nbsp;</span>FWLoader<span class="ltx_text ltx_lst_space">&nbsp;</span>-c<span class="ltx_text ltx_lst_space">&nbsp;</span>-ii</span>
+                </td>
+</tr>
 </table>
 </div>
 </div>
@@ -829,8 +1077,14 @@ Board and Capabilities:</p>
 udev rule</p>
 </div>
 <div id="S5.SS3.p7" class="ltx_para">
-<div id="LSTx56" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div id="LSTx59" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div class="ltx_listing_data"><a href="data:text/plain,SUBSYSTEM==%22usb%22,%20ATTR%7BidVendor%7D==%22221a%22,%20ATTR%7BidProduct%7D==%220100%22,%20MODE=%220666%22">&#11015;</a></div>
 <table class="ltx_tabular">
+<tr class="ltx_tr">
+<td class="ltx_td">
+                  <span class="ltx_text ltx_lst_line ltx_font_typewriter">SUBSYSTEM=="usb",<span class="ltx_text ltx_lst_space">&nbsp;</span>ATTRidVendor}=="221a",<span class="ltx_text ltx_lst_space">&nbsp;</span>ATTRidProduct}=="0100",<span class="ltx_text ltx_lst_space">&nbsp;</span>MODE="0666"</span>
+                </td>
+</tr>
 </table>
 </div>
 </div>
@@ -849,34 +1103,58 @@ once for each board (until the firmware changes).</p>
 <p class="ltx_p">Now the board will identify itself using <code class="ltx_verbatim ltx_font_typewriter">FWLoader -c -ii</code>:</p>
 </div>
 <div id="S5.SS3.p11" class="ltx_para">
-<div id="LSTx57" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div id="LSTx60" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div class="ltx_listing_data"><a href="data:text/plain,bus=001%20%20device=4%20(%60004')%20%20ID=221a:100%0A%20%20%20Manufacturer=%22TUM%20LIS%22%20%20Product=%22OpTiMSoC%20-%20ZTEX%20USB%201.15%22%20%20%20%20SerialNumber=%2204A32DBCFA%22%0A%20%20%20productID=10.13.0.0%20%20fwVer=0%20%20ifVer=1%0A%20%20%20FPGA%20configured%0A%20%20%20Capabilities:%0A%20%20%20%20%20%20EEPROM%20read/write%0A%20%20%20%20%20%20FPGA%20configuration%0A%20%20%20%20%20%20Flash%20memory%20support%0A%20%20%20%20%20%20High%20speed%20FPGA%20configuration%0A%20%20%20%20%20%20MAC%20EEPROM%20read/write">&#11015;</a></div>
 <table class="ltx_tabular">
 <tr class="ltx_tr">
-<td class="ltx_td"><span class="ltx_text ltx_lst_line ltx_font_typewriter"><span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;</span>Manufacturer="TUM<span class="ltx_text ltx_lst_space">&nbsp;</span>LIS"<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;</span>Product="OpTiMSoC<span class="ltx_text ltx_lst_space">&nbsp;</span>-<span class="ltx_text ltx_lst_space">&nbsp;</span>ZTEX<span class="ltx_text ltx_lst_space">&nbsp;</span>USB<span class="ltx_text ltx_lst_space">&nbsp;</span>1.15"<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;</span>SerialNumber="04A32DBCFA"</span></td>
+<td class="ltx_td">
+                  <span class="ltx_text ltx_lst_line ltx_font_typewriter">bus=001<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;</span>device=4<span class="ltx_text ltx_lst_space">&nbsp;</span>(`004')<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;</span>ID=221a:100</span>
+                </td>
 </tr>
 <tr class="ltx_tr">
-<td class="ltx_td"><span class="ltx_text ltx_lst_line ltx_font_typewriter"><span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;</span>productID=10.13.0.0<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;</span>fwVer=0<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;</span>ifVer=1</span></td>
+<td class="ltx_td">
+                  <span class="ltx_text ltx_lst_line ltx_font_typewriter"><span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;</span>Manufacturer="TUM<span class="ltx_text ltx_lst_space">&nbsp;</span>LIS"<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;</span>Product="OpTiMSoC<span class="ltx_text ltx_lst_space">&nbsp;</span>-<span class="ltx_text ltx_lst_space">&nbsp;</span>ZTEX<span class="ltx_text ltx_lst_space">&nbsp;</span>USB<span class="ltx_text ltx_lst_space">&nbsp;</span>1.15"<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;</span>SerialNumber="04A32DBCFA"</span>
+                </td>
 </tr>
 <tr class="ltx_tr">
-<td class="ltx_td"><span class="ltx_text ltx_lst_line ltx_font_typewriter"><span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;</span>FPGA<span class="ltx_text ltx_lst_space">&nbsp;</span>configured</span></td>
+<td class="ltx_td">
+                  <span class="ltx_text ltx_lst_line ltx_font_typewriter"><span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;</span>productID=10.13.0.0<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;</span>fwVer=0<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;</span>ifVer=1</span>
+                </td>
 </tr>
 <tr class="ltx_tr">
-<td class="ltx_td"><span class="ltx_text ltx_lst_line ltx_font_typewriter"><span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;</span>Capabilities:</span></td>
+<td class="ltx_td">
+                  <span class="ltx_text ltx_lst_line ltx_font_typewriter"><span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;</span>FPGA<span class="ltx_text ltx_lst_space">&nbsp;</span>configured</span>
+                </td>
 </tr>
 <tr class="ltx_tr">
-<td class="ltx_td"><span class="ltx_text ltx_lst_line ltx_font_typewriter"><span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>EEPROM<span class="ltx_text ltx_lst_space">&nbsp;</span>read/write</span></td>
+<td class="ltx_td">
+                  <span class="ltx_text ltx_lst_line ltx_font_typewriter"><span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;</span>Capabilities:</span>
+                </td>
 </tr>
 <tr class="ltx_tr">
-<td class="ltx_td"><span class="ltx_text ltx_lst_line ltx_font_typewriter"><span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>FPGA<span class="ltx_text ltx_lst_space">&nbsp;</span>configuration</span></td>
+<td class="ltx_td">
+                  <span class="ltx_text ltx_lst_line ltx_font_typewriter"><span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>EEPROM<span class="ltx_text ltx_lst_space">&nbsp;</span>read/write</span>
+                </td>
 </tr>
 <tr class="ltx_tr">
-<td class="ltx_td"><span class="ltx_text ltx_lst_line ltx_font_typewriter"><span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>Flash<span class="ltx_text ltx_lst_space">&nbsp;</span>memory<span class="ltx_text ltx_lst_space">&nbsp;</span>support</span></td>
+<td class="ltx_td">
+                  <span class="ltx_text ltx_lst_line ltx_font_typewriter"><span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>FPGA<span class="ltx_text ltx_lst_space">&nbsp;</span>configuration</span>
+                </td>
 </tr>
 <tr class="ltx_tr">
-<td class="ltx_td"><span class="ltx_text ltx_lst_line ltx_font_typewriter"><span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>High<span class="ltx_text ltx_lst_space">&nbsp;</span>speed<span class="ltx_text ltx_lst_space">&nbsp;</span>FPGA<span class="ltx_text ltx_lst_space">&nbsp;</span>configuration</span></td>
+<td class="ltx_td">
+                  <span class="ltx_text ltx_lst_line ltx_font_typewriter"><span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>Flash<span class="ltx_text ltx_lst_space">&nbsp;</span>memory<span class="ltx_text ltx_lst_space">&nbsp;</span>support</span>
+                </td>
 </tr>
 <tr class="ltx_tr">
-<td class="ltx_td"><span class="ltx_text ltx_lst_line ltx_font_typewriter"><span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>MAC<span class="ltx_text ltx_lst_space">&nbsp;</span>EEPROM<span class="ltx_text ltx_lst_space">&nbsp;</span>read/write</span></td>
+<td class="ltx_td">
+                  <span class="ltx_text ltx_lst_line ltx_font_typewriter"><span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>High<span class="ltx_text ltx_lst_space">&nbsp;</span>speed<span class="ltx_text ltx_lst_space">&nbsp;</span>FPGA<span class="ltx_text ltx_lst_space">&nbsp;</span>configuration</span>
+                </td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td">
+                  <span class="ltx_text ltx_lst_line ltx_font_typewriter"><span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>MAC<span class="ltx_text ltx_lst_space">&nbsp;</span>EEPROM<span class="ltx_text ltx_lst_space">&nbsp;</span>read/write</span>
+                </td>
 </tr>
 </table>
 </div>
@@ -885,20 +1163,35 @@ once for each board (until the firmware changes).</p>
 <p class="ltx_p">Everything ready to go? Then upload the bitstream to the FPGA by running</p>
 </div>
 <div id="S5.SS3.p13" class="ltx_para">
-<div id="LSTx58" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div id="LSTx61" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div class="ltx_listing_data"><a href="data:text/plain,%24&gt;%20make%20flash_115d_ddr">&#11015;</a></div>
 <table class="ltx_tabular">
+<tr class="ltx_tr">
+<td class="ltx_td">
+                  <span class="ltx_text ltx_lst_line ltx_font_typewriter">$&gt;<span class="ltx_text ltx_lst_space">&nbsp;</span>make<span class="ltx_text ltx_lst_space">&nbsp;</span>flash_115d_ddr</span>
+                </td>
+</tr>
 </table>
 </div>
 </div>
 <div id="S5.SS3.p14" class="ltx_para">
 <p class="ltx_p">in the same folder where you have been running <code class="ltx_verbatim ltx_font_typewriter">make bitstream_...</code> etc.
-in the previous section. The output should be something like</p>
+in the previous section. The output should be something like
+</p>
 </div>
 <div id="S5.SS3.p15" class="ltx_para">
-<div id="LSTx59" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div id="LSTx62" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div class="ltx_listing_data"><a href="data:text/plain,FWLoader%20-v%200x221a%200x100%20-f%20-uf%20/%5Bsomepath%5D/system_2x2_cccc_ztex.bit%0AFPGA%20configuration%20time:%20194%20ms">&#11015;</a></div>
 <table class="ltx_tabular">
 <tr class="ltx_tr">
-<td class="ltx_td"><span class="ltx_text ltx_lst_line ltx_font_typewriter">FPGA<span class="ltx_text ltx_lst_space">&nbsp;</span>configuration<span class="ltx_text ltx_lst_space">&nbsp;</span>time:<span class="ltx_text ltx_lst_space">&nbsp;</span>194<span class="ltx_text ltx_lst_space">&nbsp;</span>ms</span></td>
+<td class="ltx_td">
+                  <span class="ltx_text ltx_lst_line ltx_font_typewriter">FWLoader<span class="ltx_text ltx_lst_space">&nbsp;</span>-v<span class="ltx_text ltx_lst_space">&nbsp;</span>0x221a<span class="ltx_text ltx_lst_space">&nbsp;</span>0x100<span class="ltx_text ltx_lst_space">&nbsp;</span>-f<span class="ltx_text ltx_lst_space">&nbsp;</span>-uf<span class="ltx_text ltx_lst_space">&nbsp;</span>/[somepath]/system_2x2_cccc_ztex.bit</span>
+                </td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td">
+                  <span class="ltx_text ltx_lst_line ltx_font_typewriter">FPGA<span class="ltx_text ltx_lst_space">&nbsp;</span>configuration<span class="ltx_text ltx_lst_space">&nbsp;</span>time:<span class="ltx_text ltx_lst_space">&nbsp;</span>194<span class="ltx_text ltx_lst_space">&nbsp;</span>ms</span>
+                </td>
 </tr>
 </table>
 </div>
@@ -911,8 +1204,14 @@ connection paramters used in <code class="ltx_verbatim ltx_font_typewriter">opti
 </div>
 <div id="S5.SS3.p17" class="ltx_para">
 <p class="ltx_p">Run</p>
-<div id="LSTx60" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div id="LSTx63" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div class="ltx_listing_data"><a href="data:text/plain,%24&gt;%20optimsoc_cli%20-i%20-bdbgnoc%20-oconn=usb">&#11015;</a></div>
 <table class="ltx_tabular">
+<tr class="ltx_tr">
+<td class="ltx_td">
+                  <span class="ltx_text ltx_lst_line ltx_font_typewriter">$&gt;<span class="ltx_text ltx_lst_space">&nbsp;</span>optimsoc_cli<span class="ltx_text ltx_lst_space">&nbsp;</span>-i<span class="ltx_text ltx_lst_space">&nbsp;</span>-bdbgnoc<span class="ltx_text ltx_lst_space">&nbsp;</span>-oconn=usb</span>
+                </td>
+</tr>
 </table>
 </div>
 </div>
@@ -925,12 +1224,17 @@ before by calling <code class="ltx_verbatim ltx_font_typewriter">mem_init</code>
 <p class="ltx_p">Congratulations, you&rsquo;ve run OpTiMSoC on real hardware for the first
 time! You can now develop software and explore OpTiMSoC. A handy
 utility is the python interface to the command line interface. Instead
-of running the interactive mode you can run the script interface like:
-</p>
+of running the interactive mode you can run the script interface like:</p>
 </div>
 <div id="S5.SS3.p20" class="ltx_para">
-<div id="LSTx61" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div id="LSTx64" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div class="ltx_listing_data"><a href="data:text/plain,%24&gt;%20optimsoc_cli%20-s%20&lt;script.py&gt;%20-bdbgnoc%20-oconn=usb">&#11015;</a></div>
 <table class="ltx_tabular">
+<tr class="ltx_tr">
+<td class="ltx_td">
+                  <span class="ltx_text ltx_lst_line ltx_font_typewriter">$&gt;<span class="ltx_text ltx_lst_space">&nbsp;</span>optimsoc_cli<span class="ltx_text ltx_lst_space">&nbsp;</span>-s<span class="ltx_text ltx_lst_space">&nbsp;</span>&lt;script.py&gt;<span class="ltx_text ltx_lst_space">&nbsp;</span>-bdbgnoc<span class="ltx_text ltx_lst_space">&nbsp;</span>-oconn=usb</span>
+                </td>
+</tr>
 </table>
 </div>
 </div>
@@ -938,16 +1242,23 @@ of running the interactive mode you can run the script interface like:
 <p class="ltx_p">An example python script:</p>
 </div>
 <div id="S5.SS3.p22" class="ltx_para">
-<div id="LSTx62" class="ltx_listingblock ltx_lstlisting ltx_lst_language_python ltx_listing">
+<div id="LSTx65" class="ltx_listingblock ltx_lstlisting ltx_lst_language_python ltx_listing">
+<div class="ltx_listing_data"><a href="data:text/plain,mem_init(2,%22hello_simple.bin%22)%0Alog_stm_trace(%22strace%22)%0Astart()">&#11015;</a></div>
 <table class="ltx_tabular">
 <tr class="ltx_tr">
-<td class="ltx_td"><span class="ltx_text ltx_lst_line ltx_font_typewriter">mem_init(2,"hello_simple.bin")</span></td>
+<td class="ltx_td">
+                  <span class="ltx_text ltx_lst_line ltx_font_typewriter">mem_init(2,"hello_simple.bin")</span>
+                </td>
 </tr>
 <tr class="ltx_tr">
-<td class="ltx_td"><span class="ltx_text ltx_lst_line ltx_font_typewriter">log_stm_trace("strace")</span></td>
+<td class="ltx_td">
+                  <span class="ltx_text ltx_lst_line ltx_font_typewriter">log_stm_trace("strace")</span>
+                </td>
 </tr>
 <tr class="ltx_tr">
-<td class="ltx_td"><span class="ltx_text ltx_lst_line ltx_font_typewriter">start()</span></td>
+<td class="ltx_td">
+                  <span class="ltx_text ltx_lst_line ltx_font_typewriter">start()</span>
+                </td>
 </tr>
 </table>
 </div>
