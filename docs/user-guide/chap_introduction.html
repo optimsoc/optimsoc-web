@@ -1,12 +1,70 @@
----
-layout: default
-title: OpTiMSoC User Guide
-sectiontitle: User Guide
----
-    <div class="col-md-3"><div class="optimsoc-doc-mainnav" data-spy="affix" data-offset-top="50"><ul class="nav">
-<li class="active">
-<div class="active">Introduction</div>
-<div id="optimsoc-doc-subnav-nav" class="optimsoc-doc-subnav hidden-print" role="complementary"><ul class="nav">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>OpTiMSoC User Guide</title>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <!-- external CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+
+  <!-- our own CSS (must be include after bootstrap.css!) -->
+  <link rel="stylesheet" href="/css/optimsoc.css"/>
+
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+    <script src="/js/html5shiv.js"></script>
+    <script src="/js/respond.min.js"></script>
+  <![endif]-->
+
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="http://www.optimsoc.org/feed.xml" />
+
+  <!-- Google Web Fonts -->
+  <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,400italic,600,700,900" rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=Source+Code+Pro:400,500,600,700" rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=Fredericka+the+Great" rel="stylesheet" type="text/css">
+</head>
+<body  data-offset='50' data-spy="scroll" data-target="#optimsoc-doc-subnav-nav">
+  <!-- top navigation bar -->
+  <nav class="navbar navbar-fixed-top optimsoc-nav" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/index.html" alt="OpTiMSoC"><span class="wordmark">OpTiMSoC</span></a>
+      </div>
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          <li><a href="/download.html">Get it</a></li>
+          <li><a href="/docs/index.html">Documentation</a></li>
+          <li><a href="/getinvolved.html">Get involved</a></li>
+          <li><a href="/about.html">About</a></li>
+          <li><a href="/blog">Blog</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container" id="maincontent">
+  
+  <div class="optimsoc-section-header">
+    <h1>User Guide</h1>
+  </div>
+  <hr/>
+  
+
+      <div class="col-md-3">
+<div class="optimsoc-doc-mainnav"><ul class="nav">
+<li><a href="" title="Chapter&nbsp;1 Introduction &#8227; OpTiMSoC User Guide">Introduction</a></li>
+<li><a href="chap_installation.html" title="Chapter&nbsp;2 Installation &amp; Configuration &#8227; OpTiMSoC User Guide">Installation &amp; Configuration</a></li>
+<li><a href="chap_tutorials.html" title="Chapter&nbsp;3 Tutorials &#8227; OpTiMSoC User Guide">Tutorials</a></li>
+<li><a href="Ch4.html" title="Chapter&nbsp;4 Develop OpTiMSoC &#8227; OpTiMSoC User Guide">Develop OpTiMSoC</a></li>
+</ul></div>
+<div id="optimsoc-doc-subnav-nav" class="optimsoc-doc-subnav hidden-print" data-spy="affix" data-offset-top="200" role="complementary"><ul class="nav">
 <li class=""><a href="#S0.SSx1" title="OpTiMSoC Toolchain &#8227; Chapter&nbsp;1 Introduction &#8227; OpTiMSoC User Guide">OpTiMSoC Toolchain</a></li>
 <li class=""><a href="#S0.SSx2" title="System Libraries &#8227; Chapter&nbsp;1 Introduction &#8227; OpTiMSoC User Guide">System Libraries</a></li>
 <li class=""><a href="#S0.SSx3" title="RTL Simulation &#8227; Chapter&nbsp;1 Introduction &#8227; OpTiMSoC User Guide">RTL Simulation</a></li>
@@ -15,14 +73,10 @@ sectiontitle: User Guide
 <li class=""><a href="#S0.SSx6" title="Host Software &#8227; Chapter&nbsp;1 Introduction &#8227; OpTiMSoC User Guide">Host Software</a></li>
 <li class=""><a href="#S0.SSx7" title="Host GUI &#8227; Chapter&nbsp;1 Introduction &#8227; OpTiMSoC User Guide">Host GUI</a></li>
 </ul></div>
-</li>
-<li><a href="chap_installation.html" title="Chapter&nbsp;2 Installation &amp; Configuration &#8227; OpTiMSoC User Guide">Installation &amp; Configuration</a></li>
-<li><a href="chap_tutorials.html" title="Chapter&nbsp;3 Tutorials &#8227; OpTiMSoC User Guide">Tutorials</a></li>
-<li><a href="Ch4.html" title="Chapter&nbsp;4 Develop OpTiMSoC &#8227; OpTiMSoC User Guide">Develop OpTiMSoC</a></li>
-</ul></div></div><div class="col-md-9 optimsoc-doc-body">
+</div><div class="col-md-9 optimsoc-doc-body">
 <div class="ltx_page_main">
 <div class="ltx_page_content">
-<section class="ltx_chapter">
+<div class="ltx_chapter">
 <h1 class="ltx_title ltx_title_chapter">
 <span class="ltx_tag ltx_tag_chapter">Chapter&nbsp;1 </span>Introduction</h1>
 <div class="ltx_date ltx_role_creation"></div>
@@ -58,7 +112,7 @@ tutorials.</p>
 components that are part of OpTiMSoC.
 </p>
 </div>
-<section id="S0.SSx1" class="ltx_subsection">
+<div id="S0.SSx1" class="ltx_subsection">
 <h2 class="ltx_title ltx_title_subsection">OpTiMSoC Toolchain</h2>
 
 <div id="S0.SSx1.p1" class="ltx_para">
@@ -70,8 +124,8 @@ plus a few small utility programs and scripts.</p>
 <p class="ltx_p">You will need to have it installed in most cases as it is necessary to
 build all the software running on the OpTiMSoC systems.</p>
 </div>
-</section>
-<section id="S0.SSx2" class="ltx_subsection">
+</div>
+<div id="S0.SSx2" class="ltx_subsection">
 <h2 class="ltx_title ltx_title_subsection">System Libraries</h2>
 
 <div id="S0.SSx2.p1" class="ltx_para">
@@ -79,8 +133,8 @@ build all the software running on the OpTiMSoC systems.</p>
 platforms to the applications. This includes hardware drivers, runtime
 support, communication APIs and task management APIs.</p>
 </div>
-</section>
-<section id="S0.SSx3" class="ltx_subsection">
+</div>
+<div id="S0.SSx3" class="ltx_subsection">
 <h2 class="ltx_title ltx_title_subsection">RTL Simulation</h2>
 
 <div id="S0.SSx3.p1" class="ltx_para">
@@ -94,8 +148,8 @@ and the runtime system.</p>
 simulation tool, so that we here rely on commercial EDA tools. At the
 moment this is Mentor&rsquo;s Modelsim.</p>
 </div>
-</section>
-<section id="S0.SSx4" class="ltx_subsection">
+</div>
+<div id="S0.SSx4" class="ltx_subsection">
 <h2 class="ltx_title ltx_title_subsection">Verilator</h2>
 
 <div id="S0.SSx4.p1" class="ltx_para">
@@ -103,8 +157,8 @@ moment this is Mentor&rsquo;s Modelsim.</p>
 and allows users without a commercial RTL simulator license to run
 system simulations.</p>
 </div>
-</section>
-<section id="S0.SSx5" class="ltx_subsection">
+</div>
+<div id="S0.SSx5" class="ltx_subsection">
 <h2 class="ltx_title ltx_title_subsection">Synthesis</h2>
 
 <div id="S0.SSx5.p1" class="ltx_para">
@@ -117,24 +171,24 @@ this.</p>
 <p class="ltx_p">Beside Xilinx tools, we also support Synopsys Synplify as this a more
 sophisticated synthesis tool.</p>
 </div>
-</section>
-<section id="S0.SSx6" class="ltx_subsection">
+</div>
+<div id="S0.SSx6" class="ltx_subsection">
 <h2 class="ltx_title ltx_title_subsection">Host Software</h2>
 
 <div id="S0.SSx6.p1" class="ltx_para">
 <p class="ltx_p">Host software is needed for control and diagnosis/debug of the running
 systems.</p>
 </div>
-</section>
-<section id="S0.SSx7" class="ltx_subsection">
+</div>
+<div id="S0.SSx7" class="ltx_subsection">
 <h2 class="ltx_title ltx_title_subsection">Host GUI</h2>
 
 <div id="S0.SSx7.p1" class="ltx_para">
 <p class="ltx_p">A graphical user interface provides easy control and observability of
 the running systems.</p>
 </div>
-</section>
-</section>
+</div>
+</div>
 </div>
 </div>
 <hr class="optimsoc-doc-sep-footnotes">
@@ -142,3 +196,35 @@ the running systems.</p>
 <sup>1</sup><a href="http://arxiv.org/abs/1304.5081" title="" class="ltx_ref ltx_url"><span class="ltx_text ltx_font_typewriter">http://arxiv.org/abs/1304.5081</span></a>
 </div>
 </div>
+
+</div>
+
+
+  <!-- footer -->
+  <hr>
+  <footer class="optimsoc-footer">
+    <p>OpTiMSoC &copy; 2012-2014 Lehrstuhl für Integrierte Systeme, TUM &middot; <a href="http://www.lis.ei.tum.de/index.php?id=11">Imprint</a></p>
+  </footer>
+
+  <script src="/js/jquery.min.js"></script>
+  <script src="/js/bootstrap.min.js"></script>
+
+  <!-- Piwik -->
+  <script type="text/javascript">
+  var _paq = _paq || [];
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u=(("https:" == document.location.protocol) ? "https" : "http") + "://lis.ei.tum.de/admin/piwik/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', 1]);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0]; g.type='text/javascript';
+    g.defer=true; g.async=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+
+  </script>
+  <noscript><p><img src="http://lis.ei.tum.de/admin/piwik/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
+  <!-- End Piwik Code -->
+</body>
+</html>
+

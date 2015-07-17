@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>The OpTiMSoC Blog</title>
+  <title>Many New Ideas from ORCONF</title>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
@@ -52,55 +52,61 @@
   <div class="container" id="maincontent">
   
 
-  <h1>The OpTiMSoC Blog</h1>
+  
+<h1>Many New Ideas from ORCONF</h1>
 
-<p>In our blog we regularly post about the status of the project, things we figured out while working on it and other things that might come to our mind. Please contact us if you want to share your experience with OpTiMSoC, guest posts are always welcome!</p>
-
-
-  <h2><a href="/blog/2014/10/12/orconf2014.html">Many New Ideas from ORCONF</a></h2>
-  <p class="optimsoc-blog-meta">by Philipp Wagner, posted on 12 October 2014
-  <p><p>Every autumn the community around the OpenRISC processor meets somewhere to 
+<div class="container">
+  <div class="row">
+    <div class="col-md-10">
+      <p>Every autumn the community around the OpenRISC processor meets somewhere to 
 discuss the current status of the project, to exchange ideas with other 
 free/open hardware projects, and to discuss future directions. This year the 
 <a href="http://orconf.org">OpenRISC Conference &ldquo;ORCONF&rdquo;</a> was held at TUM in Munich and 
 attracted around 40 people from all over Europe and the US.</p>
-</p>
 
-  <h2><a href="/blog/2014/07/30/glip.html">Switching Host-Communication to GLIP</a></h2>
-  <p class="optimsoc-blog-meta">by Philipp Wagner, posted on 30 July 2014
-  <p><p>Since its beginning, OpTiMSoC contained a method for communication between a 
-PC and an FPGA board. For the ZTEX 1.15 boards we used the USB 2.0 interface, 
-based on the Cypress FX2 chip available on those boards. As we continued the 
-development, we realized that this connectivity functionality is not only 
-useful in OpTiMSoC, but in other projects as well. </p>
-</p>
+<p>The OpenRISC processor implementation &ldquo;mor1kx&rdquo; powers the the OpTiMSoC compute 
+tiles, and we have been active in its development for some time now. So it was 
+an easy call to make when the question of where to host the next conference 
+came up: visit us in Munich!</p>
 
-  <h2><a href="/blog/2014/01/03/fosdem.html">OpTiMSoC at FOSDEM</a></h2>
-  <p class="optimsoc-blog-meta">by Philipp Wagner, posted on 03 January 2014
-  <p><p>It&rsquo;s official! We are proud to announce that our talk at <a href="http://fosdem.org">FOSDEM</a>
-has been accepted. FOSDEM, for those of you who have never heard of it, is one of
-the largest Free/Open Source conferences in Europe with a very strong focus on
-developers and technology. It is held every year in Brusseles, Belgium. This year it
-takes place on February 1st and 2nd.</p>
-</p>
+<p>What followed was a great weekend with many interesting talks. Olof started 
+off with a status update on OpenRISC in general, followed by talks presenting 
+the changes to the individual components of the OpenRISC project, such as 
+toolchain and various porting efforts, e.g. of the Linux Kernel. How OpenRISC 
+is used in the wild was shown by reports from research groups all over Europe, 
+which are using the OpenRISC architecture as base of their SoC designs. </p>
 
-  <h2><a href="/blog/2013/10/30/orconf2013.html">OpTiMSoC at ORCONF 2013</a></h2>
-  <p class="optimsoc-blog-meta">by Philipp Wagner, posted on 30 October 2013
-  <p><p>The &ldquo;brain&rdquo; in a SoC is its processor; in OpTiMSoC this task falls to a 
-the freely available OpenRISC processor. For the second year now the developers
-of the OpenRISC processor met in Cambridge, UK for a two-day conference on 
-October 5th and 6th to discuss the current status of the project as well as
-plans for the future.</p>
-</p>
+<p>Implementing OpenRISC in JavaScript? Why not, thought Sebastian Macke a couple 
+years ago, and out of this idea the <a href="http://s-macke.github.io/jor1k/">jor1k</a> 
+emulator was born. In addition to some demos he showed us what&rsquo;s necessary to 
+implement a fast (80 MIPS on an iPad!) emulator in JavaScript.</p>
 
-  <h2><a href="/blog/2013/08/27/welcome.html">OpTiMSoC has a new web site!</a></h2>
-  <p class="optimsoc-blog-meta">by Philipp Wagner, posted on 27 August 2013
-  <p><p>OpTiMSoC is growing rapidly. Most of the time we have our heads deep down into
-the internals, chasing large and small bugs, implementing exciting new features
-and if it all works, enjoy a beer at night.</p>
-</p>
+<p>The round of talks was completed by presentations of exciting 
+upcoming topics such as the <a href="http://riscv.org/">RISC-V ISA</a> with its 
+implementation, <a href="http://riscv.org/download.html#tab_rocket">Rocket</a>, the 
+<a href="http://www.lowrisc.org/">lowRISC</a> project with the goal of building silicon in 
+an open way, and various other topics related to free/open hardware design.</p>
 
+<p>Thanks to everybody who joined us for the conference, and thanks for making 
+OpenRISC a success!</p>
 
+<p>Additional resources:</p>
+
+<ul>
+<li><a href="https://www.flickr.com/photos/127858841@N06/sets/72157648274711327/">Pictures are available on Flickr</a>.</li>
+<li>The presentation slides are linked from the <a href="http://tum-lis.github.io/orconf2014/">ORCONF 2014 website</a>.</li>
+<li><a href="https://www.youtube.com/watch?v=96MN6lhLFRY&amp;list=PLOGTP9W1DX5XDdzBroA2i1ffMlCNus30M">Recordings of the talks are available on YouTube.</a></li>
+</ul>
+
+<iframe width="560" height="340" src="//www.youtube-nocookie.com/embed/qf-1hL6Cwhs?list=PLOGTP9W1DX5XDdzBroA2i1ffMlCNus30M" frameborder="0" allowfullscreen></iframe>
+
+    </div>
+    <div class="col-md-2 optimsoc-blog-meta">
+      <p>by Philipp Wagner <br/>on 12 October 2014</p>
+      <img class="img-rounded" src="/img/people/philipp.jpg"/>
+    </div>
+  </div>
+</div>
 </div>
 
 

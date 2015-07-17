@@ -1,21 +1,182 @@
----
-layout: none
----
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 <channel>
-<title>{{ site.name }}</title>
-<description>{{ site.description }}</description>
-<link>{{ site.url }}</link>
-<atom:link href="{{ site.url }}/feed.xml" rel="self" type="application/rss+xml" />
-{% for post in site.posts limit:10 %}
+<title>OpTiMSoC</title>
+<description>OpTiMSoC project blog</description>
+<link>http://www.optimsoc.org/blog</link>
+<atom:link href="http://www.optimsoc.org/blog/feed.xml" rel="self" type="application/rss+xml" />
+
 <item>
-<title>{{ post.title }}</title>
-<description>{{ post.content | xml_escape }}</description>
-<pubDate>{{ post.date | date: "%a, %d %b %Y %H:%M:%S %z" }}</pubDate>
-<link>{{ site.url }}{{ post.url }}</link>
-<guid isPermaLink="true">{{ site.url }}{{ post.url }}</guid>
+<title>Many New Ideas from ORCONF</title>
+<description>&lt;p&gt;Every autumn the community around the OpenRISC processor meets somewhere to 
+discuss the current status of the project, to exchange ideas with other 
+free/open hardware projects, and to discuss future directions. This year the 
+&lt;a href=&quot;http://orconf.org&quot;&gt;OpenRISC Conference &amp;ldquo;ORCONF&amp;rdquo;&lt;/a&gt; was held at TUM in Munich and 
+attracted around 40 people from all over Europe and the US.&lt;/p&gt;
+
+&lt;p&gt;The OpenRISC processor implementation &amp;ldquo;mor1kx&amp;rdquo; powers the the OpTiMSoC compute 
+tiles, and we have been active in its development for some time now. So it was 
+an easy call to make when the question of where to host the next conference 
+came up: visit us in Munich!&lt;/p&gt;
+
+&lt;p&gt;What followed was a great weekend with many interesting talks. Olof started 
+off with a status update on OpenRISC in general, followed by talks presenting 
+the changes to the individual components of the OpenRISC project, such as 
+toolchain and various porting efforts, e.g. of the Linux Kernel. How OpenRISC 
+is used in the wild was shown by reports from research groups all over Europe, 
+which are using the OpenRISC architecture as base of their SoC designs. &lt;/p&gt;
+
+&lt;p&gt;Implementing OpenRISC in JavaScript? Why not, thought Sebastian Macke a couple 
+years ago, and out of this idea the &lt;a href=&quot;http://s-macke.github.io/jor1k/&quot;&gt;jor1k&lt;/a&gt; 
+emulator was born. In addition to some demos he showed us what&amp;rsquo;s necessary to 
+implement a fast (80 MIPS on an iPad!) emulator in JavaScript.&lt;/p&gt;
+
+&lt;p&gt;The round of talks was completed by presentations of exciting 
+upcoming topics such as the &lt;a href=&quot;http://riscv.org/&quot;&gt;RISC-V ISA&lt;/a&gt; with its 
+implementation, &lt;a href=&quot;http://riscv.org/download.html#tab_rocket&quot;&gt;Rocket&lt;/a&gt;, the 
+&lt;a href=&quot;http://www.lowrisc.org/&quot;&gt;lowRISC&lt;/a&gt; project with the goal of building silicon in 
+an open way, and various other topics related to free/open hardware design.&lt;/p&gt;
+
+&lt;p&gt;Thanks to everybody who joined us for the conference, and thanks for making 
+OpenRISC a success!&lt;/p&gt;
+
+&lt;p&gt;Additional resources:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://www.flickr.com/photos/127858841@N06/sets/72157648274711327/&quot;&gt;Pictures are available on Flickr&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;The presentation slides are linked from the &lt;a href=&quot;http://tum-lis.github.io/orconf2014/&quot;&gt;ORCONF 2014 website&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=96MN6lhLFRY&amp;amp;list=PLOGTP9W1DX5XDdzBroA2i1ffMlCNus30M&quot;&gt;Recordings of the talks are available on YouTube.&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;iframe width=&quot;560&quot; height=&quot;340&quot; src=&quot;//www.youtube-nocookie.com/embed/qf-1hL6Cwhs?list=PLOGTP9W1DX5XDdzBroA2i1ffMlCNus30M&quot; frameborder=&quot;0&quot; allowfullscreen&gt;&lt;/iframe&gt;
+</description>
+<pubDate>Sun, 12 Oct 2014 00:00:00 +0200</pubDate>
+<link>http://www.optimsoc.org/blog/blog/2014/10/12/orconf2014.html</link>
+<guid isPermaLink="true">http://www.optimsoc.org/blog/blog/2014/10/12/orconf2014.html</guid>
 </item>
-{% endfor %}
+
+<item>
+<title>Switching Host-Communication to GLIP</title>
+<description>&lt;p&gt;Since its beginning, OpTiMSoC contained a method for communication between a 
+PC and an FPGA board. For the ZTEX 1.15 boards we used the USB 2.0 interface, 
+based on the Cypress FX2 chip available on those boards. As we continued the 
+development, we realized that this connectivity functionality is not only 
+useful in OpTiMSoC, but in other projects as well. &lt;/p&gt;
+
+&lt;p&gt;We now finally got around to factor the communication interface out of OpTiMSoC 
+and to moved it into a new project, which we named the &amp;ldquo;Generic Logic Interface 
+Project&amp;rdquo;, or in short, GLIP. It provides generic, FIFO-based communication 
+between a host and a target, abstracting away all the nitty gritty details and 
+protocols in between. It lets you simply focus on the data you want to transfer, 
+handling everything else for you.&lt;/p&gt;
+
+&lt;p&gt;As of now GLIP contains a cleaned-up and improved version of the Cypress 
+FX2-based USB 2.0 backend, reaching up to 21 MByte/s bi-directional transfer 
+rate (close to the achievable maximum of the USB 2.0 interface), and a 
+host-only TCP backend for communication between a simulated system (e.g. in 
+ModelSim) and a controller.&lt;/p&gt;
+
+&lt;p&gt;In the near future, other backends for JTAG and possibly PCIe are planned.&lt;/p&gt;
+
+&lt;p&gt;We provide GLIP with an extensive set of documentation under the MIT license, 
+check it out!&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://lis.ei.tum.de/glip/&quot;&gt;Project page and documentation&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/TUM-LIS/glip&quot;&gt;Source code on GitHub&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;With the newest latest trunk version of OpTiMSoC liboptimsochost uses GLIP for 
+all Debug NoC based communications, so you need to have GLIP installed if you 
+want to use those as of now.&lt;/p&gt;
+
+&lt;p&gt;Enjoy!&lt;/p&gt;
+</description>
+<pubDate>Wed, 30 Jul 2014 20:00:00 +0200</pubDate>
+<link>http://www.optimsoc.org/blog/blog/2014/07/30/glip.html</link>
+<guid isPermaLink="true">http://www.optimsoc.org/blog/blog/2014/07/30/glip.html</guid>
+</item>
+
+<item>
+<title>OpTiMSoC at FOSDEM</title>
+<description>&lt;p&gt;It&amp;rsquo;s official! We are proud to announce that our talk at &lt;a href=&quot;http://fosdem.org&quot;&gt;FOSDEM&lt;/a&gt;
+has been accepted. FOSDEM, for those of you who have never heard of it, is one of
+the largest Free/Open Source conferences in Europe with a very strong focus on
+developers and technology. It is held every year in Brusseles, Belgium. This year it
+takes place on February 1st and 2nd.&lt;/p&gt;
+
+&lt;p&gt;Since we don&amp;rsquo;t expect the whole audience to be very deep into hardware design we
+will first give a short introduction of how SoC design is done these days, and then
+showcase some cool things you can do with OpTiMSoC. More information about the talk
+is available at the
+&lt;a href=&quot;https://fosdem.org/2014/schedule/event/optimisoc/&quot;&gt;conference homepage&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;I will be attending the whole conference, let me know if you&amp;rsquo;re around. I&amp;rsquo;d love to
+hear from you if you have problems with OpTiMSoC or ideas on how to make it better.
+See you at FOSDEM!&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Update:&lt;/strong&gt; The nice people at FOSDEM also published a short interview with me about the
+talk.
+&lt;a href=&quot;https://fosdem.org/2014/interviews/2014-philipp-wagner/&quot;&gt;Find it on the FOSDEM page!&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Update 2:&lt;/strong&gt; Now the recorded video is online as well.
+&lt;a href=&quot;http://video.fosdem.org/2014/K1105/Sunday/OpTiMSoC.webm&quot;&gt;Download the video&lt;/a&gt;
+or watch it below! The
+&lt;a href=&quot;/documents/presentations/2014-fosdem-slides.pdf&quot;&gt;slides are available online&lt;/a&gt;
+as well.&lt;/p&gt;
+
+&lt;p&gt;&lt;video width=&quot;640&quot; height=&quot;480&quot;
+       style=&quot;display: block; margin-left: auto; margin-right: auto&quot;
+       src=&quot;http://video.fosdem.org/2014/K1105/Sunday/OpTiMSoC.webm&quot; controls&gt;
+  Unfortunately your browser does not support WebM video playback. Use a supported
+  browser, such as Firefox or Chrome, or download the video and play it with another
+  application, such as the free VLC player.
+&lt;/video&gt;&lt;/p&gt;
+</description>
+<pubDate>Fri, 03 Jan 2014 11:00:00 +0100</pubDate>
+<link>http://www.optimsoc.org/blog/blog/2014/01/03/fosdem.html</link>
+<guid isPermaLink="true">http://www.optimsoc.org/blog/blog/2014/01/03/fosdem.html</guid>
+</item>
+
+<item>
+<title>OpTiMSoC at ORCONF 2013</title>
+<description>&lt;p&gt;The &amp;ldquo;brain&amp;rdquo; in a SoC is its processor; in OpTiMSoC this task falls to a 
+the freely available OpenRISC processor. For the second year now the developers
+of the OpenRISC processor met in Cambridge, UK for a two-day conference on 
+October 5th and 6th to discuss the current status of the project as well as
+plans for the future.&lt;/p&gt;
+
+&lt;p&gt;Stefan attended this conference and came home with a lot of new ideas and 
+information, which we&amp;rsquo;ll incorporate into OpTiMSoC in the future. But he was
+also able to give a 45 minute presentation about OpTiMSoC, what it is, and how
+you can make use of it. The whole talk was recorded, you can watch it down
+below or on &lt;a href=&quot;http://www.youtube.com/watch?v=gEf7EFahvAQ&quot;&gt;YouTube&lt;/a&gt;. Enjoy!&lt;/p&gt;
+
+&lt;iframe width=&quot;560&quot; height=&quot;340&quot; src=&quot;http://www.youtube.com/embed/gEf7EFahvAQ&quot; frameborder=&quot;0&quot; allowfullscreen&gt;&lt;/iframe&gt;
+</description>
+<pubDate>Wed, 30 Oct 2013 10:00:00 +0100</pubDate>
+<link>http://www.optimsoc.org/blog/blog/2013/10/30/orconf2013.html</link>
+<guid isPermaLink="true">http://www.optimsoc.org/blog/blog/2013/10/30/orconf2013.html</guid>
+</item>
+
+<item>
+<title>OpTiMSoC has a new web site!</title>
+<description>&lt;p&gt;OpTiMSoC is growing rapidly. Most of the time we have our heads deep down into
+the internals, chasing large and small bugs, implementing exciting new features
+and if it all works, enjoy a beer at night.&lt;/p&gt;
+
+&lt;p&gt;Then last weekend I thought about how we present all our work to the
+public &amp;ndash; and as you might have guessed, there&amp;rsquo;s some room for improvement.
+As a first step we decided to redesign our homepage, giving it more content
+to help you understand what OpTiMSoC is, where you can get all the necessary
+parts to get started and how you can become part of the OpTiMSoC world.&lt;/p&gt;
+
+&lt;p&gt;We hope you like it and please get back to us with any feedback you might have.&lt;/p&gt;
+</description>
+<pubDate>Tue, 27 Aug 2013 15:37:21 +0200</pubDate>
+<link>http://www.optimsoc.org/blog/blog/2013/08/27/welcome.html</link>
+<guid isPermaLink="true">http://www.optimsoc.org/blog/blog/2013/08/27/welcome.html</guid>
+</item>
+
 </channel>
 </rss>

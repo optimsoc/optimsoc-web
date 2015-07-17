@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>The OpTiMSoC Blog</title>
+  <title>Switching Host-Communication to GLIP</title>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
@@ -52,55 +52,54 @@
   <div class="container" id="maincontent">
   
 
-  <h1>The OpTiMSoC Blog</h1>
+  
+<h1>Switching Host-Communication to GLIP</h1>
 
-<p>In our blog we regularly post about the status of the project, things we figured out while working on it and other things that might come to our mind. Please contact us if you want to share your experience with OpTiMSoC, guest posts are always welcome!</p>
-
-
-  <h2><a href="/blog/2014/10/12/orconf2014.html">Many New Ideas from ORCONF</a></h2>
-  <p class="optimsoc-blog-meta">by Philipp Wagner, posted on 12 October 2014
-  <p><p>Every autumn the community around the OpenRISC processor meets somewhere to 
-discuss the current status of the project, to exchange ideas with other 
-free/open hardware projects, and to discuss future directions. This year the 
-<a href="http://orconf.org">OpenRISC Conference &ldquo;ORCONF&rdquo;</a> was held at TUM in Munich and 
-attracted around 40 people from all over Europe and the US.</p>
-</p>
-
-  <h2><a href="/blog/2014/07/30/glip.html">Switching Host-Communication to GLIP</a></h2>
-  <p class="optimsoc-blog-meta">by Philipp Wagner, posted on 30 July 2014
-  <p><p>Since its beginning, OpTiMSoC contained a method for communication between a 
+<div class="container">
+  <div class="row">
+    <div class="col-md-10">
+      <p>Since its beginning, OpTiMSoC contained a method for communication between a 
 PC and an FPGA board. For the ZTEX 1.15 boards we used the USB 2.0 interface, 
 based on the Cypress FX2 chip available on those boards. As we continued the 
 development, we realized that this connectivity functionality is not only 
 useful in OpTiMSoC, but in other projects as well. </p>
-</p>
 
-  <h2><a href="/blog/2014/01/03/fosdem.html">OpTiMSoC at FOSDEM</a></h2>
-  <p class="optimsoc-blog-meta">by Philipp Wagner, posted on 03 January 2014
-  <p><p>It&rsquo;s official! We are proud to announce that our talk at <a href="http://fosdem.org">FOSDEM</a>
-has been accepted. FOSDEM, for those of you who have never heard of it, is one of
-the largest Free/Open Source conferences in Europe with a very strong focus on
-developers and technology. It is held every year in Brusseles, Belgium. This year it
-takes place on February 1st and 2nd.</p>
-</p>
+<p>We now finally got around to factor the communication interface out of OpTiMSoC 
+and to moved it into a new project, which we named the &ldquo;Generic Logic Interface 
+Project&rdquo;, or in short, GLIP. It provides generic, FIFO-based communication 
+between a host and a target, abstracting away all the nitty gritty details and 
+protocols in between. It lets you simply focus on the data you want to transfer, 
+handling everything else for you.</p>
 
-  <h2><a href="/blog/2013/10/30/orconf2013.html">OpTiMSoC at ORCONF 2013</a></h2>
-  <p class="optimsoc-blog-meta">by Philipp Wagner, posted on 30 October 2013
-  <p><p>The &ldquo;brain&rdquo; in a SoC is its processor; in OpTiMSoC this task falls to a 
-the freely available OpenRISC processor. For the second year now the developers
-of the OpenRISC processor met in Cambridge, UK for a two-day conference on 
-October 5th and 6th to discuss the current status of the project as well as
-plans for the future.</p>
-</p>
+<p>As of now GLIP contains a cleaned-up and improved version of the Cypress 
+FX2-based USB 2.0 backend, reaching up to 21 MByte/s bi-directional transfer 
+rate (close to the achievable maximum of the USB 2.0 interface), and a 
+host-only TCP backend for communication between a simulated system (e.g. in 
+ModelSim) and a controller.</p>
 
-  <h2><a href="/blog/2013/08/27/welcome.html">OpTiMSoC has a new web site!</a></h2>
-  <p class="optimsoc-blog-meta">by Philipp Wagner, posted on 27 August 2013
-  <p><p>OpTiMSoC is growing rapidly. Most of the time we have our heads deep down into
-the internals, chasing large and small bugs, implementing exciting new features
-and if it all works, enjoy a beer at night.</p>
-</p>
+<p>In the near future, other backends for JTAG and possibly PCIe are planned.</p>
 
+<p>We provide GLIP with an extensive set of documentation under the MIT license, 
+check it out!</p>
 
+<ul>
+<li><a href="http://lis.ei.tum.de/glip/">Project page and documentation</a></li>
+<li><a href="https://github.com/TUM-LIS/glip">Source code on GitHub</a></li>
+</ul>
+
+<p>With the newest latest trunk version of OpTiMSoC liboptimsochost uses GLIP for 
+all Debug NoC based communications, so you need to have GLIP installed if you 
+want to use those as of now.</p>
+
+<p>Enjoy!</p>
+
+    </div>
+    <div class="col-md-2 optimsoc-blog-meta">
+      <p>by Philipp Wagner <br/>on 30 July 2014</p>
+      <img class="img-rounded" src="/img/people/philipp.jpg"/>
+    </div>
+  </div>
+</div>
 </div>
 
 
