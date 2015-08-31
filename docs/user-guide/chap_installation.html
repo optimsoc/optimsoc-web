@@ -274,11 +274,11 @@ toolchain website.</p>
 </div>
 <div id="S5.SS1.p3" class="ltx_para">
 <div id="LSTx6" class="ltx_listingblock ltx_lstlisting ltx_listing">
-<div class="ltx_listing_data"><a href="data:text/plain,export%20PATH=/opt/or1k-elf-multicore/bin">&#11015;</a></div>
+<div class="ltx_listing_data"><a href="data:text/plain,export%20PATH=%24PATH:/opt/toolchains/or1k-elf-multicore/bin">&#11015;</a></div>
 <table class="ltx_tabular">
 <tr class="ltx_tr">
 <td class="ltx_td">
-                  <span class="ltx_text ltx_lst_line ltx_font_typewriter">export<span class="ltx_text ltx_lst_space">&nbsp;</span>PATH=/opt/or1k-elf-multicore/bin</span>
+                  <span class="ltx_text ltx_lst_line ltx_font_typewriter">export<span class="ltx_text ltx_lst_space">&nbsp;</span>PATH=$PATH:/opt/toolchains/or1k-elf-multicore/bin</span>
                 </td>
 </tr>
 </table>
@@ -297,11 +297,11 @@ it in your environment:</p>
 </div>
 <div id="S5.SS2.p2" class="ltx_para">
 <div id="LSTx7" class="ltx_listingblock ltx_lstlisting ltx_listing">
-<div class="ltx_listing_data"><a href="data:text/plain,export%20PATH=%24PATH:/opt/or1k-gzll/bin">&#11015;</a></div>
+<div class="ltx_listing_data"><a href="data:text/plain,export%20PATH=%24PATH:/opt/toolchains/or1k-gzll/bin">&#11015;</a></div>
 <table class="ltx_tabular">
 <tr class="ltx_tr">
 <td class="ltx_td">
-                  <span class="ltx_text ltx_lst_line ltx_font_typewriter">export<span class="ltx_text ltx_lst_space">&nbsp;</span>PATH=$PATH:/opt/or1k-gzll/bin</span>
+                  <span class="ltx_text ltx_lst_line ltx_font_typewriter">export<span class="ltx_text ltx_lst_space">&nbsp;</span>PATH=$PATH:/opt/toolchains/or1k-gzll/bin</span>
                 </td>
 </tr>
 </table>
@@ -438,7 +438,7 @@ found at <code class="ltx_verbatim ltx_font_typewriter">src/sw/gzll</code>. Go t
 </div>
 <div id="S7.SS2.SSSx1.p2" class="ltx_para">
 <div id="LSTx11" class="ltx_listingblock ltx_lstlisting ltx_listing">
-<div class="ltx_listing_data"><a href="data:text/plain,./autogen.sh%0Amkdir%20build;%20cd%20build%0A../configure%20--prefix=%24%7BOPTIMSOC_INSTALLATION%7D/sw%20--host=or1k-elf%0Amake%0Asudo%20make%20install">&#11015;</a></div>
+<div class="ltx_listing_data"><a href="data:text/plain,./autogen.sh%0Amkdir%20build;%20cd%20build%0A../configure%20--prefix=%24%7BOPTIMSOC_INSTALLATION%7D/sw%20--host=or1k-elf%0Amake%0Amake%20install">&#11015;</a></div>
 <table class="ltx_tabular">
 <tr class="ltx_tr">
 <td class="ltx_td">
@@ -462,7 +462,7 @@ found at <code class="ltx_verbatim ltx_font_typewriter">src/sw/gzll</code>. Go t
 </tr>
 <tr class="ltx_tr">
 <td class="ltx_td">
-                    <span class="ltx_text ltx_lst_line ltx_font_typewriter">sudo<span class="ltx_text ltx_lst_space">&nbsp;</span>make<span class="ltx_text ltx_lst_space">&nbsp;</span>install</span>
+                    <span class="ltx_text ltx_lst_line ltx_font_typewriter">make<span class="ltx_text ltx_lst_space">&nbsp;</span>install</span>
                   </td>
 </tr>
 </table>
@@ -478,7 +478,7 @@ install them (be sure you have <code class="ltx_verbatim ltx_font_typewriter">or
 </div>
 <div id="S7.SS2.SSSx2.p2" class="ltx_para">
 <div id="LSTx12" class="ltx_listingblock ltx_lstlisting ltx_listing">
-<div class="ltx_listing_data"><a href="data:text/plain,./autogen.sh%0Amkdir%20build;%20cd%20build;%0A../configure%20--prefix=%24%7BOPTIMSOC_INSTALLATION%7D/sw%20--host=or1k-gzll%0Amake%0Asudo%20make%20install">&#11015;</a></div>
+<div class="ltx_listing_data"><a href="data:text/plain,./autogen.sh%0Amkdir%20build;%20cd%20build;%0A../configure%20--prefix=%24%7BOPTIMSOC_INSTALLATION%7D/sw%20--host=or1k-gzll%0Amake%0Amake%20install">&#11015;</a></div>
 <table class="ltx_tabular">
 <tr class="ltx_tr">
 <td class="ltx_td">
@@ -502,7 +502,7 @@ install them (be sure you have <code class="ltx_verbatim ltx_font_typewriter">or
 </tr>
 <tr class="ltx_tr">
 <td class="ltx_td">
-                    <span class="ltx_text ltx_lst_line ltx_font_typewriter">sudo<span class="ltx_text ltx_lst_space">&nbsp;</span>make<span class="ltx_text ltx_lst_space">&nbsp;</span>install</span>
+                    <span class="ltx_text ltx_lst_line ltx_font_typewriter">make<span class="ltx_text ltx_lst_space">&nbsp;</span>install</span>
                   </td>
 </tr>
 </table>
