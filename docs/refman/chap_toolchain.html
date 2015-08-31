@@ -1,79 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <title>OpTiMSoC Reference Manual</title>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-
-  <!-- external CSS -->
-  <link rel="stylesheet" href="/css/bootstrap.min.css"/>
-
-  <!-- our own CSS (must be include after bootstrap.css!) -->
-  <link rel="stylesheet" href="/css/optimsoc.css"/>
-
-  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-  <!--[if lt IE 9]>
-    <script src="/js/html5shiv.js"></script>
-    <script src="/js/respond.min.js"></script>
-  <![endif]-->
-
-  <link rel="alternate" type="application/rss+xml" title="RSS" href="http://www.optimsoc.org/feed.xml" />
-
-  <!-- Google Web Fonts -->
-  <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,400italic,600,700,900" rel="stylesheet" type="text/css">
-  <link href="http://fonts.googleapis.com/css?family=Source+Code+Pro:400,500,600,700" rel="stylesheet" type="text/css">
-  <link href="http://fonts.googleapis.com/css?family=Fredericka+the+Great" rel="stylesheet" type="text/css">
-</head>
-<body  data-offset='50' data-spy="scroll" data-target="#optimsoc-doc-subnav-nav">
-  <!-- top navigation bar -->
-  <nav class="navbar navbar-fixed-top optimsoc-nav" role="navigation">
-    <div class="container">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="/index.html" alt="OpTiMSoC"><span class="wordmark">OpTiMSoC</span></a>
-      </div>
-      <div class="navbar-collapse collapse">
-        <ul class="nav navbar-nav">
-          <li><a href="/download.html">Get it</a></li>
-          <li><a href="/docs/index.html">Documentation</a></li>
-          <li><a href="/getinvolved.html">Get involved</a></li>
-          <li><a href="/about.html">About</a></li>
-          <li><a href="/blog">Blog</a></li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-
-  <div class="container" id="maincontent">
-  
-  <div class="optimsoc-section-header">
-    <h1>Reference Manual</h1>
-  </div>
-  <hr/>
-  
-
-      <div class="col-md-3">
-<div class="optimsoc-doc-mainnav"><ul class="nav">
-<li><a href="" title="Chapter&nbsp;1 Toolchain &#8227; OpTiMSoC Reference Manual">Toolchain</a></li>
-<li><a href="chap_systemsoftware.html" title="Chapter&nbsp;2 System Software &#8227; OpTiMSoC Reference Manual">System Software</a></li>
-<li><a href="chap_system-configuration.html" title="Chapter&nbsp;3 System Configuration &#8227; OpTiMSoC Reference Manual">System Configuration</a></li>
-<li><a href="Ch4.html" title="Chapter&nbsp;4 Trace Debugging &#8227; OpTiMSoC Reference Manual">Trace Debugging</a></li>
-</ul></div>
-<div id="optimsoc-doc-subnav-nav" class="optimsoc-doc-subnav hidden-print" data-spy="affix" data-offset-top="200" role="complementary"><ul class="nav">
+---
+layout: default
+title: OpTiMSoC Reference Manual
+sectiontitle: Reference Manual
+---
+    <div class="col-md-3"><div class="optimsoc-doc-mainnav" data-spy="affix" data-offset-top="50"><ul class="nav">
+<li class="active">
+<div class="active">Toolchain</div>
+<div id="optimsoc-doc-subnav-nav" class="optimsoc-doc-subnav hidden-print" role="complementary"><ul class="nav">
 <li class=""><a href="#S0.SS1" title="1.0.1 Build Sourceware &ndash; Stage 1 &#8227; Chapter&nbsp;1 Toolchain &#8227; OpTiMSoC Reference Manual">Build Sourceware &ndash; Stage 1</a></li>
 <li class=""><a href="#S0.SS2" title="1.0.2 Build GCC &ndash; Stage 1 &#8227; Chapter&nbsp;1 Toolchain &#8227; OpTiMSoC Reference Manual">Build GCC &ndash; Stage 1</a></li>
 <li class=""><a href="#S0.SS3" title="1.0.3 Build Sourceware &ndash; Stage 2 &#8227; Chapter&nbsp;1 Toolchain &#8227; OpTiMSoC Reference Manual">Build Sourceware &ndash; Stage 2</a></li>
 <li class=""><a href="#S0.SS4" title="1.0.4 Build GCC &ndash; Stage 2 &#8227; Chapter&nbsp;1 Toolchain &#8227; OpTiMSoC Reference Manual">Build GCC &ndash; Stage 2</a></li>
 </ul></div>
-</div><div class="col-md-9 optimsoc-doc-body">
+</li>
+<li><a href="chap_systemsoftware.html" title="Chapter&nbsp;2 System Software &#8227; OpTiMSoC Reference Manual">System Software</a></li>
+<li><a href="chap_system-configuration.html" title="Chapter&nbsp;3 System Configuration &#8227; OpTiMSoC Reference Manual">System Configuration</a></li>
+<li><a href="Ch4.html" title="Chapter&nbsp;4 Trace Debugging &#8227; OpTiMSoC Reference Manual">Trace Debugging</a></li>
+</ul></div></div><div class="col-md-9 optimsoc-doc-body">
 <div class="ltx_page_main">
 <div class="ltx_page_content">
-<div class="ltx_chapter">
+<section class="ltx_chapter">
 <h1 class="ltx_title ltx_title_chapter">
 <span class="ltx_tag ltx_tag_chapter">Chapter&nbsp;1 </span>Toolchain</h1>
 <div class="ltx_date ltx_role_creation"></div>
@@ -83,39 +29,63 @@
 build gcc and gcc is needed to build the newlib then. Finally the
 complete gcc is built.</p>
 </div>
-<div id="S0.SS1" class="ltx_subsection">
+<section id="S0.SS1" class="ltx_subsection">
 <h2 class="ltx_title ltx_title_subsection">
 <span class="ltx_tag ltx_tag_subsection">1.0.1 </span>Build Sourceware &ndash; Stage 1</h2>
 
 <div id="S0.SS1.p1" class="ltx_para">
 <div id="LSTx1" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div class="ltx_listing_data"><a href="data:text/plain,%24&gt;%20mkdir%20bld-sourceware-stage1%0A%24&gt;%20cd%20bld-sourceware-stage1%0A%24&gt;%20../optimsoc-sourceware/configure%20--target=or1k-elf%20--prefix=%24PREFIX%20%5C%0A%20%20%20%20--enable-shared%20--disable-itcl%20--disable-tk%20--disable-tcl%20%5C%0A%20%20%20%20--disable-winsup%20--disable-gdbtk%20--disable-libgui%20--disable-rda%20%5C%0A%20%20%20%20--disable-sid%20--disable-sim%20--disable-gdb%20--with-sysroot%20%5C%0A%20%20%20%20--disable-newlib%20--disable-libgloss%0A%24&gt;%20make%0A%24&gt;%20make%20install%0A%24&gt;%20cd%20..">&#11015;</a></div>
 <table class="ltx_tabular">
 <tr class="ltx_tr">
-<td class="ltx_td"><span class="ltx_text ltx_lst_line">$&gt;<span class="ltx_text ltx_lst_space">&nbsp;</span>cd<span class="ltx_text ltx_lst_space">&nbsp;</span>bld-sourceware-stage1</span></td>
+<td class="ltx_td">
+                <span class="ltx_text ltx_lst_line ltx_font_typewriter">$&gt;<span class="ltx_text ltx_lst_space">&nbsp;</span>mkdir<span class="ltx_text ltx_lst_space">&nbsp;</span>bld-sourceware-stage1</span>
+              </td>
 </tr>
 <tr class="ltx_tr">
-<td class="ltx_td"><span class="ltx_text ltx_lst_line">$&gt;<span class="ltx_text ltx_lst_space">&nbsp;</span>../optimsoc-sourceware/configure<span class="ltx_text ltx_lst_space">&nbsp;</span>&ndash;target=or1k-elf<span class="ltx_text ltx_lst_space">&nbsp;</span>&ndash;prefix=$PREFIX<span class="ltx_text ltx_lst_space">&nbsp;</span>\</span></td>
+<td class="ltx_td">
+                <span class="ltx_text ltx_lst_line ltx_font_typewriter">$&gt;<span class="ltx_text ltx_lst_space">&nbsp;</span>cd<span class="ltx_text ltx_lst_space">&nbsp;</span>bld-sourceware-stage1</span>
+              </td>
 </tr>
 <tr class="ltx_tr">
-<td class="ltx_td"><span class="ltx_text ltx_lst_line"><span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;</span>&ndash;enable-shared<span class="ltx_text ltx_lst_space">&nbsp;</span>&ndash;disable-itcl<span class="ltx_text ltx_lst_space">&nbsp;</span>&ndash;disable-tk<span class="ltx_text ltx_lst_space">&nbsp;</span>&ndash;disable-tcl<span class="ltx_text ltx_lst_space">&nbsp;</span>\</span></td>
+<td class="ltx_td">
+                <span class="ltx_text ltx_lst_line ltx_font_typewriter">$&gt;<span class="ltx_text ltx_lst_space">&nbsp;</span>../optimsoc-sourceware/configure<span class="ltx_text ltx_lst_space">&nbsp;</span>--target=or1k-elf<span class="ltx_text ltx_lst_space">&nbsp;</span>--prefix=$PREFIX<span class="ltx_text ltx_lst_space">&nbsp;</span>\</span>
+              </td>
 </tr>
 <tr class="ltx_tr">
-<td class="ltx_td"><span class="ltx_text ltx_lst_line"><span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;</span>&ndash;disable-winsup<span class="ltx_text ltx_lst_space">&nbsp;</span>&ndash;disable-gdbtk<span class="ltx_text ltx_lst_space">&nbsp;</span>&ndash;disable-libgui<span class="ltx_text ltx_lst_space">&nbsp;</span>&ndash;disable-rda<span class="ltx_text ltx_lst_space">&nbsp;</span>\</span></td>
+<td class="ltx_td">
+                <span class="ltx_text ltx_lst_line ltx_font_typewriter"><span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;</span>--enable-shared<span class="ltx_text ltx_lst_space">&nbsp;</span>--disable-itcl<span class="ltx_text ltx_lst_space">&nbsp;</span>--disable-tk<span class="ltx_text ltx_lst_space">&nbsp;</span>--disable-tcl<span class="ltx_text ltx_lst_space">&nbsp;</span>\</span>
+              </td>
 </tr>
 <tr class="ltx_tr">
-<td class="ltx_td"><span class="ltx_text ltx_lst_line"><span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;</span>&ndash;disable-sid<span class="ltx_text ltx_lst_space">&nbsp;</span>&ndash;disable-sim<span class="ltx_text ltx_lst_space">&nbsp;</span>&ndash;disable-gdb<span class="ltx_text ltx_lst_space">&nbsp;</span>&ndash;with-sysroot<span class="ltx_text ltx_lst_space">&nbsp;</span>\</span></td>
+<td class="ltx_td">
+                <span class="ltx_text ltx_lst_line ltx_font_typewriter"><span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;</span>--disable-winsup<span class="ltx_text ltx_lst_space">&nbsp;</span>--disable-gdbtk<span class="ltx_text ltx_lst_space">&nbsp;</span>--disable-libgui<span class="ltx_text ltx_lst_space">&nbsp;</span>--disable-rda<span class="ltx_text ltx_lst_space">&nbsp;</span>\</span>
+              </td>
 </tr>
 <tr class="ltx_tr">
-<td class="ltx_td"><span class="ltx_text ltx_lst_line"><span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;</span>&ndash;disable-newlib<span class="ltx_text ltx_lst_space">&nbsp;</span>&ndash;disable-libgloss</span></td>
+<td class="ltx_td">
+                <span class="ltx_text ltx_lst_line ltx_font_typewriter"><span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;</span>--disable-sid<span class="ltx_text ltx_lst_space">&nbsp;</span>--disable-sim<span class="ltx_text ltx_lst_space">&nbsp;</span>--disable-gdb<span class="ltx_text ltx_lst_space">&nbsp;</span>--with-sysroot<span class="ltx_text ltx_lst_space">&nbsp;</span>\</span>
+              </td>
 </tr>
 <tr class="ltx_tr">
-<td class="ltx_td"><span class="ltx_text ltx_lst_line">$&gt;<span class="ltx_text ltx_lst_space">&nbsp;</span>make</span></td>
+<td class="ltx_td">
+                <span class="ltx_text ltx_lst_line ltx_font_typewriter"><span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;</span>--disable-newlib<span class="ltx_text ltx_lst_space">&nbsp;</span>--disable-libgloss</span>
+              </td>
 </tr>
 <tr class="ltx_tr">
-<td class="ltx_td"><span class="ltx_text ltx_lst_line">$&gt;<span class="ltx_text ltx_lst_space">&nbsp;</span>make<span class="ltx_text ltx_lst_space">&nbsp;</span>install</span></td>
+<td class="ltx_td">
+                <span class="ltx_text ltx_lst_line ltx_font_typewriter">$&gt;<span class="ltx_text ltx_lst_space">&nbsp;</span>make</span>
+              </td>
 </tr>
 <tr class="ltx_tr">
-<td class="ltx_td"><span class="ltx_text ltx_lst_line">$&gt;<span class="ltx_text ltx_lst_space">&nbsp;</span>cd<span class="ltx_text ltx_lst_space">&nbsp;</span>..</span></td>
+<td class="ltx_td">
+                <span class="ltx_text ltx_lst_line ltx_font_typewriter">$&gt;<span class="ltx_text ltx_lst_space">&nbsp;</span>make<span class="ltx_text ltx_lst_space">&nbsp;</span>install</span>
+              </td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td">
+                <span class="ltx_text ltx_lst_line ltx_font_typewriter">$&gt;<span class="ltx_text ltx_lst_space">&nbsp;</span>cd<span class="ltx_text ltx_lst_space">&nbsp;</span>..</span>
+              </td>
 </tr>
 </table>
 </div>
@@ -124,139 +94,169 @@ complete gcc is built.</p>
 <p class="ltx_p">You may run <code class="ltx_verbatim ltx_font_typewriter">make -j8</code> to run 8 parallel build jobs or similar to
 speed up the build here and in the following.</p>
 </div>
-</div>
-<div id="S0.SS2" class="ltx_subsection">
+</section>
+<section id="S0.SS2" class="ltx_subsection">
 <h2 class="ltx_title ltx_title_subsection">
 <span class="ltx_tag ltx_tag_subsection">1.0.2 </span>Build GCC &ndash; Stage 1</h2>
 
 <div id="S0.SS2.p1" class="ltx_para">
 <div id="LSTx2" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div class="ltx_listing_data"><a href="data:text/plain,%24&gt;%20mkdir%20bld-gcc-stage1%0A%24&gt;%20cd%20bld-gcc-stage1%0A%24&gt;%20../optimsoc-gcc/configure%20--target=or1k-elf%20--prefix=%24PREFIX%20%5C%0A%20%20%20%20--enable-languages=c%20--disable-shared%20--disable-libssp%0A%24&gt;%20make%0A%24&gt;%20make%20install%0A%24&gt;%20cd%20..">&#11015;</a></div>
 <table class="ltx_tabular">
 <tr class="ltx_tr">
-<td class="ltx_td"><span class="ltx_text ltx_lst_line">$&gt;<span class="ltx_text ltx_lst_space">&nbsp;</span>cd<span class="ltx_text ltx_lst_space">&nbsp;</span>bld-gcc-stage1</span></td>
+<td class="ltx_td">
+                <span class="ltx_text ltx_lst_line ltx_font_typewriter">$&gt;<span class="ltx_text ltx_lst_space">&nbsp;</span>mkdir<span class="ltx_text ltx_lst_space">&nbsp;</span>bld-gcc-stage1</span>
+              </td>
 </tr>
 <tr class="ltx_tr">
-<td class="ltx_td"><span class="ltx_text ltx_lst_line">$&gt;<span class="ltx_text ltx_lst_space">&nbsp;</span>../optimsoc-gcc/configure<span class="ltx_text ltx_lst_space">&nbsp;</span>&ndash;target=or1k-elf<span class="ltx_text ltx_lst_space">&nbsp;</span>&ndash;prefix=$PREFIX<span class="ltx_text ltx_lst_space">&nbsp;</span>\</span></td>
+<td class="ltx_td">
+                <span class="ltx_text ltx_lst_line ltx_font_typewriter">$&gt;<span class="ltx_text ltx_lst_space">&nbsp;</span>cd<span class="ltx_text ltx_lst_space">&nbsp;</span>bld-gcc-stage1</span>
+              </td>
 </tr>
 <tr class="ltx_tr">
-<td class="ltx_td"><span class="ltx_text ltx_lst_line"><span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;</span>&ndash;enable-languages=c<span class="ltx_text ltx_lst_space">&nbsp;</span>&ndash;disable-shared<span class="ltx_text ltx_lst_space">&nbsp;</span>&ndash;disable-libssp</span></td>
+<td class="ltx_td">
+                <span class="ltx_text ltx_lst_line ltx_font_typewriter">$&gt;<span class="ltx_text ltx_lst_space">&nbsp;</span>../optimsoc-gcc/configure<span class="ltx_text ltx_lst_space">&nbsp;</span>--target=or1k-elf<span class="ltx_text ltx_lst_space">&nbsp;</span>--prefix=$PREFIX<span class="ltx_text ltx_lst_space">&nbsp;</span>\</span>
+              </td>
 </tr>
 <tr class="ltx_tr">
-<td class="ltx_td"><span class="ltx_text ltx_lst_line">$&gt;<span class="ltx_text ltx_lst_space">&nbsp;</span>make</span></td>
+<td class="ltx_td">
+                <span class="ltx_text ltx_lst_line ltx_font_typewriter"><span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;</span>--enable-languages=c<span class="ltx_text ltx_lst_space">&nbsp;</span>--disable-shared<span class="ltx_text ltx_lst_space">&nbsp;</span>--disable-libssp</span>
+              </td>
 </tr>
 <tr class="ltx_tr">
-<td class="ltx_td"><span class="ltx_text ltx_lst_line">$&gt;<span class="ltx_text ltx_lst_space">&nbsp;</span>make<span class="ltx_text ltx_lst_space">&nbsp;</span>install</span></td>
+<td class="ltx_td">
+                <span class="ltx_text ltx_lst_line ltx_font_typewriter">$&gt;<span class="ltx_text ltx_lst_space">&nbsp;</span>make</span>
+              </td>
 </tr>
 <tr class="ltx_tr">
-<td class="ltx_td"><span class="ltx_text ltx_lst_line">$&gt;<span class="ltx_text ltx_lst_space">&nbsp;</span>cd<span class="ltx_text ltx_lst_space">&nbsp;</span>..</span></td>
+<td class="ltx_td">
+                <span class="ltx_text ltx_lst_line ltx_font_typewriter">$&gt;<span class="ltx_text ltx_lst_space">&nbsp;</span>make<span class="ltx_text ltx_lst_space">&nbsp;</span>install</span>
+              </td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td">
+                <span class="ltx_text ltx_lst_line ltx_font_typewriter">$&gt;<span class="ltx_text ltx_lst_space">&nbsp;</span>cd<span class="ltx_text ltx_lst_space">&nbsp;</span>..</span>
+              </td>
 </tr>
 </table>
 </div>
 </div>
-</div>
-<div id="S0.SS3" class="ltx_subsection">
+</section>
+<section id="S0.SS3" class="ltx_subsection">
 <h2 class="ltx_title ltx_title_subsection">
 <span class="ltx_tag ltx_tag_subsection">1.0.3 </span>Build Sourceware &ndash; Stage 2</h2>
 
 <div id="S0.SS3.p1" class="ltx_para">
 <div id="LSTx3" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div class="ltx_listing_data"><a href="data:text/plain,%24&gt;%20mkdir%20bld-sourceware-stage2%0A%24&gt;%20cd%20bld-sourceware-stage2%0A%24&gt;%20../optimsoc-sourceware/configure%20--target=or1k-elf%20--prefix=%24PREFIX%20%5C%0A%20%20%20%20--enable-shared%20--disable-itcl%20--disable-tk%20--disable-tcl%20%5C%0A%20%20%20%20--disable-winsup%20--disable-gdbtk%20--disable-libgui%20--disable-rda%20%5C%0A%20%20%20%20--disable-sid%20--enable-sim%20--disable-or1ksim%20--enable-gdb%20%5C%0A%20%20%20%20--with-sysroot%20--enable-newlib%20--enable-libgloss%0A%24&gt;%20make%0A%24&gt;%20make%20install%0A%24&gt;%20cd%20..">&#11015;</a></div>
 <table class="ltx_tabular">
 <tr class="ltx_tr">
-<td class="ltx_td"><span class="ltx_text ltx_lst_line">$&gt;<span class="ltx_text ltx_lst_space">&nbsp;</span>cd<span class="ltx_text ltx_lst_space">&nbsp;</span>bld-sourceware-stage2</span></td>
+<td class="ltx_td">
+                <span class="ltx_text ltx_lst_line ltx_font_typewriter">$&gt;<span class="ltx_text ltx_lst_space">&nbsp;</span>mkdir<span class="ltx_text ltx_lst_space">&nbsp;</span>bld-sourceware-stage2</span>
+              </td>
 </tr>
 <tr class="ltx_tr">
-<td class="ltx_td"><span class="ltx_text ltx_lst_line">$&gt;<span class="ltx_text ltx_lst_space">&nbsp;</span>../optimsoc-sourceware/configure<span class="ltx_text ltx_lst_space">&nbsp;</span>&ndash;target=or1k-elf<span class="ltx_text ltx_lst_space">&nbsp;</span>&ndash;prefix=$PREFIX<span class="ltx_text ltx_lst_space">&nbsp;</span>\</span></td>
+<td class="ltx_td">
+                <span class="ltx_text ltx_lst_line ltx_font_typewriter">$&gt;<span class="ltx_text ltx_lst_space">&nbsp;</span>cd<span class="ltx_text ltx_lst_space">&nbsp;</span>bld-sourceware-stage2</span>
+              </td>
 </tr>
 <tr class="ltx_tr">
-<td class="ltx_td"><span class="ltx_text ltx_lst_line"><span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;</span>&ndash;enable-shared<span class="ltx_text ltx_lst_space">&nbsp;</span>&ndash;disable-itcl<span class="ltx_text ltx_lst_space">&nbsp;</span>&ndash;disable-tk<span class="ltx_text ltx_lst_space">&nbsp;</span>&ndash;disable-tcl<span class="ltx_text ltx_lst_space">&nbsp;</span>\</span></td>
+<td class="ltx_td">
+                <span class="ltx_text ltx_lst_line ltx_font_typewriter">$&gt;<span class="ltx_text ltx_lst_space">&nbsp;</span>../optimsoc-sourceware/configure<span class="ltx_text ltx_lst_space">&nbsp;</span>--target=or1k-elf<span class="ltx_text ltx_lst_space">&nbsp;</span>--prefix=$PREFIX<span class="ltx_text ltx_lst_space">&nbsp;</span>\</span>
+              </td>
 </tr>
 <tr class="ltx_tr">
-<td class="ltx_td"><span class="ltx_text ltx_lst_line"><span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;</span>&ndash;disable-winsup<span class="ltx_text ltx_lst_space">&nbsp;</span>&ndash;disable-gdbtk<span class="ltx_text ltx_lst_space">&nbsp;</span>&ndash;disable-libgui<span class="ltx_text ltx_lst_space">&nbsp;</span>&ndash;disable-rda<span class="ltx_text ltx_lst_space">&nbsp;</span>\</span></td>
+<td class="ltx_td">
+                <span class="ltx_text ltx_lst_line ltx_font_typewriter"><span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;</span>--enable-shared<span class="ltx_text ltx_lst_space">&nbsp;</span>--disable-itcl<span class="ltx_text ltx_lst_space">&nbsp;</span>--disable-tk<span class="ltx_text ltx_lst_space">&nbsp;</span>--disable-tcl<span class="ltx_text ltx_lst_space">&nbsp;</span>\</span>
+              </td>
 </tr>
 <tr class="ltx_tr">
-<td class="ltx_td"><span class="ltx_text ltx_lst_line"><span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;</span>&ndash;disable-sid<span class="ltx_text ltx_lst_space">&nbsp;</span>&ndash;enable-sim<span class="ltx_text ltx_lst_space">&nbsp;</span>&ndash;disable-or1ksim<span class="ltx_text ltx_lst_space">&nbsp;</span>&ndash;enable-gdb<span class="ltx_text ltx_lst_space">&nbsp;</span>\</span></td>
+<td class="ltx_td">
+                <span class="ltx_text ltx_lst_line ltx_font_typewriter"><span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;</span>--disable-winsup<span class="ltx_text ltx_lst_space">&nbsp;</span>--disable-gdbtk<span class="ltx_text ltx_lst_space">&nbsp;</span>--disable-libgui<span class="ltx_text ltx_lst_space">&nbsp;</span>--disable-rda<span class="ltx_text ltx_lst_space">&nbsp;</span>\</span>
+              </td>
 </tr>
 <tr class="ltx_tr">
-<td class="ltx_td"><span class="ltx_text ltx_lst_line"><span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;</span>&ndash;with-sysroot<span class="ltx_text ltx_lst_space">&nbsp;</span>&ndash;enable-newlib<span class="ltx_text ltx_lst_space">&nbsp;</span>&ndash;enable-libgloss</span></td>
+<td class="ltx_td">
+                <span class="ltx_text ltx_lst_line ltx_font_typewriter"><span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;</span>--disable-sid<span class="ltx_text ltx_lst_space">&nbsp;</span>--enable-sim<span class="ltx_text ltx_lst_space">&nbsp;</span>--disable-or1ksim<span class="ltx_text ltx_lst_space">&nbsp;</span>--enable-gdb<span class="ltx_text ltx_lst_space">&nbsp;</span>\</span>
+              </td>
 </tr>
 <tr class="ltx_tr">
-<td class="ltx_td"><span class="ltx_text ltx_lst_line">$&gt;<span class="ltx_text ltx_lst_space">&nbsp;</span>make</span></td>
+<td class="ltx_td">
+                <span class="ltx_text ltx_lst_line ltx_font_typewriter"><span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;</span>--with-sysroot<span class="ltx_text ltx_lst_space">&nbsp;</span>--enable-newlib<span class="ltx_text ltx_lst_space">&nbsp;</span>--enable-libgloss</span>
+              </td>
 </tr>
 <tr class="ltx_tr">
-<td class="ltx_td"><span class="ltx_text ltx_lst_line">$&gt;<span class="ltx_text ltx_lst_space">&nbsp;</span>make<span class="ltx_text ltx_lst_space">&nbsp;</span>install</span></td>
+<td class="ltx_td">
+                <span class="ltx_text ltx_lst_line ltx_font_typewriter">$&gt;<span class="ltx_text ltx_lst_space">&nbsp;</span>make</span>
+              </td>
 </tr>
 <tr class="ltx_tr">
-<td class="ltx_td"><span class="ltx_text ltx_lst_line">$&gt;<span class="ltx_text ltx_lst_space">&nbsp;</span>cd<span class="ltx_text ltx_lst_space">&nbsp;</span>..</span></td>
+<td class="ltx_td">
+                <span class="ltx_text ltx_lst_line ltx_font_typewriter">$&gt;<span class="ltx_text ltx_lst_space">&nbsp;</span>make<span class="ltx_text ltx_lst_space">&nbsp;</span>install</span>
+              </td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td">
+                <span class="ltx_text ltx_lst_line ltx_font_typewriter">$&gt;<span class="ltx_text ltx_lst_space">&nbsp;</span>cd<span class="ltx_text ltx_lst_space">&nbsp;</span>..</span>
+              </td>
 </tr>
 </table>
 </div>
 </div>
-</div>
-<div id="S0.SS4" class="ltx_subsection">
+</section>
+<section id="S0.SS4" class="ltx_subsection">
 <h2 class="ltx_title ltx_title_subsection">
 <span class="ltx_tag ltx_tag_subsection">1.0.4 </span>Build GCC &ndash; Stage 2</h2>
 
 <div id="S0.SS4.p1" class="ltx_para">
 <div id="LSTx4" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div class="ltx_listing_data"><a href="data:text/plain,%24&gt;%20mkdir%20bld-gcc-stage2%0A%24&gt;%20cd%20bld-gcc-stage2%0A%24&gt;%20../optimsoc-gcc/configure%20--target=or1k-elf%20--prefix=%24PREFIX%20%5C%0A%20%20%20%20--enable-languages=c,c++%20--disable-shared%20--disable-libssp%20%5C%0A%20%20%20%20--with-newlib%0A%24&gt;%20make%0A%24&gt;%20make%20install%0A%24&gt;%20cd%20..">&#11015;</a></div>
 <table class="ltx_tabular">
 <tr class="ltx_tr">
-<td class="ltx_td"><span class="ltx_text ltx_lst_line">$&gt;<span class="ltx_text ltx_lst_space">&nbsp;</span>cd<span class="ltx_text ltx_lst_space">&nbsp;</span>bld-gcc-stage2</span></td>
+<td class="ltx_td">
+                <span class="ltx_text ltx_lst_line ltx_font_typewriter">$&gt;<span class="ltx_text ltx_lst_space">&nbsp;</span>mkdir<span class="ltx_text ltx_lst_space">&nbsp;</span>bld-gcc-stage2</span>
+              </td>
 </tr>
 <tr class="ltx_tr">
-<td class="ltx_td"><span class="ltx_text ltx_lst_line">$&gt;<span class="ltx_text ltx_lst_space">&nbsp;</span>../optimsoc-gcc/configure<span class="ltx_text ltx_lst_space">&nbsp;</span>&ndash;target=or1k-elf<span class="ltx_text ltx_lst_space">&nbsp;</span>&ndash;prefix=$PREFIX<span class="ltx_text ltx_lst_space">&nbsp;</span>\</span></td>
+<td class="ltx_td">
+                <span class="ltx_text ltx_lst_line ltx_font_typewriter">$&gt;<span class="ltx_text ltx_lst_space">&nbsp;</span>cd<span class="ltx_text ltx_lst_space">&nbsp;</span>bld-gcc-stage2</span>
+              </td>
 </tr>
 <tr class="ltx_tr">
-<td class="ltx_td"><span class="ltx_text ltx_lst_line"><span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;</span>&ndash;enable-languages=c,c++<span class="ltx_text ltx_lst_space">&nbsp;</span>&ndash;disable-shared<span class="ltx_text ltx_lst_space">&nbsp;</span>&ndash;disable-libssp<span class="ltx_text ltx_lst_space">&nbsp;</span>\</span></td>
+<td class="ltx_td">
+                <span class="ltx_text ltx_lst_line ltx_font_typewriter">$&gt;<span class="ltx_text ltx_lst_space">&nbsp;</span>../optimsoc-gcc/configure<span class="ltx_text ltx_lst_space">&nbsp;</span>--target=or1k-elf<span class="ltx_text ltx_lst_space">&nbsp;</span>--prefix=$PREFIX<span class="ltx_text ltx_lst_space">&nbsp;</span>\</span>
+              </td>
 </tr>
 <tr class="ltx_tr">
-<td class="ltx_td"><span class="ltx_text ltx_lst_line"><span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;</span>&ndash;with-newlib</span></td>
+<td class="ltx_td">
+                <span class="ltx_text ltx_lst_line ltx_font_typewriter"><span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;</span>--enable-languages=c,c++<span class="ltx_text ltx_lst_space">&nbsp;</span>--disable-shared<span class="ltx_text ltx_lst_space">&nbsp;</span>--disable-libssp<span class="ltx_text ltx_lst_space">&nbsp;</span>\</span>
+              </td>
 </tr>
 <tr class="ltx_tr">
-<td class="ltx_td"><span class="ltx_text ltx_lst_line">$&gt;<span class="ltx_text ltx_lst_space">&nbsp;</span>make</span></td>
+<td class="ltx_td">
+                <span class="ltx_text ltx_lst_line ltx_font_typewriter"><span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;</span>--with-newlib</span>
+              </td>
 </tr>
 <tr class="ltx_tr">
-<td class="ltx_td"><span class="ltx_text ltx_lst_line">$&gt;<span class="ltx_text ltx_lst_space">&nbsp;</span>make<span class="ltx_text ltx_lst_space">&nbsp;</span>install</span></td>
+<td class="ltx_td">
+                <span class="ltx_text ltx_lst_line ltx_font_typewriter">$&gt;<span class="ltx_text ltx_lst_space">&nbsp;</span>make</span>
+              </td>
 </tr>
 <tr class="ltx_tr">
-<td class="ltx_td"><span class="ltx_text ltx_lst_line">$&gt;<span class="ltx_text ltx_lst_space">&nbsp;</span>cd<span class="ltx_text ltx_lst_space">&nbsp;</span>..</span></td>
+<td class="ltx_td">
+                <span class="ltx_text ltx_lst_line ltx_font_typewriter">$&gt;<span class="ltx_text ltx_lst_space">&nbsp;</span>make<span class="ltx_text ltx_lst_space">&nbsp;</span>install</span>
+              </td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td">
+                <span class="ltx_text ltx_lst_line ltx_font_typewriter">$&gt;<span class="ltx_text ltx_lst_space">&nbsp;</span>cd<span class="ltx_text ltx_lst_space">&nbsp;</span>..</span>
+              </td>
 </tr>
 </table>
 </div>
 </div>
+</section>
+</section>
 </div>
 </div>
 </div>
-</div>
-</div>
-
-</div>
-
-
-  <!-- footer -->
-  <hr>
-  <footer class="optimsoc-footer">
-    <p>OpTiMSoC &copy; 2012-2014 Lehrstuhl für Integrierte Systeme, TUM &middot; <a href="http://www.lis.ei.tum.de/index.php?id=11">Imprint</a></p>
-  </footer>
-
-  <script src="/js/jquery.min.js"></script>
-  <script src="/js/bootstrap.min.js"></script>
-
-  <!-- Piwik -->
-  <script type="text/javascript">
-  var _paq = _paq || [];
-  _paq.push(['trackPageView']);
-  _paq.push(['enableLinkTracking']);
-  (function() {
-    var u=(("https:" == document.location.protocol) ? "https" : "http") + "://lis.ei.tum.de/admin/piwik/";
-    _paq.push(['setTrackerUrl', u+'piwik.php']);
-    _paq.push(['setSiteId', 1]);
-    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0]; g.type='text/javascript';
-    g.defer=true; g.async=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
-  })();
-
-  </script>
-  <noscript><p><img src="http://lis.ei.tum.de/admin/piwik/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
-  <!-- End Piwik Code -->
-</body>
-</html>
-
