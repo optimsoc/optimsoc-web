@@ -57,11 +57,11 @@ used to simulate local software.
 </p>
 </div>
 <div id="S1.p3" class="ltx_para">
-<p class="ltx_p">You can find this example in <code class="ltx_verbatim ltx_font_typewriter">tbench/dm/compute_tile</code>. You
+<p class="ltx_p">You can find this example in <span class="ltx_ref ltx_path ltx_ref_self"><span class="ltx_text ltx_font_typewriter">tbench/dm/compute_tile</span></span>. You
 need to have Verilator installed before you run:</p>
 </div>
 <div id="S1.p4" class="ltx_para">
-<div id="LSTx30" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div id="LSTx32" class="ltx_listingblock ltx_lstlisting ltx_listing">
 <div class="ltx_listing_data"><a href="data:text/plain,make%20build-verilator">&#11015;</a></div>
 <table class="ltx_tabular">
 <tr class="ltx_tr">
@@ -75,7 +75,7 @@ need to have Verilator installed before you run:</p>
 <div id="S1.p5" class="ltx_para">
 <p class="ltx_p">In case you see errors check that the environment variables are set
 correctly. The build creates two files: <code class="ltx_verbatim ltx_font_typewriter">tb_compute_tile</code> and
-<code class="ltx_verbatim ltx_font_typewriter">t_compute_tile-vcd</code>. Both run the RTL simulation in a testbench,
+<code class="ltx_verbatim ltx_font_typewriter">tb_compute_tile-vcd</code>. Both run the RTL simulation in a testbench,
 but the latter also writes the waveform to <code class="ltx_verbatim ltx_font_typewriter">sim.vcd</code>.</p>
 </div>
 <div id="S1.p6" class="ltx_para">
@@ -84,7 +84,7 @@ but you can use the parameter <code class="ltx_verbatim ltx_font_typewriter">sta
 standalone. If you start the simulation now</p>
 </div>
 <div id="S1.p7" class="ltx_para">
-<div id="LSTx31" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div id="LSTx33" class="ltx_listingblock ltx_lstlisting ltx_listing">
 <div class="ltx_listing_data"><a href="data:text/plain,./tb_compute_tile%20standalone">&#11015;</a></div>
 <table class="ltx_tabular">
 <tr class="ltx_tr">
@@ -99,7 +99,7 @@ standalone. If you start the simulation now</p>
 <p class="ltx_p">you will get this output</p>
 </div>
 <div id="S1.p9" class="ltx_para">
-<div id="LSTx32" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div id="LSTx34" class="ltx_listingblock ltx_lstlisting ltx_listing">
 <div class="ltx_listing_data"><a href="data:text/plain,%Error:%20ct.vmem:0:%20%24readmem%20file%20not%20found%0AAborting...%0AAborted%20(core%20dumped)">&#11015;</a></div>
 <table class="ltx_tabular">
 <tr class="ltx_tr">
@@ -127,12 +127,12 @@ build your own software you will need the support libraries as
 described in the installation procedures.</p>
 </div>
 <div id="S1.p11" class="ltx_para">
-<p class="ltx_p">The demonstration software is bundled in the <code class="ltx_verbatim ltx_font_typewriter">optimsoc/apps</code>
+<p class="ltx_p">The demonstration software is bundled in the <span class="ltx_ref ltx_path ltx_ref_self"><span class="ltx_text ltx_font_typewriter">optimsoc/apps</span></span>
 repository. First, you should create an environment variable to point
 to the base:</p>
 </div>
 <div id="S1.p12" class="ltx_para">
-<div id="LSTx33" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div id="LSTx35" class="ltx_listingblock ltx_lstlisting ltx_listing">
 <div class="ltx_listing_data"><a href="data:text/plain,export%20OPTIMSOC_APPS=%24OPTIMSOC/apps">&#11015;</a></div>
 <table class="ltx_tabular">
 <tr class="ltx_tr">
@@ -147,7 +147,7 @@ to the base:</p>
 <p class="ltx_p">Build a simple &ldquo;Hello World&rdquo; example:</p>
 </div>
 <div id="S1.p14" class="ltx_para">
-<div id="LSTx34" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div id="LSTx36" class="ltx_listingblock ltx_lstlisting ltx_listing">
 <div class="ltx_listing_data"><a href="data:text/plain,make%20-C%20%24OPTIMSOC_APPS/baremetal/hello">&#11015;</a></div>
 <table class="ltx_tabular">
 <tr class="ltx_tr">
@@ -160,7 +160,7 @@ to the base:</p>
 </div>
 <div id="S1.p15" class="ltx_para">
 <p class="ltx_p">You will then find the executable elf file as
-<code class="ltx_verbatim ltx_font_typewriter">$OPTIMSOC_APPS/baremetal/hello/hello.elf</code>.
+<span class="ltx_ref ltx_path ltx_ref_self"><span class="ltx_text ltx_font_typewriter">$OPTIMSOC_APPS/baremetal/hello/hello.elf</span></span>.
 Furthermore some other files are build:</p>
 </div>
 <div id="S1.p16" class="ltx_para">
@@ -182,9 +182,11 @@ Furthermore some other files are build:</p>
 </li>
 </ul>
 </div>
-<div id="S1.p17" class="ltx_para">
-<p class="ltx_p">(Note: If the latter is not build, ensure you have <code class="ltx_verbatim ltx_font_typewriter">bin2vmem</code> in
-your <code class="ltx_verbatim ltx_font_typewriter">PATH</code> as described in Chapter&nbsp;<a href="chap_installation.html" title="Chapter&nbsp;2 Installation &amp; Configuration &#8227; OpTiMSoC User Guide" class="ltx_ref"><span class="ltx_text ltx_ref_tag">2</span></a>).</p>
+<div id="S1.p17" class="ltx_para ltx_docnote">
+<p class="ltx_p ltx_docnote_title">Note</p>
+<p class="ltx_p">If the <code class="ltx_verbatim ltx_font_typewriter">hello.vmem</code> file is not built, ensure that you have the
+<code class="ltx_verbatim ltx_font_typewriter">bin2vmem</code> tool in your <code class="ltx_verbatim ltx_font_typewriter">PATH</code> as described in
+Chapter&nbsp;<a href="chap_installation.html" title="Chapter&nbsp;2 Installation &amp; Configuration &#8227; OpTiMSoC User Guide" class="ltx_ref"><span class="ltx_text ltx_ref_tag">2</span></a>.</p>
 </div>
 <div id="S1.p18" class="ltx_para">
 <p class="ltx_p">You can now run the example. First go back to the compute tile
@@ -193,7 +195,7 @@ testbench main folder. Before the simulation warned that
 to this filename</p>
 </div>
 <div id="S1.p19" class="ltx_para">
-<div id="LSTx35" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div id="LSTx37" class="ltx_listingblock ltx_lstlisting ltx_listing">
 <div class="ltx_listing_data"><a href="data:text/plain,ln%20-s%20%24OPTIMSOC_APPS/baremetal/hello/hello.vmem%20ct.vmem">&#11015;</a></div>
 <table class="ltx_tabular">
 <tr class="ltx_tr">
@@ -206,10 +208,11 @@ to this filename</p>
 </div>
 <div id="S1.p20" class="ltx_para">
 <p class="ltx_p">If you now run the software again, the simulation should
-terminate with:</p>
+terminate with:
+</p>
 </div>
 <div id="S1.p21" class="ltx_para">
-<div id="LSTx36" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div id="LSTx38" class="ltx_listingblock ltx_lstlisting ltx_listing">
 <div class="ltx_listing_data"><a href="data:text/plain,%5B178512%5D%20Core%200%20has%20terminated%0A%5B178512%5D%20All%20cores%20terminated.%20Exiting..">&#11015;</a></div>
 <table class="ltx_tabular">
 <tr class="ltx_tr">
@@ -230,7 +233,7 @@ terminate with:</p>
 actual output:</p>
 </div>
 <div id="S1.p23" class="ltx_para">
-<div id="LSTx37" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div id="LSTx39" class="ltx_listingblock ltx_lstlisting ltx_listing">
 <div class="ltx_listing_data"><a href="data:text/plain,Hello%20World!%20Core%200%20of%201%20in%20tile%200,%20my%20absolute%20core%20id%20is:%200%0AThere%20are%201%20compute%20tiles:%0A%20rank%200%20is%20tile%200">&#11015;</a></div>
 <table class="ltx_tabular">
 <tr class="ltx_tr">
@@ -266,8 +269,7 @@ simulation termination.</p>
 <p class="ltx_p">The termination is forced with <code class="ltx_verbatim ltx_font_typewriter">l.nop 0x1</code>. If you have a look at
 the disassembly <code class="ltx_verbatim ltx_font_typewriter">hello_simple.dis</code> at instruction <code class="ltx_verbatim ltx_font_typewriter">0x8080</code>
 (see above) you exactly find this instruction. The actual action is
-then done with the trace monitor.
-</p>
+then done with the trace monitor.</p>
 </div>
 <div id="S1.p27" class="ltx_para">
 <p class="ltx_p">With this method you can simply provide constants to your simulation
@@ -277,7 +279,7 @@ and allows you to trace values. The printf is also done that way (see
 newlib):</p>
 </div>
 <div id="S1.p28" class="ltx_para">
-<div id="LSTx38" class="ltx_listingblock ltx_lstlisting ltx_lst_language_C ltx_listing">
+<div id="LSTx40" class="ltx_listingblock ltx_lstlisting ltx_lst_language_C ltx_listing">
 <div class="ltx_listing_data"><a href="data:text/plain,void%20sim_putc(unsigned%20char%20c)%20%7B%0A%20%20asm(%22l.addi%5Ctr3,%0,0%22:%20:%22r%22%20(c));%0A%20%20asm(%22l.nop%20%0%22:%20:%22K%22%20(NOP_PUTC));%0A%7D">&#11015;</a></div>
 <table class="ltx_tabular">
 <tr class="ltx_tr">
@@ -304,10 +306,10 @@ monitor captures theses characters and puts them to the stdout file.</p>
 </div>
 <div id="S1.p30" class="ltx_para">
 <p class="ltx_p">You can easily add your own &ldquo;traces&rdquo; using a macro defined in
-<a href="baremetal-libraries/src/libbaremetal/include/optimsoc-baremetal.h" title="" class="ltx_ref ltx_path"><span class="ltx_text ltx_font_typewriter">baremetal-libraries/src/libbaremetal/include/optimsoc-baremetal.h</span></a>:</p>
+<span class="ltx_ref ltx_path ltx_ref_self"><span class="ltx_text ltx_font_typewriter">baremetal-libraries/src/libbaremetal/include/optimsoc-baremetal.h</span></span>:</p>
 </div>
 <div id="S1.p31" class="ltx_para">
-<div id="LSTx39" class="ltx_listingblock ltx_lstlisting ltx_lst_language_C ltx_listing">
+<div id="LSTx41" class="ltx_listingblock ltx_lstlisting ltx_lst_language_C ltx_listing">
 <div class="ltx_listing_data"><a href="data:text/plain,#define%20OPTIMSOC_TRACE(id,v)%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%5C%0A%20%20%20asm(%22l.addi%5Ctr3,%0,0%22:%20:%22r%22%20(v)%20:%20%22r3%22);%20%5C%0A%20%20%20asm(%22l.nop%20%0%22:%20:%22K%22%20(id));">&#11015;</a></div>
 <table class="ltx_tabular">
 <tr class="ltx_tr">
@@ -336,7 +338,7 @@ System</h2>
 
 <div id="S2.p1" class="ltx_para">
 <p class="ltx_p">Next you might want to build an actual multicore system. You can find
-such a system in <code class="ltx_verbatim ltx_font_typewriter">tbench/rtl/dm</code> directory as
+such a system in <span class="ltx_ref ltx_path ltx_ref_self"><span class="ltx_text ltx_font_typewriter">tbench/rtl/dm</span></span> directory as
 <code class="ltx_verbatim ltx_font_typewriter">system_2x2_cccc</code>. The nomenclature in all pre-packed systems
 first denotes the dimensions and then the instantiated tiles, here
 <code class="ltx_verbatim ltx_font_typewriter">cccc</code> as four compute tiles.</p>
@@ -370,8 +372,7 @@ compute tile.</p>
 </div>
 <div id="S2.p4" class="ltx_para">
 <p class="ltx_p">There are more useful utility functions like those available, find them in the
-file <code class="ltx_verbatim ltx_font_typewriter">baremetal-libraries/src/libbaremetal/include/optimsoc-baremetal.h</code>.
-</p>
+file <span class="ltx_ref ltx_path ltx_ref_self"><span class="ltx_text ltx_font_typewriter">baremetal-libraries/src/libbaremetal/include/optimsoc-baremetal.h</span></span>.</p>
 </div>
 <div id="S2.p5" class="ltx_para">
 <p class="ltx_p">A simple application that uses those functions to do message passing between
@@ -387,7 +388,7 @@ tutorial, refer to the discussion there for explanations. Here&rsquo;s the quick
 version:</p>
 </div>
 <div id="S2.p7" class="ltx_para">
-<div id="LSTx40" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div id="LSTx42" class="ltx_listingblock ltx_lstlisting ltx_listing">
 <div class="ltx_listing_data"><a href="data:text/plain,make%20build-verilator%0Amake%20-C%20%24OPTIMSOC_APPS/baremetal/hello_mpsimple%0Aln%20-s%20%24OPTIMSOC_APPS/baremetal/hello_mpsimple/hello_mpsimple.vmem%20ct.vmem%0A./tb_system_2x2_cccc%20standalone">&#11015;</a></div>
 <table class="ltx_tabular">
 <tr class="ltx_tr">
@@ -415,11 +416,12 @@ version:</p>
 </div>
 <div id="S2.p8" class="ltx_para">
 <p class="ltx_p">Have a look what the software does (you find the code in
-<a href="%24OPTIMSOC_APPS/baremetal/hello_mpsimple/hello_mpsimple.c" title="" class="ltx_ref ltx_path"><span class="ltx_text ltx_font_typewriter">$OPTIMSOC_APPS/baremetal/hello_mpsimple/hello_mpsimple.c</span></a>). Let&rsquo;s first
-check the output of core 0.</p>
+<span class="ltx_ref ltx_path ltx_ref_self"><span class="ltx_text ltx_font_typewriter">$OPTIMSOC_APPS/baremetal/hello_mpsimple/hello_mpsimple.c</span></span>). Let&rsquo;s first
+check the output of core 0.
+</p>
 </div>
 <div id="S2.p9" class="ltx_para">
-<div id="LSTx41" class="ltx_listingblock ltx_lstlisting ltx_lst_language_sh ltx_listing">
+<div id="LSTx43" class="ltx_listingblock ltx_lstlisting ltx_lst_language_sh ltx_listing">
 <div class="ltx_listing_data"><a href="data:text/plain,%24&gt;%20cat%20stdout.000%0AWait%20for%203%20messages%0AReceived%20all%20messages.%20Hello%20World!">&#11015;</a></div>
 <table class="ltx_tabular">
 <tr class="ltx_tr">
@@ -489,7 +491,8 @@ single-threaded programs, it cannot easily be applied to debugging parallel
 software running on possibly heterogenous many-core SoC. Instead, our solution
 is solely based on tracing, i.e. collecting information from the system while
 it is running and then being able to look at this data later to figure out the
-root cause of a problem.</p>
+root cause of a problem.
+</p>
 </div>
 <div id="S3.p6" class="ltx_para">
 <p class="ltx_p">The debug system consists of two main parts: the hardware part runs on the
@@ -512,13 +515,13 @@ the graphical user interface.</p>
 </div>
 <div id="S4.p2" class="ltx_para">
 <p class="ltx_p">In the following we will have a look at building such a system and how
-to observe it with the GUI. In <code class="ltx_verbatim ltx_font_typewriter">tbench/verilator/dm</code> you find
+to observe it with the GUI. In <span class="ltx_ref ltx_path ltx_ref_self"><span class="ltx_text ltx_font_typewriter">tbench/verilator/dm</span></span> you find
 systems identical to the RTL simulation. We will directly start with
 the <code class="ltx_verbatim ltx_font_typewriter">system_2x2_cccc</code>. In the base folder you should simply make
 it:</p>
 </div>
 <div id="S4.p3" class="ltx_para">
-<div id="LSTx42" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div id="LSTx44" class="ltx_listingblock ltx_lstlisting ltx_listing">
 <div class="ltx_listing_data"><a href="data:text/plain,%24&gt;%20make">&#11015;</a></div>
 <table class="ltx_tabular">
 <tr class="ltx_tr">
@@ -542,7 +545,7 @@ software, e.g., the heat example. Again you need to link the
 <code class="ltx_verbatim ltx_font_typewriter">vmem</code> file. Now start the simulation:</p>
 </div>
 <div id="S4.p6" class="ltx_para">
-<div id="LSTx43" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div id="LSTx45" class="ltx_listingblock ltx_lstlisting ltx_listing">
 <div class="ltx_listing_data"><a href="data:text/plain,%24&gt;%20./tb_system_2x2_cccc">&#11015;</a></div>
 <table class="ltx_tabular">
 <tr class="ltx_tr">
@@ -557,7 +560,7 @@ software, e.g., the heat example. Again you need to link the
 <p class="ltx_p">It will start a debug server and wait for connections:</p>
 </div>
 <div id="S4.p8" class="ltx_para">
-<div id="LSTx44" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div id="LSTx46" class="ltx_listingblock ltx_lstlisting ltx_listing">
 <div class="ltx_listing_data"><a href="data:text/plain,%0A%20%20%20%20%20%20%20%20%20%20%20%20%20SystemC%202.3.0-ASI%20---%20Feb%2011%202013%2012:54:17%0A%20%20%20%20%20%20%20%20Copyright%20(c)%201996-2012%20by%20all%20Contributors,%0A%20%20%20%20%20%20%20%20ALL%20RIGHTS%20RESERVED%0A%0AListening%20on%20port%2022000">&#11015;</a></div>
 <table class="ltx_tabular">
 <tr class="ltx_tr">
@@ -597,7 +600,7 @@ software, e.g., the heat example. Again you need to link the
 <p class="ltx_p">In another console now start the OpTiMSoC GUI:</p>
 </div>
 <div id="S4.p10" class="ltx_para">
-<div id="LSTx45" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div id="LSTx47" class="ltx_listingblock ltx_lstlisting ltx_listing">
 <div class="ltx_listing_data"><a href="data:text/plain,%24&gt;%20optimsocgui">&#11015;</a></div>
 <table class="ltx_tabular">
 <tr class="ltx_tr">
@@ -650,14 +653,14 @@ behaves like the USB chip on the ZTEX boards. The host tools can
 connect to the debug system via this module using a TCP socket.</p>
 </div>
 <div id="S5.SS1.p3" class="ltx_para">
-<p class="ltx_p">The system can be found at <code class="ltx_verbatim ltx_font_typewriter">tbench/rtl/dm/system_2x2_cccc_ztex</code>.
+<p class="ltx_p">The system can be found at <span class="ltx_ref ltx_path ltx_ref_self"><span class="ltx_text ltx_font_typewriter">tbench/rtl/dm/system_2x2_cccc_ztex</span></span>.
 Build the system running <code class="ltx_verbatim ltx_font_typewriter">make</code>. Before you simulate the system
 you will now need to provide a <code class="ltx_verbatim ltx_font_typewriter">modelsim.ini</code> either globally or
 in the system&rsquo;s folder that contains the Xilinx libraries. Once you
 have it, you can start the system using</p>
 </div>
 <div id="S5.SS1.p4" class="ltx_para">
-<div id="LSTx46" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div id="LSTx48" class="ltx_listingblock ltx_lstlisting ltx_listing">
 <div class="ltx_listing_data"><a href="data:text/plain,%24&gt;%20make%20sim-noninteractive">&#11015;</a></div>
 <table class="ltx_tabular">
 <tr class="ltx_tr">
@@ -674,7 +677,7 @@ to the system in a different shell by using the command line
 interface:</p>
 </div>
 <div id="S5.SS1.p6" class="ltx_para">
-<div id="LSTx47" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div id="LSTx49" class="ltx_listingblock ltx_lstlisting ltx_listing">
 <div class="ltx_listing_data"><a href="data:text/plain,%24&gt;%20optimsoc_cli%20-bdbgnoc%20-oconn=tcp,host=localhost,port=23000">&#11015;</a></div>
 <table class="ltx_tabular">
 <tr class="ltx_tr">
@@ -690,7 +693,7 @@ interface:</p>
 all debug modules:</p>
 </div>
 <div id="S5.SS1.p8" class="ltx_para">
-<div id="LSTx48" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div id="LSTx50" class="ltx_listingblock ltx_lstlisting ltx_listing">
 <div class="ltx_listing_data"><a href="data:text/plain,Connected%20to%20system.%0ASystem%20ID:%200x0000ce75%0AModule%20summary:%0Aaddr.%09type%09version%09name%0A0x02%090x02%090x00%09ITM%0A0x03%090x02%090x00%09ITM%0A0x04%090x02%090x00%09ITM%0A0x05%090x02%090x00%09ITM%0A0x06%090x05%090x00%09STM%0A0x07%090x05%090x00%09STM%0A0x08%090x05%090x00%09STM%0A0x09%090x05%090x00%09STM%0A0x0a%090x07%090x00%09MAM%0A0x0b%090x07%090x00%09MAM%0A0x0c%090x07%090x00%09MAM%0A0x0d%090x07%090x00%09MAM">&#11015;</a></div>
 <table class="ltx_tabular">
 <tr class="ltx_tr">
@@ -790,7 +793,7 @@ before in the <code class="ltx_verbatim ltx_font_typewriter">sw</code> subfolder
 <p class="ltx_p">First you enter interactive mode:</p>
 </div>
 <div id="S5.SS1.p12" class="ltx_para">
-<div id="LSTx49" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div id="LSTx51" class="ltx_listingblock ltx_lstlisting ltx_listing">
 <div class="ltx_listing_data"><a href="data:text/plain,%24&gt;%20optimsoc_cli%20-bdbgnoc%20-oconn=tcp,host=localhost,port=23000">&#11015;</a></div>
 <table class="ltx_tabular">
 <tr class="ltx_tr">
@@ -806,7 +809,7 @@ before in the <code class="ltx_verbatim ltx_font_typewriter">sw</code> subfolder
 can initialize the memories:</p>
 </div>
 <div id="S5.SS1.p14" class="ltx_para">
-<div id="LSTx50" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div id="LSTx52" class="ltx_listingblock ltx_lstlisting ltx_listing">
 <div class="ltx_listing_data"><a href="data:text/plain,OpTiMSoC&gt;%20mem_init%20hello_simplemp.bin%200-3">&#11015;</a></div>
 <table class="ltx_tabular">
 <tr class="ltx_tr">
@@ -822,7 +825,7 @@ can initialize the memories:</p>
 file:</p>
 </div>
 <div id="S5.SS1.p16" class="ltx_para">
-<div id="LSTx51" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div id="LSTx53" class="ltx_listingblock ltx_lstlisting ltx_listing">
 <div class="ltx_listing_data"><a href="data:text/plain,OpTiMSoC&gt;%20log_stm_trace%20strace">&#11015;</a></div>
 <table class="ltx_tabular">
 <tr class="ltx_tr">
@@ -835,7 +838,7 @@ file:</p>
 </div>
 <div id="S5.SS1.p17" class="ltx_para">
 <p class="ltx_p">Then start the system:</p>
-<div id="LSTx52" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div id="LSTx54" class="ltx_listingblock ltx_lstlisting ltx_listing">
 <div class="ltx_listing_data"><a href="data:text/plain,OpTiMSoC&gt;%20start">&#11015;</a></div>
 <table class="ltx_tabular">
 <tr class="ltx_tr">
@@ -849,7 +852,7 @@ file:</p>
 <div id="S5.SS1.p18" class="ltx_para">
 <p class="ltx_p">Let it run for a while (1 minute) and then leave the command line
 interface:</p>
-<div id="LSTx53" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div id="LSTx55" class="ltx_listingblock ltx_lstlisting ltx_listing">
 <div class="ltx_listing_data"><a href="data:text/plain,OpTiMSoC&gt;%20quit">&#11015;</a></div>
 <table class="ltx_tabular">
 <tr class="ltx_tr">
@@ -876,14 +879,14 @@ FPGA. At the moment we support the Synopsys FPGA flow (Synplify).</p>
 </div>
 <div id="S5.SS2.p2" class="ltx_para">
 <p class="ltx_p">You can find the system synthesis in the folder
-<code class="ltx_verbatim ltx_font_typewriter">syn/dm/system_2x2_cccc_ztex/</code>. A Makefile is used to build the
+<span class="ltx_ref ltx_path ltx_ref_self"><span class="ltx_text ltx_font_typewriter">syn/dm/system_2x2_cccc_ztex</span></span>. A Makefile is used to build the
 systems.</p>
 </div>
 <div id="S5.SS2.p3" class="ltx_para">
 <p class="ltx_p">To generate the system first create the project file:</p>
 </div>
 <div id="S5.SS2.p4" class="ltx_para">
-<div id="LSTx54" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div id="LSTx56" class="ltx_listingblock ltx_lstlisting ltx_listing">
 <div class="ltx_listing_data"><a href="data:text/plain,%24&gt;%20make%20synplify.prj">&#11015;</a></div>
 <table class="ltx_tabular">
 <tr class="ltx_tr">
@@ -902,7 +905,7 @@ synthesis.</p>
 <p class="ltx_p">If you want to have the output of the synthesis in a folder different from your
 source folder (the one where you just ran <code class="ltx_verbatim ltx_font_typewriter">make</code> in), you can set the
 environment variable <code class="ltx_verbatim ltx_font_typewriter">OPTIMSOC_SYN_OUTDIR</code> to any path you like, e.g. put</p>
-<div id="LSTx55" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div id="LSTx57" class="ltx_listingblock ltx_lstlisting ltx_listing">
 <div class="ltx_listing_data"><a href="data:text/plain,export%20OPTIMSOC_SYN_OUTDIR=%24HOME/syn">&#11015;</a></div>
 <table class="ltx_tabular">
 <tr class="ltx_tr">
@@ -912,13 +915,13 @@ environment variable <code class="ltx_verbatim ltx_font_typewriter">OPTIMSOC_SYN
 </tr>
 </table>
 </div>
-<p class="ltx_p">in your profile script (e.g. your <code class="ltx_verbatim ltx_font_typewriter">.bashrc</code> file) and reload it.</p>
+<p class="ltx_p">in your profile script (e.g. your <span class="ltx_ref ltx_path ltx_ref_self"><span class="ltx_text ltx_font_typewriter">~/.bashrc</span></span> file) and reload it.</p>
 </div>
 <div id="S5.SS2.p7" class="ltx_para">
 <p class="ltx_p">Run the synthesis afterwards (for the ZTEX 1.15b or d board):</p>
 </div>
 <div id="S5.SS2.p8" class="ltx_para">
-<div id="LSTx56" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div id="LSTx58" class="ltx_listingblock ltx_lstlisting ltx_listing">
 <div class="ltx_listing_data"><a href="data:text/plain,%24&gt;%20make%20synplify_115b_ddr">&#11015;</a></div>
 <table class="ltx_tabular">
 <tr class="ltx_tr">
@@ -933,7 +936,7 @@ environment variable <code class="ltx_verbatim ltx_font_typewriter">OPTIMSOC_SYN
 <p class="ltx_p">Once the synthesis is finished you can generate the bitstream:</p>
 </div>
 <div id="S5.SS2.p10" class="ltx_para">
-<div id="LSTx57" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div id="LSTx59" class="ltx_listingblock ltx_lstlisting ltx_listing">
 <div class="ltx_listing_data"><a href="data:text/plain,%24&gt;%20make%20bitgen_115d_ddr">&#11015;</a></div>
 <table class="ltx_tabular">
 <tr class="ltx_tr">
@@ -957,7 +960,7 @@ Connect the ZTEX 1.15 board to your PC via USB.</p>
 <p class="ltx_p">If you run <code class="ltx_verbatim ltx_font_typewriter">lsusb</code> the board identifies itself as:</p>
 </div>
 <div id="S5.SS3.p3" class="ltx_para">
-<div id="LSTx58" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div id="LSTx60" class="ltx_listingblock ltx_lstlisting ltx_listing">
 <div class="ltx_listing_data"><a href="data:text/plain,Bus%20001%20Device%20004:%20ID%20221a:0100">&#11015;</a></div>
 <table class="ltx_tabular">
 <tr class="ltx_tr">
@@ -973,10 +976,11 @@ Connect the ZTEX 1.15 board to your PC via USB.</p>
 is, that OpTiMSoC otherwise may require to buy a set of USB
 identifiers. Instead, all ZTEX boards share the same identifier and
 the following command is used to find out details on the Firmware,
-Board and Capabilities:</p>
+Board and Capabilities:
+</p>
 </div>
 <div id="S5.SS3.p5" class="ltx_para">
-<div id="LSTx59" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div id="LSTx61" class="ltx_listingblock ltx_lstlisting ltx_listing">
 <div class="ltx_listing_data"><a href="data:text/plain,%24&gt;%20FWLoader%20-c%20-ii">&#11015;</a></div>
 <table class="ltx_tabular">
 <tr class="ltx_tr">
@@ -992,7 +996,7 @@ Board and Capabilities:</p>
 udev rule</p>
 </div>
 <div id="S5.SS3.p7" class="ltx_para">
-<div id="LSTx60" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div id="LSTx62" class="ltx_listingblock ltx_lstlisting ltx_listing">
 <div class="ltx_listing_data"><a href="data:text/plain,SUBSYSTEM==%22usb%22,%20ATTR%7BidVendor%7D==%22221a%22,%20ATTR%7BidProduct%7D==%220100%22,%20MODE=%220666%22">&#11015;</a></div>
 <table class="ltx_tabular">
 <tr class="ltx_tr">
@@ -1009,7 +1013,7 @@ udev rule</p>
 <div id="S5.SS3.p9" class="ltx_para">
 <p class="ltx_p">If you are running OpTiMSoC on the board for the first time you need to update
 the firmware on the board. To do that, switch to the folder
-<code class="ltx_verbatim ltx_font_typewriter">src/sw/firmware/ztex_usbfpga_1_15_fx2_fw</code> in your OpTiMSoC source tree.
+<span class="ltx_ref ltx_path ltx_ref_self"><span class="ltx_text ltx_font_typewriter">src/sw/firmware/ztex_usbfpga_1_15_fx2_fw</span></span> in your OpTiMSoC source tree.
 Follow the instructions inside the provided <code class="ltx_verbatim ltx_font_typewriter">README</code> file to build and
 flash the board with the required firmware. All of this only needs to be done
 once for each board (until the firmware changes).</p>
@@ -1018,7 +1022,7 @@ once for each board (until the firmware changes).</p>
 <p class="ltx_p">Now the board will identify itself using <code class="ltx_verbatim ltx_font_typewriter">FWLoader -c -ii</code>:</p>
 </div>
 <div id="S5.SS3.p11" class="ltx_para">
-<div id="LSTx61" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div id="LSTx63" class="ltx_listingblock ltx_lstlisting ltx_listing">
 <div class="ltx_listing_data"><a href="data:text/plain,bus=001%20%20device=4%20(%60004')%20%20ID=221a:100%0A%20%20%20Manufacturer=%22TUM%20LIS%22%20%20Product=%22OpTiMSoC%20-%20ZTEX%20USB%201.15%22%20%20%20%20SerialNumber=%2204A32DBCFA%22%0A%20%20%20productID=10.13.0.0%20%20fwVer=0%20%20ifVer=1%0A%20%20%20FPGA%20configured%0A%20%20%20Capabilities:%0A%20%20%20%20%20%20EEPROM%20read/write%0A%20%20%20%20%20%20FPGA%20configuration%0A%20%20%20%20%20%20Flash%20memory%20support%0A%20%20%20%20%20%20High%20speed%20FPGA%20configuration%0A%20%20%20%20%20%20MAC%20EEPROM%20read/write">&#11015;</a></div>
 <table class="ltx_tabular">
 <tr class="ltx_tr">
@@ -1078,7 +1082,7 @@ once for each board (until the firmware changes).</p>
 <p class="ltx_p">Everything ready to go? Then upload the bitstream to the FPGA by running</p>
 </div>
 <div id="S5.SS3.p13" class="ltx_para">
-<div id="LSTx62" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div id="LSTx64" class="ltx_listingblock ltx_lstlisting ltx_listing">
 <div class="ltx_listing_data"><a href="data:text/plain,%24&gt;%20make%20flash_115d_ddr">&#11015;</a></div>
 <table class="ltx_tabular">
 <tr class="ltx_tr">
@@ -1094,7 +1098,7 @@ once for each board (until the firmware changes).</p>
 in the previous section. The output should be something like</p>
 </div>
 <div id="S5.SS3.p15" class="ltx_para">
-<div id="LSTx63" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div id="LSTx65" class="ltx_listingblock ltx_lstlisting ltx_listing">
 <div class="ltx_listing_data"><a href="data:text/plain,FWLoader%20-v%200x221a%200x100%20-f%20-uf%20/%5Bsomepath%5D/system_2x2_cccc_ztex.bit%0AFPGA%20configuration%20time:%20194%20ms">&#11015;</a></div>
 <table class="ltx_tabular">
 <tr class="ltx_tr">
@@ -1118,7 +1122,7 @@ connection paramters used in <code class="ltx_verbatim ltx_font_typewriter">opti
 </div>
 <div id="S5.SS3.p17" class="ltx_para">
 <p class="ltx_p">Run</p>
-<div id="LSTx64" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div id="LSTx66" class="ltx_listingblock ltx_lstlisting ltx_listing">
 <div class="ltx_listing_data"><a href="data:text/plain,%24&gt;%20optimsoc_cli%20-i%20-bdbgnoc%20-oconn=usb">&#11015;</a></div>
 <table class="ltx_tabular">
 <tr class="ltx_tr">
@@ -1141,7 +1145,7 @@ utility is the python interface to the command line interface. Instead
 of running the interactive mode you can run the script interface like:</p>
 </div>
 <div id="S5.SS3.p20" class="ltx_para">
-<div id="LSTx65" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div id="LSTx67" class="ltx_listingblock ltx_lstlisting ltx_listing">
 <div class="ltx_listing_data"><a href="data:text/plain,%24&gt;%20optimsoc_cli%20-s%20&lt;script.py&gt;%20-bdbgnoc%20-oconn=usb">&#11015;</a></div>
 <table class="ltx_tabular">
 <tr class="ltx_tr">
@@ -1156,7 +1160,7 @@ of running the interactive mode you can run the script interface like:</p>
 <p class="ltx_p">An example python script:</p>
 </div>
 <div id="S5.SS3.p22" class="ltx_para">
-<div id="LSTx66" class="ltx_listingblock ltx_lstlisting ltx_lst_language_python ltx_listing">
+<div id="LSTx68" class="ltx_listingblock ltx_lstlisting ltx_lst_language_python ltx_listing">
 <div class="ltx_listing_data"><a href="data:text/plain,mem_init(2,%22hello_simple.bin%22)%0Alog_stm_trace(%22strace%22)%0Astart()">&#11015;</a></div>
 <table class="ltx_tabular">
 <tr class="ltx_tr">
