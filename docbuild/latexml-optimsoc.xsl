@@ -85,11 +85,55 @@ Original work is public domain by Bruce Miller <bruce.miller@nist.gov>
   </xsl:template>
 
   <!--
-  This is mostly copied from LaTeXML-block-xhtml.xsl, but modified to use a
-  regular html:li item with the default bullets instead of a customized
-  version. This makes the resulting HTML much nicer.
+  This is mostly copied from LaTeXML-block-xhtml.xsl, but modified to provide
+  more common HTML output (which can be styled using the default CSS rule set).
+
+  - Always use <li>, even in inline context.
+    {f:blockelement($context,'li')} -> li
+  - Don't use custom bullet logic if standard lists are used
+
+  TODO: Also don't use custom tags for ordered lists.
   -->
+  <xsl:template match="ltx:itemize">
+    <xsl:param name="context"/>
+    <xsl:text>&#x0A;</xsl:text>
+    <xsl:element name="ul" namespace="{$html_ns}">
+      <xsl:call-template name="add_id"/>
+      <xsl:call-template name="add_attributes"/>
+      <xsl:apply-templates select="." mode="begin">
+        <xsl:with-param name="context" select="$context"/>
+      </xsl:apply-templates>
+      <xsl:apply-templates>
+        <xsl:with-param name="context" select="$context"/>
+      </xsl:apply-templates>
+      <xsl:apply-templates select="." mode="end">
+        <xsl:with-param name="context" select="$context"/>
+      </xsl:apply-templates>
+      <xsl:text>&#x0A;</xsl:text>
+    </xsl:element>
+  </xsl:template>
+
+  <xsl:template match="ltx:enumerate">
+    <xsl:param name="context"/>
+    <xsl:text>&#x0A;</xsl:text>
+    <xsl:element name="ol" namespace="{$html_ns}">
+      <xsl:call-template name="add_id"/>
+      <xsl:call-template name="add_attributes"/>
+      <xsl:apply-templates select="." mode="begin">
+        <xsl:with-param name="context" select="$context"/>
+      </xsl:apply-templates>
+      <xsl:apply-templates>
+        <xsl:with-param name="context" select="$context"/>
+      </xsl:apply-templates>
+      <xsl:apply-templates select="." mode="end">
+        <xsl:with-param name="context" select="$context"/>
+      </xsl:apply-templates>
+      <xsl:text>&#x0A;</xsl:text>
+    </xsl:element>
+  </xsl:template>
+
   <xsl:template match="ltx:item">
+    <xsl:param name="context"/>
     <xsl:text>&#x0A;</xsl:text>
     <xsl:choose>
       <xsl:when test="child::ltx:tag and not(child::ltx:tag/text() = '•')">
@@ -98,11 +142,19 @@ Original work is public domain by Bruce Miller <bruce.miller@nist.gov>
           <xsl:call-template name="add_attributes">
             <xsl:with-param name="extra_style" select="'list-style-type:none;'"/>
           </xsl:call-template>
-          <xsl:apply-templates select="." mode="begin"/>
-          <xsl:apply-templates select="ltx:tag"/>
+          <xsl:apply-templates select="." mode="begin">
+            <xsl:with-param name="context" select="$context"/>
+          </xsl:apply-templates>
+          <xsl:apply-templates select="ltx:tag">
+            <xsl:with-param name="context" select="$context"/>
+          </xsl:apply-templates>
           <xsl:text> </xsl:text>
-          <xsl:apply-templates select="*[local-name() != 'tag']"/>
-          <xsl:apply-templates select="." mode="end"/>
+          <xsl:apply-templates select="*[local-name() != 'tag']">
+            <xsl:with-param name="context" select="$context"/>
+          </xsl:apply-templates>
+          <xsl:apply-templates select="." mode="end">
+            <xsl:with-param name="context" select="$context"/>
+          </xsl:apply-templates>
         </xsl:element>
       </xsl:when>
       <xsl:when test="@frefnum">
@@ -111,26 +163,63 @@ Original work is public domain by Bruce Miller <bruce.miller@nist.gov>
           <xsl:call-template name="add_attributes">
             <xsl:with-param name="extra_style" select="'list-style-type:none;'"/>
           </xsl:call-template>
-          <xsl:apply-templates select="." mode="begin"/>
+          <xsl:apply-templates select="." mode="begin">
+            <xsl:with-param name="context" select="$context"/>
+          </xsl:apply-templates>
           <xsl:element name="span" namespace="{$html_ns}">
+            <xsl:variable name="innercontext" select="'inline'"/><!-- override -->
             <xsl:attribute name="class">ltx_tag</xsl:attribute>
             <xsl:value-of select="@frefnum"/>
           </xsl:element>
           <xsl:text> </xsl:text>
-          <xsl:apply-templates/>
-          <xsl:apply-templates select="." mode="end"/>
+          <xsl:apply-templates>
+            <xsl:with-param name="context" select="$context"/>
+          </xsl:apply-templates>
+          <xsl:apply-templates select="." mode="end">
+            <xsl:with-param name="context" select="$context"/>
+          </xsl:apply-templates>
         </xsl:element>
       </xsl:when>
       <xsl:otherwise>
         <xsl:element name="li" namespace="{$html_ns}">
           <xsl:call-template name="add_id"/>
           <xsl:call-template name="add_attributes"/>
-          <xsl:apply-templates select="." mode="begin"/>
-          <xsl:apply-templates select="*[not(self::ltx:tag)]"/>
-          <xsl:apply-templates select="." mode="end"/>
+          <xsl:apply-templates select="." mode="begin">
+            <xsl:with-param name="context" select="$context"/>
+          </xsl:apply-templates>
+          <xsl:apply-templates select="*[not(self::ltx:tag)]">
+            <xsl:with-param name="context" select="$context"/>
+          </xsl:apply-templates>
+          <xsl:apply-templates select="." mode="end">
+            <xsl:with-param name="context" select="$context"/>
+          </xsl:apply-templates>
         </xsl:element>
       </xsl:otherwise>
     </xsl:choose>
+  </xsl:template>
+
+  <!--
+  Taken and modified from LaTeXML-inline-xhtml.xsl to prevent \path file URLs
+  from getting wrapped in a clickable link.
+  -->
+  <xsl:template match="ltx:ref[@class='ltx_path']">
+    <xsl:param name="context"/>
+    <xsl:element name="span" namespace="{$html_ns}">
+      <xsl:variable name="innercontext" select="'inline'"/><!-- override -->
+      <xsl:call-template name="add_id"/>
+      <xsl:call-template name="add_attributes">
+        <xsl:with-param name="extra_classes" select="'ltx_ref_self'"/>
+      </xsl:call-template>
+      <xsl:apply-templates select="." mode="begin">
+        <xsl:with-param name="context" select="$innercontext"/>
+      </xsl:apply-templates>
+      <xsl:apply-templates>
+        <xsl:with-param name="context" select="$innercontext"/>
+      </xsl:apply-templates>
+      <xsl:apply-templates select="." mode="end">
+        <xsl:with-param name="context" select="$innercontext"/>
+      </xsl:apply-templates>
+    </xsl:element>
   </xsl:template>
 
 

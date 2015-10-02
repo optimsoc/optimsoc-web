@@ -1,7 +1,7 @@
 body {
   background: none repeat scroll 0 0 rgba(0, 0, 0, 0.02);
   color: rgba(0, 0, 0, 0.75);
-  font-family: "Source Sans Pro",sans-serif;
+  font-family: "Source Sans Pro", sans-serif;
   font-size: 16px;
   font-weight: 400;
   line-height: 24px;
@@ -11,7 +11,7 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: "Source Sans Pro",sans-serif;
+  font-family: "Source Sans Pro", sans-serif;
 }
 
 .optimsoc-doc-body h1,
@@ -46,25 +46,23 @@ h4 {
   font-weight: 600;
   text-shadow: 0 1px 0 #FFFFFF;
 }
-pre, code {
-  border-radius: 3px 3px 3px 3px;
-  color: #000000;
-  font-family: "Source Code Pro",Menlo,monospace;
+pre, code, .ltx_path {
+  font-family: "Source Code Pro", Menlo, Monaco, Consolas, "Courier New", monospace;
   font-size: 14px;
+  color: rgba(0, 0, 0, 0.75);
 }
 pre {
+  border-radius: 3px 3px 3px 3px;
   background: none repeat scroll 0 0 rgba(0, 0, 0, 0.05);
   border: medium none;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.075) inset;
 }
 code {
-  background: none repeat scroll 0 0 rgba(0, 0, 0, 0.03);
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.075) inset;
-  display: inline-block;
-}
-pre code {
-  background: none repeat scroll 0 0 transparent;
+  background: none;
   box-shadow: none;
+  display: inline;
+  border-radius: 0;
+  padding: 0;
 }
 
 /* top navigation bar */
@@ -110,15 +108,25 @@ pre code {
   text-shadow: 0 1px 0 #FFFFFF;
 }
 
+/* social media */
+ul.share-buttons {
+  list-style: none;
+  padding: 0;
+}
+
+ul.share-buttons li {
+  display: inline;
+}
+
 /* ================== HOMEPAGE ================== */
 .optimsoc-claim {
-    background-color: #003359;
-    background: url("../img/grid-large.jpg") repeat scroll left center transparent;
-    text-align: center;
-    padding-top: 30px;
-    padding-bottom: 30px;
+  background-color: #003359;
+  background: url("../img/grid-large.jpg") repeat scroll left center transparent;
+  text-align: center;
+  padding-top: 30px;
+  padding-bottom: 30px;
 
-    vertical-align: middle;
+  vertical-align: middle;
 }
 
 .optimsoc-claim h1 {
@@ -183,20 +191,20 @@ pre code {
 }
 
 .optimsoc-doc-subnav {
-    background-color: #FFFFFF;
-    margin-bottom: 5px;
-    margin-top: 5px;
-    padding-bottom: 15px;
-    padding-top: 15px;
+  background-color: #FFFFFF;
+  margin-bottom: 5px;
+  margin-top: 5px;
+  padding-bottom: 15px;
+  padding-top: 15px;
 }
 
 .optimsoc-doc-subnav .nav > li > a {
-    display: block;
-    padding: 4px 20px;
+  display: block;
+  padding: 4px 20px;
 }
 .optimsoc-doc-subnav .nav > li > a:hover,
 .optimsoc-docs-sidebar .nav > li > a:focus {
-    text-decoration: none;
+  text-decoration: none;
 }
 .optimsoc-doc-subnav .nav > .active > a,
 .optimsoc-docs-sidebar .nav > .active:hover > a,
@@ -206,17 +214,17 @@ pre code {
     font-weight: 500;
 }
 .optimsoc-doc-subnav .nav .nav {
-    display: none;
-    margin-bottom: 5px;
+  display: none;
+  margin-bottom: 5px;
 }
 .optimsoc-doc-subnav .nav > .active > ul {
-    display: block;
+  display: block;
 }
 .optimsoc-doc-subnav .nav .nav > li > a {
-    font-size: 90%;
-    padding-bottom: 2px;
-    padding-left: 30px;
-    padding-top: 2px;
+  font-size: 90%;
+  padding-bottom: 2px;
+  padding-left: 30px;
+  padding-top: 2px;
 }
 
 /* latexml-generated styles */
@@ -232,11 +240,11 @@ pre code {
 
 /* itemized lists with non-standard bullets */
 li.ltx_item > .ltx_tag {
-    display: inline;
-    margin-left: -1.5em;
+  display: inline;
+  margin-left: -1.5em;
 }
 .ltx_item .ltx_tag + .ltx_para, .ltx_item .ltx_tag + .ltx_para .ltx_p {
-    display: inline;
+  display: inline;
 }
 
 /* footnotes */
@@ -253,7 +261,7 @@ hr.optimsoc-doc-sep-footnotes {
 
 /* listings */
 .ltx_listingblock {
-  font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+  font-family: "Source Code Pro", Menlo, Monaco, Consolas, "Courier New", monospace;
 
   padding: 9.5px;
   margin: 0 0 10px;
@@ -279,12 +287,39 @@ hr.optimsoc-doc-sep-footnotes {
   width:3em; text-align:right;
 }
 
-/* social media */
-ul.share-buttons{
-  list-style: none;
-  padding: 0;
+.ltx_listingblock {
+  display: block;
 }
 
-ul.share-buttons li{
-  display: inline;
+
+/*
+ * styling support for the docnote environment
+ * style based on .bs-callout-info used in the bootstrap documentation
+ */
+.ltx_docnote {
+  display: block;
+  padding: 20px;
+  margin: 20px 0;
+  border: 1px solid #eee;
+  border-left-width: 5px;
+  border-radius: 3px;
+
+  border-left-color: #5bc0de;
+  width: 100%;
+}
+.ltx_docnote_title {
+  margin-top: 0;
+  margin-bottom: 5px;
+  display: block;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.1;
+
+  color: #5bc0de;
+}
+.ltx_docnote p:last-child {
+  margin-bottom: 0;
+}
+.ltx_docnote code {
+  border-radius: 3px;
 }

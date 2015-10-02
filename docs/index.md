@@ -5,12 +5,24 @@ title: OpTiMSoC Documentation Overview
 
 # Documentation
 
-OpTiMSoC comes with an ever growing set of documentation, consisting of
+## User Guide
 
-* the [User Guide](/docs/user-guide/chap_introduction.html)
-* the [Reference Manual](/docs/refman/chap_toolchain.html)
-* API documentation for the GUI and the host library, which can be built
-  from the sources
+To get started with OpTiMSoC, have a look at the User Guide. It contains
+installation instructions for all tools and tutorials to get you up to speed
+quickly.
+
+<a class="btn btn-primary btn-lg"
+   href="/docs/user-guide/chap_introduction.html"
+   role="button">
+  <span class="glyphicon glyphicon-book" aria-hidden="true"></span> Read the User Guide
+</a>
+
+Also available: a [PDF version](/docs/user-guide.pdf) for offline reading and printing
+
+## Reference Documentation
+* [Reference Manual](/docs/refman/chap_toolchain.html)
+* API documentation for the GUI and the host library can be built from the
+  sources (using Doxygen).
 
 ## Talks
 

@@ -15,9 +15,10 @@ The OpTiMSoC web site consists of two parts:
 ### Jekyll
 #### Ubuntu 14.04
 
-    sudo apt-get install jekyll
+    sudo apt-get install ruby1.9.1-dev nodejs
+    sudo gem install jekyll
 
-#### openSUSE 12.3
+#### openSUSE 13.2
 
     sudo zypper install ruby ruby-devel
     sudo gem install jekyll
@@ -44,7 +45,7 @@ sudo apt-get install libxml2 libxml-libxml-perl \
     imagemagick perlmagick
 ```
 
-Dependencies for openSUSE 12.3
+Dependencies for openSUSE 13.2
 ```
 sudo zypper install perl-PerlMagick perl-IO-String \
     perl-JSON-XS perl-XML-LibXSLT
@@ -74,6 +75,10 @@ And then point your browser to `http://localhost:4000` to view the page.
 To build the documentation from the repository:
 
      ./build-docs.sh
+
+or to use a local version of the `docs` repository and the `master` revision:
+
+    ./build-docs.sh file://$HOME/src/optimsoc/docs master
 
 ## Stock photos
 
