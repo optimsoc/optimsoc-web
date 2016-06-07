@@ -1,54 +1,114 @@
 #!/bin/bash
 #
-# Build the OpTiMSoC web page
+# Build the OpTiMSoC documentation for the web page
 #
 
 OPTIMSOC_REPO_URL=${1:-https://github.com/optimsoc/sources.git}
-OPTIMSOC_BRANCH=${2:-master}
 
 # switch to script directory
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-cd "$DIR"
+TOPDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+cd "$TOPDIR"
 
-rm -rf buildtmp buildout
-mkdir buildtmp
+function build_docs {
+  SRCDIR=$1
+  OUTDIR=$2
+  VERSION=$3
+  CSET=$4
+
+  # target directory
+  mkdir -p "$OUTDIR"
+
+  # object directory (temporary build files)
+  OBJDIR=$TOPDIR/buildtmp/objdir
+  rm -rf $OBJDIR
+  mkdir -p $OBJDIR
+
+  # Switch to requested version
+  cd "$SRCDIR"
+  git checkout "$CSET"
+
+  # User guide: HTML
+  mkdir -p $OBJDIR/user_guide/{tex,xml,html}
+  cp $SRCDIR/doc/user_guide/* $OBJDIR/user_guide/tex
+  cp $TOPDIR/docbuild/user_guide-html.tex $OBJDIR/user_guide/tex
+
+  latexml --dest=$OBJDIR/user_guide/xml/user_guide.xml \
+    $OBJDIR/user_guide/tex/user_guide-html.tex
+  latexmlpost --navigationtoc=context --splitat=chapter --splitnaming=label \
+    --stylesheet=$TOPDIR/docbuild/latexml-optimsoc.xsl --format=html \
+    --dest=$OBJDIR/user_guide/html/user_guide.html \
+    --xsltparameter=OPTIMSOC_TITLE:"User Guide" \
+    --xsltparameter=OPTIMSOC_DOCID:"user-guide" \
+    --xsltparameter=OPTIMSOC_VERSION:"$VERSION" \
+    --xsltparameter=OPTIMSOC_SOURCES_CSET:"$CSET" \
+    $OBJDIR/user_guide/xml/user_guide.xml
+
+  mkdir -p $OUTDIR/user-guide
+  cp -r $OBJDIR/user_guide/html/*.html $OUTDIR/user-guide
+  test -d $OBJDIR/user_guide/html/mi && cp -r $OBJDIR/user-guide/html/mi $OUTDIR/user_guide
+
+  # User guide: PDF
+  mkdir -p $OBJDIR/user_guide/pdf
+  (
+    cd $SRCDIR/doc/user_guide
+    pdflatex -output-directory $OBJDIR/user_guide/pdf user_guide.tex || exit
+    pdflatex -output-directory $OBJDIR/user_guide/pdf user_guide.tex
+  )
+  cp $OBJDIR/user_guide/pdf/user_guide.pdf $OUTDIR/user-guide.pdf
+
+  # Reference Manual
+  mkdir -p $OBJDIR/refman/{tex,xml,html}
+  cp $SRCDIR/doc/refman/* $OBJDIR/refman/tex
+  cp $TOPDIR/docbuild/refman-*.tex $OBJDIR/refman/tex
+
+  latexml --dest=$OBJDIR/refman/xml/refman.xml \
+    $OBJDIR/refman/tex/refman-html.tex
+  latexmlpost --navigationtoc=context --splitat=chapter --splitnaming=label \
+    --stylesheet=$TOPDIR/docbuild/latexml-optimsoc.xsl --format=html \
+    --dest=$OBJDIR/refman/html/refman.html \
+    --xsltparameter=OPTIMSOC_TITLE:"Reference Manual" \
+    --xsltparameter=OPTIMSOC_DOCID:refman \
+    --xsltparameter=OPTIMSOC_VERSION:"$VERSION" \
+    --xsltparameter=OPTIMSOC_SOURCES_CSET:"$CSET" \
+    $OBJDIR/refman/xml/refman.xml
+
+  mkdir -p $OUTDIR/refman
+  cp -r $OBJDIR/refman/html/*.html $OUTDIR/refman
+  test -d $OBJDIR/refman/html/mi && cp -r buildtmp/refman/html/mi $OUTDIR/refman
+}
+
 
 # get sources
-git clone -b $OPTIMSOC_BRANCH $OPTIMSOC_REPO_URL buildtmp/optimsoc
+git clone $OPTIMSOC_REPO_URL $TOPDIR/buildtmp/optimsoc
 
-# User guide: HTML
-mkdir -p buildtmp/user_guide/{tex,xml,html}
-cp buildtmp/optimsoc/doc/user_guide/* buildtmp/user_guide/tex
-cp docbuild/user_guide-html.tex buildtmp/user_guide/tex
+# current master and all release versions (all annotated tags starting with 'v')
+# |git tag -l| is not able to select only annotated tags?!
+RELEASE_TAGS=$(cd $TOPDIR/buildtmp/optimsoc;
+  git for-each-ref refs/tags/v\* --format '%(objecttype) %(refname:short)' |
+    awk '$1 == "tag" {print $2}' |
+    sort -V)
 
-latexml --dest=buildtmp/user_guide/xml/user_guide.xml \
-  buildtmp/user_guide/tex/user_guide-html.tex
-latexmlpost --navigationtoc=context --splitat=chapter --splitnaming=label \
-  --stylesheet=docbuild/latexml-optimsoc.xsl --format=html \
-  --dest=buildtmp/user_guide/html/user_guide.html \
-  --xsltparameter=OPTIMSOC_TITLE:"User Guide" \
-  buildtmp/user_guide/xml/user_guide.xml
+CSETS="master $RELEASE_TAGS"
+CURRENT_RELEASE_VERSION=$(echo $RELEASE_TAGS | cut -d' ' -f1 | tr -d 'v')
 
-cp -r buildtmp/user_guide/html/*.html docs/user-guide
-test -d buildtmp/user_guide/html/mi && cp -r buildtmp/user_guide/html/mi docs/user-guide
+for CSET in $CSETS; do
+  # XXX: Switch to tools/get-version.sh inside the source tree once all
+  # "new enough" versions have it (starting with 2016.1)
+  if [ "$CSET" == "master" ]; then
+    OPTIMSOC_VERSION=master
+  else
+    OPTIMSOC_VERSION=$(echo $CSET | tr -d 'v')
+  fi
+  OPTIMSOC_VERSIONS="$OPTIMSOC_VERSIONS $OPTIMSOC_VERSION"
 
-# User guide: PDF
-( cd buildtmp/optimsoc/doc/user_guide; pdflatex user_guide.tex && pdflatex user_guide.tex )
-cp buildtmp/optimsoc/doc/user_guide/user_guide.pdf docs/user-guide.pdf
+  build_docs $TOPDIR/buildtmp/optimsoc $TOPDIR/docs/$OPTIMSOC_VERSION $OPTIMSOC_VERSION $CSET
+done
 
-# Reference Manual
-mkdir -p buildtmp/refman/{tex,xml,html}
-cp buildtmp/optimsoc/doc/refman/* buildtmp/refman/tex
-cp docbuild/refman-*.tex buildtmp/refman/tex
+# generate data file: list of versions for use in Liquid templates in Jekyll
+echo '{% assign doc_version_current_dev = "master" %}' > $TOPDIR/_includes/doc_versions.txt
+echo "{% assign doc_version_current_release = '$CURRENT_RELEASE_VERSION' %}" >> $TOPDIR/_includes/doc_versions.txt
+# split is used because assigning arrays is not possible in Liquid
+echo "{% assign doc_versions = '$OPTIMSOC_VERSIONS'  | split: ' ' %}" >> $TOPDIR/_includes/doc_versions.txt
 
-latexml --dest=buildtmp/refman/xml/refman.xml \
-  buildtmp/refman/tex/refman-html.tex
-latexmlpost --navigationtoc=context --splitat=chapter --splitnaming=label \
-  --stylesheet=docbuild/latexml-optimsoc.xsl --format=html \
-  --dest=buildtmp/refman/html/refman.html \
-  --xsltparameter=OPTIMSOC_TITLE:"Reference Manual" \
-  buildtmp/refman/xml/refman.xml
 
-cp -r buildtmp/refman/html/*.html docs/refman
-test -d buildtmp/refman/html/mi && cp -r buildtmp/refman/html/mi docs/refman
-
+rm -rf $TOPDIR/buildtmp

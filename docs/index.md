@@ -2,8 +2,12 @@
 layout: default
 title: OpTiMSoC Documentation Overview
 ---
+{% include doc_versions.txt %}
 
 # Documentation
+
+OpTiMSoC comes with several pieces of documents for the individual parts of the system.
+Most documentation is part of the OpTiMSoC source tree.
 
 ## User Guide
 
@@ -11,18 +15,54 @@ To get started with OpTiMSoC, have a look at the User Guide. It contains
 installation instructions for all tools and tutorials to get you up to speed
 quickly.
 
-<a class="btn btn-primary btn-lg"
-   href="/docs/user-guide/chap_introduction.html"
-   role="button">
-  <span class="glyphicon glyphicon-book" aria-hidden="true"></span> Read the User Guide
-</a>
+<div class="btn-group">
+  <a class="btn btn-primary"
+     href="/docs/{{doc_version_current_release}}/user-guide/chap_introduction.html"
+     role="button">
+    <span class="glyphicon glyphicon-book" aria-hidden="true"></span> Read the User Guide <small>({{doc_version_current_release}})</small>
+  </a>
 
-Also available: a [PDF version](/docs/user-guide.pdf) for offline reading and printing
+  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <span class="caret"></span>
+    <span class="sr-only">Toggle Dropdown</span>
+  </button>
+  <ul class="dropdown-menu">
+    <li>
+      <a href="/docs/{{doc_version_current_dev}}/user-guide/chap_introduction.html">latest development version ({{doc_version_current_dev}})</a>
+    </li>
+    <li role="separator" class="divider"></li>
+    <li><a href="#document-archive">all versions</a></li>
+  </ul>
+</div>
 
-## Reference Documentation
-* [Reference Manual](/docs/refman/chap_toolchain.html)
-* API documentation for the GUI and the host library can be built from the
-  sources (using Doxygen).
+## Document Archive
+<div class="alert alert-warning">
+Always refer to the documentation that matches your OpTiMSoC version.
+You can determine the version you're using with <code>echo $OPTISMOC_VERSION</code>
+</div>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>OpTiMSoC Version</th>
+      <th>User Guide (online)</th>
+      <th>User Guide (PDF)</th>
+      <th>Reference Manual</th>
+    </tr>
+  </thead>
+  {% for doc_version in doc_versions %}
+    <tr>
+      <td>
+        {{ doc_version }}
+        {% if doc_version == doc_version_current_dev %}(latest development){% endif %}
+        {% if doc_version == doc_version_current_release %}(latest release){% endif %}
+      </td>
+      <td><a href="/docs/{{ doc_version }}/user-guide/chap_introduction.html">User Guide {{ doc_version }}</a></td>
+      <td><a href="/docs/{{ doc_version }}/user-guide.pdf">User Guide {{ doc_version }} (PDF)</a></td>
+      <td><a href="/docs/{{ doc_version }}/refman/chap_toolchain.html">Reference Manual {{ doc_version }}</a></td>
+    </tr>
+  {% endfor %}
+</table>
 
 ## Talks
 

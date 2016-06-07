@@ -35,6 +35,13 @@ Original work is public domain by Bruce Miller <bruce.miller@nist.gov>
     <div class="col-md-3">
       <!-- main navigation (only chapters) -->
       <div class="optimsoc-doc-mainnav" data-spy="affix" data-offset-top="50" >
+        <!-- version selection -->
+        <div style="padding-bottom:10px">
+          version <xsl:value-of select="$OPTIMSOC_VERSION" />
+
+          (<a href="/docs/index.html#document-archive">other versions</a>)
+        </div>
+
         <ul class="nav">
           <xsl:apply-templates select="//ltx:navigation/ltx:TOC//ltx:toclist[@class='ltx_toc_document' or @class='ltx_toclist_document']/ltx:tocentry" mode="nav-toplevel"/>
         </ul>
