@@ -1,0 +1,150 @@
+---
+layout: default
+title: OpTiMSoC User Guide
+sectiontitle: User Guide
+---
+    <div class="col-md-3"><div class="optimsoc-doc-mainnav" data-spy="affix" data-offset-top="50">
+<div style="padding-bottom:10px">
+          version master
+
+          (<a href="/docs/index.html#document-archive">other versions</a>)
+        </div>
+<ul class="nav">
+<li class="active">
+<div class="active">Introduction</div>
+<div id="optimsoc-doc-subnav-nav" class="optimsoc-doc-subnav hidden-print" role="complementary"><ul class="nav">
+<li class=""><a href="#S0.SSx1" title="OpTiMSoC Toolchain &#8227; Chapter&nbsp;1 Introduction &#8227; OpTiMSoC User Guide">OpTiMSoC Toolchain</a></li>
+<li class=""><a href="#S0.SSx2" title="SoC Libraries &#8227; Chapter&nbsp;1 Introduction &#8227; OpTiMSoC User Guide">SoC Libraries</a></li>
+<li class=""><a href="#S0.SSx3" title="RTL Simulation &#8227; Chapter&nbsp;1 Introduction &#8227; OpTiMSoC User Guide">RTL Simulation</a></li>
+<li class=""><a href="#S0.SSx4" title="Verilator &#8227; Chapter&nbsp;1 Introduction &#8227; OpTiMSoC User Guide">Verilator</a></li>
+<li class=""><a href="#S0.SSx5" title="Synthesis &#8227; Chapter&nbsp;1 Introduction &#8227; OpTiMSoC User Guide">Synthesis</a></li>
+<li class=""><a href="#S0.SSx6" title="Host Software &#8227; Chapter&nbsp;1 Introduction &#8227; OpTiMSoC User Guide">Host Software</a></li>
+<li class=""><a href="#S0.SSx7" title="Host GUI &#8227; Chapter&nbsp;1 Introduction &#8227; OpTiMSoC User Guide">Host GUI</a></li>
+</ul></div>
+</li>
+<li><a href="chap_installation.html" title="Chapter&nbsp;2 Installation &amp; Configuration &#8227; OpTiMSoC User Guide">Installation &amp; Configuration</a></li>
+<li><a href="chap_tutorials.html" title="Chapter&nbsp;3 Tutorials &#8227; OpTiMSoC User Guide">Tutorials</a></li>
+<li><a href="Ch4.html" title="Chapter&nbsp;4 Develop OpTiMSoC &#8227; OpTiMSoC User Guide">Develop OpTiMSoC</a></li>
+</ul>
+</div></div><div class="col-md-9 optimsoc-doc-body">
+<div class="ltx_page_main">
+<div class="ltx_page_content">
+<section class="ltx_chapter">
+<h1 class="ltx_title ltx_title_chapter">
+<span class="ltx_tag ltx_tag_chapter">Chapter&nbsp;1 </span>Introduction</h1>
+<div class="ltx_date ltx_role_creation"></div>
+
+<div id="p1" class="ltx_para">
+<p class="ltx_p">Open Tiled Manycore System-on-Chip (OpTiMSoC) is library-based
+framework that allows you to build you own Manycore. So called &ldquo;Tiled
+Manycores&rdquo; are based on a regular Network-on-Chip to which different
+tiles are connected. Such tiles can contain processing elements,
+memory, I/O devices etc.</p>
+</div>
+<div id="p2" class="ltx_para">
+<p class="ltx_p">OpTiMSoC is based on LISNoC, an open source Network-on-Chip and other
+open source hardware components. In future, this set of components
+will be continuously extended and you can easily integrate your own
+components. A variety of target platforms, such as FPGA boards,
+emulation platforms and simulations will be supported.</p>
+</div>
+<div id="p3" class="ltx_para">
+<p class="ltx_p">For a general introduction about the project goals and elements of
+OpTiMSoC please refer to our permanently updated preprint on
+ArXiv.org<a href="#optimsoc-doc-footnote-1"><sup>1</sup></a>.</p>
+</div>
+<div id="p4" class="ltx_para">
+<p class="ltx_p">This document documents the projects from a user point of view.
+Starting with the description of how to get and install OpTiMSoC it
+describes the different kinds of simulation or syntheses systems
+currently supported by OpTiMSoC in the style of step-by-step
+tutorials.</p>
+</div>
+<div id="p5" class="ltx_para">
+<p class="ltx_p">In the following, we will give you a short overview of the different
+components that are part of OpTiMSoC or other dependencies.</p>
+</div>
+<section id="S0.SSx1" class="ltx_subsection">
+<h2 class="ltx_title ltx_title_subsection">OpTiMSoC Toolchain</h2>
+
+<div id="S0.SSx1.p1" class="ltx_para">
+<p class="ltx_p">The toolchain of OpTiMSoC currently consists of the standard OpenRISC
+crosscompiler and a newlib libc port (based on the OpenRISC newlib)
+plus a few small utility programs and scripts.</p>
+</div>
+<div id="S0.SSx1.p2" class="ltx_para">
+<p class="ltx_p">You will need to have it installed in most cases as it is necessary to
+build all the software running on the OpTiMSoC systems.</p>
+</div>
+</section>
+<section id="S0.SSx2" class="ltx_subsection">
+<h2 class="ltx_title ltx_title_subsection">SoC Libraries</h2>
+
+<div id="S0.SSx2.p1" class="ltx_para">
+<p class="ltx_p">The system libraries provide all functionalities of the OpTiMSoC
+platforms to the applications. This includes hardware drivers, runtime
+support, communication APIs and task management APIs.</p>
+</div>
+</section>
+<section id="S0.SSx3" class="ltx_subsection">
+<h2 class="ltx_title ltx_title_subsection">RTL Simulation</h2>
+
+<div id="S0.SSx3.p1" class="ltx_para">
+<p class="ltx_p">In case you are developing hardware in OpTiMSoC, RTL simulation is the
+starting point of development. Beside this, RTL simulation is used to
+execute small pieces of software for testing or development of drivers
+and the runtime system.</p>
+</div>
+<div id="S0.SSx3.p2" class="ltx_para">
+<p class="ltx_p">Unfortunately, we do not know of any high-quality open source RTL
+simulation tool, so that we here rely on commercial EDA tools. At the
+moment this is Mentor&rsquo;s Modelsim.</p>
+</div>
+</section>
+<section id="S0.SSx4" class="ltx_subsection">
+<h2 class="ltx_title ltx_title_subsection">Verilator</h2>
+
+<div id="S0.SSx4.p1" class="ltx_para">
+<p class="ltx_p">Verilator is an open source tool that compiles Verilog code to SystemC
+and allows users without a commercial RTL simulator license to run
+system simulations.</p>
+</div>
+</section>
+<section id="S0.SSx5" class="ltx_subsection">
+<h2 class="ltx_title ltx_title_subsection">Synthesis</h2>
+
+<div id="S0.SSx5.p1" class="ltx_para">
+<p class="ltx_p">Currently we focus on FPGA synthesis for Xilinx FPGA. There will
+always be a supported board that can be used with the free Xilinx
+WebPack, but in general you will of course need a Xilinx license for
+this.</p>
+</div>
+<div id="S0.SSx5.p2" class="ltx_para">
+<p class="ltx_p">Beside Xilinx tools, we also support Synopsys Synplify as this a more
+sophisticated synthesis tool.</p>
+</div>
+</section>
+<section id="S0.SSx6" class="ltx_subsection">
+<h2 class="ltx_title ltx_title_subsection">Host Software</h2>
+
+<div id="S0.SSx6.p1" class="ltx_para">
+<p class="ltx_p">Host software is needed for control and diagnosis/debug of the running
+systems.</p>
+</div>
+</section>
+<section id="S0.SSx7" class="ltx_subsection">
+<h2 class="ltx_title ltx_title_subsection">Host GUI</h2>
+
+<div id="S0.SSx7.p1" class="ltx_para">
+<p class="ltx_p">A graphical user interface provides easy control and observability of
+the running systems.</p>
+</div>
+</section>
+</section>
+</div>
+</div>
+<hr class="optimsoc-doc-sep-footnotes">
+<div class="optimsoc-doc-footnote-full" id="optimsoc-doc-footnote-1">
+<sup>1</sup><a href="http://arxiv.org/abs/1304.5081" title="" class="ltx_ref ltx_url"><span class="ltx_text ltx_font_typewriter">http://arxiv.org/abs/1304.5081</span></a>
+</div>
+</div>
