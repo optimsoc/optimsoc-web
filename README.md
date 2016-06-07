@@ -9,19 +9,11 @@ The OpTiMSoC web site consists of two parts:
 
 ## Required Software
 
-- Jekyll (if you want to preview)
 - LaTeXML v0.8.1
+- GitHub Pages Support (based on Jekyll)
 
-### Jekyll
-#### Ubuntu 14.04
-
-    sudo apt-get install ruby1.9.1-dev nodejs
-    sudo gem install jekyll
-
-#### openSUSE 13.2
-
-    sudo zypper install ruby ruby-devel
-    sudo gem install jekyll
+### GitHub Pages Support (Jekyll & Co.)
+Follwo the instructions in the [GitHub Documentation](https://help.github.com/articles/setting-up-your-github-pages-site-locally-with-jekyll/) how to install Jekyll with bundler.
 
 ### LaTeXML
 LaTeXML undergoes quite some changes over time which affect the output. Since
@@ -66,7 +58,7 @@ sudo make install
 
 To test the site on your local machine run
 
-    jekyll serve -w
+    bundle exec jekyll serve -w
 
 And then point your browser to `http://localhost:4000` to view the page.
 
@@ -76,9 +68,9 @@ To build the documentation from the repository:
 
      ./build-docs.sh
 
-or to use a local version of the `docs` repository and the `master` revision:
+or to use another copy of the optimsoc source repository (like a local one):
 
-    ./build-docs.sh file://$HOME/src/optimsoc/docs master
+    ./build-docs.sh file://$HOME/src/optimsoc/docs
 
 ## Stock photos
 
@@ -108,4 +100,3 @@ jQuery 1
 - Version: 1.11.3
 - URL: http://jquery.com/
 - License: MIT License
-

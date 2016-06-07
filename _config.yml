@@ -1,12 +1,15 @@
 name: OpTiMSoC
-markdown: redcarpet
-redcarpet:
-  extensions: [smart]
-highlighter: pygments
+markdown: kramdown
+kramdown:
+  input: GFM
+highlighter: rouge
 permalink: /blog/:year/:month/:day/:title.html
 
 url: http://www.optimsoc.org/blog
 description: OpTiMSoC project blog
+
+exclude:
+  - buildtmp
 
 # blog authors
 authors:
