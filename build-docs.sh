@@ -101,7 +101,18 @@ for CSET in $CSETS; do
   fi
   OPTIMSOC_VERSIONS="$OPTIMSOC_VERSIONS $OPTIMSOC_VERSION"
 
+  # only rebuild if required, i.e. if commit id changed
+  CSET_HASH=$(cd $TOPDIR/buildtmp/optimsoc; git rev-parse $CSET)
+  if [ -f $TOPDIR/docs/$OPTIMSOC_VERSION/commit_id ] &&
+     [ `cat $TOPDIR/docs/$OPTIMSOC_VERSION/commit_id` == "$CSET_HASH" ]; then
+    echo "Nothing to do for version $OPTIMSOC_VERSION ($CSET_HASH)"
+    continue
+  fi
+
   build_docs $TOPDIR/buildtmp/optimsoc $TOPDIR/docs/$OPTIMSOC_VERSION $OPTIMSOC_VERSION $CSET
+
+  # remember commit ID of this build
+  echo $CSET_HASH > $TOPDIR/docs/$OPTIMSOC_VERSION/commit_id
 done
 
 # generate data file: list of versions for use in Liquid templates in Jekyll
@@ -109,6 +120,5 @@ echo '{% assign doc_version_current_dev = "master" %}' > $TOPDIR/_includes/doc_v
 echo "{% assign doc_version_current_release = '$CURRENT_RELEASE_VERSION' %}" >> $TOPDIR/_includes/doc_versions.txt
 # split is used because assigning arrays is not possible in Liquid
 echo "{% assign doc_versions = '$OPTIMSOC_VERSIONS'  | split: ' ' %}" >> $TOPDIR/_includes/doc_versions.txt
-
 
 rm -rf $TOPDIR/buildtmp
