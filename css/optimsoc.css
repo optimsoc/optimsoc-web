@@ -64,6 +64,21 @@ code {
   border-radius: 0;
   padding: 0;
 }
+figure {
+  margin-top: 2em;
+  margin-bottom: 2em;
+}
+figure > * {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+figcaption {
+  margin-top: 1.5em;
+  font-size: 90%;
+  text-align: center;
+}
+
 
 /* top navigation bar */
 .optimsoc-nav {
