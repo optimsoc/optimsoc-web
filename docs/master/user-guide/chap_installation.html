@@ -58,11 +58,31 @@ packages to be installed:</p>
 </div>
 <div id="S1.p3" class="ltx_para">
 <div id="LSTx1" class="ltx_listingblock ltx_lstlisting ltx_listing">
-<div class="ltx_listing_data"><a href="data:text/plain,sudo%20apt-get%20-y%20install%20git%20python%20build-essential%20automake%20autoconf">&#11015;</a></div>
+<div class="ltx_listing_data"><a href="data:text/plain,sudo%20apt-get%20-y%20install%20git%20build-essential%20tcl%20libusb-1.0-0-dev%20%5C%0A%20%20libboost-dev%20libelf-dev%20swig%20python3%20python3-yaml%0A%0A#%20optional,%20but%20highly%20recommended:%20a%20waveform%20viewer%0Asudo%20apt-get%20-y%20install%20gtkwave">&#11015;</a></div>
 <table class="ltx_tabular">
 <tr class="ltx_tr">
 <td class="ltx_td">
-                <span class="ltx_text ltx_lst_line ltx_font_typewriter">sudo<span class="ltx_text ltx_lst_space">&nbsp;</span>apt-get<span class="ltx_text ltx_lst_space">&nbsp;</span>-y<span class="ltx_text ltx_lst_space">&nbsp;</span>install<span class="ltx_text ltx_lst_space">&nbsp;</span>git<span class="ltx_text ltx_lst_space">&nbsp;</span>python<span class="ltx_text ltx_lst_space">&nbsp;</span>build-essential<span class="ltx_text ltx_lst_space">&nbsp;</span>automake<span class="ltx_text ltx_lst_space">&nbsp;</span>autoconf</span>
+                <span class="ltx_text ltx_lst_line ltx_font_typewriter">sudo<span class="ltx_text ltx_lst_space">&nbsp;</span>apt-get<span class="ltx_text ltx_lst_space">&nbsp;</span>-y<span class="ltx_text ltx_lst_space">&nbsp;</span>install<span class="ltx_text ltx_lst_space">&nbsp;</span>git<span class="ltx_text ltx_lst_space">&nbsp;</span>build-essential<span class="ltx_text ltx_lst_space">&nbsp;</span>tcl<span class="ltx_text ltx_lst_space">&nbsp;</span>libusb-1.0-0-dev<span class="ltx_text ltx_lst_space">&nbsp;</span>\</span>
+              </td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td">
+                <span class="ltx_text ltx_lst_line ltx_font_typewriter"><span class="ltx_text ltx_lst_space">&nbsp;&nbsp;</span>libboost-dev<span class="ltx_text ltx_lst_space">&nbsp;</span>libelf-dev<span class="ltx_text ltx_lst_space">&nbsp;</span>swig<span class="ltx_text ltx_lst_space">&nbsp;</span>python3<span class="ltx_text ltx_lst_space">&nbsp;</span>python3-yaml</span>
+              </td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td">
+                <span class="ltx_text ltx_lst_line"></span>
+              </td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td">
+                <span class="ltx_text ltx_lst_line ltx_font_typewriter">#<span class="ltx_text ltx_lst_space">&nbsp;</span>optional,<span class="ltx_text ltx_lst_space">&nbsp;</span>but<span class="ltx_text ltx_lst_space">&nbsp;</span>highly<span class="ltx_text ltx_lst_space">&nbsp;</span>recommended:<span class="ltx_text ltx_lst_space">&nbsp;</span>a<span class="ltx_text ltx_lst_space">&nbsp;</span>waveform<span class="ltx_text ltx_lst_space">&nbsp;</span>viewer</span>
+              </td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td">
+                <span class="ltx_text ltx_lst_line ltx_font_typewriter">sudo<span class="ltx_text ltx_lst_space">&nbsp;</span>apt-get<span class="ltx_text ltx_lst_space">&nbsp;</span>-y<span class="ltx_text ltx_lst_space">&nbsp;</span>install<span class="ltx_text ltx_lst_space">&nbsp;</span>gtkwave</span>
               </td>
 </tr>
 </table>
@@ -85,12 +105,12 @@ to get started. The <code class="ltx_verbatim ltx_font_typewriter">examples</cod
 simulations for the real quick start.</p>
 </div>
 <div id="S2.p2" class="ltx_para">
-<p class="ltx_p">For example take the 2015.1 release and download both <code class="ltx_verbatim ltx_font_typewriter">base</code> and
+<p class="ltx_p">For example take the 2016.1 release and download both <code class="ltx_verbatim ltx_font_typewriter">base</code> and
 <code class="ltx_verbatim ltx_font_typewriter">examples</code>. Then create the base folder and extract the package:</p>
 </div>
 <div id="S2.p3" class="ltx_para">
 <div id="LSTx2" class="ltx_listingblock ltx_lstlisting ltx_listing">
-<div class="ltx_listing_data"><a href="data:text/plain,sudo%20mkdir%20/opt/optimsoc%0Asudo%20chown%20%24USER%20/opt/optimsoc%0Atar%20-xzf%20optimsoc-2015.1-base.tgz%20-C%20/opt/optimsoc%0Atar%20-xzf%20optimsoc-2015.1-examples.tgz%20-C%20/opt/optimsoc">&#11015;</a></div>
+<div class="ltx_listing_data"><a href="data:text/plain,sudo%20mkdir%20/opt/optimsoc%0Asudo%20chown%20%24USER%20/opt/optimsoc%0Atar%20-xzf%20optimsoc-2016.1-base.tgz%20-C%20/opt/optimsoc%0Atar%20-xzf%20optimsoc-2016.1-examples.tgz%20-C%20/opt/optimsoc">&#11015;</a></div>
 <table class="ltx_tabular">
 <tr class="ltx_tr">
 <td class="ltx_td">
@@ -104,12 +124,12 @@ simulations for the real quick start.</p>
 </tr>
 <tr class="ltx_tr">
 <td class="ltx_td">
-                <span class="ltx_text ltx_lst_line ltx_font_typewriter">tar<span class="ltx_text ltx_lst_space">&nbsp;</span>-xzf<span class="ltx_text ltx_lst_space">&nbsp;</span>optimsoc-2015.1-base.tgz<span class="ltx_text ltx_lst_space">&nbsp;</span>-C<span class="ltx_text ltx_lst_space">&nbsp;</span>/opt/optimsoc</span>
+                <span class="ltx_text ltx_lst_line ltx_font_typewriter">tar<span class="ltx_text ltx_lst_space">&nbsp;</span>-xzf<span class="ltx_text ltx_lst_space">&nbsp;</span>optimsoc-2016.1-base.tgz<span class="ltx_text ltx_lst_space">&nbsp;</span>-C<span class="ltx_text ltx_lst_space">&nbsp;</span>/opt/optimsoc</span>
               </td>
 </tr>
 <tr class="ltx_tr">
 <td class="ltx_td">
-                <span class="ltx_text ltx_lst_line ltx_font_typewriter">tar<span class="ltx_text ltx_lst_space">&nbsp;</span>-xzf<span class="ltx_text ltx_lst_space">&nbsp;</span>optimsoc-2015.1-examples.tgz<span class="ltx_text ltx_lst_space">&nbsp;</span>-C<span class="ltx_text ltx_lst_space">&nbsp;</span>/opt/optimsoc</span>
+                <span class="ltx_text ltx_lst_line ltx_font_typewriter">tar<span class="ltx_text ltx_lst_space">&nbsp;</span>-xzf<span class="ltx_text ltx_lst_space">&nbsp;</span>optimsoc-2016.1-examples.tgz<span class="ltx_text ltx_lst_space">&nbsp;</span>-C<span class="ltx_text ltx_lst_space">&nbsp;</span>/opt/optimsoc</span>
               </td>
 </tr>
 </table>
@@ -121,11 +141,11 @@ the pre-installed environment source script:</p>
 </div>
 <div id="S2.p5" class="ltx_para">
 <div id="LSTx3" class="ltx_listingblock ltx_lstlisting ltx_listing">
-<div class="ltx_listing_data"><a href="data:text/plain,cd%20/opt/optimsoc/2015.1%0Asource%20optimsoc-environment.sh">&#11015;</a></div>
+<div class="ltx_listing_data"><a href="data:text/plain,cd%20/opt/optimsoc/2016.1%0Asource%20optimsoc-environment.sh">&#11015;</a></div>
 <table class="ltx_tabular">
 <tr class="ltx_tr">
 <td class="ltx_td">
-                <span class="ltx_text ltx_lst_line ltx_font_typewriter">cd<span class="ltx_text ltx_lst_space">&nbsp;</span>/opt/optimsoc/2015.1</span>
+                <span class="ltx_text ltx_lst_line ltx_font_typewriter">cd<span class="ltx_text ltx_lst_space">&nbsp;</span>/opt/optimsoc/2016.1</span>
               </td>
 </tr>
 <tr class="ltx_tr">
@@ -191,7 +211,10 @@ environment for the prebuilt tools:</p>
 </div>
 </div>
 <div id="S2.p12" class="ltx_para">
-<p class="ltx_p">You are now ready to go to the tutorials.</p>
+<p class="ltx_p">We recommend to put this line into your <code class="ltx_verbatim ltx_font_typewriter">~/.bashrc</code> file as well.</p>
+</div>
+<div id="S2.p13" class="ltx_para">
+<p class="ltx_p">You are now ready to go to the tutorials in Chapter&nbsp;<a href="chap_tutorials.html" title="Chapter&nbsp;3 Tutorials &#8227; OpTiMSoC User Guide" class="ltx_ref"><span class="ltx_text ltx_ref_tag">3</span></a>.</p>
 </div>
 </section>
 <section id="S3" class="ltx_section">

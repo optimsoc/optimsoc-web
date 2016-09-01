@@ -262,7 +262,7 @@ configuration, it also configures Verilog-mode).</p>
 </div>
 <div id="S1.SS3.p4" class="ltx_para">
 <p class="ltx_p">Open the file <code class="ltx_verbatim ltx_font_typewriter">~/.emacs</code> and add the following lines at the end:</p>
-<div id="LSTx49" class="ltx_listingblock ltx_lstlisting ltx_lst_language_Lisp ltx_listing">
+<div id="LSTx36" class="ltx_listingblock ltx_lstlisting ltx_lst_language_Lisp ltx_listing">
 <div class="ltx_listing_data"><a href="data:text/plain,(add-hook%20'verilog-mode-hook%20'(lambda%20()%0A%20%20;;%20Don't%20auto-insert%20spaces%20after%20%22;%22%0A%20%20(setq%20verilog-auto-newline%20nil)%0A%20%20;;%20Don't%20indent%20with%20tabs!%0A%20%20(setq%20indent-tabs-mode%20nil)))%0A(add-hook%20'verilog-mode-hook%20'(lambda%20()%0A%20%20;;%20Remove%20any%20tabs%20from%20file%20when%20saving%0A%20%20(add-hook%20'write-file-functions%20(lambda()%0A%20%20%20%20(untabify%20(point-min)%20(point-max))%0A%20%20%20%20nil))))">&#11015;</a></div>
 <table class="ltx_tabular">
 <tr class="ltx_tr">
@@ -349,7 +349,7 @@ Verilog-mode which is part of your Emacs installation, it is probably located
 somewhere in <code class="ltx_verbatim ltx_font_typewriter">/usr/share/emacs</code>, e.g.
 <code class="ltx_verbatim ltx_font_typewriter">/usr/share/emacs/24.3/lisp/progmodes/verilog-mode.elc</code> on Ubuntu 14.04.
 You can run</p>
-<div id="LSTx50" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div id="LSTx37" class="ltx_listingblock ltx_lstlisting ltx_listing">
 <div class="ltx_listing_data"><a href="data:text/plain,%24&gt;%20find%20/usr/share/emacs%20-name%20'verilog-mode.el*'">&#11015;</a></div>
 <table class="ltx_tabular">
 <tr class="ltx_tr">
@@ -372,7 +372,7 @@ main menu on <em class="ltx_emph">Project <math id="S1.SS3.SSSx1.p3.m1" class="l
 tab, write <code class="ltx_verbatim ltx_font_typewriter">/usr/bin/emacs</code> into the field <em class="ltx_emph">Location</em>. Leave the field
 <em class="ltx_emph">Working Directory</em> empty and enter the following string into the field
 <em class="ltx_emph">Arguments</em>:</p>
-<div id="LSTx51" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div id="LSTx38" class="ltx_listingblock ltx_lstlisting ltx_listing">
 <div class="ltx_listing_data"><a href="data:text/plain,--batch%20--no-site-file%20-u%20%24%7Benv_var:USER%7D%0A-l%20/usr/share/emacs/24.3/lisp/progmodes/verilog-mode.elc%0A%22%24%7Bselected_resource_loc%7D%22%20-f%20verilog-auto%20-f%20save-buffer">&#11015;</a></div>
 <table class="ltx_tabular">
 <tr class="ltx_tr">
