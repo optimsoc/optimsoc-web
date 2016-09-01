@@ -30,11 +30,13 @@ function build_docs {
   # User guide: HTML
   mkdir -p $OBJDIR/user_guide/{tex,xml,html}
   cp $SRCDIR/doc/user_guide/* $OBJDIR/user_guide/tex
+  cp -r $SRCDIR/doc/user_guide/img $OBJDIR/user_guide/tex
   cp $TOPDIR/docbuild/user_guide-html.tex $OBJDIR/user_guide/tex
 
   latexml --dest=$OBJDIR/user_guide/xml/user_guide.xml \
     $OBJDIR/user_guide/tex/user_guide-html.tex
   latexmlpost --navigationtoc=context --splitat=chapter --splitnaming=label \
+    --sourcedirectory=$OBJDIR/user_guide/tex \
     --stylesheet=$TOPDIR/docbuild/latexml-optimsoc.xsl --format=html \
     --dest=$OBJDIR/user_guide/html/user_guide.html \
     --xsltparameter=OPTIMSOC_TITLE:"User Guide" \
@@ -44,7 +46,8 @@ function build_docs {
     $OBJDIR/user_guide/xml/user_guide.xml
 
   mkdir -p $OUTDIR/user-guide
-  cp -r $OBJDIR/user_guide/html/*.html $OUTDIR/user-guide
+  cp $OBJDIR/user_guide/html/*.html $OUTDIR/user-guide
+  cp -r $OBJDIR/user_guide/html/img $OUTDIR/user-guide
   test -d $OBJDIR/user_guide/html/mi && cp -r $OBJDIR/user-guide/html/mi $OUTDIR/user_guide
 
   # User guide: PDF
@@ -59,11 +62,13 @@ function build_docs {
   # Reference Manual
   mkdir -p $OBJDIR/refman/{tex,xml,html}
   cp $SRCDIR/doc/refman/* $OBJDIR/refman/tex
+  test -d $SRCDIR/doc/refman/img && cp -r $SRCDIR/doc/refman/img $OBJDIR/refman/tex
   cp $TOPDIR/docbuild/refman-*.tex $OBJDIR/refman/tex
 
   latexml --dest=$OBJDIR/refman/xml/refman.xml \
     $OBJDIR/refman/tex/refman-html.tex
   latexmlpost --navigationtoc=context --splitat=chapter --splitnaming=label \
+    --sourcedirectory=$OBJDIR/refman/tex \
     --stylesheet=$TOPDIR/docbuild/latexml-optimsoc.xsl --format=html \
     --dest=$OBJDIR/refman/html/refman.html \
     --xsltparameter=OPTIMSOC_TITLE:"Reference Manual" \
@@ -73,7 +78,8 @@ function build_docs {
     $OBJDIR/refman/xml/refman.xml
 
   mkdir -p $OUTDIR/refman
-  cp -r $OBJDIR/refman/html/*.html $OUTDIR/refman
+  cp $OBJDIR/refman/html/*.html $OUTDIR/refman
+  test -d $OBJDIR/refman/html/img && cp -r $OBJDIR/refman/html/img $OUTDIR/refman
   test -d $OBJDIR/refman/html/mi && cp -r buildtmp/refman/html/mi $OUTDIR/refman
 }
 
