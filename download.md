@@ -20,8 +20,8 @@ Download it, unzip it and you're ready to run software on a multi-core System-on
 ```sh
 sudo mkdir /opt/optimsoc
 sudo chown $USER /opt/optimsoc
-wget https://github.com/optimsoc/sources/releases/download/{{doc_version_current_release}}/optimsoc-{{doc_version_current_release}}-base.tgz
-wget https://github.com/optimsoc/sources/releases/download/{{doc_version_current_release}}/optimsoc-{{doc_version_current_release}}-examples.tgz
+wget https://github.com/optimsoc/sources/releases/download/v{{doc_version_current_release}}/optimsoc-{{doc_version_current_release}}-base.tar.gz
+wget https://github.com/optimsoc/sources/releases/download/v{{doc_version_current_release}}/optimsoc-{{doc_version_current_release}}-examples.tar.gz
 tar -xf optimsoc-{{doc_version_current_release}}-base.tar.gz -C /opt/optimsoc
 tar -xf optimsoc-{{doc_version_current_release}}-examples.tar.gz -C /opt/optimsoc
 ```
