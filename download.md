@@ -2,49 +2,69 @@
 layout: default
 title: Download OpTiMSoC
 ---
+{% include doc_versions.txt %}
 
 # Download OpTiMSoC
 
-You can find the sources for OpTiMSoC at the [github
-organization](https://github.com/optimsoc). Usually this is where you
-end up when you need to develop in OpTiMSoC or around the
-framework. If you want to develop user software or just to get
-started, you can download the current release:
+<div class="alert alert-info">
+OpTiMSoC is only tested on Ubuntu 14.04 and 16.04.
+We strongly recommend using the same distribution setup to avoid any additional trouble.
+If you experience problems when using other Linux distributions, please open a <a href="https://github.com/optimsoc/sources/issues">GitHub issue</a>.
+</div>
 
-    sudo mkdir /opt/optimsoc
-    sudo chown $USER /opt/optimsoc
-    wget https://github.com/optimsoc/sources/releases/download/2015.1/optimsoc-2015.1-base.tgz
-    wget https://github.com/optimsoc/sources/releases/download/2015.1/optimsoc-2015.1-examples.tgz
-    tar -xzf optimsoc-2015.1-base.tgz -C /opt/optimsoc
-    tar -xzf optimsoc-2015.1-examples.tgz -C /opt/optimsoc
+## Get the latest release
+
+The easiest way to get started is to use our latest release.
+Download it, unzip it and you're ready to run software on a multi-core System-on-Chip!
+
+```sh
+sudo mkdir /opt/optimsoc
+sudo chown $USER /opt/optimsoc
+wget https://github.com/optimsoc/sources/releases/download/{{doc_version_current_release}}/optimsoc-{{doc_version_current_release}}-base.tgz
+wget https://github.com/optimsoc/sources/releases/download/{{doc_version_current_release}}/optimsoc-{{doc_version_current_release}}-examples.tgz
+tar -xf optimsoc-{{doc_version_current_release}}-base.tar.gz -C /opt/optimsoc
+tar -xf optimsoc-{{doc_version_current_release}}-examples.tar.gz -C /opt/optimsoc
+```
 
 You are now ready to use OpTiMSoC, but you also need
-[Verilator](http://www.veripool.org/wiki/verilator),
-[SystemC](http://www.systemc.org) and the [or1k-elf-multicore
+[Verilator](http://www.veripool.org/wiki/verilator) and the [or1k-elf-multicore
 Toolchain](http://openrisc.io/newlib). You can download and build them
 on your own, or for convenience use the prebuilt distribution:
 
-    wget https://raw.githubusercontent.com/optimsoc/prebuilts/master/optimsoc-prebuilt-deploy.py
-    chmod a+x optimsoc-prebuilt-deploy.py
-    ./optimsoc-prebuilt-deploy -d /opt/optimsoc systemc verilator or1kelf
+```sh
+wget https://raw.githubusercontent.com/optimsoc/prebuilts/master/optimsoc-prebuilt-deploy.py
+chmod a+x optimsoc-prebuilt-deploy.py
+./optimsoc-prebuilt-deploy -d /opt/optimsoc verilator or1kelf
+```
 
 Done. Just source the environment scripts whenever you use OpTiMSoC or
 add them to your `.bashrc`:
 
-    source /opt/optimsoc/2015.1/setup.sh
-    source /opt/optimsoc/setup_prebuilt.sh
+```sh
+source /opt/optimsoc/{{doc_version_current_release}}/optimsoc-environment.sh
+source /opt/optimsoc/setup_prebuilt.sh
+```
 
-## Test you installation
+### Test your installation
 
 Download the sample applications and build `hello world!`:
 
-    git clone https://github.com/optimsoc/baremetal-apps
-    cd baremetal-apps/hello
-    make
-    $OPTIMSOC/examples/dm/compute_tile/tb_compute_tile --standalone
-    cat stdout.000
+```sh
+git clone https://github.com/optimsoc/baremetal-apps
+cd baremetal-apps/hello
+make
+$OPTIMSOC/examples/sim/compute_tile/compute_tile_sim_singlecore
+cat stdout.000
+```
 
-## Dive into OpTiMSoC
+### Dive into OpTiMSoC
 
-Thats right the point where the [user guide's tutorials start
-from](/docs/user-guide/chap_tutorials.html).
+Thats right the point where the [tutorials in the User Guide](/docs/{{doc_version_current_release}}/user-guide/chap_tutorials.html) start from.
+
+
+## Get the sources
+If you want to develop not just software on an existing SoC, but build your own SoC hardware, you need to get the [OpTiMSoC source code](https://github.com/optimsoc/sources).
+
+```sh
+git clone https://github.com/optimsoc/sources.git optimsoc-sources
+```
