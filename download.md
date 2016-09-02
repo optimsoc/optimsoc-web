@@ -53,8 +53,18 @@ Download the sample applications and build `hello world!`:
 git clone https://github.com/optimsoc/baremetal-apps
 cd baremetal-apps/hello
 make
-$OPTIMSOC/examples/sim/compute_tile/compute_tile_sim_singlecore
+$OPTIMSOC/examples/sim/compute_tile/compute_tile_sim_singlecore --meminit=hello.vmem
 cat stdout.000
+```
+
+And you should see this:
+
+```
+# OpTiMSoC trace_monitor stdout file
+# [TIME, CORE] MESSAGE
+[               38916, 0] Hello World! Core 0 of 1 in tile 0, my absolute core id is: 0
+[               47764, 0] There are 1 compute tiles:
+[               55972, 0]  rank 0 is tile 0
 ```
 
 ### Dive into OpTiMSoC
