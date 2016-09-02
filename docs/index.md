@@ -38,7 +38,7 @@ quickly.
 ## Document Archive
 <div class="alert alert-warning">
 Always refer to the documentation that matches your OpTiMSoC version.
-You can determine the version you're using with <code>echo $OPTISMOC_VERSION</code>
+You can determine the version you're using with <code>echo $OPTIMSOC_VERSION</code>
 </div>
 
 <table class="table table-striped">
