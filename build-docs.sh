@@ -92,7 +92,7 @@ git clone $OPTIMSOC_REPO_URL $TOPDIR/buildtmp/optimsoc
 RELEASE_TAGS=$(cd $TOPDIR/buildtmp/optimsoc;
   git for-each-ref refs/tags/v\* --format '%(objecttype) %(refname:short)' |
     awk '$1 == "tag" {print $2}' |
-    sort -V)
+    sort -Vr)
 
 CSETS="master $RELEASE_TAGS"
 CURRENT_RELEASE_VERSION=$(echo $RELEASE_TAGS | cut -d' ' -f1 | tr -d 'v')
