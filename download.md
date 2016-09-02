@@ -34,7 +34,7 @@ on your own, or for convenience use the prebuilt distribution:
 ```sh
 wget https://raw.githubusercontent.com/optimsoc/prebuilts/master/optimsoc-prebuilt-deploy.py
 chmod a+x optimsoc-prebuilt-deploy.py
-./optimsoc-prebuilt-deploy -d /opt/optimsoc verilator or1kelf
+./optimsoc-prebuilt-deploy.py -d /opt/optimsoc verilator or1kelf
 ```
 
 Done. Just source the environment scripts whenever you use OpTiMSoC or
