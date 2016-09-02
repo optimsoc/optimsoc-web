@@ -1,0 +1,589 @@
+---
+layout: default
+title: OpTiMSoC User Guide
+sectiontitle: User Guide
+---
+    <div class="col-md-3"><div class="optimsoc-doc-mainnav" data-spy="affix" data-offset-top="50">
+<div style="padding-bottom:10px">
+          version master
+
+          (<a href="/docs/index.html#document-archive">other versions</a>)
+        </div>
+<ul class="nav">
+<li><a href="chap_introduction.html" title="Chapter&nbsp;1 Introduction &#8227; OpTiMSoC User Guide">Introduction</a></li>
+<li><a href="chap_installation.html" title="Chapter&nbsp;2 Installation &amp; Configuration &#8227; OpTiMSoC User Guide">Installation &amp; Configuration</a></li>
+<li><a href="chap_tutorials.html" title="Chapter&nbsp;3 Tutorials &#8227; OpTiMSoC User Guide">Tutorials</a></li>
+<li class="active">
+<div class="active">Develop OpTiMSoC</div>
+<div id="optimsoc-doc-subnav-nav" class="optimsoc-doc-subnav hidden-print" role="complementary"><ul class="nav">
+<li class=""><a href="#S1" title="4.1 Building Hardware &#8227; Chapter&nbsp;4 Develop OpTiMSoC &#8227; OpTiMSoC User Guide">Building Hardware</a></li>
+<li class=""><a href="#S2" title="4.2 Choosing an Editor/IDE &#8227; Chapter&nbsp;4 Develop OpTiMSoC &#8227; OpTiMSoC User Guide">Choosing an Editor/IDE</a></li>
+</ul></div>
+</li>
+</ul>
+</div></div><div class="col-md-9 optimsoc-doc-body">
+<div class="ltx_page_main">
+<div class="ltx_page_content">
+<section class="ltx_chapter">
+<h1 class="ltx_title ltx_title_chapter">
+<span class="ltx_tag ltx_tag_chapter">Chapter&nbsp;4 </span>Develop OpTiMSoC</h1>
+<div class="ltx_date ltx_role_creation"></div>
+
+<div id="p1" class="ltx_para">
+<p class="ltx_p">After you have worked through some, or even all, of the tutorials in the
+previous chapter, you&rsquo;re now ready to bring your own ideas to live using
+OpTiMSoC. This chapter gives you a quick introduction on how to setup your
+development environment, like editors and the revision control system, and how
+to contribute back to the OpTiMSoC project.</p>
+</div>
+<div id="p2" class="ltx_para">
+<p class="ltx_p">We assumed in this whole tutorial that you are working on Linux. While it is
+certainly possible to use Windows or OS&nbsp;X for development, we cannot provide
+help for those systems and you&rsquo;re on your own.</p>
+</div>
+<section id="S1" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">4.1 </span>Building Hardware</h2>
+
+<div id="S1.p1" class="ltx_para">
+<p class="ltx_p">When building software, engineers have gotten used to tools like <code class="ltx_verbatim ltx_font_typewriter">make</code>, CMake and similar build systems.
+Such build tools ensure that all dependencies of a software project are met, and then start the various tools (such as the compiler, linker, etc.) to produce the output files, e.g. the program binary.
+In the hardware world, no standard tool for this job exists.
+A new, but very promising contestent in this sector is is <em class="ltx_emph">FuseSoC</em>.</p>
+</div>
+<div id="S1.p2" class="ltx_para">
+<p class="ltx_p">FuseSoC allows developers to write <em class="ltx_emph">core files</em>: short declarative files in an INI-like format that describe which components are required to build a hardware design.
+When you look around in <span class="ltx_ref ltx_path ltx_ref_self"><span class="ltx_text ltx_font_typewriter">$OPTIMSOC/soc/hw</span></span> you&rsquo;ll find such core files for all components that make up the SoC.
+But the core files not only describe the modules inside the SoC design, they are also used to describe the toplevel SoC.</p>
+</div>
+<div id="S1.p3" class="ltx_para">
+<p class="ltx_p">For example, let&rsquo;s have a look at the file <span class="ltx_ref ltx_path ltx_ref_self"><span class="ltx_text ltx_font_typewriter">$OPTIMSOC_SOURCE/examples/sim/compute_tile/compute_tile_sim.core</span></span> inside the OpTiMSoC source tree (it&rsquo;s not installed!).
+In there you find all dependencies that are needed to build the system with only one compute tile.
+You also find the toplevel files that are used to simulate the system in Verilator and in XSIM (the Vivado built-in simulator).</p>
+</div>
+<div id="S1.p4" class="ltx_para">
+<p class="ltx_p">The great benefit of using FuseSoC is that you can now simply compile and run the system with one simple command.</p>
+</div>
+<div id="S1.p5" class="ltx_para">
+<p class="ltx_p">Before we start, two notes:</p>
+<ul id="I1" class="ltx_itemize">
+<li id="I1.i1" class="ltx_item">
+<div id="I1.i1.p1" class="ltx_para">
+<p class="ltx_p">OpTiMSoC uses a slightly modified version of FuseSoC. You can call it by running <code class="ltx_verbatim ltx_font_typewriter">optimsoc-fusesoc</code>.</p>
+</div>
+</li>
+<li id="I1.i2" class="ltx_item">
+<div id="I1.i2.p1" class="ltx_para">
+<p class="ltx_p">We set an environment variable (<code class="ltx_verbatim ltx_font_typewriter">$FUSESOC_CORES</code>) during the installation that makes FuseSoC find all OpTiMSoC hardware modules. You do not need to add a special configuration for this. However, the examples inside <code class="ltx_verbatim ltx_font_typewriter">$OPTIMSOC_SOURCE</code> are not part of this search path.</p>
+</div>
+</li>
+<li id="I1.i3" class="ltx_item">
+<div id="I1.i3.p1" class="ltx_para">
+<p class="ltx_p">You can call <code class="ltx_verbatim ltx_font_typewriter">optimsoc-fusesoc</code> from any directory. We recommend <span class="ltx_text ltx_font_bold">not</span> calling FuseSoC from inside your source directory. (This allows you to just delete the build folder and retain a clean source folder.)</p>
+</div>
+</li>
+</ul>
+</div>
+<div id="S1.p6" class="ltx_para">
+<p class="ltx_p">So let&rsquo;s look at a couple of examples how to build a SoC hardware with fusesoc.</p>
+</div>
+<div id="S1.p7" class="ltx_para ltx_docnote">
+<p class="ltx_p ltx_docnote_title">Note</p>
+<p class="ltx_p">All the examples require an OpTiMSoC source tree to be available at <code class="ltx_verbatim ltx_font_typewriter">$OPTIMSOC_SOURCE</code>.</p>
+</div>
+<div id="S1.p8" class="ltx_para">
+<ol id="I2" class="ltx_enumerate">
+<li id="I2.i1" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_enumerate">1.</span> 
+<div id="I2.i1.p1" class="ltx_para">
+<p class="ltx_p">Build and run a Verilator-based simulation of a single compute tile.</p>
+<div id="LSTx36" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div class="ltx_listing_data"><a href="data:text/plain,cd%20some/directory%0Aoptimsoc-fusesoc%20--cores-root%20%24OPTIMSOC_SOURCE/examples%20sim%20optimsoc:examples:compute_tile_sim">&#11015;</a></div>
+<table class="ltx_tabular">
+<tr class="ltx_tr">
+<td class="ltx_td">
+                      <span class="ltx_text ltx_lst_line ltx_font_typewriter">cd<span class="ltx_text ltx_lst_space">&nbsp;</span>some/directory</span>
+                    </td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td">
+                      <span class="ltx_text ltx_lst_line ltx_font_typewriter">optimsoc-fusesoc<span class="ltx_text ltx_lst_space">&nbsp;</span>--cores-root<span class="ltx_text ltx_lst_space">&nbsp;</span>$OPTIMSOC_SOURCE/examples<span class="ltx_text ltx_lst_space">&nbsp;</span>sim<span class="ltx_text ltx_lst_space">&nbsp;</span>optimsoc:examples:compute_tile_sim</span>
+                    </td>
+</tr>
+</table>
+</div>
+</div>
+</li>
+<li id="I2.i2" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_enumerate">2.</span> 
+<div id="I2.i2.p1" class="ltx_para">
+<p class="ltx_p">Only build a Verilator simulation of a single compute tile</p>
+<div id="LSTx37" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div class="ltx_listing_data"><a href="data:text/plain,optimsoc-fusesoc%20--cores-root%20%24OPTIMSOC_SOURCE/examples%20sim%20--build-only%20optimsoc:examples:compute_tile_sim">&#11015;</a></div>
+<table class="ltx_tabular">
+<tr class="ltx_tr">
+<td class="ltx_td">
+                      <span class="ltx_text ltx_lst_line ltx_font_typewriter">optimsoc-fusesoc<span class="ltx_text ltx_lst_space">&nbsp;</span>--cores-root<span class="ltx_text ltx_lst_space">&nbsp;</span>$OPTIMSOC_SOURCE/examples<span class="ltx_text ltx_lst_space">&nbsp;</span>sim<span class="ltx_text ltx_lst_space">&nbsp;</span>--build-only<span class="ltx_text ltx_lst_space">&nbsp;</span>optimsoc:examples:compute_tile_sim</span>
+                    </td>
+</tr>
+</table>
+</div>
+</div>
+</li>
+<li id="I2.i3" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_enumerate">3.</span> 
+<div id="I2.i3.p1" class="ltx_para">
+<p class="ltx_p">Set the parameter <code class="ltx_verbatim ltx_font_typewriter">NUM_CORES</code> to 2 to create a system with two CPU cores inside the compute tile.
+You can have a look inside the top-level source file <span class="ltx_ref ltx_path ltx_ref_self"><span class="ltx_text ltx_font_typewriter">$OPTIMSOC_SOURCE/examples/sim/compute_tile/tb_compute_tile.sv</span></span> for other parameters that are available.</p>
+<div id="LSTx38" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div class="ltx_listing_data"><a href="data:text/plain,optimsoc-fusesoc%20--cores-root%20%24OPTIMSOC_SOURCE/examples%20sim%20--build-only%20optimsoc:examples:compute_tile_sim%20--NUM_CORES%202">&#11015;</a></div>
+<table class="ltx_tabular">
+<tr class="ltx_tr">
+<td class="ltx_td">
+                      <span class="ltx_text ltx_lst_line ltx_font_typewriter">optimsoc-fusesoc<span class="ltx_text ltx_lst_space">&nbsp;</span>--cores-root<span class="ltx_text ltx_lst_space">&nbsp;</span>$OPTIMSOC_SOURCE/examples<span class="ltx_text ltx_lst_space">&nbsp;</span>sim<span class="ltx_text ltx_lst_space">&nbsp;</span>--build-only<span class="ltx_text ltx_lst_space">&nbsp;</span>optimsoc:examples:compute_tile_sim<span class="ltx_text ltx_lst_space">&nbsp;</span>--NUM_CORES<span class="ltx_text ltx_lst_space">&nbsp;</span>2</span>
+                    </td>
+</tr>
+</table>
+</div>
+</div>
+</li>
+<li id="I2.i4" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_enumerate">4.</span> 
+<div id="I2.i4.p1" class="ltx_para">
+<p class="ltx_p">Synthesize a 2x2 system with four compute tiles for the Nexys 4 DDR board using Xilinx Vivado.
+This step requires Vivado to be installed and working, and a lot of time (approx. 30 minutes, depending on your machine).</p>
+<div id="LSTx39" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div class="ltx_listing_data"><a href="data:text/plain,optimsoc-fusesoc%20--cores-root%20%24OPTIMSOC_SOURCE/examples%20build%20optimsoc:examples:system_2x2_cccc_nexys4ddr">&#11015;</a></div>
+<table class="ltx_tabular">
+<tr class="ltx_tr">
+<td class="ltx_td">
+                      <span class="ltx_text ltx_lst_line ltx_font_typewriter">optimsoc-fusesoc<span class="ltx_text ltx_lst_space">&nbsp;</span>--cores-root<span class="ltx_text ltx_lst_space">&nbsp;</span>$OPTIMSOC_SOURCE/examples<span class="ltx_text ltx_lst_space">&nbsp;</span>build<span class="ltx_text ltx_lst_space">&nbsp;</span>optimsoc:examples:system_2x2_cccc_nexys4ddr</span>
+                    </td>
+</tr>
+</table>
+</div>
+</div>
+</li>
+<li id="I2.i5" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_enumerate">5.</span> 
+<div id="I2.i5.p1" class="ltx_para">
+<p class="ltx_p">Now flash the bitstream that the previous step generated to the FPGA.</p>
+<div id="LSTx40" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div class="ltx_listing_data"><a href="data:text/plain,optimsoc-fusesoc%20--cores-root%20%24OPTIMSOC_SOURCE/examples%20pgm%20optimsoc:examples:system_2x2_cccc_nexys4ddr">&#11015;</a></div>
+<table class="ltx_tabular">
+<tr class="ltx_tr">
+<td class="ltx_td">
+                      <span class="ltx_text ltx_lst_line ltx_font_typewriter">optimsoc-fusesoc<span class="ltx_text ltx_lst_space">&nbsp;</span>--cores-root<span class="ltx_text ltx_lst_space">&nbsp;</span>$OPTIMSOC_SOURCE/examples<span class="ltx_text ltx_lst_space">&nbsp;</span>pgm<span class="ltx_text ltx_lst_space">&nbsp;</span>optimsoc:examples:system_2x2_cccc_nexys4ddr</span>
+                    </td>
+</tr>
+</table>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</section>
+<section id="S2" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">4.2 </span>Choosing an Editor/IDE</h2>
+
+<div id="S2.p1" class="ltx_para">
+<p class="ltx_p">When editing code, an editor or IDE usually comes handy. While there is clearly
+no &ldquo;best&rdquo; or even &ldquo;recommended&rdquo; editor or IDE, we will present two or our
+choices here, together with some settings that make working on OpTiMSoC a
+pleasant experience. Feel free to adapt these recommendations to your personal
+preferences!</p>
+</div>
+<section id="S2.SS1" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">4.2.1 </span>Eclipse</h3>
+
+<div id="S2.SS1.p1" class="ltx_para">
+<p class="ltx_p">Eclipse gives you a nice and integrated development across the different parts
+of the code base by using a couple of plugins. But be aware, Eclipse likes
+memory and is not exactly &ldquo;lightweight&rdquo;, but if you have enough memory
+available (in the area of 500&nbsp;MB for Eclipse) it can be a very powerful and
+productive choice.</p>
+</div>
+<section id="S2.SS1.SSSx1" class="ltx_subsubsection">
+<h4 class="ltx_title ltx_title_subsubsection">Installation and Basic Setup</h4>
+
+<div id="S2.SS1.SSSx1.p1" class="ltx_para">
+<p class="ltx_p">First of all, get Eclipse itself. Go to <a href="http://www.eclipse.org/downloads/" title="" class="ltx_ref ltx_url"><span class="ltx_text ltx_font_typewriter">http://www.eclipse.org/downloads/</span></a>
+and get the &ldquo;Eclipse IDE for C/C++ Developers&rdquo; package or install it from
+your distribution&rsquo;s package manager. All the following steps were tested with
+Eclipse Kepler (4.3).</p>
+</div>
+<div id="S2.SS1.SSSx1.p2" class="ltx_para">
+<p class="ltx_p">Now start Eclipse and first go to <em class="ltx_emph">Help <math id="S2.SS1.SSSx1.p2.m1" class="ltx_Math" alttext="\rightarrow" display="inline"><mo>&rarr;</mo></math> Check for Updates</em>.
+Install all available updates.
+</p>
+</div>
+<div id="S2.SS1.SSSx1.p3" class="ltx_para">
+<p class="ltx_p">For Verilog syntax highlighting we use a plugin called &ldquo;VEditor&rdquo;. Go to
+<em class="ltx_emph">Help <math id="S2.SS1.SSSx1.p3.m1" class="ltx_Math" alttext="\rightarrow" display="inline"><mo>&rarr;</mo></math> Install New Software&hellip;</em> In the field <em class="ltx_emph">Work with</em>
+enter the URL of the installation site,
+<code class="ltx_verbatim ltx_font_typewriter">http://veditor.sourceforge.net/update</code>. Now press the return key and after
+a couple of seconds, the entry <em class="ltx_emph">VEditor Plugin</em> appears below. Select it
+and click on the <em class="ltx_emph">Next</em> button until the installation is finished. To
+complete the process you need to restart Eclipse.</p>
+</div>
+<div id="S2.SS1.SSSx1.p4" class="ltx_para">
+<p class="ltx_p">Every project has different preferences regarding the styling of the code.
+Therefore every editor can be configured to some extend. First, we&rsquo;ll set the
+general settings for Eclipse, and then for Verilog and C.</p>
+</div>
+<div id="S2.SS1.SSSx1.p5" class="ltx_para">
+<p class="ltx_p">Start by clicking on <em class="ltx_emph">Window <math id="S2.SS1.SSSx1.p5.m1" class="ltx_Math" alttext="\rightarrow" display="inline"><mo>&rarr;</mo></math> Preferences</em> inside Eclipse.
+There, choose <em class="ltx_emph">Editors <math id="S2.SS1.SSSx1.p5.m2" class="ltx_Math" alttext="\rightarrow" display="inline"><mo>&rarr;</mo></math> Text Editors</em>. You should set the
+following settings:</p>
+</div>
+<div id="S2.SS1.SSSx1.p6" class="ltx_para">
+<ul id="I3" class="ltx_itemize">
+<li id="I3.i1" class="ltx_item">
+<div id="I3.i1.p1" class="ltx_para">
+<p class="ltx_p">Check <em class="ltx_emph">Insert spaces for tabs</em></p>
+</div>
+</li>
+<li id="I3.i2" class="ltx_item">
+<div id="I3.i2.p1" class="ltx_para">
+<p class="ltx_p">Check <em class="ltx_emph">Show print margin</em></p>
+</div>
+</li>
+<li id="I3.i3" class="ltx_item">
+<div id="I3.i3.p1" class="ltx_para">
+<p class="ltx_p">Set the <em class="ltx_emph">Print margin column</em> to 80</p>
+</div>
+</li>
+<li id="I3.i4" class="ltx_item">
+<div id="I3.i4.p1" class="ltx_para">
+<p class="ltx_p">Check <em class="ltx_emph">Show line numbers</em></p>
+</div>
+</li>
+</ul>
+</div>
+<div id="S2.SS1.SSSx1.p7" class="ltx_para">
+<p class="ltx_p">Just leave the other settings as they are, or change them to your liking.
+</p>
+</div>
+<div id="S2.SS1.SSSx1.p8" class="ltx_para">
+<p class="ltx_p">For the Verilog settings, go to <em class="ltx_emph">Verilog/VHDL Editor <math id="S2.SS1.SSSx1.p8.m1" class="ltx_Math" alttext="\rightarrow" display="inline"><mo>&rarr;</mo></math> Code
+Style</em>. There, select <em class="ltx_emph">Space as Indent Character</em> and set the <em class="ltx_emph">Indent
+Size</em> to 3.</p>
+</div>
+<div id="S2.SS1.SSSx1.p9" class="ltx_para">
+<p class="ltx_p">For the C style used in liboptimsochost and other libraries we have prepared a
+settings file. Go to <em class="ltx_emph">C/C++ <math id="S2.SS1.SSSx1.p9.m1" class="ltx_Math" alttext="\rightarrow" display="inline"><mo>&rarr;</mo></math> Code Style <math id="S2.SS1.SSSx1.p9.m2" class="ltx_Math" alttext="\rightarrow" display="inline"><mo>&rarr;</mo></math>
+Formatter</em> and click on <em class="ltx_emph">Import&hellip;</em>, choose the settings file
+<code class="ltx_verbatim ltx_font_typewriter">doc/resources/optimsoc-eclipse-cdt-codestyle.xml</code> inside the OpTiMSoC
+source tree. Now you should have a new profile &ldquo;OpTiMSoC&rdquo; in the list of
+profiles. Choose this one for all work on the C code.</p>
+</div>
+</section>
+<section id="S2.SS1.SSSx2" class="ltx_subsubsection">
+<h4 class="ltx_title ltx_title_subsubsection">Creating the OpTiMSoC HDL Project</h4>
+
+<div id="S2.SS1.SSSx2.p1" class="ltx_para">
+<p class="ltx_p">Now that all the basic settings are in place, we can create the projects inside
+Eclipse. First, we will create a project for editing the HDL (Verilog) code.</p>
+</div>
+<div id="S2.SS1.SSSx2.p2" class="ltx_para">
+<p class="ltx_p">In the <em class="ltx_emph">Project Explorer</em> (on the left side), right click and select
+<em class="ltx_emph">New <math id="S2.SS1.SSSx2.p2.m1" class="ltx_Math" alttext="\rightarrow" display="inline"><mo>&rarr;</mo></math> Project&hellip;</em>. A new dialog window shows. In this window,
+select <em class="ltx_emph">Verilog/VHDL <math id="S2.SS1.SSSx2.p2.m2" class="ltx_Math" alttext="\rightarrow" display="inline"><mo>&rarr;</mo></math> Verilog/VHDL project</em> and click
+<em class="ltx_emph">Next</em>. Now enter a project name, e.g. &ldquo;OpTiMSoC&rdquo;. Uncheck the option
+<em class="ltx_emph">Use default location</em> and click on <em class="ltx_emph">Browse</em> to choose your OpTiMSoC
+source directory (the location where you cloned the Git repository to).</p>
+</div>
+<div id="S2.SS1.SSSx2.p3" class="ltx_para">
+<p class="ltx_p">The OpTiMSoC source tree not only contains RTL code, but also the necessary
+software components like liboptimsochost and the OpTiMSoC GUI. This code is
+better edited in a separate project and should be excluded from the project you
+just created. To do that, choose <em class="ltx_emph">Project <math id="S2.SS1.SSSx2.p3.m1" class="ltx_Math" alttext="\rightarrow" display="inline"><mo>&rarr;</mo></math>
+Properties</em> from the main menu. Navigate to <em class="ltx_emph">Resource <math id="S2.SS1.SSSx2.p3.m2" class="ltx_Math" alttext="\rightarrow" display="inline"><mo>&rarr;</mo></math>
+Resource Filters</em> and click on the <em class="ltx_emph">Add&hellip;</em> button. There, choose the
+following settings:</p>
+<ul id="I4" class="ltx_itemize">
+<li id="I4.i1" class="ltx_item">
+<div id="I4.i1.p1" class="ltx_para">
+<p class="ltx_p">Choose <em class="ltx_emph">Exclude all</em> in the group <em class="ltx_emph">Filter type</em></p>
+</div>
+</li>
+<li id="I4.i2" class="ltx_item">
+<div id="I4.i2.p1" class="ltx_para">
+<p class="ltx_p">Choose <em class="ltx_emph">Folders</em> in the group <em class="ltx_emph">Applies to</em></p>
+</div>
+</li>
+<li id="I4.i3" class="ltx_item">
+<div id="I4.i3.p1" class="ltx_para">
+<p class="ltx_p">Check <em class="ltx_emph">All children (recursive)</em></p>
+</div>
+</li>
+<li id="I4.i4" class="ltx_item">
+<div id="I4.i4.p1" class="ltx_para">
+<p class="ltx_p">In the group <em class="ltx_emph">File and Folder Attributes</em> select
+<em class="ltx_emph">Project Relative Path</em> <em class="ltx_emph">matches</em> <code class="ltx_verbatim ltx_font_typewriter">src/sw</code>.</p>
+</div>
+</li>
+</ul>
+<p class="ltx_p">Now click on <em class="ltx_emph">OK</em> to finish editing the filter.</p>
+</div>
+<div id="S2.SS1.SSSx2.p4" class="ltx_para">
+<p class="ltx_p">Then repeat the steps above to create a new resource filter but as path
+use <code class="ltx_verbatim ltx_font_typewriter">src/sysc</code> this time.</p>
+</div>
+<div id="S2.SS1.SSSx2.p5" class="ltx_para">
+<p class="ltx_p">After you&rsquo;re done with the second filter, click <em class="ltx_emph">OK</em> again to
+close the dialog.</p>
+</div>
+</section>
+<section id="S2.SS1.SSSx3" class="ltx_subsubsection">
+<h4 class="ltx_title ltx_title_subsubsection">Creating a C Project</h4>
+
+<div id="S2.SS1.SSSx3.p1" class="ltx_para">
+<p class="ltx_p">Eclipse is also a great choice for editing C code. As an example, we&rsquo;ll setup
+Eclipse for the OpTiMSoC host library, liboptimsochost.
+</p>
+</div>
+<div id="S2.SS1.SSSx3.p2" class="ltx_para">
+<p class="ltx_p">In the main menu, click on <em class="ltx_emph">File <math id="S2.SS1.SSSx3.p2.m1" class="ltx_Math" alttext="\rightarrow" display="inline"><mo>&rarr;</mo></math> New <math id="S2.SS1.SSSx3.p2.m2" class="ltx_Math" alttext="\rightarrow" display="inline"><mo>&rarr;</mo></math> Project</em>.
+A dialog window is shown. There, nagivate to <em class="ltx_emph">C/C++ <math id="S2.SS1.SSSx3.p2.m3" class="ltx_Math" alttext="\rightarrow" display="inline"><mo>&rarr;</mo></math> Makefile
+Project with Existing Code</em> and click on the <em class="ltx_emph">Next</em> button. Type
+<code class="ltx_verbatim ltx_font_typewriter">liboptimsochost</code> as <em class="ltx_emph">Project Name</em> and click on <em class="ltx_emph">Browse&hellip;</em> to
+select the source code location of the library. It should be inside your
+OpTiMSoC code in the folder <code class="ltx_verbatim ltx_font_typewriter">src/sw/host/liboptimsochost</code>. Uncheck
+<em class="ltx_emph">C++</em> in the <em class="ltx_emph">Languages</em> group and select <em class="ltx_emph">GNU Autotools
+Toolchain</em> in the box below. Now click on <em class="ltx_emph">Finish</em> to close the dialog.</p>
+</div>
+<div id="S2.SS1.SSSx3.p3" class="ltx_para">
+<p class="ltx_p">Before you start coding, double-check if the code style settings are correct.
+Select the newly created liboptimsochost project from the <em class="ltx_emph">Project
+Navigator</em> on the left, right-click and choose <em class="ltx_emph">Properties</em>. Nagivate to
+<em class="ltx_emph">C/C++ General <math id="S2.SS1.SSSx3.p3.m1" class="ltx_Math" alttext="\rightarrow" display="inline"><mo>&rarr;</mo></math> Formatter</em> and check if <code class="ltx_verbatim ltx_font_typewriter">OpTiMSoC</code> is
+selected as style. If not, click on <em class="ltx_emph">Enable project specific settings</em> and
+choose <code class="ltx_verbatim ltx_font_typewriter">OpTiMSoC</code> from the list. (If there is no such entry, go back to the
+basic Eclipse setup and import the style file properly.)</p>
+</div>
+<div id="S2.SS1.SSSx3.p4" class="ltx_para">
+<p class="ltx_p">You can use the Eclipse GUI to build and run liboptimsochost, but this feature
+is currently not used by any of the developers. Instead, we only use Eclipse
+for code editing, and build and debug the software using the regular commands
+on the console.</p>
+</div>
+</section>
+</section>
+<section id="S2.SS2" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">4.2.2 </span>Emacs</h3>
+
+<div id="S2.SS2.p1" class="ltx_para">
+<p class="ltx_p"><em class="ltx_emph">This section will be added shortly.</em>
+</p>
+</div>
+</section>
+<section id="S2.SS3" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">4.2.3 </span>Verilog-mode</h3>
+
+<div id="S2.SS3.p1" class="ltx_para">
+<p class="ltx_p">Sometimes, writing Verilog means writing the same information twice in
+different places of a source file, one example being the port of a module. To
+save you as developer some typing time, a tool called &ldquo;Verilog-mode&rdquo; has been
+invented. It allows you to specify comments inside your code where information
+should be placed, and this information is then calculated and inserted
+automatically. For more information about what it is and how it works, see
+<a href="http://www.veripool.org/wiki/verilog-mode/" title="" class="ltx_ref ltx_url"><span class="ltx_text ltx_font_typewriter">http://www.veripool.org/wiki/verilog-mode/</span></a>.</p>
+</div>
+<div id="S2.SS3.p2" class="ltx_para">
+<p class="ltx_p">Verilog-mode is used extensively throughout the project. Even though using it
+is not required (the sources can be edited and compiled without it just fine),
+it will save you a lot of time during development and is highly recommended.</p>
+</div>
+<div id="S2.SS3.p3" class="ltx_para">
+<p class="ltx_p">Installation is rather easy, as it comes bundled with GNU Emacs. Simply install
+Emacs as described above and you&rsquo;re ready to go. To support our coding style,
+you will need to adjust the Emacs configuration (even though it is the Emacs
+configuration, it also configures Verilog-mode).</p>
+</div>
+<div id="S2.SS3.p4" class="ltx_para">
+<p class="ltx_p">Open the file <code class="ltx_verbatim ltx_font_typewriter">~/.emacs</code> and add the following lines at the end:</p>
+<div id="LSTx41" class="ltx_listingblock ltx_lstlisting ltx_lst_language_Lisp ltx_listing">
+<div class="ltx_listing_data"><a href="data:text/plain,(add-hook%20'verilog-mode-hook%20'(lambda%20()%0A%20%20;;%20Don't%20auto-insert%20spaces%20after%20%22;%22%0A%20%20(setq%20verilog-auto-newline%20nil)%0A%20%20;;%20Don't%20indent%20with%20tabs!%0A%20%20(setq%20indent-tabs-mode%20nil)))%0A(add-hook%20'verilog-mode-hook%20'(lambda%20()%0A%20%20;;%20Remove%20any%20tabs%20from%20file%20when%20saving%0A%20%20(add-hook%20'write-file-functions%20(lambda()%0A%20%20%20%20(untabify%20(point-min)%20(point-max))%0A%20%20%20%20nil))))">&#11015;</a></div>
+<table class="ltx_tabular">
+<tr class="ltx_tr">
+<td class="ltx_td">
+                  <span class="ltx_text ltx_lst_line ltx_font_typewriter">(add-hook<span class="ltx_text ltx_lst_space">&nbsp;</span>'verilog-mode-hook<span class="ltx_text ltx_lst_space">&nbsp;</span>'(lambda<span class="ltx_text ltx_lst_space">&nbsp;</span>()</span>
+                </td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td">
+                  <span class="ltx_text ltx_lst_line ltx_font_typewriter">
+                    <span class="ltx_text ltx_lst_space">&nbsp;&nbsp;</span>
+                    <span class="ltx_text ltx_font_italic">;;<span class="ltx_text ltx_lst_space">&nbsp;</span>Don't<span class="ltx_text ltx_lst_space">&nbsp;</span>auto-insert<span class="ltx_text ltx_lst_space">&nbsp;</span>spaces<span class="ltx_text ltx_lst_space">&nbsp;</span>after<span class="ltx_text ltx_lst_space">&nbsp;</span>";"</span>
+                  </span>
+                </td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td">
+                  <span class="ltx_text ltx_lst_line ltx_font_typewriter"><span class="ltx_text ltx_lst_space">&nbsp;&nbsp;</span>(setq<span class="ltx_text ltx_lst_space">&nbsp;</span>verilog-auto-newline<span class="ltx_text ltx_lst_space">&nbsp;</span>nil)</span>
+                </td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td">
+                  <span class="ltx_text ltx_lst_line ltx_font_typewriter">
+                    <span class="ltx_text ltx_lst_space">&nbsp;&nbsp;</span>
+                    <span class="ltx_text ltx_font_italic">;;<span class="ltx_text ltx_lst_space">&nbsp;</span>Don't<span class="ltx_text ltx_lst_space">&nbsp;</span>indent<span class="ltx_text ltx_lst_space">&nbsp;</span>with<span class="ltx_text ltx_lst_space">&nbsp;</span>tabs!</span>
+                  </span>
+                </td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td">
+                  <span class="ltx_text ltx_lst_line ltx_font_typewriter"><span class="ltx_text ltx_lst_space">&nbsp;&nbsp;</span>(setq<span class="ltx_text ltx_lst_space">&nbsp;</span>indent-tabs-mode<span class="ltx_text ltx_lst_space">&nbsp;</span>nil)))</span>
+                </td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td">
+                  <span class="ltx_text ltx_lst_line ltx_font_typewriter">(add-hook<span class="ltx_text ltx_lst_space">&nbsp;</span>'verilog-mode-hook<span class="ltx_text ltx_lst_space">&nbsp;</span>'(lambda<span class="ltx_text ltx_lst_space">&nbsp;</span>()</span>
+                </td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td">
+                  <span class="ltx_text ltx_lst_line ltx_font_typewriter">
+                    <span class="ltx_text ltx_lst_space">&nbsp;&nbsp;</span>
+                    <span class="ltx_text ltx_font_italic">;;<span class="ltx_text ltx_lst_space">&nbsp;</span>Remove<span class="ltx_text ltx_lst_space">&nbsp;</span>any<span class="ltx_text ltx_lst_space">&nbsp;</span>tabs<span class="ltx_text ltx_lst_space">&nbsp;</span>from<span class="ltx_text ltx_lst_space">&nbsp;</span>file<span class="ltx_text ltx_lst_space">&nbsp;</span>when<span class="ltx_text ltx_lst_space">&nbsp;</span>saving</span>
+                  </span>
+                </td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td">
+                  <span class="ltx_text ltx_lst_line ltx_font_typewriter"><span class="ltx_text ltx_lst_space">&nbsp;&nbsp;</span>(add-hook<span class="ltx_text ltx_lst_space">&nbsp;</span>'write-file-functions<span class="ltx_text ltx_lst_space">&nbsp;</span>(lambda()</span>
+                </td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td">
+                  <span class="ltx_text ltx_lst_line ltx_font_typewriter"><span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;</span>(untabify<span class="ltx_text ltx_lst_space">&nbsp;</span>(point-min)<span class="ltx_text ltx_lst_space">&nbsp;</span>(point-max))</span>
+                </td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td">
+                  <span class="ltx_text ltx_lst_line ltx_font_typewriter"><span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;</span>nil))))</span>
+                </td>
+</tr>
+</table>
+</div>
+</div>
+<div id="S2.SS3.p5" class="ltx_para">
+<p class="ltx_p">If you also use Emacs as your code editor,
+Verilog-mode is already enabled and you can read through the
+<a href="http://www.veripool.org/wiki/verilog-mode/Documentation" title="" class="ltx_ref">documentation</a> to
+learn how to use it.</p>
+</div>
+<section id="S2.SS3.SSSx1" class="ltx_subsubsection">
+<h4 class="ltx_title ltx_title_subsubsection">Verilog-mode in Eclipse</h4>
+
+<div id="S2.SS3.SSSx1.p1" class="ltx_para">
+<p class="ltx_p">Even if you use Eclipse, you do not need to switch editors to get the
+benefits of Verilog-mode; you can run Verilog-mode in batch mode to
+resolve all the AUTO comments. This will require some manual setup, but
+afterwards it can be used quite easily.</p>
+</div>
+<div id="S2.SS3.SSSx1.p2" class="ltx_para">
+<p class="ltx_p">First, you need to figure out where your <code class="ltx_verbatim ltx_font_typewriter">verilog-mode.el</code> or
+<code class="ltx_verbatim ltx_font_typewriter">verilog-mode.elc</code> file is located. If you want to use the
+Verilog-mode which is part of your Emacs installation, it is probably located
+somewhere in <code class="ltx_verbatim ltx_font_typewriter">/usr/share/emacs</code>, e.g.
+<code class="ltx_verbatim ltx_font_typewriter">/usr/share/emacs/24.3/lisp/progmodes/verilog-mode.elc</code> on Ubuntu 14.04.
+You can run</p>
+<div id="LSTx42" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div class="ltx_listing_data"><a href="data:text/plain,%24&gt;%20find%20/usr/share/emacs%20-name%20'verilog-mode.el*'">&#11015;</a></div>
+<table class="ltx_tabular">
+<tr class="ltx_tr">
+<td class="ltx_td">
+                    <span class="ltx_text ltx_lst_line ltx_font_typewriter">$&gt;<span class="ltx_text ltx_lst_space">&nbsp;</span>find<span class="ltx_text ltx_lst_space">&nbsp;</span>/usr/share/emacs<span class="ltx_text ltx_lst_space">&nbsp;</span>-name<span class="ltx_text ltx_lst_space">&nbsp;</span>'verilog-mode.el*'</span>
+                  </td>
+</tr>
+</table>
+</div>
+<p class="ltx_p">to search for it. If you found it, write down the path as we&rsquo;ll need it later.
+If you installed Verilog-mode from source, just note the path where you put
+your <code class="ltx_verbatim ltx_font_typewriter">verilog-mode.el</code> file (e.g. somewhere in your home directory).</p>
+</div>
+<div id="S2.SS3.SSSx1.p3" class="ltx_para">
+<p class="ltx_p">In Eclipse, we will setup Verilog-mode as &ldquo;Builder&rdquo;. To do so, click in the
+main menu on <em class="ltx_emph">Project <math id="S2.SS3.SSSx1.p3.m1" class="ltx_Math" alttext="\rightarrow" display="inline"><mo>&rarr;</mo></math> Properties</em> and nagivate to
+<em class="ltx_emph">Builders</em>. There, click on the <em class="ltx_emph">New&hellip;</em> button and select
+<em class="ltx_emph">Program</em> as configuration type in the shown dialog. After pressing
+<em class="ltx_emph">OK</em>, enter &ldquo;verilog-mode&rdquo; into the field <em class="ltx_emph">Name</em>. In the <em class="ltx_emph">Main</em>
+tab, write <code class="ltx_verbatim ltx_font_typewriter">/usr/bin/emacs</code> into the field <em class="ltx_emph">Location</em>. Leave the field
+<em class="ltx_emph">Working Directory</em> empty and enter the following string into the field
+<em class="ltx_emph">Arguments</em>:</p>
+<div id="LSTx43" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div class="ltx_listing_data"><a href="data:text/plain,--batch%20--no-site-file%20-u%20%24%7Benv_var:USER%7D%0A-l%20/usr/share/emacs/24.3/lisp/progmodes/verilog-mode.elc%0A%22%24%7Bselected_resource_loc%7D%22%20-f%20verilog-auto%20-f%20save-buffer">&#11015;</a></div>
+<table class="ltx_tabular">
+<tr class="ltx_tr">
+<td class="ltx_td">
+                    <span class="ltx_text ltx_lst_line ltx_font_typewriter">--batch<span class="ltx_text ltx_lst_space">&nbsp;</span>--no-site-file<span class="ltx_text ltx_lst_space">&nbsp;</span>-u<span class="ltx_text ltx_lst_space">&nbsp;</span>$env_var:USER}</span>
+                  </td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td">
+                    <span class="ltx_text ltx_lst_line ltx_font_typewriter">-l<span class="ltx_text ltx_lst_space">&nbsp;</span>/usr/share/emacs/24.3/lisp/progmodes/verilog-mode.elc</span>
+                  </td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td">
+                    <span class="ltx_text ltx_lst_line ltx_font_typewriter">"$selected_resource_loc}"<span class="ltx_text ltx_lst_space">&nbsp;</span>-f<span class="ltx_text ltx_lst_space">&nbsp;</span>verilog-auto<span class="ltx_text ltx_lst_space">&nbsp;</span>-f<span class="ltx_text ltx_lst_space">&nbsp;</span>save-buffer</span>
+                  </td>
+</tr>
+</table>
+</div>
+</div>
+<div id="S2.SS3.SSSx1.p4" class="ltx_para">
+<p class="ltx_p">Replace the path to the verilog-mode.el or verilog-mode.elc file with your own
+path you found out above.</p>
+</div>
+<div id="S2.SS3.SSSx1.p5" class="ltx_para">
+<p class="ltx_p">Now, switch to the tab <em class="ltx_emph">Refresh</em>, check the box <em class="ltx_emph">Refresh resources
+upon completion</em> and select <em class="ltx_emph">The selected resource</em>. Since we don&rsquo;t need
+to change anything in the last two tabs, you can now close the dialog by
+clicking on the <em class="ltx_emph">OK</em> button and on <em class="ltx_emph">OK</em> again to close the project
+properties dialog.</p>
+</div>
+<div id="S2.SS3.SSSx1.p6" class="ltx_para">
+<p class="ltx_p">To test if it all works, navigate to
+<code class="ltx_verbatim ltx_font_typewriter">src/rtl/compute_tile_dm/verilog/compute_tile_dm.v</code> and change the word
+&ldquo;Outputs&rdquo; in the comment right at the beginning of the file to something
+else. Then press CTRL-B (or go to <em class="ltx_emph">Project <math id="S2.SS3.SSSx1.p6.m1" class="ltx_Math" alttext="\rightarrow" display="inline"><mo>&rarr;</mo></math> Build All</em>) and
+after a couple of seconds, you should see the word &ldquo;Outputs&rdquo; restored and
+some output messages in the <em class="ltx_emph">Console</em> view at the bottom. Also check if
+there were no tabs inserted (e.g. at the instantiation of <code class="ltx_verbatim ltx_font_typewriter">u_core0</code>). If
+there are tabs then you probably did not setup your <code class="ltx_verbatim ltx_font_typewriter">~/.emacs</code> file
+correctly.</p>
+</div>
+</section>
+</section>
+<section id="S2.SS4" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">4.2.4 </span>Qt Creator for GUI Development</h3>
+
+<div id="S2.SS4.p1" class="ltx_para">
+<p class="ltx_p">Developing the OpTiMSoC GUI requires an IDE which understands the used Qt
+framework. The most popular choice among the developers is Qt&nbsp;Creator.</p>
+</div>
+<div id="S2.SS4.p2" class="ltx_para">
+<p class="ltx_p">To start editing, open Qt&nbsp;Creator and click on <em class="ltx_emph">File <math id="S2.SS4.p2.m1" class="ltx_Math" alttext="\rightarrow" display="inline"><mo>&rarr;</mo></math> Open
+File or Project</em>. Now nagivate to <code class="ltx_verbatim ltx_font_typewriter">src/sw/host/optimsocgui</code> inside your
+OpTiMSoC source directory and open the file <code class="ltx_verbatim ltx_font_typewriter">CMakeLists.txt</code>. In the
+following dialog you can specify a build directory (or just leave the default).
+After clicking on <em class="ltx_emph">Next</em>, a dialog with the title <em class="ltx_emph">Run CMake</em>
+appears. Type <code class="ltx_verbatim ltx_font_typewriter">-DCMAKE_BUILD_TYPE=Debug</code> into the field
+<em class="ltx_emph">Arguments</em> and click on the <em class="ltx_emph">Run CMake</em> button. CMake is now run and
+if everything works as expected you can click on <em class="ltx_emph">Finish</em> to close the
+project creation wizzard and start hacking on the source code.</p>
+</div>
+</section>
+</section>
+</section>
+</div>
+</div>
+</div>
