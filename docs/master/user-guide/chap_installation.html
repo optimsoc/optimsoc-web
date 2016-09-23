@@ -14,9 +14,9 @@ sectiontitle: User Guide
 <li class="active">
 <div class="active">Installation &amp; Configuration</div>
 <div id="optimsoc-doc-subnav-nav" class="optimsoc-doc-subnav hidden-print" role="complementary"><ul class="nav">
-<li class=""><a href="#S1" title="2.1 Prerequisites &#8227; Chapter&nbsp;2 Installation &amp; Configuration &#8227; OpTiMSoC User Guide">Prerequisites</a></li>
-<li class=""><a href="#S2" title="2.2 Option 1: Install the OpTiMSoC binary distribution (recommended) &#8227; Chapter&nbsp;2 Installation &amp; Configuration &#8227; OpTiMSoC User Guide">Option 1: Install the OpTiMSoC binary distribution (recommended)</a></li>
-<li class=""><a href="#S3" title="2.3 Option 2: Build OpTiMSoC from sources &#8227; Chapter&nbsp;2 Installation &amp; Configuration &#8227; OpTiMSoC User Guide">Option 2: Build OpTiMSoC from sources</a></li>
+<li class=""><a href="#S1" title="2.1 System Requirements &#8227; Chapter&nbsp;2 Installation &amp; Configuration &#8227; OpTiMSoC User Guide">System Requirements</a></li>
+<li class=""><a href="#S2" title="2.2 Dependencies &#8227; Chapter&nbsp;2 Installation &amp; Configuration &#8227; OpTiMSoC User Guide">Dependencies</a></li>
+<li class=""><a href="#S3" title="2.3 Install OpTiMSoC &#8227; Chapter&nbsp;2 Installation &amp; Configuration &#8227; OpTiMSoC User Guide">Install OpTiMSoC</a></li>
 </ul></div>
 </li>
 <li><a href="chap_tutorials.html" title="Chapter&nbsp;3 Tutorials &#8227; OpTiMSoC User Guide">Tutorials</a></li>
@@ -31,38 +31,69 @@ sectiontitle: User Guide
 <div class="ltx_date ltx_role_creation"></div>
 
 <div id="p1" class="ltx_para">
-<p class="ltx_p">Before you get started with OpTiMSoC you should notice that external
-tools and libraries might be required that are in some cases
-proprietary and cost some money. Although OpTiMSoC is developed at an
-university with access to many EDA tools, we aim to always provide
-tool flows and support for open and free tools, but especially when it
-comes to synthesis such alternatives are even not available.</p>
+<p class="ltx_p">Installing an OpTiMSoC release should not take more than 10&nbsp;minutes (if you have a decent internet connection), so let&rsquo;s get started!</p>
 </div>
 <section id="S1" class="ltx_section">
 <h2 class="ltx_title ltx_title_section">
-<span class="ltx_tag ltx_tag_section">2.1 </span>Prerequisites</h2>
+<span class="ltx_tag ltx_tag_section">2.1 </span>System Requirements</h2>
 
 <div id="S1.p1" class="ltx_para">
-<p class="ltx_p">Throughout this document some packages are required in your Linux
-distribution. OpTiMSoC should principally work on all common Linux
-distributions. In case you encounter problems in your system we highly
-encourage you to contact the OpTiMSoC maintainers to fix these
-problems. Nevertheless, we recommend Ubuntu 14.04 LTS as development
-system and can ensure OpTiMSoC will work on it as we also work on
-it. In the following we will refer to Ubuntu/Debian commands to
-install packages, that will run under Ubuntu 14.04 LTS.</p>
+<p class="ltx_p">Please first check the system requirements.</p>
 </div>
 <div id="S1.p2" class="ltx_para">
-<p class="ltx_p">Independent of the OpTiMSoC components you plan to use, you will need some
-packages to be installed:</p>
+<ul id="I1" class="ltx_itemize">
+<li id="I1.i1" class="ltx_item">
+<div id="I1.i1.p1" class="ltx_para">
+<p class="ltx_p">Supported Linux distribution: Ubuntu 14.04 or 16.04 LTS on x86_64</p>
 </div>
-<div id="S1.p3" class="ltx_para">
-<div id="LSTx1" class="ltx_listingblock ltx_lstlisting ltx_listing">
-<div class="ltx_listing_data"><a href="data:text/plain,sudo%20apt-get%20-y%20install%20git%20build-essential%20tcl%20libusb-1.0-0-dev%20%5C%0A%20%20libboost-dev%20libelf-dev%20swig%20python3%20python3-yaml%0A%0A#%20optional,%20but%20highly%20recommended:%20a%20waveform%20viewer%0Asudo%20apt-get%20-y%20install%20gtkwave">&#11015;</a></div>
+</li>
+<li id="I1.i2" class="ltx_item">
+<div id="I1.i2.p1" class="ltx_para">
+<p class="ltx_p">20 GB disk space (mostly for Xilinx Vivado and other tools)</p>
+</div>
+</li>
+<li id="I1.i3" class="ltx_item">
+<div id="I1.i3.p1" class="ltx_para">
+<p class="ltx_p">4&nbsp;GB or more of RAM helps greatly (especially during FPGA synthesis)</p>
+</div>
+</li>
+<li id="I1.i4" class="ltx_item">
+<div id="I1.i4.p1" class="ltx_para">
+<p class="ltx_p">We recommend not using a VM, but running directly on the hardware.
+Using a VM is possible, but will result in significantly slower compilation and synthesis runs.</p>
+</div>
+</li>
+<li id="I1.i5" class="ltx_item">
+<div id="I1.i5.p1" class="ltx_para">
+<p class="ltx_p">(optional, only if you want to do FPGA synthesis) Xilinx Vivado 2016.2 (the free WebPack edition is sufficient for most use cases)</p>
+</div>
+</li>
+</ul>
+</div>
+<div id="S1.p3" class="ltx_para ltx_docnote">
+<p class="ltx_p ltx_docnote_title">Note</p>
+<p class="ltx_p">Some external tools, especially EDA tools for synthesis and simulators, might be required that are in some cases proprietary and cost some money. Although OpTiMSoC is developed at an university with access to many EDA tools, we aim to always provide tool flows and support for open and free tools, but especially when it comes to synthesis such alternatives are even not available.</p>
+</div>
+</section>
+<section id="S2" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">2.2 </span>Dependencies</h2>
+
+<div id="S2.p1" class="ltx_para">
+<p class="ltx_p">In OpTiMSoC, we try to use only external dependencies which are known to be stable and readily available.
+Some can be installed as distribution packages, and others can be downloaded as binaries from us.
+</p>
+</div>
+<div id="S2.p2" class="ltx_para">
+<p class="ltx_p">First, install all required packages from Ubuntu.</p>
+</div>
+<div id="S2.p3" class="ltx_para">
+<div id="LSTx1" class="ltx_listingblock ltx_lstlisting ltx_lst_language_sh ltx_listing">
+<div class="ltx_listing_data"><a href="data:text/plain,sudo%20apt-get%20-y%20install%20curl%20git%20build-essential%20tcl%20libusb-1.0-0-dev%20%5C%0A%20%20libboost-dev%20libelf-dev%20swig%20python3%20python3-yaml%0A%0A#%20optional,%20but%20highly%20recommended:%20a%20waveform%20viewer%0Asudo%20apt-get%20-y%20install%20gtkwave">&#11015;</a></div>
 <table class="ltx_tabular">
 <tr class="ltx_tr">
 <td class="ltx_td">
-                <span class="ltx_text ltx_lst_line ltx_font_typewriter">sudo<span class="ltx_text ltx_lst_space">&nbsp;</span>apt-get<span class="ltx_text ltx_lst_space">&nbsp;</span>-y<span class="ltx_text ltx_lst_space">&nbsp;</span>install<span class="ltx_text ltx_lst_space">&nbsp;</span>git<span class="ltx_text ltx_lst_space">&nbsp;</span>build-essential<span class="ltx_text ltx_lst_space">&nbsp;</span>tcl<span class="ltx_text ltx_lst_space">&nbsp;</span>libusb-1.0-0-dev<span class="ltx_text ltx_lst_space">&nbsp;</span>\</span>
+                <span class="ltx_text ltx_lst_line ltx_font_typewriter">sudo<span class="ltx_text ltx_lst_space">&nbsp;</span>apt-get<span class="ltx_text ltx_lst_space">&nbsp;</span>-y<span class="ltx_text ltx_lst_space">&nbsp;</span>install<span class="ltx_text ltx_lst_space">&nbsp;</span>curl<span class="ltx_text ltx_lst_space">&nbsp;</span>git<span class="ltx_text ltx_lst_space">&nbsp;</span>build-essential<span class="ltx_text ltx_lst_space">&nbsp;</span>tcl<span class="ltx_text ltx_lst_space">&nbsp;</span>libusb-1.0-0-dev<span class="ltx_text ltx_lst_space">&nbsp;</span>\</span>
               </td>
 </tr>
 <tr class="ltx_tr">
@@ -77,7 +108,7 @@ packages to be installed:</p>
 </tr>
 <tr class="ltx_tr">
 <td class="ltx_td">
-                <span class="ltx_text ltx_lst_line ltx_font_typewriter">#<span class="ltx_text ltx_lst_space">&nbsp;</span>optional,<span class="ltx_text ltx_lst_space">&nbsp;</span>but<span class="ltx_text ltx_lst_space">&nbsp;</span>highly<span class="ltx_text ltx_lst_space">&nbsp;</span>recommended:<span class="ltx_text ltx_lst_space">&nbsp;</span>a<span class="ltx_text ltx_lst_space">&nbsp;</span>waveform<span class="ltx_text ltx_lst_space">&nbsp;</span>viewer</span>
+                <span class="ltx_text ltx_lst_line ltx_font_typewriter ltx_font_italic">#<span class="ltx_text ltx_lst_space">&nbsp;</span>optional,<span class="ltx_text ltx_lst_space">&nbsp;</span>but<span class="ltx_text ltx_lst_space">&nbsp;</span>highly<span class="ltx_text ltx_lst_space">&nbsp;</span>recommended:<span class="ltx_text ltx_lst_space">&nbsp;</span>a<span class="ltx_text ltx_lst_space">&nbsp;</span>waveform<span class="ltx_text ltx_lst_space">&nbsp;</span>viewer</span>
               </td>
 </tr>
 <tr class="ltx_tr">
@@ -88,30 +119,19 @@ packages to be installed:</p>
 </table>
 </div>
 </div>
-</section>
-<section id="S2" class="ltx_section">
-<h2 class="ltx_title ltx_title_section">
-<span class="ltx_tag ltx_tag_section">2.2 </span>Option 1: Install the OpTiMSoC binary distribution (recommended)</h2>
-
-<div id="S2.p1" class="ltx_para">
-<p class="ltx_p">The most simple way to get started is with the release packages. You
-can find the OpTiMSoC releases here:
-<a href="https://github.com/optimsoc/sources/releases" title="" class="ltx_ref ltx_url"><span class="ltx_text ltx_font_typewriter">https://github.com/optimsoc/sources/releases</span></a>. With the release
-you can find the distribution packets that can be extracted into any
-directory and used directly from there. The recommended default is to
-install OpTiMSoC into <code class="ltx_verbatim ltx_font_typewriter">/opt/optimsoc</code>. There are two packages:
-the <code class="ltx_verbatim ltx_font_typewriter">base</code> package contains the programs, libraries and tools
-to get started. The <code class="ltx_verbatim ltx_font_typewriter">examples</code> package contains prebuilt verilator
-simulations for the real quick start.</p>
+<div id="S2.p4" class="ltx_para">
+<p class="ltx_p">Additionally, we need two things which are not available as Ubuntu packages right now: a recent version of Verilator, and the or1k-elf-multicore toolchain (compiler, C library, debugger, etc.).
+Install them with our binary installation script:</p>
 </div>
-<div id="S2.p2" class="ltx_para">
-<p class="ltx_p">For example take the 2016.1 release and download both <code class="ltx_verbatim ltx_font_typewriter">base</code> and
-<code class="ltx_verbatim ltx_font_typewriter">examples</code>. Then create the base folder and extract the package:</p>
-</div>
-<div id="S2.p3" class="ltx_para">
-<div id="LSTx2" class="ltx_listingblock ltx_lstlisting ltx_listing">
-<div class="ltx_listing_data"><a href="data:text/plain,sudo%20mkdir%20/opt/optimsoc%0Asudo%20chown%20%24USER%20/opt/optimsoc%0Atar%20-xzf%20optimsoc-2016.1-base.tgz%20-C%20/opt/optimsoc%0Atar%20-xzf%20optimsoc-2016.1-examples.tgz%20-C%20/opt/optimsoc">&#11015;</a></div>
+<div id="S2.p5" class="ltx_para">
+<div id="LSTx2" class="ltx_listingblock ltx_lstlisting ltx_lst_language_sh ltx_listing">
+<div class="ltx_listing_data"><a href="data:text/plain,#%20if%20it%20does%20not%20exist%20yet:%20prepare%20the%20/opt/optimsoc%20directory%0Asudo%20mkdir%20/opt/optimsoc%0Asudo%20chown%20%24USER%20/opt/optimsoc%0A%0A#%20download%20and%20install%20the%20prebuilt%20tools%0Acurl%20-O%20https://raw.githubusercontent.com/optimsoc/prebuilts/master/optimsoc-prebuilt-deploy.py%0Asudo%20python%20optimsoc-prebuilt-deploy.py%20-d%20/opt/optimsoc%20verilator%20or1kelf">&#11015;</a></div>
 <table class="ltx_tabular">
+<tr class="ltx_tr">
+<td class="ltx_td">
+                <span class="ltx_text ltx_lst_line ltx_font_typewriter ltx_font_italic">#<span class="ltx_text ltx_lst_space">&nbsp;</span>if<span class="ltx_text ltx_lst_space">&nbsp;</span>it<span class="ltx_text ltx_lst_space">&nbsp;</span>does<span class="ltx_text ltx_lst_space">&nbsp;</span>not<span class="ltx_text ltx_lst_space">&nbsp;</span>exist<span class="ltx_text ltx_lst_space">&nbsp;</span>yet:<span class="ltx_text ltx_lst_space">&nbsp;</span>prepare<span class="ltx_text ltx_lst_space">&nbsp;</span>the<span class="ltx_text ltx_lst_space">&nbsp;</span>/opt/optimsoc<span class="ltx_text ltx_lst_space">&nbsp;</span>directory</span>
+              </td>
+</tr>
 <tr class="ltx_tr">
 <td class="ltx_td">
                 <span class="ltx_text ltx_lst_line ltx_font_typewriter">sudo<span class="ltx_text ltx_lst_space">&nbsp;</span>mkdir<span class="ltx_text ltx_lst_space">&nbsp;</span>/opt/optimsoc</span>
@@ -124,82 +144,33 @@ simulations for the real quick start.</p>
 </tr>
 <tr class="ltx_tr">
 <td class="ltx_td">
-                <span class="ltx_text ltx_lst_line ltx_font_typewriter">tar<span class="ltx_text ltx_lst_space">&nbsp;</span>-xzf<span class="ltx_text ltx_lst_space">&nbsp;</span>optimsoc-2016.1-base.tgz<span class="ltx_text ltx_lst_space">&nbsp;</span>-C<span class="ltx_text ltx_lst_space">&nbsp;</span>/opt/optimsoc</span>
+                <span class="ltx_text ltx_lst_line"></span>
               </td>
 </tr>
 <tr class="ltx_tr">
 <td class="ltx_td">
-                <span class="ltx_text ltx_lst_line ltx_font_typewriter">tar<span class="ltx_text ltx_lst_space">&nbsp;</span>-xzf<span class="ltx_text ltx_lst_space">&nbsp;</span>optimsoc-2016.1-examples.tgz<span class="ltx_text ltx_lst_space">&nbsp;</span>-C<span class="ltx_text ltx_lst_space">&nbsp;</span>/opt/optimsoc</span>
-              </td>
-</tr>
-</table>
-</div>
-</div>
-<div id="S2.p4" class="ltx_para">
-<p class="ltx_p">You can now use the installation after setting the environment with
-the pre-installed environment source script:</p>
-</div>
-<div id="S2.p5" class="ltx_para">
-<div id="LSTx3" class="ltx_listingblock ltx_lstlisting ltx_listing">
-<div class="ltx_listing_data"><a href="data:text/plain,cd%20/opt/optimsoc/2016.1%0Asource%20optimsoc-environment.sh">&#11015;</a></div>
-<table class="ltx_tabular">
-<tr class="ltx_tr">
-<td class="ltx_td">
-                <span class="ltx_text ltx_lst_line ltx_font_typewriter">cd<span class="ltx_text ltx_lst_space">&nbsp;</span>/opt/optimsoc/2016.1</span>
+                <span class="ltx_text ltx_lst_line ltx_font_typewriter ltx_font_italic">#<span class="ltx_text ltx_lst_space">&nbsp;</span>download<span class="ltx_text ltx_lst_space">&nbsp;</span>and<span class="ltx_text ltx_lst_space">&nbsp;</span>install<span class="ltx_text ltx_lst_space">&nbsp;</span>the<span class="ltx_text ltx_lst_space">&nbsp;</span>prebuilt<span class="ltx_text ltx_lst_space">&nbsp;</span>tools</span>
               </td>
 </tr>
 <tr class="ltx_tr">
 <td class="ltx_td">
-                <span class="ltx_text ltx_lst_line ltx_font_typewriter">source<span class="ltx_text ltx_lst_space">&nbsp;</span>optimsoc-environment.sh</span>
+                <span class="ltx_text ltx_lst_line ltx_font_typewriter">curl<span class="ltx_text ltx_lst_space">&nbsp;</span>-O<span class="ltx_text ltx_lst_space">&nbsp;</span>https://raw.githubusercontent.com/optimsoc/prebuilts/master/optimsoc-prebuilt-deploy.py</span>
+              </td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td">
+                <span class="ltx_text ltx_lst_line ltx_font_typewriter">sudo<span class="ltx_text ltx_lst_space">&nbsp;</span>python<span class="ltx_text ltx_lst_space">&nbsp;</span>optimsoc-prebuilt-deploy.py<span class="ltx_text ltx_lst_space">&nbsp;</span>-d<span class="ltx_text ltx_lst_space">&nbsp;</span>/opt/optimsoc<span class="ltx_text ltx_lst_space">&nbsp;</span>verilator<span class="ltx_text ltx_lst_space">&nbsp;</span>or1kelf</span>
               </td>
 </tr>
 </table>
 </div>
 </div>
 <div id="S2.p6" class="ltx_para">
-<p class="ltx_p">We encourage you to put this code into your <code class="ltx_verbatim ltx_font_typewriter">~/.bashrc</code>.</p>
+<p class="ltx_p">To use the prebuilt tools some environment variables need to be adjusted.
+This is done by running the following command <span class="ltx_text ltx_font_bold">in every terminal session that you want to use OpTiMSoC in</span>:</p>
 </div>
 <div id="S2.p7" class="ltx_para">
-<p class="ltx_p">Now you are near to get started, but you need some programs to build
-software to run in OpTiMSoC and execute the verilator-based
-simulations. Those are: the <code class="ltx_verbatim ltx_font_typewriter">or1k-elf-multicore</code> toolchain and
-<code class="ltx_verbatim ltx_font_typewriter">Verilator</code>. All those tools are free, but are (except for an
-outdated <code class="ltx_verbatim ltx_font_typewriter">Verilator</code> version) not part of the Linux package
-systems. Hence you need to built those tools as described in the
-Reference Manual, or you can simply download some prebuilt-versions.</p>
-</div>
-<div id="S2.p8" class="ltx_para">
-<p class="ltx_p">To do so simply run a script for your version:</p>
-</div>
-<div id="S2.p9" class="ltx_para">
-<div id="LSTx4" class="ltx_listingblock ltx_lstlisting ltx_listing">
-<div class="ltx_listing_data"><a href="data:text/plain,%20%20wget%20https://raw.githubusercontent.com/optimsoc/prebuilts/master/optimsoc-prebuilt-deploy.py%0A%20%20chmod%20a+x%20optimsoc-prebuilt-deploy.py%0A%20%20./optimsoc-prebuilt-deploy.py%20-d%20/opt/optimsoc%20verilator%20or1kelf">&#11015;</a></div>
-<table class="ltx_tabular">
-<tr class="ltx_tr">
-<td class="ltx_td">
-                <span class="ltx_text ltx_lst_line ltx_font_typewriter"><span class="ltx_text ltx_lst_space">&nbsp;&nbsp;</span>wget<span class="ltx_text ltx_lst_space">&nbsp;</span>https://raw.githubusercontent.com/optimsoc/prebuilts/master/optimsoc-prebuilt-deploy.py</span>
-              </td>
-</tr>
-<tr class="ltx_tr">
-<td class="ltx_td">
-                <span class="ltx_text ltx_lst_line ltx_font_typewriter"><span class="ltx_text ltx_lst_space">&nbsp;&nbsp;</span>chmod<span class="ltx_text ltx_lst_space">&nbsp;</span>a+x<span class="ltx_text ltx_lst_space">&nbsp;</span>optimsoc-prebuilt-deploy.py</span>
-              </td>
-</tr>
-<tr class="ltx_tr">
-<td class="ltx_td">
-                <span class="ltx_text ltx_lst_line ltx_font_typewriter"><span class="ltx_text ltx_lst_space">&nbsp;&nbsp;</span>./optimsoc-prebuilt-deploy.py<span class="ltx_text ltx_lst_space">&nbsp;</span>-d<span class="ltx_text ltx_lst_space">&nbsp;</span>/opt/optimsoc<span class="ltx_text ltx_lst_space">&nbsp;</span>verilator<span class="ltx_text ltx_lst_space">&nbsp;</span>or1kelf</span>
-              </td>
-</tr>
-</table>
-</div>
-</div>
-<div id="S2.p10" class="ltx_para">
-<p class="ltx_p">You may of course leave out any of the tools if you already have it
-installed. Finally, you will get another source script to set up the
-environment for the prebuilt tools:</p>
-</div>
-<div id="S2.p11" class="ltx_para">
-<div id="LSTx5" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div id="LSTx3" class="ltx_listingblock ltx_lstlisting ltx_lst_language_sh ltx_listing">
 <div class="ltx_listing_data"><a href="data:text/plain,source%20/opt/optimsoc/setup_prebuilt.sh">&#11015;</a></div>
 <table class="ltx_tabular">
 <tr class="ltx_tr">
@@ -210,105 +181,147 @@ environment for the prebuilt tools:</p>
 </table>
 </div>
 </div>
-<div id="S2.p12" class="ltx_para">
-<p class="ltx_p">We recommend to put this line into your <code class="ltx_verbatim ltx_font_typewriter">~/.bashrc</code> file as well.</p>
-</div>
-<div id="S2.p13" class="ltx_para">
-<p class="ltx_p">You are now ready to go to the tutorials in Chapter&nbsp;<a href="chap_tutorials.html" title="Chapter&nbsp;3 Tutorials &#8227; OpTiMSoC User Guide" class="ltx_ref"><span class="ltx_text ltx_ref_tag">3</span></a>.</p>
-</div>
-</section>
-<section id="S3" class="ltx_section">
-<h2 class="ltx_title ltx_title_section">
-<span class="ltx_tag ltx_tag_section">2.3 </span>Option 2: Build OpTiMSoC from sources</h2>
-
-<div id="S3.p1" class="ltx_para">
-<p class="ltx_p">You can also build OpTiMSoC from the sources. This options usually
-becomes standard if you start developing for or around OpTiMSoC. The
-build is done from one git repository:
-<a href="https://github.com/optimsoc/sources" title="" class="ltx_ref ltx_url"><span class="ltx_text ltx_font_typewriter">https://github.com/optimsoc/sources</span></a>.</p>
-</div>
-<div id="S3.p2" class="ltx_para">
-<p class="ltx_p">It is generally a good idea to understand git, especially when you
-plan to contribute to OpTiMSoC. Nevertheless, we will give a more
-detailed explanation of how to get your personal copies of OpTiMSoC
-and (potentially) update them.</p>
-</div>
-<div id="S3.p3" class="ltx_para">
-<p class="ltx_p">The start of a successful built is to install the tools
-<code class="ltx_verbatim ltx_font_typewriter">Verilator</code> and the <code class="ltx_verbatim ltx_font_typewriter">or1k-elf-multicore</code> toolchain. The most
-simple way is to start with the prebuilt tools as described above,
-then set the environment for the tools.</p>
-</div>
-<div id="S3.p4" class="ltx_para ltx_docnote">
+<div id="S2.p8" class="ltx_para ltx_docnote">
 <p class="ltx_p ltx_docnote_title">Note</p>
-<p class="ltx_p">During the installation, you&rsquo;ll frequently encounter three types of
-directories.</p>
-<ul id="I1" class="ltx_itemize">
-<li id="I1.i1" class="ltx_item">
-<div id="I1.i1.p1" class="ltx_para">
-<p class="ltx_p"><span class="ltx_text ltx_font_bold">The source directory.</span> This is the place where the
-uncompiled source code files are stored. Usually, that is the folder that
-you cloned from the git repository.</p>
-<p class="ltx_p">The <code class="ltx_verbatim ltx_font_typewriter">$OPTIMSOC_SOURCE</code> environment variable should point to
-the root of the source directories.</p>
-</div>
-</li>
-<li id="I1.i2" class="ltx_item">
-<div id="I1.i2.p1" class="ltx_para">
-<p class="ltx_p"><span class="ltx_text ltx_font_bold">The build or object directory.</span> For different
-components such a directory is used to build the component. The
-installer performs the build process in these directories and you
-perform individual builds there if you develop for OpTiMSoC (for
-example: if you develop the libraries).</p>
-<p class="ltx_p">Sometimes, this directory is equal to the source directory, but
-most of the time, we create a new directory called <span class="ltx_text ltx_font_typewriter">build</span>
-inside the source directory. Doing so has a great benefit: if
-something in the build process went wrong, you can simply delete
-the build directory and start all over again.</p>
-</div>
-</li>
-<li id="I1.i3" class="ltx_item">
-<div id="I1.i3.p1" class="ltx_para">
-<p class="ltx_p"><span class="ltx_text ltx_font_bold">The installation directory.</span> This is the target
-directory where results of the build process are stored for further
-use. It is used by the installer or you when running <span class="ltx_text ltx_font_typewriter">make
-install</span> to store the files generated by the build process. The
-environment variable <code class="ltx_verbatim ltx_font_typewriter">$OPTIMSOC</code> points to the root of the
-installation directory.</p>
-</div>
-</li>
-</ul>
-</div>
-<section id="S3.SS1" class="ltx_subsection">
-<h3 class="ltx_title ltx_title_subsection">
-<span class="ltx_tag ltx_tag_subsection">2.3.1 </span>Prerequisites</h3>
-
-<div id="S3.SS1.p1" class="ltx_para">
-<p class="ltx_p">You will need some programs to build OpTiMSoC, e.g., on Ubuntu 14.04:</p>
-</div>
-<div id="S3.SS1.p2" class="ltx_para">
-<div id="LSTx6" class="ltx_listingblock ltx_lstlisting ltx_listing">
-<div class="ltx_listing_data"><a href="data:text/plain,sudo%20apt-get%20install%20autoconf%20automake%20libtool%20tcl%20texlive%20texlive-latex-extra%20texlive-fonts-extra">&#11015;</a></div>
+<p class="ltx_p">Automatically load the prebuilts in every new terminal session by adding it to your <code class="ltx_verbatim ltx_font_typewriter">~/.bashrc</code> file:</p>
+<div id="LSTx4" class="ltx_listingblock ltx_lstlisting ltx_lst_language_sh ltx_listing">
+<div class="ltx_listing_data"><a href="data:text/plain,echo%20'source%20/opt/optimsoc/setup_prebuilt.sh'%20&gt;&gt;%20~/.bashrc">&#11015;</a></div>
 <table class="ltx_tabular">
 <tr class="ltx_tr">
 <td class="ltx_td">
-                  <span class="ltx_text ltx_lst_line ltx_font_typewriter">sudo<span class="ltx_text ltx_lst_space">&nbsp;</span>apt-get<span class="ltx_text ltx_lst_space">&nbsp;</span>install<span class="ltx_text ltx_lst_space">&nbsp;</span>autoconf<span class="ltx_text ltx_lst_space">&nbsp;</span>automake<span class="ltx_text ltx_lst_space">&nbsp;</span>libtool<span class="ltx_text ltx_lst_space">&nbsp;</span>tcl<span class="ltx_text ltx_lst_space">&nbsp;</span>texlive<span class="ltx_text ltx_lst_space">&nbsp;</span>texlive-latex-extra<span class="ltx_text ltx_lst_space">&nbsp;</span>texlive-fonts-extra</span>
-                </td>
+                <span class="ltx_text ltx_lst_line ltx_font_typewriter"><span class="ltx_text ltx_lst_keyword ltx_font_bold">echo</span><span class="ltx_text ltx_lst_space">&nbsp;</span>'source<span class="ltx_text ltx_lst_space">&nbsp;</span>/opt/optimsoc/setup_prebuilt.sh'<span class="ltx_text ltx_lst_space">&nbsp;</span>&gt;&gt;<span class="ltx_text ltx_lst_space">&nbsp;</span>~/.bashrc</span>
+              </td>
 </tr>
 </table>
 </div>
 </div>
 </section>
+<section id="S3" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">2.3 </span>Install OpTiMSoC</h2>
+
+<div id="S3.p1" class="ltx_para">
+<p class="ltx_p">Now that all preparations are done, you are now ready to install the OpTiMSoC framework itself.
+There are two options: either, you can install a prebuilt release package, or you can build OpTiMSoC yourself from the sources.
+We recommend starting with a binary release installation, and move to a custom-built version only after you verified that everything works.</p>
+</div>
+<section id="S3.SS1" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">2.3.1 </span>Recommended: OpTiMSoC binary releases</h3>
+
+<div id="S3.SS1.p1" class="ltx_para">
+<p class="ltx_p">The most simple way to get started is with the release packages. You
+can find the OpTiMSoC releases here:
+<a href="https://github.com/optimsoc/sources/releases" title="" class="ltx_ref ltx_url"><span class="ltx_text ltx_font_typewriter">https://github.com/optimsoc/sources/releases</span></a>. With the release
+you can find the distribution packages that can be extracted into any
+directory and used directly from there. The recommended default is to
+install OpTiMSoC into <code class="ltx_verbatim ltx_font_typewriter">/opt/optimsoc</code>. There are two packages:
+the <code class="ltx_verbatim ltx_font_typewriter">base</code> package contains the programs, libraries and tools
+to get started. The <code class="ltx_verbatim ltx_font_typewriter">examples</code> package contains prebuilt example systems (both in simulation and FPGA bitstreams) for the real quick start.</p>
+</div>
+<div id="S3.SS1.p2" class="ltx_para">
+<p class="ltx_p">To install the 2016.1 release into <code class="ltx_verbatim ltx_font_typewriter">/opt/optimsoc</code>, run the following commands:</p>
+</div>
+<div id="S3.SS1.p3" class="ltx_para">
+<div id="LSTx5" class="ltx_listingblock ltx_lstlisting ltx_lst_language_sh ltx_listing">
+<div class="ltx_listing_data"><a href="data:text/plain,wget%20https://github.com/optimsoc/sources/releases/download/v2016.1/optimsoc-2016.1-base.tar.gz%0Awget%20https://github.com/optimsoc/sources/releases/download/v2016.1/optimsoc-2016.1-examples.tar.gz%0Atar%20-xf%20optimsoc-2016.1-base.tar.gz%20-C%20/opt/optimsoc%0Atar%20-xf%20optimsoc-2016.1-examples.tar.gz%20-C%20/opt/optimsoc">&#11015;</a></div>
+<table class="ltx_tabular">
+<tr class="ltx_tr">
+<td class="ltx_td">
+                  <span class="ltx_text ltx_lst_line ltx_font_typewriter">wget<span class="ltx_text ltx_lst_space">&nbsp;</span>https://github.com/optimsoc/sources/releases/download/v2016.1/optimsoc-2016.1-base.tar.gz</span>
+                </td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td">
+                  <span class="ltx_text ltx_lst_line ltx_font_typewriter">wget<span class="ltx_text ltx_lst_space">&nbsp;</span>https://github.com/optimsoc/sources/releases/download/v2016.1/optimsoc-2016.1-examples.tar.gz</span>
+                </td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td">
+                  <span class="ltx_text ltx_lst_line ltx_font_typewriter">tar<span class="ltx_text ltx_lst_space">&nbsp;</span>-xf<span class="ltx_text ltx_lst_space">&nbsp;</span>optimsoc-2016.1-base.tar.gz<span class="ltx_text ltx_lst_space">&nbsp;</span>-C<span class="ltx_text ltx_lst_space">&nbsp;</span>/opt/optimsoc</span>
+                </td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td">
+                  <span class="ltx_text ltx_lst_line ltx_font_typewriter">tar<span class="ltx_text ltx_lst_space">&nbsp;</span>-xf<span class="ltx_text ltx_lst_space">&nbsp;</span>optimsoc-2016.1-examples.tar.gz<span class="ltx_text ltx_lst_space">&nbsp;</span>-C<span class="ltx_text ltx_lst_space">&nbsp;</span>/opt/optimsoc</span>
+                </td>
+</tr>
+</table>
+</div>
+</div>
+<div id="S3.SS1.p4" class="ltx_para">
+<p class="ltx_p">To use OpTiMSoC multiple environment variables need to be set.
+This is done by running the following command <span class="ltx_text ltx_font_bold">in every terminal session that you want to use OpTiMSoC in</span>:</p>
+</div>
+<div id="S3.SS1.p5" class="ltx_para">
+<div id="LSTx6" class="ltx_listingblock ltx_lstlisting ltx_lst_language_sh ltx_listing">
+<div class="ltx_listing_data"><a href="data:text/plain,cd%20/opt/optimsoc/2016.1%0Asource%20optimsoc-environment.sh">&#11015;</a></div>
+<table class="ltx_tabular">
+<tr class="ltx_tr">
+<td class="ltx_td">
+                  <span class="ltx_text ltx_lst_line ltx_font_typewriter"><span class="ltx_text ltx_lst_keyword ltx_font_bold">cd</span><span class="ltx_text ltx_lst_space">&nbsp;</span>/opt/optimsoc/2016.1</span>
+                </td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td">
+                  <span class="ltx_text ltx_lst_line ltx_font_typewriter">source<span class="ltx_text ltx_lst_space">&nbsp;</span>optimsoc-environment.sh</span>
+                </td>
+</tr>
+</table>
+</div>
+</div>
+<div id="S3.SS1.p6" class="ltx_para ltx_docnote">
+<p class="ltx_p ltx_docnote_title">Note</p>
+<p class="ltx_p">Automatically load the OpTiMSoC environment in every new terminal session by adding it to your <code class="ltx_verbatim ltx_font_typewriter">~/.bashrc</code> file:</p>
+<div id="LSTx7" class="ltx_listingblock ltx_lstlisting ltx_lst_language_sh ltx_listing">
+<div class="ltx_listing_data"><a href="data:text/plain,echo%20'cd%20/opt/optimsoc/2016.1;%20source%20optimsoc-environment.sh'%20&gt;&gt;%20~/.bashrc">&#11015;</a></div>
+<table class="ltx_tabular">
+<tr class="ltx_tr">
+<td class="ltx_td">
+                  <span class="ltx_text ltx_lst_line ltx_font_typewriter"><span class="ltx_text ltx_lst_keyword ltx_font_bold">echo</span><span class="ltx_text ltx_lst_space">&nbsp;</span>'<span class="ltx_text ltx_lst_keyword ltx_font_bold">cd</span><span class="ltx_text ltx_lst_space">&nbsp;</span>/opt/optimsoc/2016.1;<span class="ltx_text ltx_lst_space">&nbsp;</span>source<span class="ltx_text ltx_lst_space">&nbsp;</span>optimsoc-environment.sh'<span class="ltx_text ltx_lst_space">&nbsp;</span>&gt;&gt;<span class="ltx_text ltx_lst_space">&nbsp;</span>~/.bashrc</span>
+                </td>
+</tr>
+</table>
+</div>
+</div>
+<div id="S3.SS1.p7" class="ltx_para">
+<p class="ltx_p">Installation complete!
+You are now ready to go to the tutorials in Chapter&nbsp;<a href="chap_tutorials.html" title="Chapter&nbsp;3 Tutorials &#8227; OpTiMSoC User Guide" class="ltx_ref"><span class="ltx_text ltx_ref_tag">3</span></a>.</p>
+</div>
+</section>
 <section id="S3.SS2" class="ltx_subsection">
 <h3 class="ltx_title ltx_title_subsection">
-<span class="ltx_tag ltx_tag_subsection">2.3.2 </span>Get the sources</h3>
+<span class="ltx_tag ltx_tag_subsection">2.3.2 </span>Alternative: Build OpTiMSoC from sources</h3>
 
 <div id="S3.SS2.p1" class="ltx_para">
-<p class="ltx_p">Start with checking out the repository:</p>
+<p class="ltx_p">You can also build OpTiMSoC from the sources. This options usually
+becomes standard if you start developing for or around OpTiMSoC. The
+build is done from one git repository:
+<a href="https://github.com/optimsoc/sources" title="" class="ltx_ref ltx_url"><span class="ltx_text ltx_font_typewriter">https://github.com/optimsoc/sources</span></a>.</p>
 </div>
 <div id="S3.SS2.p2" class="ltx_para">
-<div id="LSTx7" class="ltx_listingblock ltx_lstlisting ltx_listing">
-<div class="ltx_listing_data"><a href="data:text/plain,git%20clone%20https://github.com/optimsoc/sources.git%20optimsoc-sources%0Acd%20optimsoc-sources">&#11015;</a></div>
+<p class="ltx_p">It is generally a good idea to understand git, especially when you
+plan to contribute to OpTiMSoC. Nevertheless, we will give a more
+detailed explanation of how to get your personal copies of OpTiMSoC
+and (potentially) update them.</p>
+</div>
+<div id="S3.SS2.p3" class="ltx_para">
+<p class="ltx_p">First, you need some additional tools (the &ldquo;build dependencies&rdquo;):</p>
+<div id="LSTx8" class="ltx_listingblock ltx_lstlisting ltx_lst_language_sh ltx_listing">
+<div class="ltx_listing_data"><a href="data:text/plain,sudo%20apt-get%20-y%20install%20texlive%20texlive-latex-extra%20texlive-fonts-extra">&#11015;</a></div>
+<table class="ltx_tabular">
+<tr class="ltx_tr">
+<td class="ltx_td">
+                  <span class="ltx_text ltx_lst_line ltx_font_typewriter">sudo<span class="ltx_text ltx_lst_space">&nbsp;</span>apt-get<span class="ltx_text ltx_lst_space">&nbsp;</span>-y<span class="ltx_text ltx_lst_space">&nbsp;</span>install<span class="ltx_text ltx_lst_space">&nbsp;</span>texlive<span class="ltx_text ltx_lst_space">&nbsp;</span>texlive-latex-extra<span class="ltx_text ltx_lst_space">&nbsp;</span>texlive-fonts-extra</span>
+                </td>
+</tr>
+</table>
+</div>
+</div>
+<div id="S3.SS2.p4" class="ltx_para">
+<p class="ltx_p">Then get the sources from git:</p>
+<div id="LSTx9" class="ltx_listingblock ltx_lstlisting ltx_lst_language_sh ltx_listing">
+<div class="ltx_listing_data"><a href="data:text/plain,git%20clone%20https://github.com/optimsoc/sources.git%20optimsoc-sources%0Acd%20optimsoc-sources%0A#%20optional:%20checkout%20a%20release%20version%0Agit%20checkout%20v2016.1">&#11015;</a></div>
 <table class="ltx_tabular">
 <tr class="ltx_tr">
 <td class="ltx_td">
@@ -317,23 +330,29 @@ installation directory.</p>
 </tr>
 <tr class="ltx_tr">
 <td class="ltx_td">
-                  <span class="ltx_text ltx_lst_line ltx_font_typewriter">cd<span class="ltx_text ltx_lst_space">&nbsp;</span>optimsoc-sources</span>
+                  <span class="ltx_text ltx_lst_line ltx_font_typewriter"><span class="ltx_text ltx_lst_keyword ltx_font_bold">cd</span><span class="ltx_text ltx_lst_space">&nbsp;</span>optimsoc-sources</span>
+                </td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td">
+                  <span class="ltx_text ltx_lst_line ltx_font_typewriter ltx_font_italic">#<span class="ltx_text ltx_lst_space">&nbsp;</span>optional:<span class="ltx_text ltx_lst_space">&nbsp;</span>checkout<span class="ltx_text ltx_lst_space">&nbsp;</span>a<span class="ltx_text ltx_lst_space">&nbsp;</span>release<span class="ltx_text ltx_lst_space">&nbsp;</span>version</span>
+                </td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td">
+                  <span class="ltx_text ltx_lst_line ltx_font_typewriter">git<span class="ltx_text ltx_lst_space">&nbsp;</span>checkout<span class="ltx_text ltx_lst_space">&nbsp;</span>v2016.1</span>
                 </td>
 </tr>
 </table>
 </div>
 </div>
-</section>
-<section id="S3.SS3" class="ltx_subsection">
-<h3 class="ltx_title ltx_title_subsection">
-<span class="ltx_tag ltx_tag_subsection">2.3.3 </span>Build the code</h3>
-
-<div id="S3.SS3.p1" class="ltx_para">
-<p class="ltx_p">OpTiMSoC contains a Makefile which controls the whole build process. Building is
-as simple as calling (inside the top-level source directory)</p>
+<div id="S3.SS2.p5" class="ltx_para">
+<p class="ltx_p">Now you&rsquo;re ready to build OpTiMSoC.
+OpTiMSoC contains a Makefile which controls the whole build process.
+Building is as simple as calling (inside the top-level source directory that you just got from git)</p>
 </div>
-<div id="S3.SS3.p2" class="ltx_para">
-<div id="LSTx8" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div id="S3.SS2.p6" class="ltx_para">
+<div id="LSTx10" class="ltx_listingblock ltx_lstlisting ltx_lst_language_sh ltx_listing">
 <div class="ltx_listing_data"><a href="data:text/plain,make">&#11015;</a></div>
 <table class="ltx_tabular">
 <tr class="ltx_tr">
@@ -344,33 +363,53 @@ as simple as calling (inside the top-level source directory)</p>
 </table>
 </div>
 </div>
-</section>
-<section id="S3.SS4" class="ltx_subsection">
-<h3 class="ltx_title ltx_title_subsection">
-<span class="ltx_tag ltx_tag_subsection">2.3.4 </span>Install the code</h3>
-
-<div id="S3.SS4.p1" class="ltx_para">
-<p class="ltx_p">To install OpTiMSoC to the default location in <code class="ltx_verbatim ltx_font_typewriter">/opt/optimsoc/VERSION</code>
-it&rsquo;s sufficient to run</p>
+<div id="S3.SS2.p7" class="ltx_para">
+<p class="ltx_p">By default this also builds the documentation, the Verilator examples and the FPGA bitstreams (which requires Xilinx Vivado to be working).
+You can disable some features by passing variables to the <code class="ltx_verbatim ltx_font_typewriter">Makefile</code>:</p>
 </div>
-<div id="S3.SS4.p2" class="ltx_para">
-<div id="LSTx9" class="ltx_listingblock ltx_lstlisting ltx_listing">
-<div class="ltx_listing_data"><a href="data:text/plain,sudo%20make%20install">&#11015;</a></div>
+<div id="S3.SS2.p8" class="ltx_para">
+<div id="LSTx11" class="ltx_listingblock ltx_lstlisting ltx_lst_language_sh ltx_listing">
+<div class="ltx_listing_data"><a href="data:text/plain,#%20only%20build%20Verilator%20examples,%20but%20no%20bitstreams%20and%20no%20docs%0Amake%20BUILD_EXAMPLES=yes%20BUILD_EXAMPLES_FPGA=no%20BUILD_DOCS=no">&#11015;</a></div>
 <table class="ltx_tabular">
 <tr class="ltx_tr">
 <td class="ltx_td">
-                  <span class="ltx_text ltx_lst_line ltx_font_typewriter">sudo<span class="ltx_text ltx_lst_space">&nbsp;</span>make<span class="ltx_text ltx_lst_space">&nbsp;</span>install</span>
+                  <span class="ltx_text ltx_lst_line ltx_font_typewriter ltx_font_italic">#<span class="ltx_text ltx_lst_space">&nbsp;</span>only<span class="ltx_text ltx_lst_space">&nbsp;</span>build<span class="ltx_text ltx_lst_space">&nbsp;</span>Verilator<span class="ltx_text ltx_lst_space">&nbsp;</span>examples,<span class="ltx_text ltx_lst_space">&nbsp;</span>but<span class="ltx_text ltx_lst_space">&nbsp;</span>no<span class="ltx_text ltx_lst_space">&nbsp;</span>bitstreams<span class="ltx_text ltx_lst_space">&nbsp;</span>and<span class="ltx_text ltx_lst_space">&nbsp;</span>no<span class="ltx_text ltx_lst_space">&nbsp;</span>docs</span>
+                </td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td">
+                  <span class="ltx_text ltx_lst_line ltx_font_typewriter">make<span class="ltx_text ltx_lst_space">&nbsp;</span>BUILD_EXAMPLES=yes<span class="ltx_text ltx_lst_space">&nbsp;</span>BUILD_EXAMPLES_FPGA=no<span class="ltx_text ltx_lst_space">&nbsp;</span>BUILD_DOCS=no</span>
                 </td>
 </tr>
 </table>
 </div>
 </div>
-<div id="S3.SS4.p3" class="ltx_para">
+<div id="S3.SS2.p9" class="ltx_para">
+<p class="ltx_p">If you need even more fine-grained control over the build process, call the build script <code class="ltx_verbatim ltx_font_typewriter">tools/build.py</code> directly.
+Running <code class="ltx_verbatim ltx_font_typewriter">tools/build.py --help</code> will give you a list of all available options.</p>
+</div>
+<div id="S3.SS2.p10" class="ltx_para">
+<p class="ltx_p">After the build process, all build artifacts are located in <code class="ltx_verbatim ltx_font_typewriter">objdir/dist</code>.
+You can either use OpTiMSoC directly from there (good during development), or copy it to a more suitable installation location in <code class="ltx_verbatim ltx_font_typewriter">/opt/optimsoc/VERSION</code> by running</p>
+</div>
+<div id="S3.SS2.p11" class="ltx_para">
+<div id="LSTx12" class="ltx_listingblock ltx_lstlisting ltx_lst_language_sh ltx_listing">
+<div class="ltx_listing_data"><a href="data:text/plain,make%20install">&#11015;</a></div>
+<table class="ltx_tabular">
+<tr class="ltx_tr">
+<td class="ltx_td">
+                  <span class="ltx_text ltx_lst_line ltx_font_typewriter">make<span class="ltx_text ltx_lst_space">&nbsp;</span>install</span>
+                </td>
+</tr>
+</table>
+</div>
+</div>
+<div id="S3.SS2.p12" class="ltx_para">
 <p class="ltx_p">You can also modify the target directory using environment variables passed to
-make. This is especially useful if you don&rsquo;t have enough permissions to
+<code class="ltx_verbatim ltx_font_typewriter">make</code>. This is especially useful if you don&rsquo;t have enough permissions to
 write to <code class="ltx_verbatim ltx_font_typewriter">/opt/optimsoc</code>.</p>
 </div>
-<div id="S3.SS4.p4" class="ltx_para">
+<div id="S3.SS2.p13" class="ltx_para">
 <ul id="I2" class="ltx_itemize">
 <li id="I2.i1" class="ltx_item">
 <div id="I2.i1.p1" class="ltx_para">
@@ -387,13 +426,13 @@ The installation will then go exactly into this directory.</p>
 </li>
 </ul>
 </div>
-<div id="S3.SS4.p5" class="ltx_para">
-<div id="LSTx10" class="ltx_listingblock ltx_lstlisting ltx_listing">
-<div class="ltx_listing_data"><a href="data:text/plain,#%20recommended%20option:%20use%20INSTALL_PREFIX%0Amake%20install%20INSTALL_PREFIX=~/optimsoc%0A%0A#%20full%20control%20for%20special%20cases:%20use%20INSTALL_TARGET%0Amake%20install%20INSTALL_TARGET=~/optimsoc-testversion">&#11015;</a></div>
+<div id="S3.SS2.p14" class="ltx_para">
+<div id="LSTx13" class="ltx_listingblock ltx_lstlisting ltx_lst_language_sh ltx_listing">
+<div class="ltx_listing_data"><a href="data:text/plain,#%20use%20INSTALL_PREFIX%20to%20install%20into%20~/optimsoc/VERSION%0Amake%20install%20INSTALL_PREFIX=~/optimsoc%0A%0A#%20full%20control%20for%20special%20cases:%20use%20INSTALL_TARGET%0A#%20to%20install%20into%20~/optimsoc-testversion%0Amake%20install%20INSTALL_TARGET=~/optimsoc-testversion">&#11015;</a></div>
 <table class="ltx_tabular">
 <tr class="ltx_tr">
 <td class="ltx_td">
-                  <span class="ltx_text ltx_lst_line ltx_font_typewriter">#<span class="ltx_text ltx_lst_space">&nbsp;</span>recommended<span class="ltx_text ltx_lst_space">&nbsp;</span>option:<span class="ltx_text ltx_lst_space">&nbsp;</span>use<span class="ltx_text ltx_lst_space">&nbsp;</span>INSTALL_PREFIX</span>
+                  <span class="ltx_text ltx_lst_line ltx_font_typewriter ltx_font_italic">#<span class="ltx_text ltx_lst_space">&nbsp;</span>use<span class="ltx_text ltx_lst_space">&nbsp;</span>INSTALL_PREFIX<span class="ltx_text ltx_lst_space">&nbsp;</span>to<span class="ltx_text ltx_lst_space">&nbsp;</span>install<span class="ltx_text ltx_lst_space">&nbsp;</span>into<span class="ltx_text ltx_lst_space">&nbsp;</span>~/optimsoc/VERSION</span>
                 </td>
 </tr>
 <tr class="ltx_tr">
@@ -408,7 +447,12 @@ The installation will then go exactly into this directory.</p>
 </tr>
 <tr class="ltx_tr">
 <td class="ltx_td">
-                  <span class="ltx_text ltx_lst_line ltx_font_typewriter">#<span class="ltx_text ltx_lst_space">&nbsp;</span>full<span class="ltx_text ltx_lst_space">&nbsp;</span>control<span class="ltx_text ltx_lst_space">&nbsp;</span>for<span class="ltx_text ltx_lst_space">&nbsp;</span>special<span class="ltx_text ltx_lst_space">&nbsp;</span>cases:<span class="ltx_text ltx_lst_space">&nbsp;</span>use<span class="ltx_text ltx_lst_space">&nbsp;</span>INSTALL_TARGET</span>
+                  <span class="ltx_text ltx_lst_line ltx_font_typewriter ltx_font_italic">#<span class="ltx_text ltx_lst_space">&nbsp;</span>full<span class="ltx_text ltx_lst_space">&nbsp;</span>control<span class="ltx_text ltx_lst_space">&nbsp;</span>for<span class="ltx_text ltx_lst_space">&nbsp;</span>special<span class="ltx_text ltx_lst_space">&nbsp;</span>cases:<span class="ltx_text ltx_lst_space">&nbsp;</span>use<span class="ltx_text ltx_lst_space">&nbsp;</span>INSTALL_TARGET</span>
+                </td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td">
+                  <span class="ltx_text ltx_lst_line ltx_font_typewriter ltx_font_italic">#<span class="ltx_text ltx_lst_space">&nbsp;</span>to<span class="ltx_text ltx_lst_space">&nbsp;</span>install<span class="ltx_text ltx_lst_space">&nbsp;</span>into<span class="ltx_text ltx_lst_space">&nbsp;</span>~/optimsoc-testversion</span>
                 </td>
 </tr>
 <tr class="ltx_tr">
@@ -418,6 +462,33 @@ The installation will then go exactly into this directory.</p>
 </tr>
 </table>
 </div>
+</div>
+<div id="S3.SS2.p15" class="ltx_para">
+<p class="ltx_p">Independent of which directory you chose, to use OpTiMSoC multiple environment variables need to be set.
+This is done by running the following command <span class="ltx_text ltx_font_bold">in every terminal session that you want to use OpTiMSoC in</span>:</p>
+</div>
+<div id="S3.SS2.p16" class="ltx_para">
+<div id="LSTx14" class="ltx_listingblock ltx_lstlisting ltx_lst_language_sh ltx_listing">
+<div class="ltx_listing_data"><a href="data:text/plain,cd%20YOUR_INSTALLATION_DIR%0Asource%20optimsoc-environment.sh">&#11015;</a></div>
+<table class="ltx_tabular">
+<tr class="ltx_tr">
+<td class="ltx_td">
+                  <span class="ltx_text ltx_lst_line ltx_font_typewriter"><span class="ltx_text ltx_lst_keyword ltx_font_bold">cd</span><span class="ltx_text ltx_lst_space">&nbsp;</span>YOUR_INSTALLATION_DIR</span>
+                </td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td">
+                  <span class="ltx_text ltx_lst_line ltx_font_typewriter">source<span class="ltx_text ltx_lst_space">&nbsp;</span>optimsoc-environment.sh</span>
+                </td>
+</tr>
+</table>
+</div>
+</div>
+<div id="S3.SS2.p17" class="ltx_para">
+<p class="ltx_p">See the binary installation description above for information on how to make this change permanent.</p>
+</div>
+<div id="S3.SS2.p18" class="ltx_para">
+<p class="ltx_p">OpTiMSoC is now ready to be used and you can continue with the tutorials in Chapter&nbsp;<a href="chap_tutorials.html" title="Chapter&nbsp;3 Tutorials &#8227; OpTiMSoC User Guide" class="ltx_ref"><span class="ltx_text ltx_ref_tag">3</span></a>.</p>
 </div>
 </section>
 </section>

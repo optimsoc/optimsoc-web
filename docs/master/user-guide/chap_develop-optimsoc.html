@@ -97,7 +97,7 @@ You also find the toplevel files that are used to simulate the system in Verilat
 <span class="ltx_tag ltx_tag_enumerate">1.</span> 
 <div id="I2.i1.p1" class="ltx_para">
 <p class="ltx_p">Build and run a Verilator-based simulation of a single compute tile.</p>
-<div id="LSTx36" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div id="LSTx40" class="ltx_listingblock ltx_lstlisting ltx_listing">
 <div class="ltx_listing_data"><a href="data:text/plain,cd%20some/directory%0Aoptimsoc-fusesoc%20--cores-root%20%24OPTIMSOC_SOURCE/examples%20sim%20optimsoc:examples:compute_tile_sim">&#11015;</a></div>
 <table class="ltx_tabular">
 <tr class="ltx_tr">
@@ -118,7 +118,7 @@ You also find the toplevel files that are used to simulate the system in Verilat
 <span class="ltx_tag ltx_tag_enumerate">2.</span> 
 <div id="I2.i2.p1" class="ltx_para">
 <p class="ltx_p">Only build a Verilator simulation of a single compute tile</p>
-<div id="LSTx37" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div id="LSTx41" class="ltx_listingblock ltx_lstlisting ltx_listing">
 <div class="ltx_listing_data"><a href="data:text/plain,optimsoc-fusesoc%20--cores-root%20%24OPTIMSOC_SOURCE/examples%20sim%20--build-only%20optimsoc:examples:compute_tile_sim">&#11015;</a></div>
 <table class="ltx_tabular">
 <tr class="ltx_tr">
@@ -135,7 +135,7 @@ You also find the toplevel files that are used to simulate the system in Verilat
 <div id="I2.i3.p1" class="ltx_para">
 <p class="ltx_p">Set the parameter <code class="ltx_verbatim ltx_font_typewriter">NUM_CORES</code> to 2 to create a system with two CPU cores inside the compute tile.
 You can have a look inside the top-level source file <span class="ltx_ref ltx_path ltx_ref_self"><span class="ltx_text ltx_font_typewriter">$OPTIMSOC_SOURCE/examples/sim/compute_tile/tb_compute_tile.sv</span></span> for other parameters that are available.</p>
-<div id="LSTx38" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div id="LSTx42" class="ltx_listingblock ltx_lstlisting ltx_listing">
 <div class="ltx_listing_data"><a href="data:text/plain,optimsoc-fusesoc%20--cores-root%20%24OPTIMSOC_SOURCE/examples%20sim%20--build-only%20optimsoc:examples:compute_tile_sim%20--NUM_CORES%202">&#11015;</a></div>
 <table class="ltx_tabular">
 <tr class="ltx_tr">
@@ -152,7 +152,7 @@ You can have a look inside the top-level source file <span class="ltx_ref ltx_pa
 <div id="I2.i4.p1" class="ltx_para">
 <p class="ltx_p">Synthesize a 2x2 system with four compute tiles for the Nexys 4 DDR board using Xilinx Vivado.
 This step requires Vivado to be installed and working, and a lot of time (approx. 30 minutes, depending on your machine).</p>
-<div id="LSTx39" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div id="LSTx43" class="ltx_listingblock ltx_lstlisting ltx_listing">
 <div class="ltx_listing_data"><a href="data:text/plain,optimsoc-fusesoc%20--cores-root%20%24OPTIMSOC_SOURCE/examples%20build%20optimsoc:examples:system_2x2_cccc_nexys4ddr">&#11015;</a></div>
 <table class="ltx_tabular">
 <tr class="ltx_tr">
@@ -168,7 +168,7 @@ This step requires Vivado to be installed and working, and a lot of time (approx
 <span class="ltx_tag ltx_tag_enumerate">5.</span> 
 <div id="I2.i5.p1" class="ltx_para">
 <p class="ltx_p">Now flash the bitstream that the previous step generated to the FPGA.</p>
-<div id="LSTx40" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div id="LSTx44" class="ltx_listingblock ltx_lstlisting ltx_listing">
 <div class="ltx_listing_data"><a href="data:text/plain,optimsoc-fusesoc%20--cores-root%20%24OPTIMSOC_SOURCE/examples%20pgm%20optimsoc:examples:system_2x2_cccc_nexys4ddr">&#11015;</a></div>
 <table class="ltx_tabular">
 <tr class="ltx_tr">
@@ -407,7 +407,7 @@ configuration, it also configures Verilog-mode).</p>
 </div>
 <div id="S2.SS3.p4" class="ltx_para">
 <p class="ltx_p">Open the file <code class="ltx_verbatim ltx_font_typewriter">~/.emacs</code> and add the following lines at the end:</p>
-<div id="LSTx41" class="ltx_listingblock ltx_lstlisting ltx_lst_language_Lisp ltx_listing">
+<div id="LSTx45" class="ltx_listingblock ltx_lstlisting ltx_lst_language_Lisp ltx_listing">
 <div class="ltx_listing_data"><a href="data:text/plain,(add-hook%20'verilog-mode-hook%20'(lambda%20()%0A%20%20;;%20Don't%20auto-insert%20spaces%20after%20%22;%22%0A%20%20(setq%20verilog-auto-newline%20nil)%0A%20%20;;%20Don't%20indent%20with%20tabs!%0A%20%20(setq%20indent-tabs-mode%20nil)))%0A(add-hook%20'verilog-mode-hook%20'(lambda%20()%0A%20%20;;%20Remove%20any%20tabs%20from%20file%20when%20saving%0A%20%20(add-hook%20'write-file-functions%20(lambda()%0A%20%20%20%20(untabify%20(point-min)%20(point-max))%0A%20%20%20%20nil))))">&#11015;</a></div>
 <table class="ltx_tabular">
 <tr class="ltx_tr">
@@ -494,7 +494,7 @@ Verilog-mode which is part of your Emacs installation, it is probably located
 somewhere in <code class="ltx_verbatim ltx_font_typewriter">/usr/share/emacs</code>, e.g.
 <code class="ltx_verbatim ltx_font_typewriter">/usr/share/emacs/24.3/lisp/progmodes/verilog-mode.elc</code> on Ubuntu 14.04.
 You can run</p>
-<div id="LSTx42" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div id="LSTx46" class="ltx_listingblock ltx_lstlisting ltx_listing">
 <div class="ltx_listing_data"><a href="data:text/plain,%24&gt;%20find%20/usr/share/emacs%20-name%20'verilog-mode.el*'">&#11015;</a></div>
 <table class="ltx_tabular">
 <tr class="ltx_tr">
@@ -517,7 +517,7 @@ main menu on <em class="ltx_emph">Project <math id="S2.SS3.SSSx1.p3.m1" class="l
 tab, write <code class="ltx_verbatim ltx_font_typewriter">/usr/bin/emacs</code> into the field <em class="ltx_emph">Location</em>. Leave the field
 <em class="ltx_emph">Working Directory</em> empty and enter the following string into the field
 <em class="ltx_emph">Arguments</em>:</p>
-<div id="LSTx43" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div id="LSTx47" class="ltx_listingblock ltx_lstlisting ltx_listing">
 <div class="ltx_listing_data"><a href="data:text/plain,--batch%20--no-site-file%20-u%20%24%7Benv_var:USER%7D%0A-l%20/usr/share/emacs/24.3/lisp/progmodes/verilog-mode.elc%0A%22%24%7Bselected_resource_loc%7D%22%20-f%20verilog-auto%20-f%20save-buffer">&#11015;</a></div>
 <table class="ltx_tabular">
 <tr class="ltx_tr">
