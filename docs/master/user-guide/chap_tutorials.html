@@ -340,7 +340,7 @@ step, you can just start simulations of compute tiles with multiple
 cores.</p>
 </div>
 <div id="S3.p2" class="ltx_para">
-<p class="ltx_p">Inside <span class="ltx_ref ltx_path ltx_ref_self"><span class="ltx_text ltx_font_typewriter">OPTIMSOC/examples/sim/compute_tile</span></span> you&rsquo;ll find a dual-core version and a quad-core version of the system with just one compute tile that you just simulated in the previous step.
+<p class="ltx_p">Inside <span class="ltx_ref ltx_path ltx_ref_self"><span class="ltx_text ltx_font_typewriter">$OPTIMSOC/examples/sim/compute_tile</span></span> you&rsquo;ll find a dual-core version and a quad-core version of the system with just one compute tile that you just simulated in the previous step.
 You can run those examples like you did before.</p>
 </div>
 <div id="S3.p3" class="ltx_para">
@@ -1200,7 +1200,12 @@ You don&rsquo;t need to connect any additional power supply.</p>
 The OpTiMSoC release contains pre-built bitstreams for the single compute tile system and a 2x2 system with four compute tiles, meaning we can start directly with programming the FPGA.</p>
 </div>
 <div id="S7.SS2.p2" class="ltx_para">
-<p class="ltx_p">To program the FPGA we&rsquo;ll use Vivado.</p>
+<p class="ltx_p">There are two ways to program the device: using the Vivado GUI, or using the command line.</p>
+</div>
+<section id="S7.SS2.SSSx1" class="ltx_subsubsection">
+<h4 class="ltx_title ltx_title_subsubsection">Programming the FPGA with the Vivado GUI</h4>
+
+<div id="S7.SS2.SSSx1.p1" class="ltx_para">
 <ul id="I5" class="ltx_itemize">
 <li id="I5.i1" class="ltx_item">
 <div id="I5.i1.p1" class="ltx_para">
@@ -1230,7 +1235,7 @@ The OpTiMSoC release contains pre-built bitstreams for the single compute tile s
 <li id="I5.i6" class="ltx_item">
 <div id="I5.i6.p1" class="ltx_para">
 <p class="ltx_p">In the dialog window, select the bitstream file. We&rsquo;ll start directly with the larger 2x2 system, you can find the bitstream in
-<span class="ltx_ref ltx_path ltx_ref_self"><span class="ltx_text ltx_font_typewriter">$OPTISMOC/examples/system_2x2_cccc_nexys4ddr/system_2x2_cccc_nexys4ddr.bit</span></span>.</p>
+<span class="ltx_ref ltx_path ltx_ref_self"><span class="ltx_text ltx_font_typewriter">$OPTISMOC/examples/fpga/nexys4ddr/system_2x2_cccc/system_2x2_cccc_nexys4ddr.bit</span></span>.</p>
 </div>
 </li>
 <li id="I5.i7" class="ltx_item">
@@ -1245,9 +1250,26 @@ The OpTiMSoC release contains pre-built bitstreams for the single compute tile s
 </li>
 </ul>
 </div>
-<div id="S7.SS2.p3" class="ltx_para">
+<div id="S7.SS2.SSSx1.p2" class="ltx_para">
 <p class="ltx_p">After a couple of seconds, your FPGA contains the SoC hardware and is ready to be used.</p>
 </div>
+</section>
+<section id="S7.SS2.SSSx2" class="ltx_subsubsection">
+<h4 class="ltx_title ltx_title_subsubsection">Programming the FPGA on the Command Line</h4>
+
+<div id="S7.SS2.SSSx2.p1" class="ltx_para">
+<div id="LSTx38" class="ltx_listingblock ltx_lstlisting ltx_lst_language_sh ltx_listing">
+<div class="ltx_listing_data"><a href="data:text/plain,optimsoc-pgm-fpga%20%24OPTISMOC/examples/fpga/nexys4ddr/system_2x2_cccc/system_2x2_cccc_nexys4ddr.bit%20xc7a100t_0">&#11015;</a></div>
+<table class="ltx_tabular">
+<tr class="ltx_tr">
+<td class="ltx_td">
+                    <span class="ltx_text ltx_lst_line ltx_font_typewriter">optimsoc-pgm-fpga<span class="ltx_text ltx_lst_space">&nbsp;</span>$OPTISMOC/examples/fpga/nexys4ddr/system_2x2_cccc/system_2x2_cccc_nexys4ddr.bit<span class="ltx_text ltx_lst_space">&nbsp;</span>xc7a100t_0</span>
+                  </td>
+</tr>
+</table>
+</div>
+</div>
+</section>
 </section>
 <section id="S7.SS3" class="ltx_subsection">
 <h3 class="ltx_title ltx_title_subsection">
@@ -1261,7 +1283,7 @@ Fortunately, you don&rsquo;t need to connect any additional cables; the USB cabl
 <div id="S7.SS3.p2" class="ltx_para">
 <p class="ltx_p">First, check which serial port was assigned to the board.
 Usually the easiest way is to do a</p>
-<div id="LSTx38" class="ltx_listingblock ltx_lstlisting ltx_lst_language_sh ltx_listing">
+<div id="LSTx39" class="ltx_listingblock ltx_lstlisting ltx_lst_language_sh ltx_listing">
 <div class="ltx_listing_data"><a href="data:text/plain,ls%20/dev/ttyUSB*">&#11015;</a></div>
 <table class="ltx_tabular">
 <tr class="ltx_tr">
@@ -1279,7 +1301,7 @@ Make note of this device name, and replace it accordingly in all the following s
 <div id="S7.SS3.p4" class="ltx_para">
 <p class="ltx_p">Just as before, we&rsquo;ll need more than one terminal window.
 Open a first terminal and start <code class="ltx_verbatim ltx_font_typewriter">opensocdebugd</code> (remember to replace the device with your device name).</p>
-<div id="LSTx39" class="ltx_listingblock ltx_lstlisting ltx_lst_language_sh ltx_listing">
+<div id="LSTx40" class="ltx_listingblock ltx_lstlisting ltx_lst_language_sh ltx_listing">
 <div class="ltx_listing_data"><a href="data:text/plain,opensocdebugd%20uart%20device=/dev/ttyUSB1%20speed=12000000">&#11015;</a></div>
 <table class="ltx_tabular">
 <tr class="ltx_tr">
