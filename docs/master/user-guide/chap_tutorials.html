@@ -72,7 +72,7 @@ used to simulate local software.</p>
 Our demonstration software is available in an extra repository:</p>
 </div>
 <div id="S1.p5" class="ltx_para">
-<div id="LSTx15" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div id="LSTx16" class="ltx_listingblock ltx_lstlisting ltx_listing">
 <div class="ltx_listing_data"><a href="data:text/plain,git%20clone%20https://github.com/optimsoc/baremetal-apps%0Acd%20baremetal-apps">&#11015;</a></div>
 <table class="ltx_tabular">
 <tr class="ltx_tr">
@@ -92,7 +92,7 @@ Our demonstration software is available in an extra repository:</p>
 <p class="ltx_p">Build a simple &ldquo;Hello World&rdquo; example:</p>
 </div>
 <div id="S1.p7" class="ltx_para">
-<div id="LSTx16" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div id="LSTx17" class="ltx_listingblock ltx_lstlisting ltx_listing">
 <div class="ltx_listing_data"><a href="data:text/plain,cd%20hello%0Amake">&#11015;</a></div>
 <table class="ltx_tabular">
 <tr class="ltx_tr">
@@ -137,7 +137,7 @@ They are essentially transformed versions of the ELF file, i.e. the software bin
 <p class="ltx_p">Now you have everything you need to run the hello world example on a simulated SoC hardware:</p>
 </div>
 <div id="S1.p11" class="ltx_para">
-<div id="LSTx17" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div id="LSTx18" class="ltx_listingblock ltx_lstlisting ltx_listing">
 <div class="ltx_listing_data"><a href="data:text/plain,%24OPTIMSOC/examples/sim/compute_tile/compute_tile_sim_singlecore%20--meminit=hello.vmem">&#11015;</a></div>
 <table class="ltx_tabular">
 <tr class="ltx_tr">
@@ -152,7 +152,7 @@ They are essentially transformed versions of the ELF file, i.e. the software bin
 <p class="ltx_p">And you&rsquo;ll get roughly this output:</p>
 </div>
 <div id="S1.p13" class="ltx_para">
-<div id="LSTx18" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div id="LSTx19" class="ltx_listingblock ltx_lstlisting ltx_listing">
 <div class="ltx_listing_data"><a href="data:text/plain,TOP.tb_compute_tile.u_compute_tile.gen_cores%5B0%5D.u_core.u_cpu.bus_gen.ibus_bridge:%20Wishbone%20bus%20IF%20is%20B3_REGISTERED_FEEDBACK%0ATOP.tb_compute_tile.u_compute_tile.gen_cores%5B0%5D.u_core.u_cpu.bus_gen.dbus_bridge:%20Wishbone%20bus%20IF%20is%20B3_REGISTERED_FEEDBACK%0A%5B%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%2022,%200%5D%20Software%20reset%0A%5B%20%20%20%20%20%20%20%20%20%20%20%20%20%20%2063128,%200%5D%20Terminated%20at%20address%200x0000e958%20(status:%20%20%20%20%20%20%20%20%20%200)%0A-%20../src/optimsoc_trace_monitor_trace_monitor/verilog/trace_monitor.sv:89:%20Verilog%20%24finish">&#11015;</a></div>
 <table class="ltx_tabular">
 <tr class="ltx_tr">
@@ -187,7 +187,7 @@ They are essentially transformed versions of the ELF file, i.e. the software bin
 <p class="ltx_p">Furthermore, you will find a file called <code class="ltx_verbatim ltx_font_typewriter">stdout.000</code> which shows the actual output:</p>
 </div>
 <div id="S1.p15" class="ltx_para">
-<div id="LSTx19" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div id="LSTx20" class="ltx_listingblock ltx_lstlisting ltx_listing">
 <div class="ltx_listing_data"><a href="data:text/plain,#%20OpTiMSoC%20trace_monitor%20stdout%20file%0A#%20%5BTIME,%20CORE%5D%20MESSAGE%0A%5B%20%20%20%20%20%20%20%20%20%20%20%20%20%20%2039614,%200%5D%20Hello%20World!%20Core%200%20of%201%20in%20tile%200,%20my%20absolute%20core%20id%20is:%200%0A%5B%20%20%20%20%20%20%20%20%20%20%20%20%20%20%2048764,%200%5D%20There%20are%201%20compute%20tiles:%0A%5B%20%20%20%20%20%20%20%20%20%20%20%20%20%20%2057162,%200%5D%20%20rank%200%20is%20tile%200">&#11015;</a></div>
 <table class="ltx_tabular">
 <tr class="ltx_tr">
@@ -238,7 +238,7 @@ environments. For variables this method is extended by putting data in
 further registers (often <code class="ltx_verbatim ltx_font_typewriter">r3</code>). This still is minimally intrusive
 and allows you to trace values. The printf is also done that way (see
 newlib):</p>
-<div id="LSTx20" class="ltx_listingblock ltx_lstlisting ltx_lst_language_C ltx_listing">
+<div id="LSTx21" class="ltx_listingblock ltx_lstlisting ltx_lst_language_C ltx_listing">
 <div class="ltx_listing_data"><a href="data:text/plain,void%20sim_putc(unsigned%20char%20c)%20%7B%0A%20%20asm(%22l.addi%5Ctr3,%0,0%22:%20:%22r%22%20(c));%0A%20%20asm(%22l.nop%20%0%22:%20:%22K%22%20(NOP_PUTC));%0A%7D">&#11015;</a></div>
 <table class="ltx_tabular">
 <tr class="ltx_tr">
@@ -262,7 +262,7 @@ newlib):</p>
 monitor captures theses characters and puts them to the stdout file.</p>
 <p class="ltx_p">You can easily add your own &ldquo;traces&rdquo; using a macro defined in
 <span class="ltx_ref ltx_path ltx_ref_self"><span class="ltx_text ltx_font_typewriter">$OPTIMSOC/soc/sw/include/baremetal/optimsoc-baremetal.h</span></span>:</p>
-<div id="LSTx21" class="ltx_listingblock ltx_lstlisting ltx_lst_language_C ltx_listing">
+<div id="LSTx22" class="ltx_listingblock ltx_lstlisting ltx_lst_language_C ltx_listing">
 <div class="ltx_listing_data"><a href="data:text/plain,#define%20OPTIMSOC_TRACE(id,v)%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%5C%0A%20%20%20asm(%22l.addi%5Ctr3,%0,0%22:%20:%22r%22%20(v)%20:%20%22r3%22);%20%5C%0A%20%20%20asm(%22l.nop%20%0%22:%20:%22K%22%20(id));">&#11015;</a></div>
 <table class="ltx_tabular">
 <tr class="ltx_tr">
@@ -295,7 +295,7 @@ It instructs Verilator to write all signals into a file.
 You can then start a waveform viewer, like GTKWave to display it.</p>
 </div>
 <div id="S2.p2" class="ltx_para">
-<div id="LSTx22" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div id="LSTx23" class="ltx_listingblock ltx_lstlisting ltx_listing">
 <div class="ltx_listing_data"><a href="data:text/plain,%24OPTIMSOC/examples/sim/compute_tile/compute_tile_sim_singlecore%20--meminit=hello.vmem%20--vcd">&#11015;</a></div>
 <table class="ltx_tabular">
 <tr class="ltx_tr">
@@ -309,12 +309,12 @@ You can then start a waveform viewer, like GTKWave to display it.</p>
 <div id="S2.p3" class="ltx_para">
 <p class="ltx_p">This command will run the hello world example like it did before, but this time Verilator additionally writes a <code class="ltx_verbatim ltx_font_typewriter">sim.vcd</code> waveform file.
 You can now view this file.</p>
-<div id="LSTx23" class="ltx_listingblock ltx_lstlisting ltx_listing">
-<div class="ltx_listing_data"><a href="data:text/plain,gtkwave%20sim.vcd">&#11015;</a></div>
+<div id="LSTx24" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div class="ltx_listing_data"><a href="data:text/plain,gtkwave%20-o%20sim.vcd">&#11015;</a></div>
 <table class="ltx_tabular">
 <tr class="ltx_tr">
 <td class="ltx_td">
-                <span class="ltx_text ltx_lst_line ltx_font_typewriter">gtkwave<span class="ltx_text ltx_lst_space">&nbsp;</span>sim.vcd</span>
+                <span class="ltx_text ltx_lst_line ltx_font_typewriter">gtkwave<span class="ltx_text ltx_lst_space">&nbsp;</span>-o<span class="ltx_text ltx_lst_space">&nbsp;</span>sim.vcd</span>
               </td>
 </tr>
 </table>
@@ -368,7 +368,7 @@ In our pre-built example, each compute tile has two CPU cores, meaning you have 
 <p class="ltx_p">Execute it again to get the hello world experience:</p>
 </div>
 <div id="S4.p3" class="ltx_para">
-<div id="LSTx24" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div id="LSTx25" class="ltx_listingblock ltx_lstlisting ltx_listing">
 <div class="ltx_listing_data"><a href="data:text/plain,%24OPTIMSOC/examples/sim/system_2x2_cccc/system_2x2_cccc_sim_dualcore%20--meminit=hello.vmem">&#11015;</a></div>
 <table class="ltx_tabular">
 <tr class="ltx_tr">
@@ -419,7 +419,7 @@ All cores send a message to core 0. If all messages have been received, core 0
 prints a message &ldquo;Received all messages. Hello World!&rdquo;.</p>
 </div>
 <div id="S4.p8" class="ltx_para">
-<div id="LSTx25" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div id="LSTx26" class="ltx_listingblock ltx_lstlisting ltx_listing">
 <div class="ltx_listing_data"><a href="data:text/plain,#%20start%20from%20the%20the%20baremetal-apps%20source%20code%20directory%0Acd%20hello_mpsimple%0Amake%0A%24OPTIMSOC/examples/sim/system_2x2_cccc/system_2x2_cccc_sim_dualcore%20--meminit=hello_mpsimple.vmem">&#11015;</a></div>
 <table class="ltx_tabular">
 <tr class="ltx_tr">
@@ -451,7 +451,7 @@ prints a message &ldquo;Received all messages. Hello World!&rdquo;.</p>
 first check the output of core 0.</p>
 </div>
 <div id="S4.p10" class="ltx_para">
-<div id="LSTx26" class="ltx_listingblock ltx_lstlisting ltx_lst_language_sh ltx_listing">
+<div id="LSTx27" class="ltx_listingblock ltx_lstlisting ltx_lst_language_sh ltx_listing">
 <div class="ltx_listing_data"><a href="data:text/plain,%24&gt;%20cat%20stdout.000%0A#%20OpTiMSoC%20trace_monitor%20stdout%20file%0A#%20%5BTIME,%20CORE%5D%20MESSAGE%0A%5B%20%20%20%20%20%20%20%20%20%20%20%20%20%20%2042844,%200%5D%20Wait%20for%203%20messages%0A%5B%20%20%20%20%20%20%20%20%20%20%20%20%20%20%2048734,%200%5D%20Received%20all%20messages.%20Hello%20World!">&#11015;</a></div>
 <table class="ltx_tabular">
 <tr class="ltx_tr">
@@ -471,7 +471,7 @@ first check the output of core 0.</p>
 </tr>
 <tr class="ltx_tr">
 <td class="ltx_td">
-                <span class="ltx_text ltx_lst_line ltx_font_typewriter">[<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>42844,<span class="ltx_text ltx_lst_space">&nbsp;</span>0]<span class="ltx_text ltx_lst_space">&nbsp;</span>Wait<span class="ltx_text ltx_lst_space">&nbsp;</span><span class="ltx_text ltx_lst_keyword ltx_font_bold">for</span><span class="ltx_text ltx_lst_space">&nbsp;</span>3<span class="ltx_text ltx_lst_space">&nbsp;</span>messages</span>
+                <span class="ltx_text ltx_lst_line ltx_font_typewriter">[<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>42844,<span class="ltx_text ltx_lst_space">&nbsp;</span>0]<span class="ltx_text ltx_lst_space">&nbsp;</span><span class="ltx_text ltx_lst_keyword ltx_font_bold">Wait</span><span class="ltx_text ltx_lst_space">&nbsp;</span><span class="ltx_text ltx_lst_keyword ltx_font_bold">for</span><span class="ltx_text ltx_lst_space">&nbsp;</span>3<span class="ltx_text ltx_lst_space">&nbsp;</span>messages</span>
               </td>
 </tr>
 <tr class="ltx_tr">
@@ -541,7 +541,7 @@ This tutorial works best if you have multiple terminal windows open at the same 
 <div id="S5.p8" class="ltx_para">
 <p class="ltx_p">So, open a new terminal (or a new tab inside your terminal), and start the simulation of the SoC hardware.
 </p>
-<div id="LSTx27" class="ltx_listingblock ltx_lstlisting ltx_lst_language_sh ltx_listing">
+<div id="LSTx28" class="ltx_listingblock ltx_lstlisting ltx_lst_language_sh ltx_listing">
 <div class="ltx_listing_data"><a href="data:text/plain,%24OPTIMSOC/examples/sim/system_2x2_cccc/system_2x2_cccc_sim_dualcore_debug">&#11015;</a></div>
 <table class="ltx_tabular">
 <tr class="ltx_tr">
@@ -553,11 +553,8 @@ This tutorial works best if you have multiple terminal windows open at the same 
 </div>
 </div>
 <div id="S5.p9" class="ltx_para">
-<p class="ltx_p">You&rsquo;ll see a lot of &ldquo;Software reset&rdquo; messages; that&rsquo;s expected.</p>
-</div>
-<div id="S5.p10" class="ltx_para">
 <p class="ltx_p">Now, open a second terminal (leave the first one running!) and type</p>
-<div id="LSTx28" class="ltx_listingblock ltx_lstlisting ltx_lst_language_sh ltx_listing">
+<div id="LSTx29" class="ltx_listingblock ltx_lstlisting ltx_lst_language_sh ltx_listing">
 <div class="ltx_listing_data"><a href="data:text/plain,opensocdebugd%20tcp">&#11015;</a></div>
 <table class="ltx_tabular">
 <tr class="ltx_tr">
@@ -568,18 +565,18 @@ This tutorial works best if you have multiple terminal windows open at the same 
 </table>
 </div>
 </div>
-<div id="S5.p11" class="ltx_para">
+<div id="S5.p10" class="ltx_para">
 <p class="ltx_p">This starts the &ldquo;Open SoC Debug daemon.&rdquo;
 Open SoC Debug (or short, OSD) is the name of the debug infrastructure that&rsquo;s included with OpTiMSoC.
 The Open SoC Debug daemon is a tool which connects to the debug system inside the SoC hardware and interacts with it.
 In our case, since the SoC is running inside the Verilator simulation on the same PC, we use TCP to connect the simulated hardware <code class="ltx_verbatim ltx_font_typewriter">opensocdebugd</code>.
 Later, if we run the hardware on an FPGA, we&rsquo;ll use UART or USB instead of TCP &ndash; but all the commands stay the same.</p>
 </div>
-<div id="S5.p12" class="ltx_para">
+<div id="S5.p11" class="ltx_para">
 <p class="ltx_p">After some seconds, <code class="ltx_verbatim ltx_font_typewriter">opensocdebugd</code> will output something like this.</p>
 </div>
-<div id="S5.p13" class="ltx_para">
-<div id="LSTx29" class="ltx_listingblock ltx_lstlisting ltx_lst_language_sh ltx_listing">
+<div id="S5.p12" class="ltx_para">
+<div id="LSTx30" class="ltx_listingblock ltx_lstlisting ltx_lst_language_sh ltx_listing">
 <div class="ltx_listing_data"><a href="data:text/plain,Open%20SoC%20Debug%20Daemon%0ABackend:%20tcp%0ASystem%20ID:%200001%0A22%20debug%20modules%20found:%0A%20%5B0%5D:%20HOST%0A%20%20%20version:%200000%0A%20%5B1%5D:%20SCM%0A%20%20%20version:%200000%0A%20%5B2%5D:%20MAM%0A%20%20%20version:%200000%0A%20%20%20data%20width:%2032,%20address%20width:%2032%0A%20%20%20number%20of%20regions:%201%0A%20%20%20%20%20%5B0%5D%20base%20address:%200x0000000000000000,%20memory%20size:%2033554432%20Bytes%0A%20%5B3%5D:%20STM%0A%20%20%20version:%200000%0A%20%20%20xlen:%2032%0A%20%5B4%5D:%20CTM%0A%20%20%20version:%200000%0A%20%20%20addr_width:%2032%0A%20%20%20data_width:%2032%0A%20%5B5%5D:%20STM%0A%20%20%20version:%200000%0A%20%20%20xlen:%2032%0A%20%5B6%5D:%20CTM%0A%20%20%20version:%200000%0A%20%20%20addr_width:%2032%0A%20%20%20data_width:%2032%0A%20%5B7%5D:%20MAM%0A%20%20%20version:%200000%0A%20%20%20data%20width:%2032,%20address%20width:%2032%0A%20%20%20number%20of%20regions:%201%0A%20%20%20%20%20%5B0%5D%20base%20address:%200x0000000000000000,%20memory%20size:%2033554432%20Bytes%0A%20%5B8%5D:%20STM%0A%20%20%20version:%200000%0A%20%20%20xlen:%2032%0A%20%5B9%5D:%20CTM%0A%20%20%20version:%200000%0A%20%20%20addr_width:%2032%0A%20%20%20data_width:%2032%0A%20%5B10%5D:%20STM%0A%20%20%20version:%200000%0A%20%20%20xlen:%2032%0A%20%5B11%5D:%20CTM%0A%20%20%20version:%200000%0A%20%20%20addr_width:%2032%0A%20%20%20data_width:%2032%0A...%20(we've%20skipped%20some%20output%20here)%20...%0AWait%20for%20connection">&#11015;</a></div>
 <table class="ltx_tabular">
 <tr class="ltx_tr">
@@ -819,13 +816,13 @@ Later, if we run the hardware on an FPGA, we&rsquo;ll use UART or USB instead of
 </tr>
 <tr class="ltx_tr">
 <td class="ltx_td">
-                <span class="ltx_text ltx_lst_line ltx_font_typewriter">Wait<span class="ltx_text ltx_lst_space">&nbsp;</span><span class="ltx_text ltx_lst_keyword ltx_font_bold">for</span><span class="ltx_text ltx_lst_space">&nbsp;</span>connection</span>
+                <span class="ltx_text ltx_lst_line ltx_font_typewriter"><span class="ltx_text ltx_lst_keyword ltx_font_bold">Wait</span><span class="ltx_text ltx_lst_space">&nbsp;</span><span class="ltx_text ltx_lst_keyword ltx_font_bold">for</span><span class="ltx_text ltx_lst_space">&nbsp;</span>connection</span>
               </td>
 </tr>
 </table>
 </div>
 </div>
-<div id="S5.p14" class="ltx_para">
+<div id="S5.p13" class="ltx_para">
 <p class="ltx_p">What you see is the output of the &ldquo;debug system enumeration.&rdquo;
 Internally, the debug system consists of many modules.
 When first started, <code class="ltx_verbatim ltx_font_typewriter">opensocdebugd</code> first asks the SoC hardware for all available modules and prints them out.
@@ -834,7 +831,8 @@ Without going into too much details, the most important ones are the following o
 <li id="I3.i1" class="ltx_item">
 <div id="I3.i1.p1" class="ltx_para">
 <p class="ltx_p">The Memory Access Module (MAM) allows us to write and read memories inside the SoC from the host.
-We&rsquo;ll make use of this in a bit to load our software into the SoC.</p>
+We&rsquo;ll make use of this in a bit to load our software into the SoC.
+</p>
 </div>
 </li>
 <li id="I3.i2" class="ltx_item">
@@ -850,17 +848,17 @@ We use it mainly to generate a function trace, i.e. a list of all software funct
 </li>
 </ul>
 </div>
-<div id="S5.p15" class="ltx_para">
+<div id="S5.p14" class="ltx_para">
 <p class="ltx_p">Why is there not just one of each modules?
 We&rsquo;re running a system with four tiles, each with two CPU cores.
 There are so many modules, because some of the debug modules are part of a tile, and some are attached to each CPU core.
 So this explains why there are four MAM modules, and eight CTM and STM modules each.</p>
 </div>
-<div id="S5.p16" class="ltx_para">
+<div id="S5.p15" class="ltx_para">
 <p class="ltx_p">Let&rsquo;s go back to our terminals.
 Up to now we have two terminals open, let&rsquo;s open a third one.
 In here, we start <code class="ltx_verbatim ltx_font_typewriter">osd-cli</code>, a command line application that allows you to interact with the SoC hardware.</p>
-<div id="LSTx30" class="ltx_listingblock ltx_lstlisting ltx_lst_language_sh ltx_listing">
+<div id="LSTx31" class="ltx_listingblock ltx_lstlisting ltx_lst_language_sh ltx_listing">
 <div class="ltx_listing_data"><a href="data:text/plain,osd-cli">&#11015;</a></div>
 <table class="ltx_tabular">
 <tr class="ltx_tr">
@@ -871,11 +869,11 @@ In here, we start <code class="ltx_verbatim ltx_font_typewriter">osd-cli</code>,
 </table>
 </div>
 </div>
-<div id="S5.p17" class="ltx_para">
+<div id="S5.p16" class="ltx_para">
 <p class="ltx_p"><code class="ltx_verbatim ltx_font_typewriter">osd-cli</code> supports many commands, and the <code class="ltx_verbatim ltx_font_typewriter">help</code> command is probably a good starting point.</p>
 </div>
-<div id="S5.p18" class="ltx_para">
-<div id="LSTx31" class="ltx_listingblock ltx_lstlisting ltx_lst_language_sh ltx_listing">
+<div id="S5.p17" class="ltx_para">
+<div id="LSTx32" class="ltx_listingblock ltx_lstlisting ltx_lst_language_sh ltx_listing">
 <div class="ltx_listing_data"><a href="data:text/plain,osd&gt;%20help%0AAvailable%20commands:%0A%20%20help%20%20%20%20%20%20%20%20Print%20this%20help%0A%20%20&lt;cmd&gt;%20help%20%20Print%20help%20for%20command%0A%20%20quit%20%20%20%20%20%20%20%20Exit%20the%20command%20line%0A%20%20reset%20%20%20%20%20%20%20Reset%20the%20system%0A%20%20start%20%20%20%20%20%20%20Start%20the%20processor%20cores%0A%20%20mem%20%20%20%20%20%20%20%20%20Access%20memory%0A%20%20ctm%20%20%20%20%20%20%20%20%20Configure%20core%20trace%20module%0A%20%20stm%20%20%20%20%20%20%20%20%20Configure%20software%20trace%20module%0A%20%20terminal%20%20%20%20Start%20terminal%20for%20device%20emulation%20module%0A%20%20wait%20%20%20%20%20%20%20%20Wait%20for%20given%20seconds%0Aosd&gt;%20mem%20help%0AAvailable%20subcommands:%0A%20%20help%20%20%20%20%20%20%20%20Print%20this%20help%0A%20%20test%20%20%20%20%20%20%20%20Run%20memory%20tests%0A%20%20loadelf%20%20%20%20%20Load%20an%20elf%20to%20memory">&#11015;</a></div>
 <table class="ltx_tabular">
 <tr class="ltx_tr">
@@ -935,7 +933,7 @@ In here, we start <code class="ltx_verbatim ltx_font_typewriter">osd-cli</code>,
 </tr>
 <tr class="ltx_tr">
 <td class="ltx_td">
-                <span class="ltx_text ltx_lst_line ltx_font_typewriter"><span class="ltx_text ltx_lst_space">&nbsp;&nbsp;</span>wait<span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>Wait<span class="ltx_text ltx_lst_space">&nbsp;</span><span class="ltx_text ltx_lst_keyword ltx_font_bold">for</span><span class="ltx_text ltx_lst_space">&nbsp;</span>given<span class="ltx_text ltx_lst_space">&nbsp;</span>seconds</span>
+                <span class="ltx_text ltx_lst_line ltx_font_typewriter"><span class="ltx_text ltx_lst_space">&nbsp;&nbsp;</span><span class="ltx_text ltx_lst_keyword ltx_font_bold">wait</span><span class="ltx_text ltx_lst_space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="ltx_text ltx_lst_keyword ltx_font_bold">Wait</span><span class="ltx_text ltx_lst_space">&nbsp;</span><span class="ltx_text ltx_lst_keyword ltx_font_bold">for</span><span class="ltx_text ltx_lst_space">&nbsp;</span>given<span class="ltx_text ltx_lst_space">&nbsp;</span>seconds</span>
               </td>
 </tr>
 <tr class="ltx_tr">
@@ -966,16 +964,16 @@ In here, we start <code class="ltx_verbatim ltx_font_typewriter">osd-cli</code>,
 </table>
 </div>
 </div>
-<div id="S5.p19" class="ltx_para">
+<div id="S5.p18" class="ltx_para">
 <p class="ltx_p">Now let&rsquo;s run our hello world software on the SoC.</p>
 </div>
-<div id="S5.p20" class="ltx_para">
+<div id="S5.p19" class="ltx_para">
 <ul id="I4" class="ltx_itemize">
 <li id="I4.i1" class="ltx_item">
 <div id="I4.i1.p1" class="ltx_para">
 <p class="ltx_p">First, we reset and then halt all CPUs.
 This gives us a &ldquo;silent&rdquo; system, i.e. nothing is running and we can modify the memory without being disturbed by the CPUs.</p>
-<div id="LSTx32" class="ltx_listingblock ltx_lstlisting ltx_lst_language_sh ltx_listing">
+<div id="LSTx33" class="ltx_listingblock ltx_lstlisting ltx_lst_language_sh ltx_listing">
 <div class="ltx_listing_data"><a href="data:text/plain,osd&gt;%20reset%20-halt">&#11015;</a></div>
 <table class="ltx_tabular">
 <tr class="ltx_tr">
@@ -993,7 +991,7 @@ This gives us a &ldquo;silent&rdquo; system, i.e. nothing is running and we can 
 To do this, we tell the MAM module with ID 2 to write the file into the memory. (See the output of opensocdebugd for all IDs that are available.)
 After writing, the <code class="ltx_verbatim ltx_font_typewriter">-verify</code> option instructs <code class="ltx_verbatim ltx_font_typewriter">osd-cli</code> to read back all memory content and check if the read data is equal to the written data.
 This step is not strictly necessary, but is helpful to check that the memory write was successful indeed.</p>
-<div id="LSTx33" class="ltx_listingblock ltx_lstlisting ltx_lst_language_sh ltx_listing">
+<div id="LSTx34" class="ltx_listingblock ltx_lstlisting ltx_lst_language_sh ltx_listing">
 <div class="ltx_listing_data"><a href="data:text/plain,osd&gt;%20mem%20loadelf%20hello.elf%202%20-verify%0AVerify:%201%0ALoad%20program%20header%200%0ALoad%20program%20header%201%0AVerify%20program%20header%200%0AVerify%20program%20header%201">&#11015;</a></div>
 <table class="ltx_tabular">
 <tr class="ltx_tr">
@@ -1039,7 +1037,7 @@ The CTM can use the information inside this file to record not only the program 
 This makes the CTM logs much nicer to read (at least for humans).</p>
 </div>
 <div id="I4.i3.p2" class="ltx_para">
-<div id="LSTx34" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div id="LSTx35" class="ltx_listingblock ltx_lstlisting ltx_listing">
 <div class="ltx_listing_data"><a href="data:text/plain,osd&gt;%20stm%20log%20stm000.log%203%0Aosd&gt;%20ctm%20log%20ctm000.log%204%20hello.elf">&#11015;</a></div>
 <table class="ltx_tabular">
 <tr class="ltx_tr">
@@ -1058,9 +1056,8 @@ This makes the CTM logs much nicer to read (at least for humans).</p>
 </li>
 <li id="I4.i4" class="ltx_item">
 <div id="I4.i4.p1" class="ltx_para">
-<p class="ltx_p">Finally, we are ready to start the system, i.e. lower the reset signal.
-</p>
-<div id="LSTx35" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<p class="ltx_p">Finally, we are ready to start the system, i.e. lower the reset signal.</p>
+<div id="LSTx36" class="ltx_listingblock ltx_lstlisting ltx_listing">
 <div class="ltx_listing_data"><a href="data:text/plain,osd&gt;%20start%0Aosd&gt;%20%5BSTM%20003%5D%20004616b5%20Hello%20World!%20Core%200%20of%202%20in%20tile%200,%20my%20absolute%20core%20id%20is:%200%0A%5BSTM%20003%5D%200046266e%20There%20are%204%20compute%20tiles:%0A%5BSTM%20003%5D%2000463792%20%20rank%200%20is%20tile%200%0A%5BSTM%20003%5D%200046484d%20%20rank%201%20is%20tile%201%0A%5BSTM%20003%5D%2000465918%20%20rank%202%20is%20tile%202%0A%5BSTM%20003%5D%20004669ea%20%20rank%203%20is%20tile%203">&#11015;</a></div>
 <table class="ltx_tabular">
 <tr class="ltx_tr">
@@ -1108,7 +1105,7 @@ This makes the CTM logs much nicer to read (at least for humans).</p>
 <li id="I4.i5" class="ltx_item">
 <div id="I4.i5.p1" class="ltx_para">
 <p class="ltx_p">Now that the software has finished, we can close the connection by typing</p>
-<div id="LSTx36" class="ltx_listingblock ltx_lstlisting ltx_listing">
+<div id="LSTx37" class="ltx_listingblock ltx_lstlisting ltx_listing">
 <div class="ltx_listing_data"><a href="data:text/plain,osd&gt;%20quit">&#11015;</a></div>
 <table class="ltx_tabular">
 <tr class="ltx_tr">
@@ -1122,7 +1119,7 @@ This makes the CTM logs much nicer to read (at least for humans).</p>
 </li>
 </ul>
 </div>
-<div id="S5.p21" class="ltx_para">
+<div id="S5.p20" class="ltx_para">
 <p class="ltx_p">Remember that we instructed the STM and CTM modules to write log files?
 Have a look at the files <code class="ltx_verbatim ltx_font_typewriter">stm000.log</code> and <code class="ltx_verbatim ltx_font_typewriter">ctm000.log</code> to find all STM and CTM messages that were issued by the system.
 If possible the modules already assemble them back together to be more useful to the human user.
@@ -1143,7 +1140,7 @@ The script then waits for ten seconds before it closes the connection to the <co
 (If your application runs longer than that adjust the script accordingly.)</p>
 </div>
 <div id="S6.p2" class="ltx_para">
-<div id="LSTx37" class="ltx_listingblock ltx_lstlisting ltx_lst_language_sh ltx_listing">
+<div id="LSTx38" class="ltx_listingblock ltx_lstlisting ltx_lst_language_sh ltx_listing">
 <div class="ltx_listing_data"><a href="data:text/plain,#%20only%20Python%202%20is%20supported%20at%20the%20moment%0Apython2%20%24OPTIMSOC/host/share/opensocdebug/examples/runelf.py%20hello.elf">&#11015;</a></div>
 <table class="ltx_tabular">
 <tr class="ltx_tr">
@@ -1184,7 +1181,8 @@ If you need help obtaining one, let us know &ndash; maybe we can help out in som
 </div>
 <div id="S7.SS1.p2" class="ltx_para">
 <p class="ltx_p">Additionally you need to download and install the Xilinx Vivado tool (the cost-free WebPack license is sufficient).
-We used the 2016.2 version when preparing this tutorial; we strongly recommend you also use this exact version.</p>
+We used the 2016.2 version when preparing this tutorial; we strongly recommend you also use this exact version.
+</p>
 </div>
 <div id="S7.SS1.p3" class="ltx_para">
 <p class="ltx_p">Once you have obtained the FPGA board, connect it to the PC on the &ldquo;PROG UART&rdquo; USB connection.
@@ -1258,7 +1256,7 @@ The OpTiMSoC release contains pre-built bitstreams for the single compute tile s
 <h4 class="ltx_title ltx_title_subsubsection">Programming the FPGA on the Command Line</h4>
 
 <div id="S7.SS2.SSSx2.p1" class="ltx_para">
-<div id="LSTx38" class="ltx_listingblock ltx_lstlisting ltx_lst_language_sh ltx_listing">
+<div id="LSTx39" class="ltx_listingblock ltx_lstlisting ltx_lst_language_sh ltx_listing">
 <div class="ltx_listing_data"><a href="data:text/plain,optimsoc-pgm-fpga%20%24OPTISMOC/examples/fpga/nexys4ddr/system_2x2_cccc/system_2x2_cccc_nexys4ddr.bit%20xc7a100t_0">&#11015;</a></div>
 <table class="ltx_tabular">
 <tr class="ltx_tr">
@@ -1283,7 +1281,7 @@ Fortunately, you don&rsquo;t need to connect any additional cables; the USB cabl
 <div id="S7.SS3.p2" class="ltx_para">
 <p class="ltx_p">First, check which serial port was assigned to the board.
 Usually the easiest way is to do a</p>
-<div id="LSTx39" class="ltx_listingblock ltx_lstlisting ltx_lst_language_sh ltx_listing">
+<div id="LSTx40" class="ltx_listingblock ltx_lstlisting ltx_lst_language_sh ltx_listing">
 <div class="ltx_listing_data"><a href="data:text/plain,ls%20/dev/ttyUSB*">&#11015;</a></div>
 <table class="ltx_tabular">
 <tr class="ltx_tr">
@@ -1301,7 +1299,7 @@ Make note of this device name, and replace it accordingly in all the following s
 <div id="S7.SS3.p4" class="ltx_para">
 <p class="ltx_p">Just as before, we&rsquo;ll need more than one terminal window.
 Open a first terminal and start <code class="ltx_verbatim ltx_font_typewriter">opensocdebugd</code> (remember to replace the device with your device name).</p>
-<div id="LSTx40" class="ltx_listingblock ltx_lstlisting ltx_lst_language_sh ltx_listing">
+<div id="LSTx41" class="ltx_listingblock ltx_lstlisting ltx_lst_language_sh ltx_listing">
 <div class="ltx_listing_data"><a href="data:text/plain,opensocdebugd%20uart%20device=/dev/ttyUSB1%20speed=12000000">&#11015;</a></div>
 <table class="ltx_tabular">
 <tr class="ltx_tr">
