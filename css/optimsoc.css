@@ -175,6 +175,25 @@ ul.share-buttons li {
   padding: 0;
 }
 
+/* Sphinx: The TOC caption, don't show */
+.optimsoc-doc-mainnav .caption {
+    visibility: hidden;
+    line-height: 0;
+    padding: 0px;
+}
+
+/* The toplevel list */
+/* Comment: Despite we use .nav on the div, list-style doesn't show
+   properly, hence the extra one here. */
+.optimsoc-doc-mainnav > div > ul {
+    padding: 0px;
+    list-style: none;
+}
+
+.optimsoc-doc-mainnav .toctree-l2 {
+    list-style: none;
+}
+
 /* documentation subnavigation (inside the chapter) */
 .optimsoc-doc-mainnav.affix {
     position: static;
@@ -200,12 +219,23 @@ ul.share-buttons li {
   }
 }
 
-.optimsoc-doc-mainnav li div.active {
+/* Highlight current chapter */
+/* Latex: */ .optimsoc-doc-mainnav li div.active,
+/* Sphinx: */ .optimsoc-doc-mainnav .toctree-l1 .current {
   color: #F04C5C;
   font-weight: bold;
 }
 
-.optimsoc-doc-subnav {
+/* Sphinx only: don't have link for current */
+.optimsoc-doc-mainnav .toctree-l1 .current {
+   pointer-events: none;
+   cursor: default;
+}
+
+/* Current chapter subnav*/
+/* Latex: */ .optimsoc-doc-subnav,
+/* Sphinx: */ .optimsoc-doc-mainnav .toctree-l1 > ul
+{
   background-color: #FFFFFF;
   margin-bottom: 5px;
   margin-top: 5px;
@@ -213,22 +243,36 @@ ul.share-buttons li {
   padding-top: 15px;
 }
 
-.optimsoc-doc-subnav .nav > li > a {
+/* Sphinx only: This is the subnav */
+.optimsoc-doc-mainnav .toctree-l1 > ul
+{
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+/* Latex: */.optimsoc-doc-subnav .nav > li > a,
+/* Sphinx: */.optimsoc-doc-mainnav .toctree-l1 > ul > li > a
+{
   display: block;
   padding: 4px 20px;
 }
-.optimsoc-doc-subnav .nav > li > a:hover,
-.optimsoc-docs-sidebar .nav > li > a:focus {
+/* Latex: */.optimsoc-doc-subnav .nav > li > a:hover,
+.optimsoc-docs-sidebar .nav > li > a:focus,
+/* Sphinx: */.optimsoc-doc-mainnav ul > li > a:hover,
+.optimsoc-doc-mainnav ul > li > a:focus
+{
   text-decoration: none;
 }
 .optimsoc-doc-subnav .nav > .active > a,
 .optimsoc-docs-sidebar .nav > .active:hover > a,
-.optimsoc-docs-sidebar .nav > .active:focus > a {
+.optimsoc-docs-sidebar .nav > .active:focus > a
+{
     background-color: rgba(0, 0, 0, 0);
     color: #F04C5C;
     font-weight: 500;
 }
-.optimsoc-doc-subnav .nav .nav {
+.optimsoc-doc-subnav .nav .nav,
+{
   display: none;
   margin-bottom: 5px;
 }
@@ -338,3 +382,13 @@ hr.optimsoc-doc-sep-footnotes {
 .ltx_docnote code {
   border-radius: 3px;
 }
+
+/* In the sphinx template this is the anchor link after headers */
+a.headerlink {
+    font-size: 0.7em;
+    padding: 0 4px 0 4px;
+    text-decoration: none;
+    visibility: hidden;
+    color: #aaa;
+}
+*:hover > a.headerlink { visibility: visible; }
