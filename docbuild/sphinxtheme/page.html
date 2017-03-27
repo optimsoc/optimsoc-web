@@ -1,0 +1,27 @@
+---
+layout: default
+title: {{ title }}
+---
+
+<div class="optimsoc-section-header">
+  {#  <h1>{{ parents[0].title }}</h1> #}
+  <h1>Reference Manual</h1>
+</div>
+
+<hr/>
+
+<div class="col-md-3">
+  <div class="optimsoc-doc-mainnav affix" data-spy="affix" data-offset-top="50">
+    <div style="padding-bottom:10px" class="nav">
+      version {{ version }} (<a href="/docs/index.html#document-archive">other versions</a>)
+
+      {{ local_toctree("refman/index",pagename,maxdepth=2,collapse=True) }}
+    </div>
+  </div>
+</div>
+
+<div class="col-md-9">
+{% block body %}
+ {{ body }}
+{% endblock %}
+</div>

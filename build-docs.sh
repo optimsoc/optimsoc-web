@@ -9,6 +9,8 @@ OPTIMSOC_REPO_URL=${1:-https://github.com/optimsoc/sources.git}
 TOPDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 cd "$TOPDIR"
 
+SPHINXBUILD=$TOPDIR/.venv/bin/sphinx-build
+
 function build_docs {
   SRCDIR=$1
   OUTDIR=$2
@@ -60,29 +62,19 @@ function build_docs {
   cp $OBJDIR/user_guide/pdf/user_guide.pdf $OUTDIR/user-guide.pdf
 
   # Reference Manual
-  mkdir -p $OBJDIR/refman/{tex,xml,html}
-  cp $SRCDIR/doc/refman/* $OBJDIR/refman/tex
-  test -d $SRCDIR/doc/refman/img && cp -r $SRCDIR/doc/refman/img $OBJDIR/refman/tex
-  cp $TOPDIR/docbuild/refman-*.tex $OBJDIR/refman/tex
-
-  latexml --dest=$OBJDIR/refman/xml/refman.xml \
-    $OBJDIR/refman/tex/refman-html.tex
-  latexmlpost --navigationtoc=context --splitat=chapter --splitnaming=label \
-    --sourcedirectory=$OBJDIR/refman/tex \
-    --stylesheet=$TOPDIR/docbuild/latexml-optimsoc.xsl --format=html \
-    --dest=$OBJDIR/refman/html/refman.html \
-    --xsltparameter=OPTIMSOC_TITLE:"Reference Manual" \
-    --xsltparameter=OPTIMSOC_DOCID:refman \
-    --xsltparameter=OPTIMSOC_VERSION:"$VERSION" \
-    --xsltparameter=OPTIMSOC_SOURCES_CSET:"$CSET" \
-    $OBJDIR/refman/xml/refman.xml
-
-  mkdir -p $OUTDIR/refman
-  cp $OBJDIR/refman/html/*.html $OUTDIR/refman
-  test -d $OBJDIR/refman/html/img && cp -r $OBJDIR/refman/html/img $OUTDIR/refman
-  test -d $OBJDIR/refman/html/mi && cp -r buildtmp/refman/html/mi $OUTDIR/refman
+  if [ -e $SRCDIR/doc/refman/index.rst ]; then
+    mkdir -p $OBJDIR/refman/html
+    $SPHINXBUILD -b html -D html_theme=sphinxtheme \
+      -D html_theme_path=$TOPDIR/docbuild \
+      -D version=$VERSION \
+      $SRCDIR/doc $OUTDIR/
+  fi
 }
 
+# Prepare Sphinx
+python3 -m venv .venv
+.venv/bin/pip install --upgrade pip
+.venv/bin/pip install --upgrade -r sphinx_requirements.txt
 
 # get sources
 git clone $OPTIMSOC_REPO_URL $TOPDIR/buildtmp/optimsoc
