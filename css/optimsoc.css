@@ -183,7 +183,7 @@ ul.share-buttons li {
     top: 50px;
 }
 @media screen and (min-width: 992px) {
-  .optimsoc-doc-mainnav.affix-bottom, .optimsoc-doc-mainnav.affix {
+  .optimsoc-doc-mainnav.affix-bottom, .optimsoc-doc-mainnav.affix, .optimsoc-doc-mainnav.affix-top {
       width: 213px;
   }
   .optimsoc-doc-mainnav.affix {
@@ -195,7 +195,7 @@ ul.share-buttons li {
   }
 }
 @media screen and (min-width: 1200px) {
-  .optimsoc-doc-mainnav.affix-bottom, .optimsoc-doc-mainnav.affix {
+  .optimsoc-doc-mainnav.affix-bottom, .optimsoc-doc-mainnav.affix, .optimsoc-doc-mainnav.affix-top {
       width: 263px;
   }
 }
