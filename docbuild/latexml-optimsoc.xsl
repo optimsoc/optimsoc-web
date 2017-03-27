@@ -236,6 +236,7 @@ Original work is public domain by Bruce Miller <bruce.miller@nist.gov>
 layout: default
 title: OpTiMSoC </xsl:text><xsl:value-of select="$OPTIMSOC_TITLE" /><xsl:text>
 sectiontitle: </xsl:text><xsl:value-of select="$OPTIMSOC_TITLE" /><xsl:text>
+scrollspytarget: "#optimsoc-doc-subnav-nav"
 ---
     </xsl:text>
   </xsl:template>

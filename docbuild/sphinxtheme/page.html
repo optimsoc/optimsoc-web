@@ -1,6 +1,7 @@
 ---
 layout: default
 title: {{ title }}
+scrollspytarget:
 ---
 
 <div class="optimsoc-section-header">
@@ -15,12 +16,17 @@ title: {{ title }}
     <div style="padding-bottom:10px" class="nav">
       version {{ version }} (<a href="/docs/index.html#document-archive">other versions</a>)
 
-      {{ local_toctree("refman/index",pagename,maxdepth=2,collapse=True) }}
+      {#
+      we need the nav class added to all <ul> tags for bootstrap to give us
+      proper styling. The right (TM) way is to modify the HTML writer of
+      Sphinx. The quick way is shown below.
+      #}
+      {{ local_toctree("refman/index",pagename,maxdepth=2,collapse=True) | replace('ul class="', 'ul class="nav ') | replace('<ul>', '<ul class="nav">') }}
     </div>
   </div>
 </div>
 
-<div class="col-md-9">
+<div class="col-md-9 optimsoc-doc-body">
 {% block body %}
  {{ body }}
 {% endblock %}
