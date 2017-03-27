@@ -59,7 +59,7 @@ You can determine the version you're using with <code>echo $OPTIMSOC_VERSION</co
       </td>
       <td><a href="/docs/{{ doc_version }}/user-guide/chap_introduction.html">User Guide {{ doc_version }}</a></td>
       <td><a href="/docs/{{ doc_version }}/user-guide.pdf">User Guide {{ doc_version }} (PDF)</a></td>
-      <td>{% if doc_version != doc_version_current_dev %}<a href="/docs/{{ doc_version }}/refman/chap_toolchain.html">Reference Manual {{ doc_version }}</a>{% endif %}</td>
+      <td>{% if doc_version != "2015.1" and doc_version != "2016.1" %}<a href="/docs/{{ doc_version }}/refman/index.html">Reference Manual {{ doc_version }}</a>{% endif %}</td>
     </tr>
   {% endfor %}
 </table>
