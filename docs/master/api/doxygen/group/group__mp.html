@@ -1,0 +1,107 @@
+---
+layout: default
+title: Message passing support
+scrollspytarget:
+---
+
+<div class="optimsoc-section-header">
+  
+  <h1>API Documentation</h1>
+  
+</div>
+
+  
+
+<hr/>
+
+<div class="col-md-3">
+  <div class="optimsoc-doc-mainnav affix" data-spy="affix" data-offset-top="50">
+    <div style="padding-bottom:10px" class="nav">
+      version master (<a href="/docs/index.html#document-archive">other versions</a>)
+
+      
+      
+        <ul class="nav current">
+<li class="toctree-l1"><a class="reference internal" href="group__utility.html">Utility functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="group__system.html">OpTiMSoC system functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="group__tracing.html">OpTiMSoC tracing</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="group__libbaremetal.html">Baremetal library</a><ul class="nav current">
+<li class="toctree-l2"><a class="reference internal" href="group__userio.html">User I/O</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group__sync.html">Support for atomic operations and synchronization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group__dma.html">Direct Memory Access support</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Message passing support</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="group__libruntime.html">Runtime library</a></li>
+</ul>
+
+      
+    </div>
+  </div>
+</div>
+
+<div class="col-md-9 optimsoc-doc-body">
+
+ <div class="section" id="message-passing-support">
+<h1>Message passing support<a class="headerlink" href="#message-passing-support" title="Permalink to this headline">¶</a></h1>
+<dl class="group">
+<dt>
+<span class="target" id="apigroup__mp"></span><em>group</em> <code class="descname">mp</code></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Functions</p>
+<dl class="function">
+<dt id="c.optimsoc_mp_simple_init">
+<span class="target" id="apigroup__mp_1ga12cc8cca986b931b25de15f7cf808630"></span>void <code class="descname">optimsoc_mp_simple_init</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#c.optimsoc_mp_simple_init" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize simple message passing environment </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="c.optimsoc_mp_simple_enable">
+<span class="target" id="apigroup__mp_1gae56146255db2ebf8805d867ca8c6b792"></span>void <code class="descname">optimsoc_mp_simple_enable</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#c.optimsoc_mp_simple_enable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Enable hardware to receive packets </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="c.optimsoc_mp_simple_ctready">
+<span class="target" id="apigroup__mp_1ga9304f7c979fca65dfd00d63bf698edf0"></span>int <code class="descname">optimsoc_mp_simple_ctready</code><span class="sig-paren">(</span>uint32_t<em>&nbsp;rank</em><span class="sig-paren">)</span><a class="headerlink" href="#c.optimsoc_mp_simple_ctready" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="c.optimsoc_mp_simple_send">
+<span class="target" id="apigroup__mp_1gab475b20661241b9b2fe06e8fdaf6c443"></span>void <code class="descname">optimsoc_mp_simple_send</code><span class="sig-paren">(</span>unsigned int<em>&nbsp;size</em>, uint32_t *<em>&nbsp;buf</em><span class="sig-paren">)</span><a class="headerlink" href="#c.optimsoc_mp_simple_send" title="Permalink to this definition">¶</a></dt>
+<dd><p>Send a message</p>
+<p>Sends a message of size from buf.</p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">size</span></code>: Size of the message in (word-sized) flits </li>
+<li><code class="docutils literal"><span class="pre">buf</span></code>: Message buffer containint size flits </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="c.optimsoc_mp_simple_addhandler">
+<span class="target" id="apigroup__mp_1gac3373511acc690535288745027b2b1d0"></span>void <code class="descname">optimsoc_mp_simple_addhandler</code><span class="sig-paren">(</span>unsigned int<em>&nbsp;class</em>, void(<em>*hnd</em>)(unsigned int *, int)<span class="sig-paren">)</span><a class="headerlink" href="#c.optimsoc_mp_simple_addhandler" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a handler for a class of incoming messages</p>
+<p>A message header contains a class. This class field can be used to mix different kinds of message services. For each class you are using in your system you need to add a class handler. As there is no default class handler all remaining classes are dropped.</p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">class</span></code>: Class to register </li>
+<li><code class="docutils literal"><span class="pre">hnd</span></code>: Function pointer to handler for this class </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+
+
+</div>
