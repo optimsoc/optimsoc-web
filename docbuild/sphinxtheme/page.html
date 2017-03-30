@@ -5,9 +5,14 @@ scrollspytarget:
 ---
 
 <div class="optimsoc-section-header">
-  {#  <h1>{{ parents[0].title }}</h1> #}
-  <h1>Reference Manual</h1>
+  {% if parents|length>0 %}
+  <h1>{{ parents[0].title }}</h1>
+  {% else %}
+  <h1>{{ title }}</h1>
+  {% endif %}
 </div>
+
+  {% set partid = pagename.split('/')[0] %}
 
 <hr/>
 
@@ -21,7 +26,9 @@ scrollspytarget:
       proper styling. The right (TM) way is to modify the HTML writer of
       Sphinx. The quick way is shown below.
       #}
-      {{ local_toctree("refman/index",pagename,maxdepth=2,collapse=True) | replace('ul class="', 'ul class="nav ') | replace('<ul>', '<ul class="nav">') }}
+      {% if partid != "index" %}
+        {{ local_toctree("{}/index".format(partid),pagename,maxdepth=2,collapse=True) | replace('ul class="', 'ul class="nav ') | replace('<ul>', '<ul class="nav">') }}
+      {% endif %}
     </div>
   </div>
 </div>
