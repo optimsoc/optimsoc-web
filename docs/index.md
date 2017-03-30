@@ -45,9 +45,9 @@ You can determine the version you're using with <code>echo $OPTIMSOC_VERSION</co
   <thead>
     <tr>
       <th>OpTiMSoC Version</th>
-      <th>User Guide (online)</th>
-      <th>User Guide (PDF)</th>
+      <th>User Guide</th>
       <th>Reference Manual</th>
+      <th>API Documentation</th>
     </tr>
   </thead>
   {% for doc_version in doc_versions %}
@@ -57,9 +57,10 @@ You can determine the version you're using with <code>echo $OPTIMSOC_VERSION</co
         {% if doc_version == doc_version_current_dev %}(latest development){% endif %}
         {% if doc_version == doc_version_current_release %}(latest release){% endif %}
       </td>
-      <td><a href="/docs/{{ doc_version }}/user-guide/chap_introduction.html">User Guide {{ doc_version }}</a></td>
-      <td><a href="/docs/{{ doc_version }}/user-guide.pdf">User Guide {{ doc_version }} (PDF)</a></td>
-      <td>{% if doc_version != "2015.1" and doc_version != "2016.1" %}<a href="/docs/{{ doc_version }}/refman/index.html">Reference Manual {{ doc_version }}</a>{% endif %}</td>
+      <td><a href="/docs/{{ doc_version }}/user-guide/chap_introduction.html">online</a>,
+	  <a href="/docs/{{ doc_version }}/user-guide.pdf">PDF</a></td>
+      <td>{% if doc_version != "2015.1" and doc_version != "2016.1" %}<a href="/docs/{{ doc_version }}/refman/index.html">online</a>{% endif %}</td>
+      <td>{% if doc_version != "2015.1" and doc_version != "2016.1" %}<a href="/docs/{{ doc_version }}/api/index.html">online</a>{% endif %}</td>
     </tr>
   {% endfor %}
 </table>

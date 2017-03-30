@@ -1,0 +1,109 @@
+---
+layout: default
+title: Utility functions
+scrollspytarget:
+---
+
+<div class="optimsoc-section-header">
+  
+  <h1>API Documentation</h1>
+  
+</div>
+
+  
+
+<hr/>
+
+<div class="col-md-3">
+  <div class="optimsoc-doc-mainnav affix" data-spy="affix" data-offset-top="50">
+    <div style="padding-bottom:10px" class="nav">
+      version master (<a href="/docs/index.html#document-archive">other versions</a>)
+
+      
+      
+        <ul class="nav current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Utility functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="group__system.html">OpTiMSoC system functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="group__tracing.html">OpTiMSoC tracing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="group__libbaremetal.html">Baremetal library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="group__libruntime.html">Runtime library</a></li>
+</ul>
+
+      
+    </div>
+  </div>
+</div>
+
+<div class="col-md-9 optimsoc-doc-body">
+
+ <div class="section" id="utility-functions">
+<h1>Utility functions<a class="headerlink" href="#utility-functions" title="Permalink to this headline">¶</a></h1>
+<dl class="group">
+<dt>
+<span class="target" id="apigroup__utility"></span><em>group</em> <code class="descname">utility</code></dt>
+<dd><p>Utility functions </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Functions</p>
+<dl class="function">
+<dt id="c.extract_bits">
+<span class="target" id="apigroup__utility_1gaa759aba5a757059c71fe1c2677a94b1f"></span>static unsigned int <code class="descname">extract_bits</code><span class="sig-paren">(</span>uint32_t<em>&nbsp;x</em>, uint32_t<em>&nbsp;msb</em>, uint32_t<em>&nbsp;lsb</em><span class="sig-paren">)</span><a class="headerlink" href="#c.extract_bits" title="Permalink to this definition">¶</a></dt>
+<dd><p>extract bits between MSB and LSB (including)</p>
+<p><div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">return</span> <span class="n">x</span><span class="p">[</span><span class="n">MSB</span><span class="p">:</span><span class="n">LSB</span><span class="p">];</span>
+</pre></div>
+</div>
+</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>extracted value (aligned to lsb=0) </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">x</span></code>: Value to extract from </li>
+<li><code class="docutils literal"><span class="pre">msb</span></code>: MSB of extraction </li>
+<li><code class="docutils literal"><span class="pre">lsb</span></code>: LSB of extraction </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="c.set_bits">
+<span class="target" id="apigroup__utility_1ga0415f93ba2dcfefe1882334968cdee8e"></span>static void <code class="descname">set_bits</code><span class="sig-paren">(</span>uint32_t *<em>&nbsp;x</em>, uint32_t<em>&nbsp;v</em>, uint32_t<em>&nbsp;msb</em>, uint32_t<em>&nbsp;lsb</em><span class="sig-paren">)</span><a class="headerlink" href="#c.set_bits" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set bits in variable between MSB and LSB (including)</p>
+<p><div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">x</span><span class="p">[</span><span class="n">MSB</span><span class="p">:</span><span class="n">LSB</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span><span class="p">;</span>
+</pre></div>
+</div>
+</p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">x</span></code>: Pointer to value where to set </li>
+<li><code class="docutils literal"><span class="pre">v</span></code>: Value to set </li>
+<li><code class="docutils literal"><span class="pre">msb</span></code>: MSB of part to set </li>
+<li><code class="docutils literal"><span class="pre">lsb</span></code>: LSB of part to set </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="c.optimsoc_get_seed">
+<span class="target" id="apigroup__utility_1ga998595e5c3c7f59ab0c39cc791731ea6"></span>uint32_t <code class="descname">optimsoc_get_seed</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#c.optimsoc_get_seed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a random seed for randomization</p>
+<p>This function is used to obtain a random seed from the simulation environment for randomization tests. It has no function when executing in hardware.</p>
+<p>It is only random when the actual simulation is seeded with a non-static value.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>(random) seed </dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+
+
+</div>

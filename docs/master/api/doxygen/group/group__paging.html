@@ -1,0 +1,334 @@
+---
+layout: default
+title: Page Handling
+scrollspytarget:
+---
+
+<div class="optimsoc-section-header">
+  
+  <h1>API Documentation</h1>
+  
+</div>
+
+  
+
+<hr/>
+
+<div class="col-md-3">
+  <div class="optimsoc-doc-mainnav affix" data-spy="affix" data-offset-top="50">
+    <div style="padding-bottom:10px" class="nav">
+      version master (<a href="/docs/index.html#document-archive">other versions</a>)
+
+      
+      
+        <ul class="nav current">
+<li class="toctree-l1"><a class="reference internal" href="group__utility.html">Utility functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="group__system.html">OpTiMSoC system functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="group__tracing.html">OpTiMSoC tracing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="group__libbaremetal.html">Baremetal library</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="group__libruntime.html">Runtime library</a><ul class="nav current">
+<li class="toctree-l2"><a class="reference internal" href="group__initconfig.html">Initialization and Configuration</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Page Handling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group__thread.html">Thread Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group__syscall.html">Syscall Handling</a></li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+  </div>
+</div>
+
+<div class="col-md-9 optimsoc-doc-body">
+
+ <div class="section" id="page-handling">
+<h1>Page Handling<a class="headerlink" href="#page-handling" title="Permalink to this headline">¶</a></h1>
+<dl class="group">
+<dt>
+<span class="target" id="apigroup__paging"></span><em>group</em> <code class="descname">paging</code></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Unnamed Group</p>
+<dl class="typedef">
+<dt id="c.optimsoc_pte_t">
+<span class="target" id="apigroup__paging_1ga845e7d783c6c900164d2e2c342f41420"></span><em class="property">typedef </em>uint32_t <code class="descname">optimsoc_pte_t</code><a class="headerlink" href="#c.optimsoc_pte_t" title="Permalink to this definition">¶</a></dt>
+<dd><p>Page table entry</p>
+<p>A page table entry is a 32 bit value as defined by the architecture specification. </p>
+</dd></dl>
+
+<dl class="typedef">
+<dt id="c.optimsoc_page_table_t">
+<span class="target" id="apigroup__paging_1ga0a0014bff9d333027c902c6ed14d069e"></span><em class="property">typedef </em><a class="reference internal" href="#c.optimsoc_pte_t" title="optimsoc_pte_t">optimsoc_pte_t</a>* <code class="descname">optimsoc_page_table_t</code><a class="headerlink" href="#c.optimsoc_page_table_t" title="Permalink to this definition">¶</a></dt>
+<dd><p>Page table</p>
+<p>A page table is an array of page table entries. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="c._optimsoc_vmm_init">
+<span class="target" id="apigroup__paging_1ga3742d9ee081187a585ca5608d5a1fa2d"></span>void <code class="descname">_optimsoc_vmm_init</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#c._optimsoc_vmm_init" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize virtual memory subsystem</p>
+<p>Set the exception handlers for the memory management units. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="c._optimsoc_vmm_create_page_table">
+<span class="target" id="apigroup__paging_1ga01500f6a1f06698dd51853e80eaf7427"></span><a class="reference internal" href="#c.optimsoc_page_table_t" title="optimsoc_page_table_t">optimsoc_page_table_t</a> <code class="descname">_optimsoc_vmm_create_page_table</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#c._optimsoc_vmm_create_page_table" title="Permalink to this definition">¶</a></dt>
+<dd><p>Allocate page table</p>
+<p>Allocate a page table in memory and initialize all entries to 0.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>New allocated table </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="c._optimsoc_vmm_lookup">
+<span class="target" id="apigroup__paging_1gac7a82762db5d226d1bd730792c947317"></span><a class="reference internal" href="#c.optimsoc_pte_t" title="optimsoc_pte_t">optimsoc_pte_t</a> <code class="descname">_optimsoc_vmm_lookup</code><span class="sig-paren">(</span><a class="reference internal" href="#c.optimsoc_page_dir_t" title="optimsoc_page_dir_t">optimsoc_page_dir_t</a><em>&nbsp;directory</em>, uint32_t<em>&nbsp;vaddr</em><span class="sig-paren">)</span><a class="headerlink" href="#c._optimsoc_vmm_lookup" title="Permalink to this definition">¶</a></dt>
+<dd><p>Lookup virtual address in page directory</p>
+<p>This is the lookup function that does the two level lookup for a virtual address and returns the page table entry. Call optimsoc_vmm_virt2phys if you need the physical address.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>Page table entry for virtual address </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">directory</span></code>: Directory to search </li>
+<li><code class="docutils literal"><span class="pre">vaddr</span></code>: Virtual address to lookup </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="c._optimsoc_set_dtlb">
+<span class="target" id="apigroup__paging_1ga89878cb75f4f8c84768fa1b864c5053f"></span>void <code class="descname">_optimsoc_set_dtlb</code><span class="sig-paren">(</span>uint32_t<em>&nbsp;vaddr</em>, <a class="reference internal" href="#c.optimsoc_pte_t" title="optimsoc_pte_t">optimsoc_pte_t</a><em>&nbsp;pte</em><span class="sig-paren">)</span><a class="headerlink" href="#c._optimsoc_set_dtlb" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the DTLB entry</p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">vaddr</span></code>: Virtual address to set </li>
+<li><code class="docutils literal"><span class="pre">pte</span></code>: Corresponding page table entry </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="c._optimsoc_set_itlb">
+<span class="target" id="apigroup__paging_1gac8ba807337466ad578b66a78630fc45d"></span>void <code class="descname">_optimsoc_set_itlb</code><span class="sig-paren">(</span>uint32_t<em>&nbsp;vaddr</em>, <a class="reference internal" href="#c.optimsoc_pte_t" title="optimsoc_pte_t">optimsoc_pte_t</a><em>&nbsp;pte</em><span class="sig-paren">)</span><a class="headerlink" href="#c._optimsoc_set_itlb" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the ITLB entry</p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">vaddr</span></code>: Virtual address to set </li>
+<li><code class="docutils literal"><span class="pre">pte</span></code>: Corresponding page table entry </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="c._optimsoc_dtlb_miss">
+<span class="target" id="apigroup__paging_1gace3e09ce10a46f3b1a033d96959ea9f7"></span>void <code class="descname">_optimsoc_dtlb_miss</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#c._optimsoc_dtlb_miss" title="Permalink to this definition">¶</a></dt>
+<dd><p>DTLB miss handler </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="c._optimsoc_itlb_miss">
+<span class="target" id="apigroup__paging_1gaea8c4c7311bb7f006c1aad0feca1d615"></span>void <code class="descname">_optimsoc_itlb_miss</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#c._optimsoc_itlb_miss" title="Permalink to this definition">¶</a></dt>
+<dd><p>ITLB miss handler </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="c._optimsoc_dpage_fault">
+<span class="target" id="apigroup__paging_1ga2b5c83976c0c0fb7cac42d6baa03bb87"></span>void <code class="descname">_optimsoc_dpage_fault</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#c._optimsoc_dpage_fault" title="Permalink to this definition">¶</a></dt>
+<dd><p>DMMU fault handler </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="c._optimsoc_ipage_fault">
+<span class="target" id="apigroup__paging_1gabce1569b8819ad2e8b5f3974384bb4d8"></span>void <code class="descname">_optimsoc_ipage_fault</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#c._optimsoc_ipage_fault" title="Permalink to this definition">¶</a></dt>
+<dd><p>IMMU fault handler </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Typedefs</p>
+<dl class="typedef">
+<dt id="c.optimsoc_page_dir_t">
+<span class="target" id="apigroup__paging_1ga9f95bc3f5929363f5743a2bf27f2ffe6"></span><em class="property">typedef </em>uint32_t* <code class="descname">optimsoc_page_dir_t</code><a class="headerlink" href="#c.optimsoc_page_dir_t" title="Permalink to this definition">¶</a></dt>
+<dd><p>Page directory</p>
+<p>The page directory is the data structure for the memory lookup from virtual addresses to physical addresses. It can be shared by multiple threads and is assigned to a thread by calling optimsoc_thread_set_pagedir.</p>
+<p>It should not be manipulated directly, but only by the functions provided. Mapping pages is thread-safe, but generally caution is necessary when calling the functions on two different cores concurrently when accessing the same virtual pages. </p>
+</dd></dl>
+
+<dl class="typedef">
+<dt id="c.optimsoc_pfault_handler_fptr">
+<span class="target" id="apigroup__paging_1ga2b9114cafdb979bc9169afcd833e3cdc"></span><em class="property">typedef </em>void<code class="descname">(* optimsoc_pfault_handler_fptr)</code><span class="sig-paren">(</span>uint32_t<em>&nbsp;vaddr</em><span class="sig-paren">)</span><a class="headerlink" href="#c.optimsoc_pfault_handler_fptr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Page fault handler type</p>
+<p>The function pointer is used to define callback function for page faults when a page cannot be found in the page directory. The user code has to take appropriate actions then.</p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">vaddr</span></code>: The virtual address of the fault </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="typedef">
+<dt id="c.page_alloc_fptr">
+<span class="target" id="apigroup__paging_1ga45a61fdb11f1d7defa844e0715b1d591"></span><em class="property">typedef </em>void*<code class="descname">(* page_alloc_fptr)</code><a class="headerlink" href="#c.page_alloc_fptr" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Functions</p>
+<dl class="function">
+<dt id="c.optimsoc_vmm_create_page_dir">
+<span class="target" id="apigroup__paging_1ga97067c65d7f9fb4f99ad877f1b0e2c70"></span><a class="reference internal" href="#c.optimsoc_page_dir_t" title="optimsoc_page_dir_t">optimsoc_page_dir_t</a> <code class="descname">optimsoc_vmm_create_page_dir</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#c.optimsoc_vmm_create_page_dir" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a new page directory</p>
+<p>This function allocates a new page directory. You can set it for a thread by calling optimsoc_thread_set_pagedir.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>Empty page dir </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="c.optimsoc_vmm_map">
+<span class="target" id="apigroup__paging_1ga2530e55b4129ce6a23e8a6d68ab58d5a"></span>int <code class="descname">optimsoc_vmm_map</code><span class="sig-paren">(</span><a class="reference internal" href="#c.optimsoc_page_dir_t" title="optimsoc_page_dir_t">optimsoc_page_dir_t</a><em>&nbsp;directory</em>, uint32_t<em>&nbsp;vaddr</em>, uint32_t<em>&nbsp;paddr</em><span class="sig-paren">)</span><a class="headerlink" href="#c.optimsoc_vmm_map" title="Permalink to this definition">¶</a></dt>
+<dd><p>Map virtual page to physical page</p>
+<p>This functions adds the entry of the virtual page of vaddr to the physical page of paddr.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>Success of operation </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">directory</span></code>: Directory to add page mapping to </li>
+<li><code class="docutils literal"><span class="pre">vaddr</span></code>: Virtual address of the page to map </li>
+<li><code class="docutils literal"><span class="pre">paddr</span></code>: Physical address of the page to map </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="c.optimsoc_vmm_unmap">
+<span class="target" id="apigroup__paging_1ga41c574850f5e8b6edb40d92e2abf3144"></span>int <code class="descname">optimsoc_vmm_unmap</code><span class="sig-paren">(</span><a class="reference internal" href="#c.optimsoc_page_dir_t" title="optimsoc_page_dir_t">optimsoc_page_dir_t</a><em>&nbsp;directory</em>, uint32_t<em>&nbsp;vaddr</em><span class="sig-paren">)</span><a class="headerlink" href="#c.optimsoc_vmm_unmap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove a page from directory</p>
+<p>Remove an entry from the page directory.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>Success of operation </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">directory</span></code>: Directory to remove page from </li>
+<li><code class="docutils literal"><span class="pre">vaddr</span></code>: Virtual address of page to map </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="c.optimsoc_vmm_virt2phys">
+<span class="target" id="apigroup__paging_1gacb348c27d0b9bda64646bf519b8756b5"></span>int <code class="descname">optimsoc_vmm_virt2phys</code><span class="sig-paren">(</span><a class="reference internal" href="#c.optimsoc_page_dir_t" title="optimsoc_page_dir_t">optimsoc_page_dir_t</a><em>&nbsp;directory</em>, uint32_t<em>&nbsp;vaddr</em>, uint32_t *<em>&nbsp;paddr</em><span class="sig-paren">)</span><a class="headerlink" href="#c.optimsoc_vmm_virt2phys" title="Permalink to this definition">¶</a></dt>
+<dd><p>Virtual to physical mapping</p>
+<p>Map a virtual address to the physical address.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>Success of operation </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">directory</span></code>: Directory for lookup </li>
+<li><code class="docutils literal"><span class="pre">vaddr</span></code>: Virtual address </li>
+<li><code class="docutils literal"><span class="pre">paddr</span></code>: Physical address </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="c.optimsoc_vmm_phys2virt">
+<span class="target" id="apigroup__paging_1ga3bc9711c3cc0aacd16ee11ed2431457c"></span>int <code class="descname">optimsoc_vmm_phys2virt</code><span class="sig-paren">(</span><a class="reference internal" href="#c.optimsoc_page_dir_t" title="optimsoc_page_dir_t">optimsoc_page_dir_t</a><em>&nbsp;directory</em>, uint32_t<em>&nbsp;paddr</em>, uint32_t *<em>&nbsp;vaddr</em><span class="sig-paren">)</span><a class="headerlink" href="#c.optimsoc_vmm_phys2virt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Physical to virtual mapping</p>
+<p>Find virtual address for a physical address. This is a very time consuming operation, especially if the virtual address space is fully or sparsely populated. It also only finds the first mapping, but may be usefull to find and delete incorrect mappings.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>Success of operation </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">directory</span></code>: Directory for lookup </li>
+<li><code class="docutils literal"><span class="pre">paddr</span></code>: Physical address </li>
+<li><code class="docutils literal"><span class="pre">vaddr</span></code>: Virtual address </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="c.optimsoc_vmm_set_dfault_handler">
+<span class="target" id="apigroup__paging_1ga9e0efd2f9c6e30b3fea1bd78e85b955c"></span>void <code class="descname">optimsoc_vmm_set_dfault_handler</code><span class="sig-paren">(</span><a class="reference internal" href="#c.optimsoc_pfault_handler_fptr" title="optimsoc_pfault_handler_fptr">optimsoc_pfault_handler_fptr</a><em>&nbsp;handler</em><span class="sig-paren">)</span><a class="headerlink" href="#c.optimsoc_vmm_set_dfault_handler" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set handler for data page faults</p>
+<p>Register the handler for fault exceptions from the data MMU.</p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">handler</span></code>: Handler to register </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="c.optimsoc_vmm_set_ifault_handler">
+<span class="target" id="apigroup__paging_1gab49616cc3ad2895bbc8b81e348a32b7a"></span>void <code class="descname">optimsoc_vmm_set_ifault_handler</code><span class="sig-paren">(</span><a class="reference internal" href="#c.optimsoc_pfault_handler_fptr" title="optimsoc_pfault_handler_fptr">optimsoc_pfault_handler_fptr</a><em>&nbsp;handler</em><span class="sig-paren">)</span><a class="headerlink" href="#c.optimsoc_vmm_set_ifault_handler" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set handler for instruction page faults</p>
+<p>Register the handler for fault exceptions from the instructions MMU.</p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">handler</span></code>: Handler to register </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="c.optimsoc_vmm_destroy_page_dir">
+<span class="target" id="apigroup__paging_1ga13020cf0a1e1c7cfd20642578f1ad7b0"></span>void <code class="descname">optimsoc_vmm_destroy_page_dir</code><span class="sig-paren">(</span><a class="reference internal" href="#c.optimsoc_page_dir_t" title="optimsoc_page_dir_t">optimsoc_page_dir_t</a><em>&nbsp;dir</em><span class="sig-paren">)</span><a class="headerlink" href="#c.optimsoc_vmm_destroy_page_dir" title="Permalink to this definition">¶</a></dt>
+<dd><p>Destroy a page directory</p>
+<p>Destroy an entire page directory and free the memory.</p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">dir</span></code>: Directory to destroy </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="c.optimsoc_vmm_dir_copy">
+<span class="target" id="apigroup__paging_1ga48fcc47a34ea8389fae37e7804dcb602"></span><a class="reference internal" href="#c.optimsoc_page_dir_t" title="optimsoc_page_dir_t">optimsoc_page_dir_t</a> <code class="descname">optimsoc_vmm_dir_copy</code><span class="sig-paren">(</span>uint32_t<em>&nbsp;remote_tile</em>, void *<em>&nbsp;remote_addr</em>, <a class="reference internal" href="#c.page_alloc_fptr" title="page_alloc_fptr">page_alloc_fptr</a><em>&nbsp;page_alloc_fnc</em><span class="sig-paren">)</span><a class="headerlink" href="#c.optimsoc_vmm_dir_copy" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+
+
+</div>

@@ -1,0 +1,97 @@
+---
+layout: default
+title: Syscall Handling
+scrollspytarget:
+---
+
+<div class="optimsoc-section-header">
+  
+  <h1>API Documentation</h1>
+  
+</div>
+
+  
+
+<hr/>
+
+<div class="col-md-3">
+  <div class="optimsoc-doc-mainnav affix" data-spy="affix" data-offset-top="50">
+    <div style="padding-bottom:10px" class="nav">
+      version master (<a href="/docs/index.html#document-archive">other versions</a>)
+
+      
+      
+        <ul class="nav current">
+<li class="toctree-l1"><a class="reference internal" href="group__utility.html">Utility functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="group__system.html">OpTiMSoC system functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="group__tracing.html">OpTiMSoC tracing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="group__libbaremetal.html">Baremetal library</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="group__libruntime.html">Runtime library</a><ul class="nav current">
+<li class="toctree-l2"><a class="reference internal" href="group__initconfig.html">Initialization and Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group__paging.html">Page Handling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group__thread.html">Thread Management</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Syscall Handling</a></li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+  </div>
+</div>
+
+<div class="col-md-9 optimsoc-doc-body">
+
+ <div class="section" id="syscall-handling">
+<h1>Syscall Handling<a class="headerlink" href="#syscall-handling" title="Permalink to this headline">¶</a></h1>
+<dl class="group">
+<dt>
+<span class="target" id="apigroup__syscall"></span><em>group</em> <code class="descname">syscall</code></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Typedefs</p>
+<dl class="typedef">
+<dt id="c.optimsoc_syscall_handler_fptr">
+<span class="target" id="apigroup__syscall_1gaa2e412444da7003cb54d683424e8119a"></span><em class="property">typedef </em>void<code class="descname">(* optimsoc_syscall_handler_fptr)</code><span class="sig-paren">(</span>struct optimsoc_syscall<em>&nbsp;*sysc</em><span class="sig-paren">)</span><a class="headerlink" href="#c.optimsoc_syscall_handler_fptr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Syscall handler function</p>
+<p>The user or the runtime system registers the syscall handler function that is called with a pointer to the syscall data.</p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">sysc</span></code>: The syscall data </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Functions</p>
+<dl class="function">
+<dt id="c.optimsoc_syscall_handler_set">
+<span class="target" id="apigroup__syscall_1ga92d011fb26791e375ac4a0bca743cfce"></span>void <code class="descname">optimsoc_syscall_handler_set</code><span class="sig-paren">(</span><a class="reference internal" href="#c.optimsoc_syscall_handler_fptr" title="optimsoc_syscall_handler_fptr">optimsoc_syscall_handler_fptr</a><em>&nbsp;handler</em><span class="sig-paren">)</span><a class="headerlink" href="#c.optimsoc_syscall_handler_set" title="Permalink to this definition">¶</a></dt>
+<dd><p>Register a syscall handler</p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">handler</span></code>: The syscall handler function to call on syscall exceptions. </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+<dl class="class">
+<dt id="_CPPv216optimsoc_syscall">
+<span id="optimsoc_syscall"></span><span class="target" id="apistructoptimsoc__syscall"></span><em class="property">struct </em><code class="descname">optimsoc_syscall</code><a class="headerlink" href="#_CPPv216optimsoc_syscall" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;optimsoc-runtime.h&gt;</em><p>Syscall data</p>
+<p>The syscall data is an identifier, up to six parameters and a return value. </p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+</div>

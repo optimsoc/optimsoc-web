@@ -221,15 +221,20 @@ ul.share-buttons li {
 
 /* Highlight current chapter */
 /* Latex: */ .optimsoc-doc-mainnav li div.active,
-/* Sphinx: */ .optimsoc-doc-mainnav .toctree-l1 .current {
+/* Sphinx: */ .optimsoc-doc-mainnav .toctree-l1.current > a {
   color: #F04C5C;
   font-weight: bold;
 }
 
 /* Sphinx only: don't have link for current */
-.optimsoc-doc-mainnav .toctree-l1 .current {
+.optimsoc-doc-mainnav .toctree-l1.current > a,
+.optimsoc-doc-mainnav .toctree-l2.current > a {
    pointer-events: none;
    cursor: default;
+}
+
+/* Sphinx: */ .optimsoc-doc-mainnav .toctree-l2.current > a {
+  color: #F04C5C;
 }
 
 /* Current chapter subnav*/
