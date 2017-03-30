@@ -62,8 +62,8 @@ function build_docs {
   cp $OBJDIR/user_guide/pdf/user_guide.pdf $OUTDIR/user-guide.pdf
 
   # Reference Manual
+  VENV=$TOPDIR/.venv make -C $SRCDIR/doc/api
   if [ -e $SRCDIR/doc/refman/index.rst ]; then
-    mkdir -p $OBJDIR/refman/html
     $SPHINXBUILD -b html -D html_theme=sphinxtheme \
       -D html_theme_path=$TOPDIR/docbuild \
       -D version=$VERSION \
