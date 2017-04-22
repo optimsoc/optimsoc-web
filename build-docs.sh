@@ -29,39 +29,6 @@ function build_docs {
   cd "$SRCDIR"
   git checkout "$CSET"
 
-  # User guide: HTML
-  mkdir -p $OBJDIR/user_guide/{tex,xml,html}
-  cp $SRCDIR/doc/user_guide/* $OBJDIR/user_guide/tex
-  cp -r $SRCDIR/doc/user_guide/img $OBJDIR/user_guide/tex
-  cp $TOPDIR/docbuild/user_guide-html.tex $OBJDIR/user_guide/tex
-
-  latexml --dest=$OBJDIR/user_guide/xml/user_guide.xml \
-    $OBJDIR/user_guide/tex/user_guide-html.tex
-  latexmlpost --navigationtoc=context --splitat=chapter --splitnaming=label \
-    --sourcedirectory=$OBJDIR/user_guide/tex \
-    --stylesheet=$TOPDIR/docbuild/latexml-optimsoc.xsl --format=html \
-    --dest=$OBJDIR/user_guide/html/user_guide.html \
-    --xsltparameter=OPTIMSOC_TITLE:"User Guide" \
-    --xsltparameter=OPTIMSOC_DOCID:"user-guide" \
-    --xsltparameter=OPTIMSOC_VERSION:"$VERSION" \
-    --xsltparameter=OPTIMSOC_SOURCES_CSET:"$CSET" \
-    $OBJDIR/user_guide/xml/user_guide.xml
-
-  mkdir -p $OUTDIR/user-guide
-  cp $OBJDIR/user_guide/html/*.html $OUTDIR/user-guide
-  cp -r $OBJDIR/user_guide/html/img $OUTDIR/user-guide
-  test -d $OBJDIR/user_guide/html/mi && cp -r $OBJDIR/user-guide/html/mi $OUTDIR/user_guide
-
-  # User guide: PDF
-  mkdir -p $OBJDIR/user_guide/pdf
-  (
-    cd $SRCDIR/doc/user_guide
-    pdflatex -output-directory $OBJDIR/user_guide/pdf user_guide.tex || exit
-    pdflatex -output-directory $OBJDIR/user_guide/pdf user_guide.tex
-  )
-  cp $OBJDIR/user_guide/pdf/user_guide.pdf $OUTDIR/user-guide.pdf
-
-  # Reference Manual
   VENV=$TOPDIR/.venv make -C $SRCDIR/doc/api
   if [ -e $SRCDIR/doc/refman/index.rst ]; then
     $SPHINXBUILD -b html -D html_theme=sphinxtheme \

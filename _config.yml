@@ -12,6 +12,8 @@ exclude:
   - buildtmp
   - docbuild
 
+include: ["_images"]
+
 # blog authors
 authors:
   philipp:

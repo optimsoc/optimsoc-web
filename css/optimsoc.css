@@ -411,6 +411,10 @@ a.headerlink {
   border-color: #faebcc;
 }
 
+.admonition.note {
+    border-color: #bce8f1;
+}
+
 .admonition > .admonition-title {
     padding: 10px 15px;
     border-bottom: 1px solid transparent;
@@ -429,7 +433,19 @@ a.headerlink {
   line-height: 1.1;
 }
 
-.admonition > .last {
+.admonition.note > .admonition-title {
+  background-color: #d9edf7;
+  color: #31708f;
+  border-color: #bce8f1;;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.1;
+}
+
+.admonition > .last,
+.admonition > p {
   padding: 10px 15px;
 }
 

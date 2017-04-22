@@ -28,7 +28,7 @@ quickly.
   </button>
   <ul class="dropdown-menu">
     <li>
-      <a href="/docs/{{doc_version_current_dev}}/user-guide/chap_introduction.html">latest development version ({{doc_version_current_dev}})</a>
+      <a href="/docs/{{doc_version_current_dev}}/user-guide/index.html">latest development version ({{doc_version_current_dev}})</a>
     </li>
     <li role="separator" class="divider"></li>
     <li><a href="#document-archive">all versions</a></li>
@@ -57,8 +57,13 @@ You can determine the version you're using with <code>echo $OPTIMSOC_VERSION</co
         {% if doc_version == doc_version_current_dev %}(latest development){% endif %}
         {% if doc_version == doc_version_current_release %}(latest release){% endif %}
       </td>
-      <td><a href="/docs/{{ doc_version }}/user-guide/chap_introduction.html">online</a>,
-	  <a href="/docs/{{ doc_version }}/user-guide.pdf">PDF</a></td>
+      <td>
+        {% if doc_version == "2015.1" or doc_version == "2016.1" %}<a href="/docs/{{ doc_version }}/user-guide/chap_introduction.html">online</a>,
+        <a href="/docs/{{ doc_version }}/user-guide.pdf">PDF</a>
+		{% else %}
+        <a href="/docs/{{ doc_version }}/user_guide/index.html">online</a>
+        {% endif %}
+      </td>
       <td>{% if doc_version != "2015.1" and doc_version != "2016.1" %}<a href="/docs/{{ doc_version }}/refman/index.html">online</a>{% endif %}</td>
       <td>{% if doc_version != "2015.1" and doc_version != "2016.1" %}<a href="/docs/{{ doc_version }}/api/index.html">online</a>{% endif %}</td>
     </tr>
