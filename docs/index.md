@@ -28,7 +28,7 @@ quickly.
   </button>
   <ul class="dropdown-menu">
     <li>
-      <a href="/docs/{{doc_version_current_dev}}/user-guide/index.html">latest development version ({{doc_version_current_dev}})</a>
+      <a href="/docs/{{doc_version_current_dev}}/user_guide/index.html">latest development version ({{doc_version_current_dev}})</a>
     </li>
     <li role="separator" class="divider"></li>
     <li><a href="#document-archive">all versions</a></li>
