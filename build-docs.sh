@@ -9,7 +9,8 @@ OPTIMSOC_REPO_URL=${1:-https://github.com/optimsoc/sources.git}
 TOPDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 cd "$TOPDIR"
 
-SPHINXBUILD=$TOPDIR/.venv/bin/sphinx-build
+VENV=$TOPDIR/.venv
+SPHINXBUILD=$VENV/bin/sphinx-build
 
 function build_docs {
   SRCDIR=$1
@@ -29,22 +30,27 @@ function build_docs {
   cd "$SRCDIR"
   git checkout "$CSET"
 
-  VENV=$TOPDIR/.venv make -C $SRCDIR/doc/api
+  $VENV/bin/pip install --upgrade -r $SRCDIR/doc/requirements.txt
+
+  VENV=$VENV make -C $SRCDIR/doc/api
+
   if [ -e $SRCDIR/doc/refman/index.rst ]; then
     $SPHINXBUILD -b html -D html_theme=sphinxtheme \
       -D html_theme_path=$TOPDIR/docbuild \
       -D version=$VERSION \
+      -c $SRCDIR/doc/ \
       $SRCDIR/doc $OUTDIR/
   fi
 }
+	    
+# get sources
+git clone $OPTIMSOC_REPO_URL $TOPDIR/buildtmp/optimsoc
 
 # Prepare Sphinx
 python3 -m venv .venv
-.venv/bin/pip install --upgrade pip
-.venv/bin/pip install --upgrade -r sphinx_requirements.txt
-
-# get sources
-git clone $OPTIMSOC_REPO_URL $TOPDIR/buildtmp/optimsoc
+$VENV/bin/pip install --upgrade pip
+# Ugly hotfix from OpTiMSoC source repo
+patch -N --silent -d $VENV/lib/`ls $VENV/lib/`/site-packages/breathe/renderer/ < $TOPDIR/buildtmp/optimsoc/doc/hotfix/breathe-sphinx1.6.patch;
 
 # current master and all release versions (all annotated tags starting with 'v')
 # |git tag -l| is not able to select only annotated tags?!
