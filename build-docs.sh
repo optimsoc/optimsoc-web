@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -e
 #
 # Build the OpTiMSoC documentation for the web page
 #
