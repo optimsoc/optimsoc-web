@@ -30,7 +30,13 @@ function build_docs {
   cd "$SRCDIR"
   git checkout "$CSET"
 
+  # Prepare Sphinx
+  rm -rf $VENV
+  python3 -m venv $VENV
+  $VENV/bin/pip install --upgrade pip
   $VENV/bin/pip install --upgrade -r $SRCDIR/doc/requirements.txt
+  # Ugly hotfix from OpTiMSoC source repo
+  patch -N --silent -d $VENV/lib/`ls $VENV/lib/`/site-packages/breathe/renderer/ < $TOPDIR/buildtmp/optimsoc/doc/hotfix/breathe-sphinx1.6.patch;
 
   VENV=$VENV make -C $SRCDIR/doc/api
 
@@ -42,15 +48,9 @@ function build_docs {
       $SRCDIR/doc $OUTDIR/
   fi
 }
-	    
+
 # get sources
 git clone $OPTIMSOC_REPO_URL $TOPDIR/buildtmp/optimsoc
-
-# Prepare Sphinx
-python3 -m venv .venv
-$VENV/bin/pip install --upgrade pip
-# Ugly hotfix from OpTiMSoC source repo
-patch -N --silent -d $VENV/lib/`ls $VENV/lib/`/site-packages/breathe/renderer/ < $TOPDIR/buildtmp/optimsoc/doc/hotfix/breathe-sphinx1.6.patch;
 
 # current master and all release versions (all annotated tags starting with 'v')
 # |git tag -l| is not able to select only annotated tags?!
