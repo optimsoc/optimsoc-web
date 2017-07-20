@@ -11,6 +11,9 @@ description: OpTiMSoC project blog
 exclude:
   - buildtmp
   - docbuild
+  - build-docs.sh
+  - README.md
+  - Gemfile*
 
 include: ["_images"]
 
