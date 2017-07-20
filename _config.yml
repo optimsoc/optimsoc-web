@@ -14,6 +14,7 @@ exclude:
   - build-docs.sh
   - README.md
   - Gemfile*
+  - vendor
 
 include: ["_images"]
 
