@@ -1,5 +1,6 @@
 *~
 /buildtmp
 /_site
-/Gemfile.lock
 /.venv
+/.bundle
+/vendor
