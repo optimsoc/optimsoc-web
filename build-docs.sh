@@ -7,7 +7,7 @@ OPTIMSOC_REPO_URL=${1:-https://github.com/optimsoc/sources.git}
 
 # switch to script directory
 TOPDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-cd "$TOPDIR"
+cd "'$TOPDIR'"
 
 VENV=$TOPDIR/.venv
 SPHINXBUILD=$VENV/bin/sphinx-build
@@ -50,7 +50,7 @@ function build_docs {
 }
 
 # get sources
-git clone $OPTIMSOC_REPO_URL "$TOPDIR/buildtmp/optimsoc"
+git clone $OPTIMSOC_REPO_URL $TOPDIR/buildtmp/optimsoc
 
 # current master and all release versions (all annotated tags starting with 'v')
 # |git tag -l| is not able to select only annotated tags?!
