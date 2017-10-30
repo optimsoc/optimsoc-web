@@ -35,8 +35,6 @@ function build_docs {
   python3 -m venv $VENV
   $VENV/bin/pip install --upgrade pip
   $VENV/bin/pip install --upgrade -r $SRCDIR/doc/requirements.txt
-  # Ugly hotfix from OpTiMSoC source repo
-  patch -N --silent -d $VENV/lib/`ls $VENV/lib/`/site-packages/breathe/renderer/ < $TOPDIR/buildtmp/optimsoc/doc/hotfix/breathe-sphinx1.6.patch;
 
   VENV=$VENV make -C $SRCDIR/doc/api
 
