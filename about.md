@@ -73,6 +73,16 @@ OpTiMSoC is developed mainly by a research group at the [Lehrstuhl für Integrie
 
 <div class="row optimsoc-about-people">
   <div class="col-md-2">
+    <img class="img-rounded" src="/img/people/max.jpg"/>
+  </div>
+  <div class="col-md-10">
+    <h3>Max Koenen</h3>
+    Max first joined the OpTiMSoC team in 2014 for a research practice. Since 2016 he also works at <a href="http://www.lis.ei.tum.de/?id=koenen">LIS</a> where he researches fault-tolerant Network on Chips for safety-critical real-time systems. Contact him by mail at <a href="mailto:max.koenen@tum.de">max.koenen@tum.de</a>.
+  </div>
+</div>
+
+<div class="row optimsoc-about-people">
+  <div class="col-md-2">
   </div>
   <div class="col-md-10">
     <h3>Many others!</h3>
