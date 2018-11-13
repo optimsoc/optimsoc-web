@@ -27,7 +27,7 @@ scrollspytarget:
       Sphinx. The quick way is shown below.
       #}
       {% if partid != "index" %}
-        {{ local_toctree("{}/index".format(partid),pagename,maxdepth=2,collapse=True) | replace('ul class="', 'ul class="nav ') | replace('<ul>', '<ul class="nav">') }}
+        {{ toctree(maxdepth=3) | replace('ul class="', 'ul class="nav ') | replace('<ul>', '<ul class="nav">') }}
       {% endif %}
     </div>
   </div>
