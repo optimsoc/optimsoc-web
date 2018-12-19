@@ -50,11 +50,14 @@ function build_docs {
 # get sources
 git clone $OPTIMSOC_REPO_URL $TOPDIR/buildtmp/optimsoc
 
-# current master and all release versions (all annotated tags starting with 'v')
+# current master and all release versions (all annotated tags starting with 'v'
+# following our naming scheme). Pre-release version (such as v2018.1-rc1) are
+# skipped.
 # |git tag -l| is not able to select only annotated tags?!
 RELEASE_TAGS=$(cd $TOPDIR/buildtmp/optimsoc;
   git for-each-ref refs/tags/v\* --format '%(objecttype) %(refname:short)' |
     awk '$1 == "tag" {print $2}' |
+    grep -P '^v\d{4}(\.\d+)+$' |
     sort -Vr)
 
 CSETS="master $RELEASE_TAGS"
