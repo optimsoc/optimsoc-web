@@ -7,9 +7,9 @@ title: Download OpTiMSoC
 # Download OpTiMSoC
 
 <div class="alert alert-info">
-OpTiMSoC is only tested on Ubuntu 14.04 and 16.04.
+OpTiMSoC is only tested on Ubuntu 16.04.
 We strongly recommend using the same distribution setup to avoid any additional trouble.
-If you experience problems when using other Linux distributions, please open a <a href="https://github.com/optimsoc/sources/issues">GitHub issue</a>.
+If you experience problems when using other Linux distributions, please open a <a href="https://github.com/optimsoc/optimsoc/issues">GitHub issue</a>.
 </div>
 
 ## Get the latest release
@@ -17,33 +17,10 @@ If you experience problems when using other Linux distributions, please open a <
 The easiest way to get started is to use our latest release.
 Download it, unzip it and you're ready to run software on a multi-core System-on-Chip!
 
-```sh
-sudo mkdir /opt/optimsoc
-sudo chown $USER /opt/optimsoc
-wget https://github.com/optimsoc/sources/releases/download/v{{doc_version_current_release}}/optimsoc-{{doc_version_current_release}}-base.tar.gz
-wget https://github.com/optimsoc/sources/releases/download/v{{doc_version_current_release}}/optimsoc-{{doc_version_current_release}}-examples.tar.gz
-tar -xf optimsoc-{{doc_version_current_release}}-base.tar.gz -C /opt/optimsoc
-tar -xf optimsoc-{{doc_version_current_release}}-examples.tar.gz -C /opt/optimsoc
-```
+You can find all releases on the [GitHub release page](https://github.com/optimsoc/optimsoc/releases).
+Nightly builds can be found in the [optimsoc/nightly channel on Bintray](https://bintray.com/optimsoc/nightly/) (these builds can be unstable!).
 
-You are now ready to use OpTiMSoC, but you also need
-[Verilator](http://www.veripool.org/wiki/verilator) and the [or1k-elf-multicore
-Toolchain](http://openrisc.io/newlib). You can download and build them
-on your own, or for convenience use the prebuilt distribution:
-
-```sh
-wget https://raw.githubusercontent.com/optimsoc/prebuilts/master/optimsoc-prebuilt-deploy.py
-chmod a+x optimsoc-prebuilt-deploy.py
-./optimsoc-prebuilt-deploy.py -d /opt/optimsoc verilator or1kelf
-```
-
-Done. Just source the environment scripts whenever you use OpTiMSoC or
-add them to your `.bashrc`:
-
-```sh
-source /opt/optimsoc/{{doc_version_current_release}}/optimsoc-environment.sh
-source /opt/optimsoc/setup_prebuilt.sh
-```
+Read more about installing OpTiMSoC in our [User Guide](/docs/{{doc_version_current_release}}/user_guide/installation.html).
 
 ### Test your installation
 
@@ -73,8 +50,9 @@ Thats right the point where the [tutorials in the User Guide](/docs/{{doc_versio
 
 
 ## Get the sources
-If you want to develop not just software on an existing SoC, but build your own SoC hardware, you need to get the [OpTiMSoC source code](https://github.com/optimsoc/sources).
+
+If you want to develop not just software on an existing SoC, but build your own SoC hardware, you need to get the [OpTiMSoC source code](https://github.com/optimsoc/optimsoc).
 
 ```sh
-git clone https://github.com/optimsoc/sources.git optimsoc-sources
+git clone https://github.com/optimsoc/optimsoc.git
 ```
