@@ -17,7 +17,7 @@ quickly.
 
 <div class="btn-group">
   <a class="btn btn-primary"
-     href="/docs/{{doc_version_current_release}}/user-guide/chap_introduction.html"
+     href="/docs/{{doc_version_current_release}}/user_guide/index.html"
      role="button">
     <span class="glyphicon glyphicon-book" aria-hidden="true"></span> Read the User Guide <small>({{doc_version_current_release}})</small>
   </a>
