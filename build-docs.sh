@@ -34,6 +34,10 @@ function build_docs {
   rm -rf $VENV
   python3 -m venv $VENV
   $VENV/bin/pip install --upgrade pip
+  # Fix "WARNING: Generating metadata for package cairocffi produced metadata
+  # for project name unknown. Fix your #egg=cairocffi fragments."
+  # See optimsoc/doc/Makefile for details.
+  $VENV/bin/pip install --upgrade setuptools
   $VENV/bin/pip install --upgrade -r $SRCDIR/doc/requirements.txt
 
   VENV=$VENV make -C $SRCDIR/doc/api
