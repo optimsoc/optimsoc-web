@@ -38,7 +38,7 @@ Please note that some code is licensed under the [GPLv3+](http://www.gnu.org/lic
 
 ## The people behind OpTiMSoC
 
-OpTiMSoC is developed mainly by a research group at the [Lehrstuhl für Integrierte Systeme (Institute for Integrated Systems)](http://lis.ei.tum.de) at the [Technische Universität München (TUM)](http://www.tum.de). We use it there for our research on new manycore System-on-Chip architectures. The project started in 2011 and up to now many researchers and students have contributed to it.
+OpTiMSoC was developed mainly by a research group at the [Lehrstuhl für Integrierte Systeme (Institute for Integrated Systems)](http://lis.ei.tum.de) at the [Technische Universität München (TUM)](http://www.tum.de). We used it there for our research on new manycore System-on-Chip architectures. The project started in 2011 and up to now many researchers and students have contributed to it. Today it is still maintained by us after graduation.
 
 <div class="row optimsoc-about-people">
   <div class="col-md-2">
@@ -47,8 +47,6 @@ OpTiMSoC is developed mainly by a research group at the [Lehrstuhl für Integrie
   <div class="col-md-10">
     <h3>Stefan Wallentowitz</h3>
     Stefan started the project in 2011 and is probably the only person who knows every corner of OpTiMSoC by heart.
-    He works at <a href="http://www.lis.ei.tum.de/?id=wallentowitz">LIS</a>.
-    Contact him by mail at <a href="mailto:stefan.wallentowitz@tum.de">stefan.wallentowitz@tum.de</a>
   </div>
 </div>
 
@@ -58,18 +56,9 @@ OpTiMSoC is developed mainly by a research group at the [Lehrstuhl für Integrie
   </div>
   <div class="col-md-10">
     <h3>Philipp Wagner</h3>
-    Philipp joined in 2012 and is mainly working on the debug and diagnosis infrastructure. He also works at <a href="http://www.lis.ei.tum.de/?id=wagner">LIS</a>. In his spare time he's fiddeling a lot with free/open source software, and you can read about it on his <a href="https://philipp-wagner.com">blog</a>. Contact him by mail at <a href="mailto:philipp.wagner@tum.de">philipp.wagner@tum.de</a>.
+    Philipp joined in 2012 and is mainly working on the debug and diagnosis infrastructure.
   </div>
 </div>
-
-<div class="row optimsoc-about-people"> <div class="col-md-2"> <img
-  class="img-rounded" src="/img/people/no-image.png"/> </div> <div
-  class="col-md-10"> <h3>Stefan Rösch</h3> Stefan joined the OpTiMSoC
-  team in 2014 for his master thesis. He works afterwards joined the
-  institute and now researches on dependable computing. Contact him by
-  mail at <a
-  href="mailto:stefan.roesch@tum.de">stefan.roesch@tum.de</a>.</div>
-  </div>
 
 <div class="row optimsoc-about-people">
   <div class="col-md-2">
