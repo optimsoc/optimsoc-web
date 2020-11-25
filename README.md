@@ -19,7 +19,7 @@ The OpTiMSoC web site consists of two parts:
 
 When using Ubuntu, install all build dependencies with this command:
 ```sh
-sudo apt-get install libffi-dev python3 python3-venv ruby ruby-bundler doxygen
+sudo apt-get install libffi-dev python3 python3-venv python3-wheel ruby ruby-bundler doxygen
 ```
 
 In addition, Jekyll needs to be installed through bundler:
