@@ -1,0 +1,868 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+<title>OpTiMSoC</title>
+<description>OpTiMSoC project blog</description>
+<link>http://www.optimsoc.org</link>
+<atom:link href="http://www.optimsoc.org/feed.xml" rel="self" type="application/rss+xml" />
+
+<item>
+<title>OpTiMSoC wins the Eurolab4HPC Open Source Project Award!</title>
+<description>&lt;p&gt;How exciting!
+At the &lt;a href=&quot;https://fossi-foundation.org/wosh/&quot;&gt;Week of Open Source Hardware (WOSH)&lt;/a&gt; in Zürich, OpTiMSoC co-won the &lt;a href=&quot;https://www.eurolab4hpc.eu/open-source/call/&quot;&gt;Eurolab4HPC Open Source Project Award&lt;/a&gt;!
+We’re very excited and honored to see the efforts we put into OpTiMSoC being more widely recognized.
+Thanks a lot to the sponsors of this award!&lt;/p&gt;
+
+&lt;p&gt;The other prices went to &lt;a href=&quot;http://nyuzi.org/&quot;&gt;Nyuzi&lt;/a&gt;, a processor for highly parallel and GPGPU applications, and &lt;a href=&quot;https://fusesoc.net/&quot;&gt;FuseSoC&lt;/a&gt;, a hardware package manager and build tool which we use in OpTiMSoC!&lt;/p&gt;
+
+&lt;p&gt;You can find OpTiMSoC, Nyuzi, FuseSoC, and many other great projects, listed at the &lt;a href=&quot;https://www.eurolab4hpc.eu/open-source/&quot;&gt;Open Source contributions page&lt;/a&gt;.&lt;/p&gt;
+
+&lt;center&gt;
+&lt;img alt=&quot;Stefan and Philipp accept the award at WOSH&quot; src=&quot;/img/posts/2019-06-16-award/award_philipp_stefan.jpg&quot; title=&quot;Philipp and Stefan accept the award at WOSH&quot; width=&quot;50%&quot; /&gt;
+&lt;/center&gt;
+</description>
+<pubDate>Sun, 16 Jun 2019 00:00:00 +0000</pubDate>
+<link>http://www.optimsoc.org/blog/2019/06/16/award.html</link>
+<guid isPermaLink="true">http://www.optimsoc.org/blog/2019/06/16/award.html</guid>
+</item>
+
+<item>
+<title>2018.1 Release: Linux, Debugging, Automation, and Tons of Fixes</title>
+<description>&lt;p&gt;Woohoo! After more than two years of work and 479 git commits later we are very proud to present the all-new 2018.1 release of OpTiMSoC!
+A look at the statistics gives a first impression of how large this release is: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;diffstat&lt;/code&gt; tells us about 973 files changed, 133,697 lines inserted and 58,806 lines deleted.
+Or in other words, the code size increased by 74,891 lines!
+How do those lines of code translate into functionality, you may ask?
+Let’s have a closer look.&lt;/p&gt;
+
+&lt;h2 id=&quot;debug-infrastructure&quot;&gt;Debug Infrastructure&lt;/h2&gt;
+
+&lt;p&gt;The debug infrastructure of OpTiMSoC is essential in getting code running on the system, in debugging it, and in performing measurements.
+Over the last year we have fully re-implemented the &lt;a href=&quot;https://github.com/opensocdebug/osd-sw&quot;&gt;host software of the debug system&lt;/a&gt; as part of Open SoC Debug (OSD), and imported it back into OpTiMSoC.
+Together with this rewrite we extended and improved the &lt;a href=&quot;https://opensocdebug.readthedocs.io/en/latest/02_spec/index.html&quot;&gt;OSD specification document&lt;/a&gt; to be even more complete, flexible, and robust.&lt;/p&gt;
+
+&lt;p&gt;Other changes:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;A rock-solid off-chip interface is key: if developers cannot reliably access the SoC frustration levels can rise quickly. To avoid that, Max significantly improved the UART and USB3 (Cypress FX3) backends of &lt;a href=&quot;https://www.glip.io&quot;&gt;GLIP&lt;/a&gt;, which provide the off-chip interface for OSD and consequently for OpTiMSoC.&lt;/li&gt;
+  &lt;li&gt;The implementation of the off-chip interfaces are now free of vendor primitives, making the porting between FPGAs easier than ever.&lt;/li&gt;
+  &lt;li&gt;New and improved Python bindings make it easy to interact with an OpTiMSoC system in an automated way.&lt;/li&gt;
+  &lt;li&gt;Last but not least, a new implementation of the UART Device Emulation Module within Open SoC Debug by Thomas Leyk was the last remaining blocker to get Linux up and running on OpTiMSoC.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;refreshed-network-on-chip-noc-implementation&quot;&gt;Refreshed Network on Chip (NoC) Implementation&lt;/h2&gt;
+
+&lt;p&gt;In previous generations of OpTiMSoC we relied on a NoC implementation called LISNoC.
+Developed as part of a research project a couple years ago it has shown its age in various places.
+Stefan took up the job of reimplementing significant parts of it, leading to a design which is easier to understand and more flexible as a result.&lt;/p&gt;
+
+&lt;h2 id=&quot;testing-and-automation&quot;&gt;Testing and Automation&lt;/h2&gt;
+
+&lt;p&gt;OpTiMSoC is complex: hardware, software, tooling, all need to work together to form a feature-rich System on Chip.
+To ensure that we don’t accidentally break functionality we have added more tests on various levels.
+The tests can be executed manually by every developer, and are executed automatically: some on every check-in, some once a day.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Static analysis helps to catch bugs early. For hardware, we are making use of Spyglass Lint to check the code for common errors.&lt;/li&gt;
+  &lt;li&gt;To test and verify the functionality of our hardware modules, we have added more &lt;a href=&quot;https://github.com/potentialventures/cocotb&quot;&gt;cocotb tests&lt;/a&gt; to the tree.&lt;/li&gt;
+  &lt;li&gt;All software imported from Open SoC Debug is tested extensively with &lt;a href=&quot;https://app.shippable.com/github/opensocdebug/osd-sw&quot;&gt;unit tests and static analysis tools&lt;/a&gt; to avoid regressions and to catch bugs like memory leaks early. Look at the configuration in the &lt;a href=&quot;https://github.com/opensocdebug/osd-sw&quot;&gt;opensocdebug/osd-sw&lt;/a&gt; repository for more details.&lt;/li&gt;
+  &lt;li&gt;All steps in the tutorial within the user guide are now covered by automated tests. Even the tutorial showing how to build and flash Linux on an OpTiMSoC system running on an FPGA is fully &lt;a href=&quot;https://github.com/optimsoc/optimsoc/blob/933cc88e4a0e19741521a4a286ad2525086ad9cf/test/systemtest/test_tutorial.py#L393&quot;&gt;performed and checked as part of a test&lt;/a&gt;. This allows us to say: our tutorials always work!&lt;/li&gt;
+  &lt;li&gt;Finally, we have fully automated our test and build infrastructure using Travis (directly visible on GitHub) and GitLab CI (for nightly builds using internal infrastructure). Read more about that in a &lt;a href=&quot;/blog/2018/12/18/ci.html&quot;&gt;separate blog post&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;user-experience&quot;&gt;User Experience&lt;/h2&gt;
+
+&lt;p&gt;OpTiMSoC is used at TUM for research and teaching purposes.
+With many different people working on it it is essential to provide a great out-of-the-box user experience.
+Many small changes in this regard accumulated over the period of this release.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;The steps needed to get started with OpTiMSoC have been reduced. For example, all dependencies can be now installed with a single script.&lt;/li&gt;
+  &lt;li&gt;A new tool, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;optimsoc-pgm-fpga&lt;/code&gt;, has been added to help flashing a bitstream onto an FPGA.&lt;/li&gt;
+  &lt;li&gt;Initially we shipped our own version of FuseSoC. Now that all of our patches have made it upstream we were able to rely on the upstream version, which is easily installable through &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;pip&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;Good documentation makes a developer’s life so much easier. This time around we added &lt;a href=&quot;https://www.optimsoc.org/docs/2018.1/api/index.html&quot;&gt;API documentation for our SoC software libraries&lt;/a&gt;, documented &lt;a href=&quot;https://www.optimsoc.org/docs/2018.1/refman/networkonchip.html&quot;&gt;the NoC implementation&lt;/a&gt;, and added a &lt;a href=&quot;https://www.optimsoc.org/docs/2018.1/refman/porting.html&quot;&gt;guide how to port OpTiMSoC to new FPGAs&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;It might seem like a odd entry in the category “user experience,” but it is an important one: we integrated a fan controller for the VCU108 board, significantly reducing the noise level produced by this board.&lt;/li&gt;
+  &lt;li&gt;Finally, we added a &lt;a href=&quot;https://github.com/optimsoc/optimsoc/blob/master/devenv/install-optimsocide.sh&quot;&gt;script to automatically install an Eclipse IDE&lt;/a&gt; with all recommended settings to develop with and on OpTiMSoC.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;linux-support&quot;&gt;Linux Support&lt;/h2&gt;
+
+&lt;p&gt;Most users of OpTiMSoC run baremetal software on it, i.e. programming it like a microcontroller without any operating system.
+Supporting advanced operating systems has always been a dream, but getting there required a lot of work.
+But with all the small and large changes in this release and in the previous releases, we finally were able to make our dream come true: reliably boot Linux on OpTiMSoC.
+Partly responsible for this dream is also the work of Stafford Horne, who worked relentlessly to update the OpenRISC port of Linux upstream and to incorporate all the changes that accumulated over the years.&lt;/p&gt;
+
+&lt;p&gt;Read more about that in &lt;a href=&quot;/blog/2018/12/19/linux.html&quot;&gt;Linux on OpTiMSoC: How many small steps unlock a whole new world&lt;/a&gt;.&lt;/p&gt;
+
+&lt;center&gt;
+&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/Wp_2eORlWek&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+&lt;/center&gt;
+
+&lt;h2 id=&quot;contributors&quot;&gt;Contributors&lt;/h2&gt;
+
+&lt;p&gt;This release would not have happened without the continued great work of our contributors.
+In this release the following people contributed.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Shivam Aggarwal&lt;/li&gt;
+  &lt;li&gt;Franz Biersack&lt;/li&gt;
+  &lt;li&gt;Annika Fuchs&lt;/li&gt;
+  &lt;li&gt;Max Koenen&lt;/li&gt;
+  &lt;li&gt;Pedro H. Penna&lt;/li&gt;
+  &lt;li&gt;Philipp Wagner&lt;/li&gt;
+  &lt;li&gt;Stefan Wallentowitz&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+<pubDate>Thu, 20 Dec 2018 00:00:00 +0000</pubDate>
+<link>http://www.optimsoc.org/blog/2018/12/20/release.html</link>
+<guid isPermaLink="true">http://www.optimsoc.org/blog/2018/12/20/release.html</guid>
+</item>
+
+<item>
+<title>Linux on OpTiMSoC: How many small steps unlock a whole new world</title>
+<description>&lt;p&gt;Some projects we take upon ourselves are done quickly: start, do the work, profit.
+Others take a bit longer.
+And then there are these projects which seem to linger forever in an “almost done” state.
+Just one more small thing and we’ll be done.
+A small fix here.
+An extension to a module there.
+A new component elsewhere.
+And so it goes on, and on, and on.
+For days, for weeks, for years.
+Adding Linux support to OpTiMSoC is such a story.
+But there’s a happy end: Linux support has finally arrived!&lt;/p&gt;
+
+&lt;p&gt;This blog post tells the story of how Linux can be now used on OpTiMSoC, and shines a bit of light on the obstacles along the way.&lt;/p&gt;
+
+&lt;h2 id=&quot;how-it-all-looks-in-the-end&quot;&gt;How it all looks in the end&lt;/h2&gt;
+
+&lt;p&gt;A picture is always a good starting point, so let’s start with a picture.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/posts/2018-12-19-linux/architecture.jpg&quot; alt=&quot;An overview of how Linux runs on OpTiMSoC&quot; title=&quot;An overview of how Linux runs on OpTiMSoC&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The picture shows a simplified version of the whole system we’ve set up to run Linux on OpTiMSoC.
+On the left is the “Host PC” where the developer sits.
+On the bottom at right is the FPGA board, in this case a &lt;a href=&quot;https://reference.digilentinc.com/reference/programmable-logic/nexys-4-ddr/start&quot;&gt;Nexys 4 DDR board&lt;/a&gt; (recently renamed to Nexys A7-100T) containing a Xilinx Artix 7 FPGA (the XC7A100T to be exact).
+The board is connected to the Host PC through USB, and the FPGA is programmed with a bitstream containing our SoC design.&lt;/p&gt;
+
+&lt;p&gt;The design (all described in Verilog) is shown on the top right.
+At its center is the Wishbone bus which connects a single OpenRISC CPU core, DDR memory, and a 16550 UART module (we’ll get to that in a minute).
+Supporting this infrastructure is the debug system.
+It connects to the memory and the UART and enables them to speak with the Host PC.&lt;/p&gt;
+
+&lt;h2 id=&quot;what-we-want-to-achieve-and-what-not&quot;&gt;What we want to achieve (and what not)&lt;/h2&gt;
+
+&lt;p&gt;Before we go into all the gory details, let’s first discuss the goals of this whole exercise.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;We want to have a Linux-based operating system running on the OpenRISC CPU core on the FPGA.&lt;/li&gt;
+  &lt;li&gt;We want to see the output produced by Linux (e.g. during boot), and we want to interact with it by typing commands and seeing their output.
+We call this way of interaction “virtual serial console.”&lt;/li&gt;
+  &lt;li&gt;We also want to use the Host PC to control the system on the FPGA: we want to load our Linux operating system into the memory on the FPGA, and we want to start and reset it.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;To avoid confusion, let’s also discuss the things we &lt;em&gt;don’t&lt;/em&gt; want to achieve.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;We don’t have a monitor connected to the FPGA.
+Our only way of interacting with the system is through the virtual serial console.&lt;/li&gt;
+  &lt;li&gt;We don’t have persistent storage hooked up to the system, like an SD card or flash memory.
+Once the FPGA is turned off all software is gone and needs to be loaded onto the system again through the Host PC.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;With the goals and non-goals clearly stated let’s have a look at how all this machinery can be brought to life.&lt;/p&gt;
+
+&lt;h2 id=&quot;lets-cook-up-a-linux-system-on-optimsoc&quot;&gt;Let’s cook up a Linux system on OpTiMSoC!&lt;/h2&gt;
+
+&lt;p&gt;Before we can get started we first need to prepare our “ingredients”.
+Don’t worry for now if you don’t know where to get these “ingredients” from, we’ll discuss that later.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;A bitstream for the FPGA containing the SoC design as shown in the picture.&lt;/li&gt;
+  &lt;li&gt;Software on the Host PC (which also runs Linux) to interact with the FPGA.&lt;/li&gt;
+  &lt;li&gt;Finally, we need a Linux root image. That’s the software which we will execute on the OpenRISC CPU.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;With everything prepared let’s start our recipe, the steps we need to take to boot up Linux on OpTiMSoC are simple.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Program the FPGA with the bitstream.&lt;/li&gt;
+  &lt;li&gt;Connect to the system through the debug infrastructure.&lt;/li&gt;
+  &lt;li&gt;The host software detects the UART emulation module on the FPGA and provides a virtual serial port (e.g. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/dev/pts/1&lt;/code&gt;).&lt;/li&gt;
+  &lt;li&gt;On the Host PC, open a terminal application and connect to the virtual serial port.&lt;/li&gt;
+  &lt;li&gt;Write the Linux root image to the DDR memory using the host software.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;That’s it!
+Once the Linux root image has been written to the DDR memory the CPU starts executing it.
+In our case, that means Linux boots, and as soon as that’s done, greets you with a login screen: “Welcome to OpTiMSoC”!
+You can now log into the system as root user, and interact with it as you would do with any other Linux system.&lt;/p&gt;
+
+&lt;p&gt;Don’t believe me? Have a look at the video then.&lt;/p&gt;
+&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/Wp_2eORlWek&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+
+&lt;h2 id=&quot;where-do-all-the-components-come-from&quot;&gt;Where do all the components come from?&lt;/h2&gt;
+
+&lt;p&gt;Everything you’ve seen in the video is using published components of OpTiMSoC.
+Head to the &lt;a href=&quot;https://www.optimsoc.org/download.html&quot;&gt;download page&lt;/a&gt; to get the latest release.
+This gives you pre-built versions of all tools and bitstreams used in this demo.
+The only thing you need to build yourself it the Linux image.&lt;/p&gt;
+
+&lt;p&gt;The Linux root image we’re using is similar to a self-extracting ZIP file: it contains the Linux kernel together with an initial ramdisk (initramfs).
+That’s essentially a “hard drive image” loaded into memory, with all tools contained in it: a shell, tools like &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ps&lt;/code&gt; or &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ls&lt;/code&gt;, and additional software we chose to add.&lt;/p&gt;
+
+&lt;p&gt;To prepare such a image we are using &lt;a href=&quot;http://buildroot.org/&quot;&gt;buildroot&lt;/a&gt;, a project dedicated to exactly that purpose.
+Buildroot takes a configuration file as input, and produces a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;vmlinux&lt;/code&gt; file as output.
+That’s just normal ELF file which we program into the memory on the FPGA board.&lt;/p&gt;
+
+&lt;p&gt;All our custom configuration is contained in the &lt;a href=&quot;https://github.com/optimsoc/optimsoc-buildroot&quot;&gt;optimsoc/optimsoc-buildroot&lt;/a&gt; repository.
+The user guide contains &lt;a href=&quot;https://www.optimsoc.org/docs/master/user_guide/tutorials.html#run-linux-on-optimsoc&quot;&gt;detailed instructions how to make it all work&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;why-did-it-take-so-long&quot;&gt;Why did it take so long?&lt;/h2&gt;
+
+&lt;p&gt;The system shown above looks sufficiently simple, doesn’t it?
+That’s what we thought as well, and again and again.
+It turns out, to have something as complex as Linux running on a custom system actually requires getting a lot of small and by itself insignificant details right.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;The off-chip connection must be fully reliable. Making sure that no packets drop, even in rare backpressure scenarios, took a while.
+Max did great work in creating &lt;a href=&quot;https://github.com/TUM-LIS/glip/blob/master/src/tools/io_stress_test.c&quot;&gt;stress tests&lt;/a&gt; for our UART and USB3 interfaces (all of them part of &lt;a href=&quot;https://www.glip.io&quot;&gt;GLIP&lt;/a&gt;) and debugging their fallout.
+Some days and nights went into the firmware for the Cypress FX3 chip, which doesn’t always behave as the datasheet would make one think …&lt;/li&gt;
+  &lt;li&gt;The second ingredient is of course Linux itself.
+Stafford Horne did a great job to pick up work on the upstream Linux port and to steadily improve it.
+Today, we can run an unpatched upstream Linux kernel on our system!&lt;/li&gt;
+  &lt;li&gt;One of the last steps was to add the &lt;a href=&quot;https://opensocdebug.readthedocs.io/en/latest/02_spec/07_modules/dem_uart/index.html&quot;&gt;DEM UART module&lt;/a&gt; to &lt;a href=&quot;https://www.opensocdebug.org&quot;&gt;Open SoC Debug&lt;/a&gt;.
+This module emulates a &lt;a href=&quot;https://en.wikipedia.org/wiki/16550_UART&quot;&gt;16550 UART device&lt;/a&gt; so that Linux can use its standard drivers to communicate.
+But instead of sending all data to a physical UART port, the DEM UART module wraps it into Debug Packets, which are sent through the debug interconnect to the host PC, reusing the same infrastructure we use for loading the Linux root image into the memory.
+This last step was completed by Thomas Leyk a couple of weeks ago.&lt;/li&gt;
+  &lt;li&gt;Finally, we needed a way to reproducibly build a Linux root image.
+Thankfully, that’s rather easy thanks to buildroot.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Not mentioned here is all the time spent on debugging small issues, fixing the build automation, and adding tests to ensure we don’t break our newly gained Linux functionality any more.
+Today we have a &lt;a href=&quot;https://github.com/optimsoc/optimsoc/blob/6fc1a2f6cef02bd24a8b63b4303f2a5488878c7c/test/systemtest/test_tutorial.py#L393&quot;&gt;full Linux build happening every night, performing the exact same steps as you’ve seen in the video, and checking its outputs&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;get-started&quot;&gt;Get started&lt;/h2&gt;
+
+&lt;p&gt;Do you want to build your own Linux image for OpTiMSoC?
+Do you want to try out what you’ve seen in the video?
+Then head over to &lt;a href=&quot;https://www.optimsoc.org/docs/master/user_guide/tutorials.html#run-linux-on-optimsoc&quot;&gt;the tutorial in the user guide&lt;/a&gt;!&lt;/p&gt;
+
+&lt;p&gt;With Linux running on OpTiMSoC we’ve unlocked a whole new world of possibilities – software can run with minimal porting effort, existing drivers can be reused, and much more.
+The future is bright, and we’re excited to explore more ways of using OpTiMSoC!&lt;/p&gt;
+</description>
+<pubDate>Wed, 19 Dec 2018 00:00:00 +0000</pubDate>
+<link>http://www.optimsoc.org/blog/2018/12/19/linux.html</link>
+<guid isPermaLink="true">http://www.optimsoc.org/blog/2018/12/19/linux.html</guid>
+</item>
+
+<item>
+<title>Code with Confidence: OpTiMSoC Always Works!</title>
+<description>&lt;p&gt;OpTiMSoC is a highly complex system.
+If all goes to plan, software, hardware and tooling work together to form a well-integrated SoC (framework).
+But as so often, the reality is less gloomy: changing a single line of code anywhere could lead to trouble anywhere else.
+Finding out about breakages only weeks of months after the fact makes debugging a nightmare. [1]&lt;/p&gt;
+
+&lt;p&gt;Not any more.
+After multiple years of despair and a lot of work we can finally say with confidence: “OpTiMSoC always works!”
+In this blog post we’ll have a look at how we achieved this goal.&lt;/p&gt;
+
+&lt;p&gt;The first ingredient to our solution are (automated) tests.
+OpTiMSoC comes with many tests on various levels up to the full system level; just type &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;make test&lt;/code&gt; in your OpTiMSoC source tree to execute them.
+But: the best tests are useless if they’re not run.
+And that’s the problem:
+Compiling all parts of OpTiMSoC and running the tests takes multiple hours.
+Expecting developers to run all of them after every single change is unrealistic.
+So we need a better solution, and the answer is (as so often) automation.
+In this case, the automation is called &lt;a href=&quot;https://en.wikipedia.org/wiki/Continuous_integration&quot;&gt;Continuous Integration&lt;/a&gt;, or CI for short.&lt;/p&gt;
+
+&lt;p&gt;CI is is not a new concept, of course.
+It has been used in software development for almost two decades now.
+Unfortunately, testing and CI in the hardware world are a bit more complicated than in the software world.&lt;/p&gt;
+
+&lt;p&gt;The first challenge are tools: While many of the tools we’re using are available as open source, not all of them are.
+Particularly the tools to generate FPGA bitstreams (e.g. Xilinx Vivado) are closed source, and some of them require a license to operate.
+Another challenge is the hardware itself: running tests on an FPGA board requires (unsurprisingly) an FPGA board, and a way to connect it to the test machine.
+A third challenge is time: synthesizing an FPGA bitstream takes multiple hours.
+Hence waiting for the full build and test to complete significantly reduces developer productivity.&lt;/p&gt;
+
+&lt;p&gt;Despite these challenges, we found a way to have extensive test coverage &lt;em&gt;and&lt;/em&gt; fast developer feedback.
+A two-staged solution gets us there.
+The first stage are tests in &lt;a href=&quot;http://travis-ci.org/&quot;&gt;Travis CI&lt;/a&gt;.
+Travis is a commonly used continuous integration service which is free to use for open source projects.
+It integrates nicely into GitHub and can be configured to run a build and test script on every check-in, and on every pull request.&lt;/p&gt;
+
+&lt;p&gt;We &lt;a href=&quot;https://github.com/optimsoc/optimsoc/blob/master/.travis.yml&quot;&gt;configured&lt;/a&gt; &lt;a href=&quot;https://github.com/optimsoc/optimsoc/blob/master/Dockerfile&quot;&gt;Travis&lt;/a&gt; to build OpTiMSoC and to run all simulation-based tests using Verilator.
+If a Travis run indicates a successful build and test, we already know that all steps outlined in the &lt;a href=&quot;/docs/master/user_guide/tutorials.html&quot;&gt;user guide tutorial&lt;/a&gt; up to (and including) the &lt;a href=&quot;https://www.veripool.org/projects/verilator/wiki/Intro&quot;&gt;Verilator&lt;/a&gt;-based examples work as expected.&lt;/p&gt;
+
+&lt;p&gt;The second stage goes beyond what Travis can provide, as we now need access to commercial tools, associated licenses, and real hardware (e.g. FPGA boards).
+Internally at TUM we have access to a hosted instance of GitLab, which comes with (among many other great things) an integrated continuous integration system, GitLab CI.
+GitLab CI lets you attach “runners” to it.
+A runner is nothing else than a PC with a piece of software installed, connecting it to the central GitLab server.
+We have made a couple machines in our lab a “GitLab runner”.
+All of them have access to our tools installed on a central NFS share, and some of them have FPGA boards connected to them.&lt;/p&gt;
+
+&lt;p&gt;Making use of this setup and combining it with &lt;a href=&quot;https://github.com/optimsoc/optimsoc-autobuild/blob/master/.gitlab-ci.yml&quot;&gt;over 200 lines of configuration file&lt;/a&gt; we have created a fully automated continuous integration system.
+Every night, a new build pipeline wakes up (so we don’t need to) and crunches data for more than four hours on up to four machines in parallel.&lt;/p&gt;
+
+&lt;p&gt;That’s how it looks in GitLab CI:
+&lt;img src=&quot;/img/posts/2018-12-18-ci/gitlab-pipeline.jpg&quot; alt=&quot;A look at our build and test pipeline in GitLab CI&quot; title=&quot;A look at our build and test pipeline in GitLab CI&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Looking closer, the build pipeline consists of the following steps.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Get latest OpTiMSoC source code from the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;master&lt;/code&gt; branch.&lt;/li&gt;
+  &lt;li&gt;Run all cocotb-based hardware tests.&lt;/li&gt;
+  &lt;li&gt;Run Spyglass Lint on all hardware.&lt;/li&gt;
+  &lt;li&gt;Build OpTiMSoC itself (that’s mostly software tooling)&lt;/li&gt;
+  &lt;li&gt;Build seven different Verilator-based simulations models, from a small single-core, single-tile model without debug system up to a 2x2 mesh system with two cores per tile.&lt;/li&gt;
+  &lt;li&gt;Build four FPGA bitstreams for the &lt;a href=&quot;https://store.digilentinc.com/nexys-4-ddr-artix-7-fpga-trainer-board-recommended-for-ece-curriculum/&quot;&gt;Nexys 4 DDR&lt;/a&gt; (recently renamed to &lt;a href=&quot;https://store.digilentinc.com/nexys-a7-fpga-trainer-board-recommended-for-ece-curriculum/&quot;&gt;Nexys A7-100T&lt;/a&gt;) and &lt;a href=&quot;https://www.xilinx.com/products/boards-and-kits/ek-u1-vcu108-g.html&quot;&gt;VCU108&lt;/a&gt; boards.&lt;/li&gt;
+  &lt;li&gt;Run the system tests in simulation and on real hardware. On real hardware, the tests use the Nexys 4 DDR board to run baremetal software, and to build, flash and boot a full Linux!&lt;/li&gt;
+  &lt;li&gt;If all went well, the resulting build artifacts (source files, simulation models, FPGA bistreams) are uploaded to &lt;a href=&quot;https://bintray.com/optimsoc/nightly/&quot;&gt;Bintray&lt;/a&gt;, where anybody can download them.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;With all this automation in place you can now write a short script to always get the latest nightly build of OpTiMSoC, including FPGA bitstreams.&lt;/p&gt;
+
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# figure out the latest version of OpTiMSoC [2]&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;LV&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;$(&lt;/span&gt;curl &lt;span class=&quot;nt&quot;&gt;-sL&lt;/span&gt; https://api.bintray.com/packages/optimsoc/nightly/optimsoc-src/versions/_latest  |  python &lt;span class=&quot;nt&quot;&gt;-c&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'import sys, json; print json.load(sys.stdin)[&quot;name&quot;]'&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# get the source archive&lt;/span&gt;
+curl &lt;span class=&quot;nt&quot;&gt;-sLO&lt;/span&gt; https://dl.bintray.com/optimsoc/nightly/optimsoc-&lt;span class=&quot;nv&quot;&gt;$LV&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;-src&lt;/span&gt;.tar.gz
+
+&lt;span class=&quot;c&quot;&gt;# get the OpTiMSoC framework&lt;/span&gt;
+curl &lt;span class=&quot;nt&quot;&gt;-sLO&lt;/span&gt; https://dl.bintray.com/optimsoc/nightly/optimsoc-&lt;span class=&quot;nv&quot;&gt;$LV&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;-base&lt;/span&gt;.tar.gz
+
+&lt;span class=&quot;c&quot;&gt;# and finally: get all examples with all bitstreams&lt;/span&gt;
+curl &lt;span class=&quot;nt&quot;&gt;-sLO&lt;/span&gt; https://dl.bintray.com/optimsoc/nightly/optimsoc-&lt;span class=&quot;nv&quot;&gt;$LV&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;-examples&lt;/span&gt;.tar.gz
+curl &lt;span class=&quot;nt&quot;&gt;-sLO&lt;/span&gt; https://dl.bintray.com/optimsoc/nightly/optimsoc-&lt;span class=&quot;nv&quot;&gt;$LV&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;-examples-ext&lt;/span&gt;.tar.gz
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;You can find all CI configuration used for Travis in our &lt;a href=&quot;https://github.com/optimsoc/optimsoc&quot;&gt;main repository&lt;/a&gt; (look for the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.travis.yml&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Dockerfile&lt;/code&gt; files).
+The results of the Travis runs are also &lt;a href=&quot;https://travis-ci.org/optimsoc/optimsoc&quot;&gt;visible online&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;The configuration for the GitLab CI is contained in the &lt;a href=&quot;https://github.com/optimsoc/optimsoc-autobuild&quot;&gt;optimsoc-autobuild repository&lt;/a&gt; (look for the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.gitlab-ci.yml&lt;/code&gt; file).
+However, this configuration is heavily tailored towards our internal infrastructure and won’t run anywhere else as-is.&lt;/p&gt;
+
+&lt;p&gt;So for now, go and give it a try!
+Use OpTiMSoC to learn and teach, to explore and discover.
+Have fun!&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;[1] At least for light debugging. Heavy debugging, typically performed at night, avoids the problem of nightmares in an interesting way: no sleep, no nightmares.&lt;/p&gt;
+
+&lt;p&gt;[2] Getting the latest version first is a bit annoying, having a “latest” symlink would be easier of course. This seems to be a &lt;a href=&quot;https://bintray.com/docs/api/#_dynamic_download&quot;&gt;restriction Bintray has for their non-paying customers&lt;/a&gt;. Having an additional line in a script is a fair price to pay a free service.&lt;/p&gt;
+</description>
+<pubDate>Tue, 18 Dec 2018 00:00:00 +0000</pubDate>
+<link>http://www.optimsoc.org/blog/2018/12/18/ci.html</link>
+<guid isPermaLink="true">http://www.optimsoc.org/blog/2018/12/18/ci.html</guid>
+</item>
+
+<item>
+<title>What's going on at OpTiMSoC?</title>
+<description>&lt;p&gt;Each year in September or early October the OpTiMSoC team attends &lt;a href=&quot;https://orconf.org/&quot;&gt;ORConf&lt;/a&gt;, and this year was no exception.
+In addition to exchanging a lot of ideas with friends and other open source enthusiasts, ORConf presents itself as a good opportunity to reflect on what has happened in OpTiMSoC land over the last year.&lt;/p&gt;
+
+&lt;p&gt;As it turns out, there’s a lot we forgot to talk about before!&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;OpTiMSoC got initial Linux support, thanks to the great work of &lt;a href=&quot;https://sites.google.com/view/ppenna/&quot;&gt;Pedro&lt;/a&gt; during his Google Summer of Code. See &lt;a href=&quot;/blog/2017/09/04/gsoc2917.html&quot;&gt;this blog post&lt;/a&gt; for more details. Also, none of this work would have been possible without the great support of Stafford Horne, the maintainer of the OpenRISC architecture on Linux.&lt;/li&gt;
+  &lt;li&gt;Our system-level tests are run continuously in Travis and make sure that the steps outlined in the tutorial documentation always work. Even though these tests are in simulation only, they are at least able to ensure that we don’t fundamentally break the code base when making changes.&lt;/li&gt;
+  &lt;li&gt;We extended the &lt;a href=&quot;https://optimsoc.org/docs/master/refman/index.html&quot;&gt;Reference Manual&lt;/a&gt; and added &lt;a href=&quot;https://optimsoc.org/docs/master/api/index.html&quot;&gt;auto-generated API documentation&lt;/a&gt; to the homepage.&lt;/li&gt;
+  &lt;li&gt;Stefan reimplemented the NoC. While the functionality stayed largely the same, the code is now easier to maintain.&lt;/li&gt;
+  &lt;li&gt;The Xilinx VCU108 board is now supported.&lt;/li&gt;
+  &lt;li&gt;A lot of debugging work, sweat and tears went into GLIP, especially the USB 3.0 transport (Cypress FX3). A huge thanks to Max for leading the effort on this and spending weeks on debugging tiny little bugs between the FPGA, the FX3 chip, its firmware and the host. Using USB 3 we can more than 100 MByte/s trace streams off-chip, which helped significantly in getting the Linux port up and running.&lt;/li&gt;
+  &lt;li&gt;Finally: We went over 1024 commits!&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The future is always hard to predict (and history has told us many times that we’re particularly bad at predictions), but some serious things are cooking and might come to you soon.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Multi-core Linux support. The required Linux patches are currently under review and are scheduled to get into Linux in the 4.15 release.&lt;/li&gt;
+  &lt;li&gt;Debug infrastructure improvements. Most of that work is happening over at Open SoC Debug, but we’re actively involved and are constantly merging when things get ready.&lt;/li&gt;
+  &lt;li&gt;More NoC and network adapter improvements. We have quite a bit of research going on in this area, and we’ll try to make the results available as soon as they’re sufficiently usable in the general case.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;As always, if you have questions, let us know!
+In addition to the &lt;a href=&quot;mailto:optimsoc@lists.lrz.de&quot;&gt;mailing list&lt;/a&gt; you can find us on &lt;a href=&quot;https://gitter.im/optimsoc/Lobby&quot;&gt;Gitter in the optimsoc/Lobby channel&lt;/a&gt;.&lt;/p&gt;
+</description>
+<pubDate>Wed, 20 Sep 2017 00:00:00 +0000</pubDate>
+<link>http://www.optimsoc.org/blog/2017/09/20/status.html</link>
+<guid isPermaLink="true">http://www.optimsoc.org/blog/2017/09/20/status.html</guid>
+</item>
+
+<item>
+<title>GSoC 2017 Project: Integration of the OpenRISC Linux Port into OpTiMSoC</title>
+<description>&lt;p&gt;Linux was ported to OpTiMSoC during the 2017’s Google Sumer of Code. This blog
+post details the work that was accomplished during the project; and as well the work
+that was left to be tackled.&lt;/p&gt;
+
+&lt;p&gt;To port Linux to OpTiMSoC, a new manycore configuration with a Host Tile was designed and
+implemented. The Host Tile runs OpenRISC Linux and communicates with
+applications running on Computing Tiles via message-passing through the
+Network-on-Chip (NoC). Overall, the communication infrastructure is exported to
+user-level through standard UNIX file system operations, thereby enabling
+user-level applications running on the Host Tile to rely on a high-level
+communication abstractions.&lt;/p&gt;
+
+&lt;h2 id=&quot;i-design&quot;&gt;I. Design&lt;/h2&gt;
+
+&lt;p&gt;Figure 1 presents and the design overview of this project. A manycore
+configuration featuring six tiles is depicted, one host tile and five compute
+tiles. The host tile has a UART device attached to it and runs the OpenRISC
+port of Linux; whereas compute tiles runs user-level applications bare metal.
+Processes running on the Host Tile and user-level applications running on the
+Compute Tile communicate with one another via message-passing.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://lh6.googleusercontent.com/RNhSim8cI60Tlxoow31vsldGeG2oHcLEsdjJHKaWlBXlTWe6_WuH5Facrp2VGM3f4-DuX-BDt_V6569dTISxWqoTt8Q3JdXxr0r_XNMRo-S8y82hByMaatmNzrx_ERKgbBQktcHf&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Figure 1:&lt;/strong&gt; Overview of the target manycore configuration.&lt;/p&gt;
+
+&lt;p&gt;The OpenRisc Linux kernel running on the Host Tile features a Network-on-Chip
+(NoC) driver on which processes rely to send/receive messages. Operations on
+this driver are exported to userland through the standard UNIX system calls for
+manipulating files. Code Snippet 1 illustrates how a process running on the
+Host Tile send messages based on this abstraction. As a side remark, note that
+the user-level application should explicitly build the message header. In
+future implementation, the idea is to have a user-level library that does this
+job for the application. On the other hand, in Compute Tiles, user-level
+applications rely on a baremetal message-passing library to carry out a
+communication with other tiles.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;int main(int argc, char **argv)
+{
+    int fd;
+    const char *devname = &quot;/dev/noc&quot;;
+
+    /* Open NoC device. */
+    fd = open(devname, O_WRONLY);
+    
+    /* Write some data. */
+    while (int i = 0; i &amp;lt; 100; i++) {
+        unsigned dest = 0x8000000;
+        unsigned data = 0x0000dead;
+        unsigned msg = dest | data;
+        write(fd, &amp;amp;msg, sizeof(unsigned));
+    }
+   
+    /* Close NoC device. */
+    close(fd);
+
+    return (EXIT_SUCCESS);
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;ii-noc-driver-implementation&quot;&gt;II. NoC Driver Implementation&lt;/h2&gt;
+
+&lt;p&gt;To enable inter-tile communication, a NoC device driver for Linux was written.
+This device driver was implemented as a dynamically loadable module and it exports operations on the NoC to userland through regular file system calls. The main internal  routines of the implemented driver are discussed next.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/*
+ * Opens a NoC endpoint. The device minor number is used to
+ * identify the target endpoint to open. Access to an endpoint
+ * is exclusive, ie. only one process may use a given endpoint
+ * at a time.
+ */
+int optimsoc_open(struct inode *, struct file *);
+
+/*
+ * Releases a NoC endpoint. The device minor number is is used
+ * to identify the target  endpoint to release. Underlying
+ * resources associated with the endpoint are released.
+ */
+int optimsoc_release(struct inode, struct file *);
+
+/*
+ * Sends messages over an endpoint. The device minor number
+ * is used to identify the target endpoint to use on the
+ * communication. Sending messages does not block the
+ * calling process. The size of messages should be aligned
+ * on word size (32 bits). Message headers should be built
+ * on user-space.
+ */
+ssize_t optimsoc_write(struct file *, const char *, size_t, off_t);
+
+/*
+ * Receives messages over an endpoint. The device minor
+ * number is used to identify the target endpoint to use on
+ * the communication. Sending messages blocks the calling
+ * process. Flits of a message are buffered in kernel land.
+ */
+ssize_t optimsoc_read(struct file *, const char *, size_t, off_t);
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;iii-building-the-project&quot;&gt;III. Building the Project&lt;/h2&gt;
+
+&lt;p&gt;Since the Linux source tree is not yet integrated into OpTiMSoC Project, you should follow the next steps to get it running on OpTiMSoC.&lt;/p&gt;
+
+&lt;h3 id=&quot;part-1-setup-optimsoc&quot;&gt;Part 1: Setup OpTiMSoC&lt;/h3&gt;
+
+&lt;p&gt;Follow the upstream online instructions at: https://www.optimsoc.org/docs/master/user_guide/installation.html&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;In the end, set the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;OPTIMSOC&lt;/code&gt; environment variable to point to the
+installation location of OpTiMSoC.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;part-2-get-development-tools&quot;&gt;Part 2: Get Development Tools&lt;/h3&gt;
+
+&lt;p&gt;To build Linux, you will need a slightly diferent toolchain than the one used to build OpTiMSoC.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Musl Toolchain&lt;/li&gt;
+  &lt;li&gt;Newlib Baremetal Toolchain&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;mkdir -p $HOME/toolchain
+
+cd $HOME/toolchain
+
+wget  https://github.com/openrisc/or1k-gcc/releases/download/or1k-5.4.0-20170218/or1k-elf-5.4.0-20170218.tar.bz2
+
+tar -xjvf or1k-elf-5.4.0-20170218.tar.bz2
+
+wget https://github.com/openrisc/or1k-gcc/releases/download/or1k-5.4.0-20170218/or1k-linux-musl-5.4.0-20170218.tar.bz2
+
+tar -xjvf or1k-linux-musl-5.4.0-20170218.tar.bz2
+
+wget https://github.com/openrisc/or1k-gcc/releases/download/or1k-5.4.0-20170218/or1k-linux-5.4.0-20170218.tar.bz2
+
+tar -xjvf or1k-linux-5.4.0-20170218.tar.bz2
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;part-3-build-unit-tests-optional&quot;&gt;Part 3: Build Unit Tests (Optional)&lt;/h3&gt;
+
+&lt;p&gt;You can test your Linux build in OpTiMSoC with a simple distributed application:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;hello-linux:&lt;/strong&gt; runs on a host tile on top of Linux and simply sends raw messages to a remote compute tile.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;hello-baremetal&lt;/strong&gt;: runs on a compute tile on baremental, and simply read messages that arrive at the local NoC adapater and print them on the screen.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;export LIBS=$OPTIMSOC/soc/sw/lib/baremetal/libbaremetal.a
+
+git clone https://github.com/optimsoc/linux-apps $HOME/linux-apps
+
+cd $HOME/linux-apps/
+
+export CC=$HOME/toolchain/or1k-linux-musl/bin/or1k-linux-musl-gcc
+
+
+$CC hello-linux/hello.c -o hello-linux/hello
+
+export CC=$HOME/toolchain/or1k-elf/bin/or1k-elf-gcc
+export CFLAGS=”-I $OPTIMSOC/soc/sw/include/baremetal/”
+
+$CC $CFLAGS hello-baremetal/hello.c -o hello-baremetal/hello $LIBS    
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;part-4-build-linux&quot;&gt;Part 4: Build Linux&lt;/h3&gt;
+
+&lt;p&gt;Setup toolchain.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;export PATH=$PATH:$HOME/toolchain/or1k-linux/bin/
+export ARCH=openrisc
+export CROSS_COMPILE=or1k-linux-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;(Optional) If you have built unit tests from Step 3, you should copy &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;hello-linux&lt;/code&gt; to the the initramfs directory.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;mkdir -p $HOME/linux/arch/openrisc/initramfs/
+    cp $HOME/linux-apps/hello-linux/hello $HOME/linux/arch/openrisc/initramfs/
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Clone and build Linux. Note that this is done in three steps: (i) build system configuration; (ii) build dynamic modules; and (iii) build the kernel.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git clone https://github.com/optimsoc/linux.git $HOME/linux
+
+cd $HOME/linux
+
+make optimsoc_defconfig
+make modules
+make
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;iii-conclusions&quot;&gt;III. Conclusions&lt;/h2&gt;
+
+&lt;p&gt;During this GSoC project I wrote a Linux NoC driver for OpTiMSoC-based platforms. This driver was implemented as a dynamically loadable module and used standard file system kernel calls to export the message passing of the underlying platform to user space. 
+Concerning the current  implementation, the following work remains open:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;[Enhancement] Enable Endpoints to Be Multiplexed.&lt;/strong&gt; In the current implementation, only process at a time may use a given endpoint. A nice feature to have would be to enable multiple processes to concurrently use an endpoint.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;[Bug Fix] Properly Install the Interrupt Handler.&lt;/strong&gt; In the current implementation, when the interrupt handler is registered, the boot sequence halts when running on Verilator/FPGA. Interrupt-firing behavior should be investigated and the interrupt handler setup should be fixed accordingly.&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+<pubDate>Mon, 04 Sep 2017 00:00:00 +0000</pubDate>
+<link>http://www.optimsoc.org/blog/2017/09/04/gsoc2917.html</link>
+<guid isPermaLink="true">http://www.optimsoc.org/blog/2017/09/04/gsoc2917.html</guid>
+</item>
+
+<item>
+<title>2016.1 Release: Heart Surgery for FuseSoC and Open SoC Debug</title>
+<description>&lt;p&gt;It’s OpTiMSoC release time! After a bit over half a year of work, we’re proud to announce our first release in this year, 2016.1.
+It comes with many great new features, but two are especially noteworthy: our switch to FuseSoC and the integration of Open SoC Debug.
+Both new features strengthen our collaborations with other projects – because sharing is caring!&lt;/p&gt;
+
+&lt;h2 id=&quot;part-1-fusesoc&quot;&gt;Part 1: FuseSoC&lt;/h2&gt;
+&lt;p&gt;Traditionally, every digital hardware project had its own build system and its own way of managing dependencies, and OpTiMSoC was no exception.
+Especially for people coming from the software world with all the nice package managers and module repositories specialized to the various programming languages, this seems a bit arcane.
+Fortunately, our friend Olof Kindgren has put a lot of work into FuseSoC, a tool that fills exactly that gap: a package manager, dependency solver and build system for digital hardware designs.&lt;/p&gt;
+
+&lt;p&gt;For this release, we took the chance to perform a bit of heart surgery: rip out our existing build infrastructure based on TCL files, and replace it with FuseSoC’s core description files.&lt;/p&gt;
+
+&lt;p&gt;While we restored all the existing functionality, i.e. to run Verilator, Vivado Synthesis and the various simulation tools through FuseSoC, we discovered a couple of issues with FuseSoC that are not all fixed upstream yet. While we work on getting all our changes upstream, we ship OpTiMSoC with a slightly modified FuseSoC version, which is available by calling &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;optimsoc-fusesoc&lt;/code&gt;. One main reason is that we are using the
+new &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;vendor&amp;gt;:&amp;lt;library&amp;gt;:&amp;lt;name&amp;gt;:&amp;lt;version&amp;gt;&lt;/code&gt; (vlnv) naming scheme that we prototyped
+before it is now also getting into upstream. Beside that, we added
+Vivado and better xsim support, that we will also get into the
+official fusesoc version soon.&lt;/p&gt;
+
+&lt;p&gt;So what does that mean for you?
+Synthesizing a 2x2 tiled multi-core system with four compute tiles using Xilinx Vivado is now as simple as&lt;/p&gt;
+
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;optimsoc-fusesoc &lt;span class=&quot;nt&quot;&gt;--cores-root&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$OPTIMSOC_SOURCE&lt;/span&gt;/examples build optimsoc:examples:system_2x2_cccc_nexys4ddr
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Building and running a Verilator-based simulation of a single compute tile with two mor1kx cores is not much harder:&lt;/p&gt;
+
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;optimsoc-fusesoc &lt;span class=&quot;nt&quot;&gt;--cores-root&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$OPTIMSOC_SOURCE&lt;/span&gt;/examples sim optimsoc:examples:compute_tile_sim &lt;span class=&quot;nt&quot;&gt;--NUM_CORES&lt;/span&gt; 2
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;See the &lt;a href=&quot;http://www.optimsoc.org/docs/2016.1/user-guide/chap_develop-optimsoc.html#S1&quot;&gt;documentation&lt;/a&gt; for more examples.&lt;/p&gt;
+
+&lt;h2 id=&quot;part-1b-sharing-hardware-modules&quot;&gt;Part 1b: Sharing Hardware Modules&lt;/h2&gt;
+&lt;p&gt;By switching to FuseSoC, we are now able to much easier share hardware modules with other projects.
+In the old days, sharing meant copying HDL files around, and missing updates whenever there were new releases.
+With FuseSoC, it’s easy to simply point to a Git repository containing HDL files, or even download a &lt;a href=&quot;https://github.com/wallento/fusesoc_cores/blob/master/cores/micron/mt47h64m16hr-25e/mt47h64m16hr-25e.core&quot;&gt;ZIP file with HDL files from a web site (a great usage example of FuseSoC!)&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;We use this feature to factor out and share some of our modules.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;We share our board support packages, like the one for the Nexys 4 DDR board, with others.
+You can find them &lt;a href=&quot;https://github.com/wallento/fusesoc_cores/&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;We also include the HDL files for GLIP (our host communication library) and Open Soc Debug (more about that below) from their upstream sources.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Right now, we ship all these sources inside our source tree to make changes and editing easier.
+If the rate of changes decreases over time, we can move to directly including these dependencies from upstream.&lt;/p&gt;
+
+&lt;h2 id=&quot;part-2-open-soc-debug-osd&quot;&gt;Part 2: Open SoC Debug (OSD)&lt;/h2&gt;
+&lt;p&gt;OpTiMSoC has always included a rather sophisticated trace-based debug infrastructure.
+As it turns out, we’re not the only open source digital hardware project that needs such a infrastructure.
+In order to share effort, we founded, together with the &lt;a href=&quot;http://www.lowrisc.org/&quot;&gt;LowRISC project&lt;/a&gt; and in close cooperation with the &lt;a href=&quot;http://www.pulp-platform.org/&quot;&gt;PULPino project&lt;/a&gt;, &lt;a href=&quot;http://opensocdebug.org/&quot;&gt;Open SoC Debug&lt;/a&gt; (OSD).&lt;/p&gt;
+
+&lt;p&gt;The goal of this project is to collaborate on debug and diagnosis components, as they are included in OpTiMSoC: components for instruction traces, system traces, memory initialization, and much more.&lt;/p&gt;
+
+&lt;p&gt;In this OpTiMSoC release, we see the first results of this collaboration.
+Our debug infrastructure is now based on OSD.
+All debug features that were available previously are still there, and some features are new:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;System Traces (using &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;printf()&lt;/code&gt; inside the SoC software, or the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;OPTISMOC_TRACE&lt;/code&gt; macro)&lt;/li&gt;
+  &lt;li&gt;Function traces&lt;/li&gt;
+  &lt;li&gt;Reading and writing of memories in the system (now with an additional memory test and verify feature)&lt;/li&gt;
+  &lt;li&gt;Now you can also write ELF files directly into the memory, without using &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;objdump&lt;/code&gt; to convert them first.&lt;/li&gt;
+  &lt;li&gt;Not really a OSD feature, but we still profit from it by using GLIP: You can now use 12 MBaud/s UART to connect to the debug system, in addition to JTAG or USB (depending on the board)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The main visible difference today are new tools to communicate with the OpTiMSoC system.
+Instead of our own tools like &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;optimsoc-cli&lt;/code&gt;, we now use the OSD tools, like &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;osd-cli&lt;/code&gt;.
+You find much more about how to use them in the updated &lt;a href=&quot;http://www.optimsoc.org/docs/2016.1/user-guide/chap_tutorials.html&quot;&gt;tutorials in the User Guide&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;part-3-fpga-synthesis&quot;&gt;Part 3: FPGA Synthesis&lt;/h2&gt;
+&lt;p&gt;Support for &lt;em&gt;FPGA synthesis&lt;/em&gt; and prebuilt example FPGA bitstreams are
+available again. We currently focus on the
+&lt;a href=&quot;http://store.digilentinc.com/nexys-4-ddr-artix-7-fpga-trainer-board-recommended-for-ece-curriculum/&quot;&gt;Nexys 4 DDR&lt;/a&gt;
+and the
+&lt;a href=&quot;https://www.xilinx.com/products/boards-and-kits/ek-k7-kc705-g.html&quot;&gt;KC705&lt;/a&gt;
+boards. But as we have defined a good board abstraction layer now,
+it is a lot easier to support other boards. Please get in
+&lt;a href=&quot;/getinvolved.html&quot;&gt;touch with us&lt;/a&gt; if you want to have another
+board mainline supported.&lt;/p&gt;
+
+&lt;h2 id=&quot;part-4-the-small-things&quot;&gt;Part 4: The small things&lt;/h2&gt;
+&lt;p&gt;There were much more small changes throughout the system. Some things without special order.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;We now use much more SystemVerilog. That’s still a bit tricky, because every tool supports a slightly different subset of features, but in general the benefits to code readability are significant.&lt;/li&gt;
+  &lt;li&gt;Our build system has improved a lot to the point that we now can build a full release including bitstreams with one command. We use this also to do automated builds on Travis for all checkins.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;the-future-is-bright&quot;&gt;The future is bright&lt;/h2&gt;
+&lt;p&gt;With this release we’ve layed a lot of groundwork for even faster progress in the future.
+Some things are already in the pipeline, including a cool demo with live video streams.&lt;/p&gt;
+
+&lt;p&gt;We currently plan a project sprint and
+&lt;a href=&quot;https://github.com/optimsoc/sources/milestone/3&quot;&gt;plan the next release&lt;/a&gt;
+for end of October with the following improvements:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Re-activation of the &lt;em&gt;Partitioned Global Address Space&lt;/em&gt; option&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Support for the KC705&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Improved &lt;em&gt;Network-on-Chip configuration&lt;/em&gt; for better extendability&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Re-activation of the &lt;em&gt;multiple clock domains&lt;/em&gt; support and maybe
+dynamic clocks&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Stay tuned and join us on &lt;a href=&quot;/getinvolved.html&quot;&gt;IRC or the mailing list&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;contributors-to-this-release&quot;&gt;Contributors to this release&lt;/h2&gt;
+&lt;p&gt;Without the work of many individuals, a project like OpTiMSoC would be impossible. We thank everybody who contributed to this release and the projects that we included into our release.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Nico Gutmann&lt;/li&gt;
+  &lt;li&gt;Olof Kindgren (on FuseSoC)&lt;/li&gt;
+  &lt;li&gt;Stefan Rösch&lt;/li&gt;
+  &lt;li&gt;Wei Song (on Open Soc Debug)&lt;/li&gt;
+  &lt;li&gt;Philipp Wagner&lt;/li&gt;
+  &lt;li&gt;Stefan Wallentowitz&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;(This list is likely to be incomplete; if you’re missing, let us know!)&lt;/p&gt;
+</description>
+<pubDate>Fri, 02 Sep 2016 00:00:00 +0000</pubDate>
+<link>http://www.optimsoc.org/blog/2016/09/02/release.html</link>
+<guid isPermaLink="true">http://www.optimsoc.org/blog/2016/09/02/release.html</guid>
+</item>
+
+<item>
+<title>2015.1 Release and Back to Unified Tree</title>
+<description>&lt;p&gt;Good news first: We have a put out a regular release and we promise to
+do this more often. Until now there was not much sense to make
+releases, because everything was in a flow and there was not even an
+installation package. But this has changed, from now on regular
+releases can be found on
+&lt;a href=&quot;https://github.com/optimsoc/sources/releases&quot;&gt;github&lt;/a&gt;. The release
+numbers are numbered throughout the year (2015.1 on December 30 will
+hopefully not happen again..).&lt;/p&gt;
+
+&lt;p&gt;We have also accordingly updated the &lt;a href=&quot;/download.html&quot;&gt;download
+instruction&lt;/a&gt;, pretty simple now, right?&lt;/p&gt;
+
+&lt;p&gt;Now to the kind of “bad” news: We are moving back from Google repo to
+a unified source tree, plus extra repositories for demo apps, FPGA
+target code, etc. It simply turned out that for people new to git, the
+usage of repo is too challenging and time-consuming. Hence, you can
+now find the unified source tree
+&lt;a href=&quot;https://github.com/optimsoc/sources&quot;&gt;github&lt;/a&gt;. We have brought in all
+changes from the distributed repos again.&lt;/p&gt;
+
+&lt;p&gt;But to turn it into good news again, you can install from sources with
+one simple installer script (a better one to come in 2016):&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git clone https://github.com/optimsoc/sources optimsoc-sources
+./optimsoc-sources/tools/install.py -d /opt/optimsoc/current
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;We are looking forward to a more active 2016 and wish you all a Happy
+New Year!&lt;/p&gt;
+
+</description>
+<pubDate>Wed, 30 Dec 2015 00:00:00 +0000</pubDate>
+<link>http://www.optimsoc.org/blog/2015/12/30/release.html</link>
+<guid isPermaLink="true">http://www.optimsoc.org/blog/2015/12/30/release.html</guid>
+</item>
+
+<item>
+<title>Switch to github organization and Google repo</title>
+<description>&lt;p&gt;A few weeks ago we started cutting out the different parts of OpTiMSoC
+from the &lt;a href=&quot;https://github.com/tum-lis/optimsoc&quot;&gt;original repository&lt;/a&gt; to
+separate repositories at the &lt;a href=&quot;https://github.com/optimsoc/&quot;&gt;new
+organization&lt;/a&gt;. The aim is to structure
+it better and have separation of different aspects of OpTiMSoC.&lt;/p&gt;
+
+&lt;p&gt;The method of separating subtrees from the original tree with keeping
+the history is straight forward using &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git filter-branch&lt;/code&gt;. Some parts
+of the history get lost, especially for the system software.
+Nevertheless, we now have cut the original large repository into
+smaller logical units. Some of them are only needed for installation
+if you simply want to run OpTiMSoC, others are needed to build systems
+or for debugging.&lt;/p&gt;
+
+&lt;p&gt;Finally, we struggled a bit with still allowing for a unified tree
+layout, which is desirable for the documentation and ease of use. We
+wanted a tree similar to the original layout and inspected &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git
+submodule&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git subtree&lt;/code&gt;. Unfortunately both did not convince us
+entirely, as we don’t want people to learn new merge strategies etc.&lt;/p&gt;
+
+&lt;p&gt;We first started with a simple shell script that initially creates the
+layout. After some more search we came to &lt;a href=&quot;https://code.google.com/p/git-repo/&quot;&gt;Google
+repo&lt;/a&gt;, which is a git wrapper for
+Android developers. While we don’t plan to use the entire feature set,
+we use it to distribute the tree layout. The layout is distributed as
+xml files and it is possible to define groups for different feature
+sets.&lt;/p&gt;
+
+&lt;p&gt;To start a layout, simply create an empty folder, download the repo
+script and make it executable:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;mkdir optimsoc
+wget https://storage.googleapis.com/git-repo-downloads/repo
+chmod a+x repo
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Now you can initialize the repository layout. The script downloads
+some more files from Google’s repositories and reads the remote xml
+description into a local repository of the repository files, both in
+the hidden path &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.repo&lt;/code&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;./repo init -u https://github.com/optimsoc/optimsoc-repo
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;You then synchronize the repositories and repo clones and puts them
+into “detached HEAD” state.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; ./repo sync
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;If you want to create a new feature branch for a part of OpTiMSoC you
+can use the repo infrastructure or simply do this with the usual git
+commands (create branch, stage, commit etc.). We are also still
+experimenting with the best development strategies.&lt;/p&gt;
+
+</description>
+<pubDate>Sat, 16 May 2015 00:00:00 +0000</pubDate>
+<link>http://www.optimsoc.org/blog/2015/05/16/repo.html</link>
+<guid isPermaLink="true">http://www.optimsoc.org/blog/2015/05/16/repo.html</guid>
+</item>
+
+<item>
+<title>Website updates and mailing list</title>
+<description>&lt;p&gt;Maybe not visible to the outside, but there has been a change in the
+website rcently. We have updated the documentation, moved the entire
+site to &lt;a href=&quot;https://github.com/optimsoc/optimsoc.github.io&quot;&gt;github pages&lt;/a&gt;
+and added some social media buttons to share the website or our blog
+posts.&lt;/p&gt;
+
+&lt;p&gt;Also very important to mention we want to (re-)activate the mailing
+list (&lt;a href=&quot;mailto:optimsoc@lists.lrz.de&quot;&gt;optimsoc.lists.lrz.de&lt;/a&gt;). So if
+you have any feedback, questions or ideas please feel free to send a
+mail there. You can also subsribe to the list and always stay updated:&lt;/p&gt;
+
+&lt;form class=&quot;form-inline&quot; method=&quot;post&quot; action=&quot;https://lists.lrz.de/mailman/subscribe/optimsoc&quot;&gt;
+  &lt;div class=&quot;form-group&quot;&gt;
+    &lt;label class=&quot;sr-only&quot; for=&quot;email&quot;&gt;e-mail address&lt;/label&gt;
+    &lt;input type=&quot;text&quot; class=&quot;form-control&quot; placeholder=&quot;your-email@example.com&quot; name=&quot;email&quot; /&gt;
+  &lt;/div&gt;
+  &lt;button class=&quot;btn btn-primary&quot; type=&quot;submit&quot;&gt;Subscribe me!&lt;/button&gt;
+&lt;/form&gt;
+
+&lt;p&gt;As you might have noticed, we are also preparing a release, this time
+seriously ;)&lt;/p&gt;
+
+</description>
+<pubDate>Tue, 12 May 2015 00:00:00 +0000</pubDate>
+<link>http://www.optimsoc.org/blog/2015/05/12/website.html</link>
+<guid isPermaLink="true">http://www.optimsoc.org/blog/2015/05/12/website.html</guid>
+</item>
+
+</channel>
+</rss>

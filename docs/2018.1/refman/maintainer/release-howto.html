@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>OpTiMSoC Release HOWTO</title>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <!-- external CSS -->
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- our own CSS (must be include after bootstrap.css!) -->
+  <link rel="stylesheet" href="/css/optimsoc.css"/>
+
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+    <script src="/js/html5shiv.js"></script>
+    <script src="/js/respond.min.js"></script>
+  <![endif]-->
+
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/feed.xml" />
+
+  <!-- Google Web Fonts -->
+  <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,400italic,600,700,900" rel="stylesheet" type="text/css">
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro:400,500,600,700" rel="stylesheet" type="text/css">
+  <link href="//fonts.googleapis.com/css?family=Fredericka+the+Great" rel="stylesheet" type="text/css">
+</head>
+<body  data-offset='50' data-spy="scroll" data-target="">
+  <!-- top navigation bar -->
+  <nav class="navbar navbar-fixed-top optimsoc-nav" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/index.html" alt="OpTiMSoC"><span class="wordmark">OpTiMSoC</span></a>
+      </div>
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          <li><a href="/download.html">Download</a></li>
+          <li><a href="/docs/index.html">Documentation</a></li>
+          <li><a href="/getinvolved.html">Get involved</a></li>
+          <li><a href="/about.html">About</a></li>
+          <li><a href="/blog">Blog</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container" id="maincontent">
+  
+
+  <div class="optimsoc-section-header">
+  
+  <h1>Reference Manual</h1>
+  
+</div>
+
+  
+
+<hr/>
+
+<div class="col-md-3">
+  <div class="optimsoc-doc-mainnav affix" data-spy="affix" data-offset-top="50">
+    <div style="padding-bottom:10px" class="nav">
+      version 2018.1 (<a href="/docs/index.html#document-archive">other versions</a>)
+
+      
+      
+        <p class="caption"><span class="caption-text">Documentation Parts</span></p>
+<ul class="nav current">
+<li class="toctree-l1"><a class="reference internal" href="../../user_guide/index.html">User Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Reference Manual</a><ul class="nav current">
+<li class="toctree-l2"><a class="reference internal" href="../porting.html">Porting OpTiMSoC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../configuration.html">Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../networkonchip.html">Network-on-Chip</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">OpTiMSoC Release HOWTO</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/index.html">API Documentation</a></li>
+</ul>
+
+      
+    </div>
+  </div>
+</div>
+
+<div class="col-md-9 optimsoc-doc-body">
+
+ <div class="section" id="optimsoc-release-howto">
+<h1>OpTiMSoC Release HOWTO<a class="headerlink" href="#optimsoc-release-howto" title="Permalink to this headline">¶</a></h1>
+<p>What needs to be done to release a new OpTiMSoC version?</p>
+<p>OpTiMSoC releases are named YEAR.N, where YEAR is the current year
+(four-digit), and N is a incrementing number starting at 1 representing
+the Nth release in YEAR.</p>
+<ol class="arabic simple">
+<li><p>Tag the source code in git on the <code class="docutils literal notranslate"><span class="pre">master</span></code> branch</p></li>
+</ol>
+<blockquote>
+<div><p>We use annotated tags for releases to record the release author and the
+release date properly. All release version tags start with “v”.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git tag -am <span class="s2">&quot;Release vYEAR.N&quot;</span> vYEAR.N
+</pre></div>
+</div>
+</div></blockquote>
+<ol class="arabic" start="2">
+<li><p>Build the code for this release</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> <span class="nv">$OPTIMSOC_SRC</span>
+make dist
+</pre></div>
+</div>
+<p>The resulting binary packages are named <code class="docutils literal notranslate"><span class="pre">objdir/optimsoc-YEAR.N-[base|examples].tar.gz</span></code></p>
+</li>
+<li><p>Test the release and make sure it works.</p></li>
+<li><p>Push the tag to the remote repository</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git push origin vYEAR.N
+</pre></div>
+</div>
+</li>
+<li><p>Follow the <a class="reference external" href="https://help.github.com/articles/creating-releases/">GitHub documentation</a>
+on how to create a release.
+In this process you can also upload the created binary packages.</p></li>
+</ol>
+</div>
+
+
+</div>
+</div>
+
+
+  <!-- footer -->
+  <hr>
+  <footer class="optimsoc-footer">
+    <p>OpTiMSoC &copy; 2012-2020 OpTiMSoC Maintainers &middot; Imprint</p>
+  </footer>
+
+  <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</body>
+</html>

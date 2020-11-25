@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Network-on-Chip</title>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <!-- external CSS -->
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- our own CSS (must be include after bootstrap.css!) -->
+  <link rel="stylesheet" href="/css/optimsoc.css"/>
+
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+    <script src="/js/html5shiv.js"></script>
+    <script src="/js/respond.min.js"></script>
+  <![endif]-->
+
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/feed.xml" />
+
+  <!-- Google Web Fonts -->
+  <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,400italic,600,700,900" rel="stylesheet" type="text/css">
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro:400,500,600,700" rel="stylesheet" type="text/css">
+  <link href="//fonts.googleapis.com/css?family=Fredericka+the+Great" rel="stylesheet" type="text/css">
+</head>
+<body  data-offset='50' data-spy="scroll" data-target="">
+  <!-- top navigation bar -->
+  <nav class="navbar navbar-fixed-top optimsoc-nav" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/index.html" alt="OpTiMSoC"><span class="wordmark">OpTiMSoC</span></a>
+      </div>
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          <li><a href="/download.html">Download</a></li>
+          <li><a href="/docs/index.html">Documentation</a></li>
+          <li><a href="/getinvolved.html">Get involved</a></li>
+          <li><a href="/about.html">About</a></li>
+          <li><a href="/blog">Blog</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container" id="maincontent">
+  
+
+  <div class="optimsoc-section-header">
+  
+  <h1>Reference Manual</h1>
+  
+</div>
+
+  
+
+<hr/>
+
+<div class="col-md-3">
+  <div class="optimsoc-doc-mainnav affix" data-spy="affix" data-offset-top="50">
+    <div style="padding-bottom:10px" class="nav">
+      version master (<a href="/docs/index.html#document-archive">other versions</a>)
+
+      
+      
+        <p class="caption"><span class="caption-text">Documentation Parts</span></p>
+<ul class="nav current">
+<li class="toctree-l1"><a class="reference internal" href="../user_guide/index.html">User Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Reference Manual</a><ul class="nav current">
+<li class="toctree-l2"><a class="reference internal" href="porting.html">Porting OpTiMSoC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html">Configuration</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Network-on-Chip</a><ul class="nav">
+<li class="toctree-l3"><a class="reference internal" href="#transmission-packet-format">Transmission &amp; Packet Format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#network-on-chip-router">Network-on-Chip Router</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#instantiating-a-network-on-chip">Instantiating a Network-on-Chip</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="maintainer/release-howto.html">OpTiMSoC Release HOWTO</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../api/index.html">API Documentation</a></li>
+</ul>
+
+      
+    </div>
+  </div>
+</div>
+
+<div class="col-md-9 optimsoc-doc-body">
+
+ <div class="section" id="network-on-chip">
+<h1>Network-on-Chip<a class="headerlink" href="#network-on-chip" title="Permalink to this headline">¶</a></h1>
+<p>In OpTiMSoC we ship our own, minimalistic network-on-chip.
+It is a plain, straight-forward implementation with the following features:</p>
+<ul class="simple">
+<li><p>wormhole-based: Packets are preserved in the network</p></li>
+<li><p>dimension-routing: Deadlock free XY-routing</p></li>
+<li><p>strict ordering: Packets in one stream leave the network in the same order as they entered it</p></li>
+<li><p>configurable: Easily create your own topology from the building blocks</p></li>
+</ul>
+<p>In this part of the documentation you can learn more about the network-on-chip.</p>
+<div class="section" id="transmission-packet-format">
+<h2>Transmission &amp; Packet Format<a class="headerlink" href="#transmission-packet-format" title="Permalink to this headline">¶</a></h2>
+<p>The packet width is parameterized in the network-on-chip, but in OpTiMSoC we currently rely on 32-bit links.
+This may change in the future, but is abstracted in the network-on-chip.
+The transmission protocol is a very simple handshake signal with the following signals:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">valid</span></code> signals from the master that it currently assigns valid data.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ready</span></code> signals from the slave that it can accept a data item in this cycle.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">flit</span></code> is the actual data and assigned by the master.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">last</span></code> signals from the master that this is the last <code class="docutils literal notranslate"><span class="pre">flit</span></code>.</p></li>
+</ul>
+<p>Packets are formed by multiple flits and the <code class="docutils literal notranslate"><span class="pre">last</span></code> bit marks the end of a packet.
+The network-on-chip is agnostic to the packet content, except for the first flit in a packet: the header.
+The first 5 bits are the destination of this packet and those bits are used to compute the output port at each hop.</p>
+<p>Beside the destination two extra fields are standardized in OpTiMSoC as depicted in the following table:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 20%" />
+<col style="width: 70%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit(s)</p></th>
+<th class="head"><p>Field</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:27</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">DEST</span></code></p></td>
+<td><p><strong>Packet Destination</strong></p>
+<p>The ID of this packet’s destination network-on-chip port.</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>26:24</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">CLASS</span></code></p></td>
+<td><p><strong>Packet Class</strong></p>
+<p>Packet classes are used to differentiate between different services in the network-on-chip.
+Services are commonly associated with a specific module in the network adapter of the tiles.</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>23:19</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">SRC</span></code></p></td>
+<td><p><strong>Packet Source</strong></p>
+<p>The ID of this packet’s source network-on-chip port.</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>18:0</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">...</span></code></p></td>
+<td><p><strong>Class specific</strong></p>
+<p>The remaining part of the header is used by the classes.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="network-on-chip-router">
+<h2>Network-on-Chip Router<a class="headerlink" href="#network-on-chip-router" title="Permalink to this headline">¶</a></h2>
+<div class="figure align-default" id="fig-noc-router">
+<img alt="The network-on-chip router" src="../_images/noc_router.svg" /><p class="caption"><span class="caption-number">Fig. 1 </span><span class="caption-text">The network-on-chip router</span><a class="headerlink" href="#fig-noc-router" title="Permalink to this image">¶</a></p>
+</div>
+<p>Figure <a class="reference internal" href="#fig-noc-router"><span class="std std-numref">1</span></a> sketches the anatomy of the basic
+network-on-chip router: It has a configurable number of input ports
+and output ports (that don’t have to be the same). An input port
+stores incoming flits into a buffer, then a route lookup module
+determines the output port based on the destination of a packet and
+forwards it to the switch with that routing information. The output
+ports get the requests from the input ports and an arbiter decides
+which input port to serve, forwarding the packets to an output buffer
+then.</p>
+<div class="section" id="virtual-channels">
+<h3>Virtual Channels<a class="headerlink" href="#virtual-channels" title="Permalink to this headline">¶</a></h3>
+<p>Virtual channels are a bit hard to grasp if you are new to
+networks-on-chip. First of all, you need to understand the concept of
+channels: Channels are independent links between routers in
+networks-on-chip. As we use so called strict ordering, the channel
+number of the output port link is the same as the input port
+link. Hence, this notion does not really exist in our
+network-on-chip. Having two channels actually means having two
+physical networks.</p>
+<p>Channels are useful to avoid so called message-dependent deadlocks and
+to divert different traffic classes in general. As the point-to-point
+links between routers have historically been more costy in an ASIC,
+the idea of virtual channels is to share the links between two routers
+virtually. So, instead of having two networks they overlap on the
+links. This means that the inner parts of the router are replicated,
+but with some extra logic to share the links on input and output.</p>
+</div>
+<div class="section" id="configuration">
+<h3>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h3>
+<p>The router has the following configuration parameters:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 20%" />
+<col style="width: 70%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">FLIT_WIDTH</span></code></p></td>
+<td><p>integer</p></td>
+<td><p><strong>Width of the flit data</strong></p>
+<p>Number of bits in each data item during a network-on-chip
+transfer.</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">VCHANNELS</span></code></p></td>
+<td><p>integer</p></td>
+<td><p><strong>Number of virtual channels</strong></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">INPUTS</span></code></p></td>
+<td><p>integer</p></td>
+<td><p><strong>Number of input ports</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">OUTPUTS</span></code></p></td>
+<td><p>integer</p></td>
+<td><p><strong>Number of output ports</strong></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">DESTS</span></code></p></td>
+<td><p>integer</p></td>
+<td><p><strong>Number of destinations in network</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ROUTES</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">[OUTPUTS*DESTS-1:0]</span></code> bits</p></td>
+<td><p><strong>Output destinations</strong></p>
+<p>This is a flat field of bitvectors, with one entry for each
+possible destination. Each of the bitvectors is a one-hot
+encoding of the output to route the packet for. Be careful with
+ordering when assigning to it (LSB is index 0).</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="instantiating-a-network-on-chip">
+<h2>Instantiating a Network-on-Chip<a class="headerlink" href="#instantiating-a-network-on-chip" title="Permalink to this headline">¶</a></h2>
+<p>Actually, you will rarely build the network-on-chip out of the
+routers. Instead you will use a topology toplevel to generate the
+router layout for you. The topology we use by default is a mesh.</p>
+<div class="section" id="mesh">
+<h3>Mesh<a class="headerlink" href="#mesh" title="Permalink to this headline">¶</a></h3>
+<p>The module <code class="docutils literal notranslate"><span class="pre">noc_mesh</span></code> is instantiated to build a regular
+two-dimensional mesh. It has the following configuration parameters:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 20%" />
+<col style="width: 70%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">FLIT_WIDTH</span></code></p></td>
+<td><p>integer</p></td>
+<td><p><strong>Width of the flit data</strong></p>
+<p>Number of bits in each data item during a network-on-chip
+transfer.</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">CHANNELS</span></code></p></td>
+<td><p>integer</p></td>
+<td><p><strong>Number of channels</strong></p>
+<p>This is the number of independent channels in the network. The
+parameter <code class="docutils literal notranslate"><span class="pre">ENABLE_VCHANNELS</span></code> switches between physical and
+virtual channels.</p>
+</td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ENABLE_VCHANNELS</span></code></p></td>
+<td><p>1 bit</p></td>
+<td><p><strong>Activate virtual channels</strong></p>
+<p>Setting this to <code class="docutils literal notranslate"><span class="pre">1</span></code> will activate link-sharing between the
+routers in the mesh, while setting it to <code class="docutils literal notranslate"><span class="pre">0</span></code> will instantiate
+as many networks as configured by <code class="docutils literal notranslate"><span class="pre">CHANNELS</span></code>.</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">X</span></code>, <code class="docutils literal notranslate"><span class="pre">Y</span></code></p></td>
+<td><p>integer</p></td>
+<td><p><strong>Dimensions of the mesh</strong></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+
+</div>
+</div>
+
+
+  <!-- footer -->
+  <hr>
+  <footer class="optimsoc-footer">
+    <p>OpTiMSoC &copy; 2012-2020 OpTiMSoC Maintainers &middot; Imprint</p>
+  </footer>
+
+  <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Tutorials</title>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <!-- external CSS -->
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- our own CSS (must be include after bootstrap.css!) -->
+  <link rel="stylesheet" href="/css/optimsoc.css"/>
+
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+    <script src="/js/html5shiv.js"></script>
+    <script src="/js/respond.min.js"></script>
+  <![endif]-->
+
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/feed.xml" />
+
+  <!-- Google Web Fonts -->
+  <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,400italic,600,700,900" rel="stylesheet" type="text/css">
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro:400,500,600,700" rel="stylesheet" type="text/css">
+  <link href="//fonts.googleapis.com/css?family=Fredericka+the+Great" rel="stylesheet" type="text/css">
+</head>
+<body  data-offset='50' data-spy="scroll" data-target="">
+  <!-- top navigation bar -->
+  <nav class="navbar navbar-fixed-top optimsoc-nav" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/index.html" alt="OpTiMSoC"><span class="wordmark">OpTiMSoC</span></a>
+      </div>
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          <li><a href="/download.html">Download</a></li>
+          <li><a href="/docs/index.html">Documentation</a></li>
+          <li><a href="/getinvolved.html">Get involved</a></li>
+          <li><a href="/about.html">About</a></li>
+          <li><a href="/blog">Blog</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container" id="maincontent">
+  
+
+  <div class="optimsoc-section-header">
+  
+  <h1>User Guide</h1>
+  
+</div>
+
+  
+
+<hr/>
+
+<div class="col-md-3">
+  <div class="optimsoc-doc-mainnav affix" data-spy="affix" data-offset-top="50">
+    <div style="padding-bottom:10px" class="nav">
+      version master (<a href="/docs/index.html#document-archive">other versions</a>)
+
+      
+      
+        <p class="caption"><span class="caption-text">Documentation Parts</span></p>
+<ul class="nav current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">User Guide</a><ul class="nav current">
+<li class="toctree-l2"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html">Installation &amp; Configuration</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Tutorials</a><ul class="nav">
+<li class="toctree-l3"><a class="reference internal" href="#starting-small-compute-tile-and-embedded-software-simulated">Starting Small: Compute Tile and Embedded Software (Simulated)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#see-the-waves">See the Waves</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#going-multicore-simulate-a-multicore-compute-tile">Going Multicore: Simulate a Multicore Compute Tile</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tiled-multicore-soc-simulate-a-small-2x2-distributed-memory-system">Tiled Multicore SoC: Simulate a Small 2x2 Distributed Memory System</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#observing-software-during-execution-the-debug-system">Observing Software During Execution: The Debug System</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#our-soc-on-an-fpga">Our SoC on an FPGA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#make-message-passing-more-simple">Make Message Passing More Simple</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#run-linux-on-optimsoc">Run Linux on OpTiMSoC</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="develop.html">Develop OpTiMSoC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changes.html">Document Changes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../refman/index.html">Reference Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/index.html">API Documentation</a></li>
+</ul>
+
+      
+    </div>
+  </div>
+</div>
+
+<div class="col-md-9 optimsoc-doc-body">
+
+ <div class="section" id="tutorials">
+<h1>Tutorials<a class="headerlink" href="#tutorials" title="Permalink to this headline">¶</a></h1>
+<p>The best way to get started with OpTiMSoC after you’ve prepared your system as described in the previous chapter is to follow some of our tutorials.
+They are written with two goals in mind: to introduce some of the basic concepts and nomenclature of manycore SoC, and to show you how those are implemented and can be used in OpTiMSoC.</p>
+<p>Some of the tutorials (especially the first ones) build on top of each other, so it’s recommended to do them in order.
+Simply stop if you think you know enough to implement your own ideas!</p>
+<div class="section" id="starting-small-compute-tile-and-embedded-software-simulated">
+<h2>Starting Small: Compute Tile and Embedded Software (Simulated)<a class="headerlink" href="#starting-small-compute-tile-and-embedded-software-simulated" title="Permalink to this headline">¶</a></h2>
+<p>It is a good starting point to simulate a single compute tile of a distributed memory system.
+Therefore a simple example is included and demonstrates the general simulation approach and gives an insight in the software building process.</p>
+<p>Simulating only a single compute tile is essentially an OpenRISC core plus memory and the network adapter, where all I/O of the network adapter is not functional in this test case.
+It can therefore only be used to simulate local software.</p>
+<p>You can find this example in <code class="docutils literal notranslate"><span class="pre">$OPTIMSOC/examples/sim/compute_tile</span></code>.</p>
+<p>In addition to the simulated SoC hardware, you also need software that runs on the system.
+Our demonstration software is available in an extra repository:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">optimsoc</span><span class="o">/</span><span class="n">baremetal</span><span class="o">-</span><span class="n">apps</span>
+<span class="n">cd</span> <span class="n">baremetal</span><span class="o">-</span><span class="n">apps</span>
+</pre></div>
+</div>
+<p>Build a simple “Hello World” example:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> hello
+make
+</pre></div>
+</div>
+<p>You will then find the executable elf file as <code class="docutils literal notranslate"><span class="pre">hello/hello.elf</span></code>.
+Furthermore some other files are built.
+They are essentially transformed versions of the ELF file, i.e. the software binary.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">hello.dis</span></code> is the disassembly of the file</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">hello.bin</span></code> is the elf representation of the binary file</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">hello.vmem</span></code> is a textual copy of the binary file</p></li>
+</ul>
+<p>Now you have everything you need to run the hello world example on a simulated SoC hardware:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nv">$OPTIMSOC</span>/examples/sim/compute_tile/compute_tile_sim_singlecore --meminit<span class="o">=</span>hello.vmem
+</pre></div>
+</div>
+<p>And you’ll get roughly this output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>[                  22, 0] Software reset
+[               63128, 0] Terminated at address 0x0000e958 (status:          0)
+- ../src/optimsoc_trace_monitor_trace_monitor/verilog/trace_monitor.sv:89: Verilog $finish
+</pre></div>
+</div>
+<p>Furthermore, you will find a file called <code class="docutils literal notranslate"><span class="pre">stdout.000</span></code> which shows the actual output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># OpTiMSoC trace_monitor stdout file
+# [TIME, CORE] MESSAGE
+[               39614, 0] Hello World! Core 0 of 1 in tile 0, my absolute core id is: 0
+[               48764, 0] There are 1 compute tiles:
+[               57162, 0]  rank 0 is tile 0
+</pre></div>
+</div>
+<p>Congratulations, you’ve ran your first OpTiMSoC system!</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you are already familiar with embedded systems or microcontrollers, you might wonder: how did the <code class="docutils literal notranslate"><span class="pre">printf()</span></code> output from the software get into the <code class="docutils literal notranslate"><span class="pre">stdout.000</span></code> file if there is no UART or anything similar?</p>
+<p>OpTiMSoC software makes excessive use of a useful part of the OpenRISC ISA.
+The “no operation” instruction <code class="docutils literal notranslate"><span class="pre">l.nop</span></code> has a parameter <code class="docutils literal notranslate"><span class="pre">K</span></code> in assembly.
+This can be used for simulation purposes. It can be used for instrumentation, tracing or special purposes as writing characters with minimal intrusion or simulation termination.</p>
+<p>The termination is forced with <code class="docutils literal notranslate"><span class="pre">l.nop</span> <span class="pre">0x1</span></code>.
+The instruction is observed and a trace monitor terminates when it was observed at all cores (shortly after <code class="docutils literal notranslate"><span class="pre">main()</span></code> returned).</p>
+<p>With this method you can simply provide constants to your simulation environments.
+For variables this method is extended by putting data in further registers (often <code class="docutils literal notranslate"><span class="pre">r3</span></code>).
+This still is minimally intrusive and allows you to trace values.
+The printf is also done that way (see newlib):</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span> <span class="kt">void</span> <span class="n">sim_putc</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">c</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">asm</span><span class="p">(</span><span class="s">&quot;l.addi r3,%0,0&quot;</span> <span class="o">:</span> <span class="o">:</span> <span class="s">&quot;r&quot;</span> <span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="o">:</span> <span class="s">&quot;r3&quot;</span><span class="p">);</span>
+    <span class="k">asm</span><span class="p">(</span><span class="s">&quot;l.nop 4&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>This function is called from printf as write function.
+The trace monitor captures theses characters and puts them to the stdout file.</p>
+<p>You can easily add your own <em>traces</em> using a macro defined in <code class="docutils literal notranslate"><span class="pre">$OPTIMSOC/soc/sw/include/baremetal/optimsoc-baremetal.h</span></code>:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#define OPTIMSOC_TRACE(id,v)                \</span>
+<span class="cp">   asm(&quot;l.addi r3,%0,0&quot; : : &quot;r&quot; (v) : &quot;r3&quot;); \</span>
+<span class="cp">   asm(&quot;l.nop %0&quot;: :&quot;K&quot; (id));</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="see-the-waves">
+<h2>See the Waves<a class="headerlink" href="#see-the-waves" title="Permalink to this headline">¶</a></h2>
+<p>One major benefit of simulating a SoC is the possibility to inspect every signal inside the hardware design quite easily.
+When running a Verilator simulation, as we did in the previous step, you can simply add the <code class="docutils literal notranslate"><span class="pre">--vcd</span></code> command line option.
+It instructs Verilator to write all signals into a file.
+You can then start a waveform viewer, like GTKWave to display it.</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nv">$OPTIMSOC</span>/examples/sim/compute_tile/compute_tile_sim_singlecore --meminit<span class="o">=</span>hello.vmem --vcd
+</pre></div>
+</div>
+<p>This command will run the hello world example like it did before, but this time Verilator additionally writes a <code class="docutils literal notranslate"><span class="pre">sim.vcd</span></code> waveform file.
+You can now view this file.</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>gtkwave -o sim.vcd
+</pre></div>
+</div>
+<p>The screenshot is similar to what you should see when running GTKWave.</p>
+<a class="reference internal image-reference" href="../_images/screenshot-gtkwave.png"><img alt="../_images/screenshot-gtkwave.png" src="../_images/screenshot-gtkwave.png" style="width: 100%;" /></a>
+<p>On the left side you find a hierarchy of all signals in the system.
+Add them to the wave view and explore all internals of a working SoC at your fingertips!
+Can you find the program counter? The instruction and data caches? The branch predictor?</p>
+</div>
+<div class="section" id="going-multicore-simulate-a-multicore-compute-tile">
+<h2>Going Multicore: Simulate a Multicore Compute Tile<a class="headerlink" href="#going-multicore-simulate-a-multicore-compute-tile" title="Permalink to this headline">¶</a></h2>
+<p>Next you might want to build an actual multicore system.
+In a first step, you can just start simulations of compute tiles with multiple cores.</p>
+<p>Inside <code class="docutils literal notranslate"><span class="pre">$OPTIMSOC/examples/sim/compute_tile</span></code> you’ll find a dual-core version and a quad-core version of the system with just one compute tile that you just simulated in the previous step.
+You can run those examples like you did before.</p>
+<p>The first thing you observe: the simulation runs become longer.
+After each run, inspect the <code class="docutils literal notranslate"><span class="pre">stdout.*</span></code> files.</p>
+<p>Welcome to the multicore world!</p>
+</div>
+<div class="section" id="tiled-multicore-soc-simulate-a-small-2x2-distributed-memory-system">
+<h2>Tiled Multicore SoC: Simulate a Small 2x2 Distributed Memory System<a class="headerlink" href="#tiled-multicore-soc-simulate-a-small-2x2-distributed-memory-system" title="Permalink to this headline">¶</a></h2>
+<p>Next we want to run an actual NoC-based tiled multicore system-on-chip, with the examples you get <code class="docutils literal notranslate"><span class="pre">system_2x2_cccc</span></code>.
+The nomenclature in all pre-packed systems first denotes the dimensions and then the instantiated tiles, here <code class="docutils literal notranslate"><span class="pre">cccc</span></code> as four compute tiles.
+In our pre-built example, each compute tile has two CPU cores, meaning you have eight CPU cores in total.</p>
+<p>Execute it again to get the hello world experience:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nv">$OPTIMSOC</span>/examples/sim/system_2x2_cccc/system_2x2_cccc_sim_dualcore --meminit<span class="o">=</span>hello.vmem
+</pre></div>
+</div>
+<p>In our simulation all cores in the four tiles run the same software.
+Before you shout “that’s boring”: you can still write different code depending on which tile and core the software is executed.
+A couple of functions are useful for that:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../api/doxygen/group/group__system.html#c.optimsoc_get_numct" title="optimsoc_get_numct"><code class="xref c c-func docutils literal notranslate"><span class="pre">optimsoc_get_numct()</span></code></a>: The number of compute tiles in the system</p></li>
+<li><p><a class="reference internal" href="../api/doxygen/group/group__system.html#c.optimsoc_get_numtiles" title="optimsoc_get_numtiles"><code class="xref c c-func docutils literal notranslate"><span class="pre">optimsoc_get_numtiles()</span></code></a>: The number of tiles (of any type) in the system</p></li>
+<li><p><a class="reference internal" href="../api/doxygen/group/group__system.html#c.optimsoc_get_ctrank" title="optimsoc_get_ctrank"><code class="xref c c-func docutils literal notranslate"><span class="pre">optimsoc_get_ctrank()</span></code></a>: Get the rank of this compute tile in this system.
+Essentially this is just a number that uniquely identifies a compute tile.</p></li>
+</ul>
+<p>There are more useful utility functions like those available, find them in the file <code class="docutils literal notranslate"><span class="pre">$OPTIMSOC/soc/sw/include/baremetal/optimsoc-baremetal.h</span></code>.</p>
+<p>A simple application that uses those functions to do message passing between the different tiles is <code class="docutils literal notranslate"><span class="pre">hello_mpsimple</span></code>.
+This program uses the simple message passing facilities of the network adapter to send messages.
+All cores send a message to core 0.
+If all messages have been received, core 0 prints a message “Received all messages. Hello World!”.</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="c1"># start from the the baremetal-apps source code directory</span>
+<span class="nb">cd</span> hello_mpsimple
+make
+<span class="nv">$OPTIMSOC</span>/examples/sim/system_2x2_cccc/system_2x2_cccc_sim_dualcore --meminit<span class="o">=</span>hello_mpsimple.vmem
+</pre></div>
+</div>
+<p>Have a look what the software does (you find the code in <code class="docutils literal notranslate"><span class="pre">hello_mpsimple.c</span></code>).
+Let’s first check the output of core 0.</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$&gt; cat stdout.000
+<span class="c1"># OpTiMSoC trace_monitor stdout file</span>
+<span class="c1"># [TIME, CORE] MESSAGE</span>
+<span class="o">[</span>               <span class="m">42844</span>, <span class="m">0</span><span class="o">]</span> Wait <span class="k">for</span> <span class="m">3</span> messages
+<span class="o">[</span>               <span class="m">48734</span>, <span class="m">0</span><span class="o">]</span> Received all messages. Hello World!
+</pre></div>
+</div>
+<p>Finally, let’s have a quick glance at a more realistic application: <code class="docutils literal notranslate"><span class="pre">heat_mpsimple</span></code>.
+You can find it in the same place as the previous applications, <code class="docutils literal notranslate"><span class="pre">hello</span></code> and <code class="docutils literal notranslate"><span class="pre">hello_mpsimple</span></code>.
+The application calculates the heat distribution in a distributed manner.
+The cores coordinate their boundary regions by sending messages around.</p>
+<p>Can you compile this application and run it?
+Don’t get nervous, the simulation can take a couple of minutes to finish.
+Have a look at the source code and try to understand what’s going on.
+Also have a look at the <code class="docutils literal notranslate"><span class="pre">stdout</span></code> log files.
+Core 0 will also print the complete heat distribution at the end.</p>
+</div>
+<div class="section" id="observing-software-during-execution-the-debug-system">
+<h2>Observing Software During Execution: The Debug System<a class="headerlink" href="#observing-software-during-execution-the-debug-system" title="Permalink to this headline">¶</a></h2>
+<p>Up to now, you have seen the output of the software that runs on your SoC.
+And you had a look deep into the inner works of the SoC by looking at the waveforms.</p>
+<p>In a real-world system, you need something in between: a way to observe the software as it executes on a chip, but without observing or understanding all the signals inside the hardware.
+This is what the debug system provides: hardware inside the chip which allows you to observe what’s going on during software execution.</p>
+<p>OpTiMSoC also comes with an extensive debug system.
+In this section, we’ll have a look at this system, how it works and how you can use it to debug your applications.
+But before diving into the details, we’ll have a short discussion of the basics which are necessary to understand the system.</p>
+<p>Many developers know debugging from their daily work.
+Most of the time it involves running a program inside a debugger like GDB or Microsoft Visual Studio, setting a breakpoint at the right line of code, and stepping through the program from there on, running one instruction (or one line of code) at a time.
+This technique is what we call run-control debugging.
+While it works great for single-threaded programs, it cannot easily be applied to debugging parallel software running on possibly heterogeneous many-core SoC.
+Instead, the debug support in OpTiMSoC mainly relies on tracing.
+Tracing does not stop or otherwise influence the SoC itself; it only “records” what’s going on during software execution, and transmits this data to the developer.</p>
+<p>The debug system consists of two main parts: the hardware part runs on the OpTiMSoC system itself and collects all data.
+The other part runs on a developer’s PC (often also called host PC) and controls the debugging process and displays the collected data.</p>
+<p>After this introduction, let’s make use of the debug system to obtain various traces.
+Just like in the previous examples, our SoC hardware is still running in Verilator.
+This tutorial works best if you have multiple terminal windows open at the same time, as we’ll need to have multiple programs running at the same time.</p>
+<p>So, open a new terminal (or a new tab inside your terminal), and start the simulation of the SoC hardware.</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nv">$OPTIMSOC</span>/examples/sim/system_2x2_cccc/system_2x2_cccc_sim_dualcore_debug
+</pre></div>
+</div>
+<p>The first and most common task using the debug system is to run a program (just like we did before with the <code class="docutils literal notranslate"><span class="pre">--meminit</span></code> parameter).
+Open a second terminal (leave the first one running!) and type</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>osd-target-run -e hello.elf -vvv
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">The</span> <span class="pre">osd-target-run</span></code> command takes a couple seconds to finish, so don’t get nervious.
+If everything goes to plan <code class="docutils literal notranslate"><span class="pre">osd-target-run</span></code> just does its job: run the provided ELF file <code class="docutils literal notranslate"><span class="pre">hello.elf</span></code> on all CPUs in the system.
+To do that, it internally performs the following steps:</p>
+<ul class="simple">
+<li><p>Connect to the simulation over TCP (on port 23000 and 23001)</p></li>
+<li><p>Halt all CPUs</p></li>
+<li><p>Load all memories in the system (since this is a 2x2 system, there are four memories) with the ELF file</p></li>
+<li><p>Reset and start all CPUs</p></li>
+<li><p>Close the TCP connection</p></li>
+</ul>
+<p>If you switch back to the first console where you started the simulation you should see something like this:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$&gt; $OPTIMSOC/examples/sim/system_2x2_cccc/system_2x2_cccc_sim_dualcore_debug
+Glip TCP DPI listening on port 23000 and 23001
+[                  24, 0] Software reset
+[                  24, 1] Software reset
+[                  24, 2] Software reset
+[                  24, 3] Software reset
+Client connected
+Disconnected
+[             1035016, 0] Terminated at address 0x0000ee38 (status:          0)
+[             1035016, 1] Terminated at address 0x0000ee38 (status:          0)
+[             1035016, 2] Terminated at address 0x0000ee38 (status:          0)
+[             1035016, 3] Terminated at address 0x0000ee38 (status:          0)
+- ../src/optimsoc_trace_monitor_trace_monitor_0/verilog/trace_monitor.sv:94: Verilog $finish
+- ../src/optimsoc_trace_monitor_trace_monitor_0/verilog/trace_monitor.sv:94: Verilog $finish
+- ../src/optimsoc_trace_monitor_trace_monitor_0/verilog/trace_monitor.sv:94: Second verilog $finish, exiting
+</pre></div>
+</div>
+<p>Just like in the previous examples you can see the output of the program runs as captured by the simulation software in the files <code class="docutils literal notranslate"><span class="pre">stdout.NNN</span></code> in the directory where you started the simulation.</p>
+<p>Reading the <code class="docutils literal notranslate"><span class="pre">stdout</span></code> files works great as long as OpTiMSoC runs in simulation – but how can you access the program’s output when it runs on an FPGA?
+The answer is called “system trace”, and you’ll learn more about that in the next section.</p>
+<div class="section" id="system-traces">
+<h3>System Traces<a class="headerlink" href="#system-traces" title="Permalink to this headline">¶</a></h3>
+<p>System traces (sometimes also called instrumentation traces) give software developers a tool to instruct their software running on OpTiMSoC to send information into a “system trace log”.
+By default, all calls to <code class="docutils literal notranslate"><span class="pre">printf()</span></code> result in an entry in the system trace.
+(See the discussion above for how this works.)
+This system trace log can then be captured on the host and displayed.
+To capture a system trace from the system we’ll again use the <code class="docutils literal notranslate"><span class="pre">osd-target-run</span></code> tool:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>osd-target-run -e hello.elf --systrace -vvv
+</pre></div>
+</div>
+<p>Just like before, <code class="docutils literal notranslate"><span class="pre">osd-target-run</span></code> initializes the memories and starts the CPUs.
+It then starts recording system traces until you press CTRL-C to end the trace collection.
+(Yes, you need to abort the program by pressing CTRL-C! It will not terminate itself.)
+After roughly 20 seconds, you can press CTRL-C to stop collecting traces.
+Now you can analyze the collected traces in the same directory you ran <code class="docutils literal notranslate"><span class="pre">osd-target-run</span></code> in.
+The files <code class="docutils literal notranslate"><span class="pre">systrace.print.NNNN.log</span></code> contain the <code class="docutils literal notranslate"><span class="pre">printf()</span></code> output of the program.
+These files are generated by analyzing the raw system log events, which are recorded in <code class="docutils literal notranslate"><span class="pre">systrace.NNNN.log</span></code>.</p>
+</div>
+<div class="section" id="core-function-traces">
+<h3>Core Function Traces<a class="headerlink" href="#core-function-traces" title="Permalink to this headline">¶</a></h3>
+<p>If you need more insight into a program than system traces provide, or want to get insight into a program which isn’t instrumented to generate system traces, core function traces come to help.
+These traces are recording every call of a function and every return from it, resulting in traces which allow you to understand which parts of your program have been called.</p>
+<p>To obtain a core trace use the following command:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>osd-target-run -e hello.elf --coretrace -vvv
+</pre></div>
+</div>
+<p>Just like in the previous example, you need to stop the trace collection by pressing CTRL-C.
+You can then view the traces in the <code class="docutils literal notranslate"><span class="pre">coretrace.NNNN.log</span></code> files.</p>
+<p>This completes our short trip through the debug system.
+Knowing about it will be of great help when we move on to the next step: running OpTiMSoC on an FPGA.</p>
+</div>
+</div>
+<div class="section" id="our-soc-on-an-fpga">
+<h2>Our SoC on an FPGA<a class="headerlink" href="#our-soc-on-an-fpga" title="Permalink to this headline">¶</a></h2>
+<p>Welcome to the fun of real hardware!
+Before we can get started, you need to clarify some prerequisites.</p>
+<div class="section" id="prerequisites-fpga-board-and-vivado">
+<h3>Prerequisites: FPGA board and Vivado<a class="headerlink" href="#prerequisites-fpga-board-and-vivado" title="Permalink to this headline">¶</a></h3>
+<p>This, of course, first means that you need borrow, buy or otherwise obtain an FPGA board.
+In this tutorial, we use the Nexys 4 DDR board by Xilinx/Digilent.
+It’s not that expensive (of course, depending on your financial situation) and widely available.
+If you need help obtaining one, let us know - maybe we can help out in some way.</p>
+<p>Additionally you need to download and install the Xilinx Vivado tool (the cost-free WebPack license is sufficient).
+We used the 2016.4 version when preparing this tutorial; we strongly recommend you also use this exact version.</p>
+<p>Once you have obtained the FPGA board, connect it to the PC on the “PROG UART” USB connection.
+You don’t need to connect any additional power supply.</p>
+</div>
+<div class="section" id="programming-the-fpga">
+<h3>Programming the FPGA<a class="headerlink" href="#programming-the-fpga" title="Permalink to this headline">¶</a></h3>
+<p>With the board connected, we can program (or “flash”) the FPGA with our hardware design, the <em>bitstream</em>.
+The OpTiMSoC release contains pre-built bitstreams for the single compute tile system, meaning we can start directly with programming the FPGA.</p>
+<p>There are two ways to program the device: using the Vivado GUI, or using the command line.</p>
+<div class="section" id="programming-the-fpga-with-the-vivado-gui">
+<h4>Programming the FPGA with the Vivado GUI<a class="headerlink" href="#programming-the-fpga-with-the-vivado-gui" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><p>Open Vivado (e.g. by typing <code class="docutils literal notranslate"><span class="pre">vivado</span></code> into a terminal window)</p></li>
+<li><p>On the welcome screen, click on “Hardware Manager”</p></li>
+<li><p>Ensure that your Nexys 4 DDR board is plugged into your PC and is turned on.</p></li>
+<li><p>Click on “Open Target” in the green bar on the top, and then on “Auto Connect”</p></li>
+<li><p>Now click on “Program Device” in the same green bar and select the only option <code class="docutils literal notranslate"><span class="pre">xc7a100t_0</span></code> (that’s the FPGA on the board).</p></li>
+<li><dl class="simple">
+<dt>In the dialog window, select the bitstream file. We’ll start directly with the larger 2x2 system, you can find the bitstream in</dt><dd><p><code class="docutils literal notranslate"><span class="pre">$OPTISMOC/examples/fpga/nexys4ddr/compute_tile/compute_tile_nexys4ddr_singlecore.bit</span></code>.</p>
+</dd>
+</dl>
+</li>
+<li><p>You can leave the other field “Debug probes file” empty.</p></li>
+<li><p>Click on “Program” to download the bitstream onto the FPGA.</p></li>
+</ul>
+<p>After a couple of seconds, your FPGA contains the SoC hardware and is ready to be used.</p>
+</div>
+<div class="section" id="programming-the-fpga-on-the-command-line">
+<h4>Programming the FPGA on the Command Line<a class="headerlink" href="#programming-the-fpga-on-the-command-line" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>optimsoc-pgm-fpga <span class="nv">$OPTIMSOC</span>/examples/fpga/nexys4ddr/compute_tile/compute_tile_nexys4ddr_singlecore.bit xc7a100t_0
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="connecting">
+<h3>Connecting<a class="headerlink" href="#connecting" title="Permalink to this headline">¶</a></h3>
+<p>In the previous tutorials, we have already seen the debug infrastructure and connected to it over TCP.
+We now use the same tools to connect to our SoC, but this time we connect to the FPGA using UART.
+Fortunately, you don’t need to connect any additional cables; the USB cable that you just used to program the FPGA is also the serial connection.</p>
+<p>First, check which serial port was assigned to the board.
+Usually the easiest way is to do a</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>ls /dev/ttyUSB*
+</pre></div>
+</div>
+<p>If you have only the Nexys 4 DDR board connected, you’ll see only one device, e.g. <code class="docutils literal notranslate"><span class="pre">/dev/ttyUSB1</span></code>.
+Make note of this device name, and replace it accordingly in all the following steps in this tutorial.</p>
+</div>
+<div class="section" id="running-software">
+<h3>Running Software<a class="headerlink" href="#running-software" title="Permalink to this headline">¶</a></h3>
+<p>Now that you’ve connected to the system, can you run software on it?
+Just like in the previous chapter we’ll use the <code class="docutils literal notranslate"><span class="pre">osd-target-run</span></code> tool, this time passing it some paramters to connect to the FPGA instead to a simulation.</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>osd-target-run -e hello.elf -b uart -o <span class="nv">device</span><span class="o">=</span>/dev/ttyUSB1,speed<span class="o">=</span><span class="m">12000000</span> --coretrace --systrace --verify -vvv
+<span class="c1"># let it run for a couple of seconds, then press CTRL-C to stop collecting traces</span>
+</pre></div>
+</div>
+<p>When you run software, you’ll notice two things: first, the output is the same as you’ve already seen when running the system in simulation.
+But: it’s much faster. The FPGA runs at 50 MHz, which is still quite slow compared to current desktop processors, but still much faster than the simulation.</p>
+<p>Before we end, let’s discuss one more topic which helps you in writing good software for OpTiMSoC: message passing.</p>
+</div>
+</div>
+<div class="section" id="make-message-passing-more-simple">
+<h2>Make Message Passing More Simple<a class="headerlink" href="#make-message-passing-more-simple" title="Permalink to this headline">¶</a></h2>
+<p>So far the example programs you have seen used the low level message passing buffers to exchange data between the tiles.
+You may remember that exchanging this data involved forming and parsing messages including the low level network-on-chip details.</p>
+<p>To abstract from these low level details and to encapsulate certain extensions OpTiMSoC comes with the message passing library (<code class="docutils literal notranslate"><span class="pre">libmp</span></code>).
+It is a rather simple, straight-forward message passing API.
+Two different styles of communication are supported: message-oriented and connection-oriented.
+Message-oriented communication is preferred when you have spurious communication between many different communication partners.
+Connection-oriented communication is preferred when you have a fixed setup of channels between communication partners.</p>
+<p>In this part of the tutorial you will learn the basic usage of the message passing library using message-oriented communication.
+In the <code class="docutils literal notranslate"><span class="pre">baremetal-apps</span></code> you can find the <code class="docutils literal notranslate"><span class="pre">hello_mp</span></code> example.
+Inspecting <code class="docutils literal notranslate"><span class="pre">hello_mp.c</span></code> you can see that it is much less code than the low level example from before.</p>
+<p>Lets have a look at how it works. It starts with initializing the hardware and software:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">optimsoc_init</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="n">optimsoc_mp_initialize</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The parameters of those functions can be ignored for now.
+After calling those functions you can use the message passing library.</p>
+<p>Communication in the message passing library takes place between so called endpoints.
+In the next step we create an endpoint in each tile:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">optimsoc_mp_endpoint_handle</span> <span class="n">ep</span><span class="p">;</span>
+<span class="n">optimsoc_mp_endpoint_create</span><span class="p">(</span><span class="o">&amp;</span><span class="n">ep</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">OPTIMSOC_MP_EP_CONNECTIONLESS</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><a class="reference internal" href="../api/doxygen/group/group__libmp.html#c.optimsoc_mp_endpoint_handle" title="optimsoc_mp_endpoint_handle"><code class="xref c c-type docutils literal notranslate"><span class="pre">optimsoc_mp_endpoint_handle</span></code></a> is the opaque type used to identify an endpoint in your code.
+You create and initialize the endpoint by calling <a class="reference internal" href="../api/doxygen/group/group__libmp.html#c.optimsoc_mp_endpoint_create" title="optimsoc_mp_endpoint_create"><code class="xref c c-func docutils literal notranslate"><span class="pre">optimsoc_mp_endpoint_create()</span></code></a> that takes a reference to this handle as first parameter.
+The second and third parameter initialize the endpoint with a node and port.
+Each endpoint is globally addressable with its <code class="docutils literal notranslate"><span class="pre">(tile,</span> <span class="pre">node,</span> <span class="pre">port)</span></code> identifier.
+In our case the node 0 and port 0 endpoint is created in each tile.</p>
+<p>The remaining parameters of <a class="reference internal" href="../api/doxygen/group/group__libmp.html#c.optimsoc_mp_endpoint_create" title="optimsoc_mp_endpoint_create"><code class="xref c c-func docutils literal notranslate"><span class="pre">optimsoc_mp_endpoint_create()</span></code></a> configure the endpoint.
+By using <a class="reference internal" href="../api/doxygen/group/group__libmp.html#c.optimsoc_endpoint_type.OPTIMSOC_MP_EP_CONNECTIONLESS" title="OPTIMSOC_MP_EP_CONNECTIONLESS"><code class="xref c c-type docutils literal notranslate"><span class="pre">OPTIMSOC_MP_EP_CONNECTIONLESS</span></code></a> we create it to receive messages from arbitrary tiles.
+The last two parameters configure the number of messages it can hold and the maximum message size (<code class="docutils literal notranslate"><span class="pre">0</span></code> says it is the default).</p>
+<p>Now the code of the example diverts again, all but tile 0 execute:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">optimsoc_mp_endpoint_handle</span> <span class="n">ep_remote</span><span class="p">;</span>
+<span class="n">optimsoc_mp_endpoint_get</span><span class="p">(</span><span class="o">&amp;</span><span class="n">ep_remote</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+
+<span class="n">optimsoc_mp_msg_send</span><span class="p">(</span><span class="n">ep</span><span class="p">,</span> <span class="n">ep_remote</span><span class="p">,</span> <span class="p">(</span><span class="kt">uint8_t</span><span class="o">*</span><span class="p">)</span> <span class="o">&amp;</span><span class="n">rank</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">rank</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>So what they do is to define a second endpoint.
+But in this case it is not locally generated but points to a remote endpoint.
+It is the one we want to send a message too: tile 0, node 0, port 0.
+What happens under the hood it blocks until the remote endpoint is created and ready and than stores some information locally.
+In the final step the software sends a word to the remote endpoint using the local endpoint for sending.</p>
+<p>In tile zero the software waits to receive all messages using:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">optimsoc_mp_msg_recv</span><span class="p">(</span><span class="n">ep</span><span class="p">,</span> <span class="p">(</span><span class="kt">uint8_t</span><span class="o">*</span><span class="p">)</span> <span class="o">&amp;</span><span class="n">remote</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">received</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>You can now run the example using:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="c1"># start from the the baremetal-apps source code directory</span>
+<span class="nb">cd</span> hello_mp
+make
+<span class="nv">$OPTIMSOC</span>/examples/sim/system_2x2_cccc/system_2x2_cccc_sim_dualcore --meminit<span class="o">=</span>hello_mp.vmem
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>... (we&#39;ve skipped some output here) ...
+[               37812, 0] Event 0x0380: 0x00018c08
+[               37844, 2] Event 0x0380: 0x00018c08
+[               37872, 4] Event 0x0380: 0x00018c08
+[               37900, 6] Event 0x0380: 0x00018c08
+[               39984, 2] External interrupt exception
+[               40012, 4] External interrupt exception
+[               40040, 6] External interrupt exception
+[               42048, 2] Return from exception
+[               42076, 4] Return from exception
+[               42104, 6] Return from exception
+... (we&#39;ve skipped some output here) ...
+[              171970, 6] Event 0x0303: 0x00018d10
+[              171982, 6] Event 0x0303: 0x00000000
+[              172212, 6] Event 0x0304: 0x00018d10
+[              172224, 6] Event 0x0304: 0x00000000
+[              172240, 6] Event 0x0304: 0x00000004
+[              172782, 0] External interrupt exception
+[              173528, 6] Event 0x0305: 0x00018d10
+[              174822, 0] Return from exception
+[              174944, 6] Terminated at address 0x00011364 (status:          0)
+[              185912, 0] Terminated at address 0x00011364 (status:          0)
+- ../src/optimsoc_trace_monitor_trace_monitor_0/verilog/trace_monitor.sv:94: Verilog $finish
+</pre></div>
+</div>
+<p>The simulation is currently very verbose, the events are emitted by the library to debug the message passing protocol.
+More important is the output of tile 0 in <code class="docutils literal notranslate"><span class="pre">stdout.000</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># OpTiMSoC trace_monitor stdout file</span>
+<span class="c1"># [TIME, CORE] MESSAGE</span>
+<span class="p">[</span>               <span class="mi">72050</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="n">Received</span> <span class="kn">from</span> <span class="mi">1</span>
+<span class="p">[</span>               <span class="mi">78792</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="n">Received</span> <span class="kn">from</span> <span class="mi">2</span>
+<span class="p">[</span>              <span class="mi">179834</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="n">Received</span> <span class="kn">from</span> <span class="mi">3</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="run-linux-on-optimsoc">
+<h2>Run Linux on OpTiMSoC<a class="headerlink" href="#run-linux-on-optimsoc" title="Permalink to this headline">¶</a></h2>
+<p>Up to now all software running on OpTiMSoC was “baremetal” software, similar to software run on a microcontroller.
+For many purposes “baremetal” software is sufficient.
+However, if you want to write more advanced software an operating system (OS) can help: it provides task management (scheduling), separates resources between tasks, and provides standardized interfaces which are expected by many of today’s applications (e.g. pthreads).
+For many, the operating system of choice is Linux, and it’s natively supported by OpTiMSoC.
+This tutorial section explores how to build a Linux “image,”. i.e. a binary which contains both the Linux kernel (the actual operating system), together with a root filesystem containing all userspace components.</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="c1"># get the OpTiMSoC buildroot configuration (a &quot;br2-external tree&quot;)</span>
+git clone https://github.com/optimsoc/optimsoc-buildroot.git
+<span class="nb">cd</span> optimsoc-buildroot
+<span class="nv">OPTIMSOC_BUILDROOT_DIR</span><span class="o">=</span><span class="nv">$PWD</span>
+<span class="nv">OPTIMSOC_BUILDROOT_VERSION</span><span class="o">=</span><span class="k">$(</span>cat <span class="nv">$OPTIMSOC_BUILDROOT_DIR</span>/buildroot_version<span class="k">)</span>
+<span class="nb">cd</span> .. <span class="c1"># back to your source directory</span>
+
+<span class="c1"># get buildroot itself</span>
+git clone https://git.busybox.net/buildroot
+<span class="nb">cd</span> buildroot
+git checkout <span class="nv">$OPTIMSOC_BUILDROOT_VERSION</span>
+make <span class="nv">BR2_EXTERNAL</span><span class="o">=</span><span class="nv">$OPTIMSOC_BUILDROOT_DIR</span> optimsoc_computetile_singlecore_defconfig
+make
+</pre></div>
+</div>
+<p>This leaves a file <code class="docutils literal notranslate"><span class="pre">output/images/vmlinux</span></code> in the buildroot directory, which is in fact a regular ELF file for OpenRISC, which can be loaded on the system like a baremetal application.
+To see the output of the Linux during boot, and to have a console to interact with the Linux system we make use of the UART device emulation provided by Open SoC Debug, and built into the <code class="docutils literal notranslate"><span class="pre">compute_tile</span></code> designs.</p>
+<p>To continue with this tutorial we use the <code class="docutils literal notranslate"><span class="pre">compute_tile</span></code> design with a with a single core and the debug system for the Nexys 4 DDR board.
+You can find this design in the folder <code class="docutils literal notranslate"><span class="pre">$OPTIMSOC/examples/fpga/nexys4ddr/compute_tile/compute_tile_nexys4ddr_singlecore</span></code>.</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="c1"># Program the FPGA on the Nexys 4 DDR board</span>
+optimsoc-pgm-fpga <span class="nv">$OPTIMSOC</span>/examples/fpga/nexys4ddr/compute_tile/compute_tile_nexys4ddr_singlecore.bit xc7a100t_0
+</pre></div>
+</div>
+<p>Now you can load the Linux image on the FPGA.
+See notes earlier in this tutorial for a discussion on the correct parameters for <code class="docutils literal notranslate"><span class="pre">osd-target-run</span></code>.</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>osd-target-run -e YOUR_BUILDROOT_DIR/output/images/vmlinux -b uart -o <span class="nv">device</span><span class="o">=</span>/dev/ttyUSB1,speed<span class="o">=</span><span class="m">12000000</span> --systrace -vvv
+</pre></div>
+</div>
+<p>Watch the output of this command.
+If all goes well the output should contain a line similar to <code class="docutils literal notranslate"><span class="pre">libosd:</span> <span class="pre">DEM-UART</span> <span class="pre">pseudo-terminal</span> <span class="pre">available</span> <span class="pre">at</span> <span class="pre">/dev/pts/19</span></code>.
+Keep note of the device file (starting with <code class="docutils literal notranslate"><span class="pre">/dev/pts/</span></code>), you’ll need this path to connect to the Linux console on the OpTiMSoC system.</p>
+<p>To connect, open a second terminal window on your machine, and use <code class="docutils literal notranslate"><span class="pre">screen</span></code> to connect to the remote console (use the appropriate device name as displayed by <code class="docutils literal notranslate"><span class="pre">osd-target-run</span></code> instead of <code class="docutils literal notranslate"><span class="pre">/dev/pts/19</span></code>):</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>screen /dev/pts/19
+</pre></div>
+</div>
+<p>You should now see the output of Linux booting, and as soon as the boot process is done you can log into the system as <code class="docutils literal notranslate"><span class="pre">root</span></code> user (no password is required).
+You can now interact with the system as it would be a normal Linux system.</p>
+<p>If you have some time to spare, how about playing a round of pacman?</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="c1"># convince Linux that our console supports colors</span>
+stty cols <span class="m">80</span> rows <span class="m">80</span>
+<span class="nb">export</span> <span class="nv">TERM</span><span class="o">=</span>linux
+
+<span class="c1"># and run pacman</span>
+/usr/games/pacman4linux
+</pre></div>
+</div>
+<p>This concludes our tutorial session, and hands over to you:
+modify the software as you wish, program it again, analyze the simulations and explore your first multicore SoC.</p>
+</div>
+</div>
+
+
+</div>
+</div>
+
+
+  <!-- footer -->
+  <hr>
+  <footer class="optimsoc-footer">
+    <p>OpTiMSoC &copy; 2012-2020 OpTiMSoC Maintainers &middot; Imprint</p>
+  </footer>
+
+  <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</body>
+</html>

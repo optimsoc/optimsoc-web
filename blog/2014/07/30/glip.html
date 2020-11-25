@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Switching Host-Communication to GLIP</title>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <!-- external CSS -->
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- our own CSS (must be include after bootstrap.css!) -->
+  <link rel="stylesheet" href="/css/optimsoc.css"/>
+
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+    <script src="/js/html5shiv.js"></script>
+    <script src="/js/respond.min.js"></script>
+  <![endif]-->
+
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/feed.xml" />
+
+  <!-- Google Web Fonts -->
+  <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,400italic,600,700,900" rel="stylesheet" type="text/css">
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro:400,500,600,700" rel="stylesheet" type="text/css">
+  <link href="//fonts.googleapis.com/css?family=Fredericka+the+Great" rel="stylesheet" type="text/css">
+</head>
+<body  data-offset='50' data-spy="scroll" data-target="">
+  <!-- top navigation bar -->
+  <nav class="navbar navbar-fixed-top optimsoc-nav" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/index.html" alt="OpTiMSoC"><span class="wordmark">OpTiMSoC</span></a>
+      </div>
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          <li><a href="/download.html">Download</a></li>
+          <li><a href="/docs/index.html">Documentation</a></li>
+          <li><a href="/getinvolved.html">Get involved</a></li>
+          <li><a href="/about.html">About</a></li>
+          <li><a href="/blog">Blog</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container" id="maincontent">
+  
+
+  
+<h1>Switching Host-Communication to GLIP</h1>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-10">
+      <p>Since its beginning, OpTiMSoC contained a method for communication between a 
+PC and an FPGA board. For the ZTEX 1.15 boards we used the USB 2.0 interface, 
+based on the Cypress FX2 chip available on those boards. As we continued the 
+development, we realized that this connectivity functionality is not only 
+useful in OpTiMSoC, but in other projects as well.</p>
+
+<p>We now finally got around to factor the communication interface out of OpTiMSoC 
+and to moved it into a new project, which we named the “Generic Logic Interface 
+Project”, or in short, GLIP. It provides generic, FIFO-based communication 
+between a host and a target, abstracting away all the nitty gritty details and 
+protocols in between. It lets you simply focus on the data you want to transfer, 
+handling everything else for you.</p>
+
+<p>As of now GLIP contains a cleaned-up and improved version of the Cypress 
+FX2-based USB 2.0 backend, reaching up to 21 MByte/s bi-directional transfer 
+rate (close to the achievable maximum of the USB 2.0 interface), and a 
+host-only TCP backend for communication between a simulated system (e.g. in 
+ModelSim) and a controller.</p>
+
+<p>In the near future, other backends for JTAG and possibly PCIe are planned.</p>
+
+<p>We provide GLIP with an extensive set of documentation under the MIT license, 
+check it out!</p>
+
+<ul>
+  <li><a href="http://lis.ei.tum.de/glip/">Project page and documentation</a></li>
+  <li><a href="https://github.com/TUM-LIS/glip">Source code on GitHub</a></li>
+</ul>
+
+<p>With the newest latest trunk version of OpTiMSoC liboptimsochost uses GLIP for 
+all Debug NoC based communications, so you need to have GLIP installed if you 
+want to use those as of now.</p>
+
+<p>Enjoy!</p>
+
+    </div>
+    <div class="col-md-2 optimsoc-blog-meta">
+      <p>by Philipp Wagner <br/>on 30 July 2014</p>
+      <img class="img-rounded" src="/img/people/philipp.jpg"/>
+      <hr/>
+      <b>Share this post at:</b>
+      <ul class="share-buttons">
+	<li><a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fwww.optimsoc.org&t=" title="Share on Facebook" target="_blank" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(document.URL) + '&t=' + encodeURIComponent(document.URL)); return false;"><img src="/img/flat_web_icon_set/color/Facebook.png"></a></li>
+	<li><a href="https://twitter.com/intent/tweet?source=http%3A%2F%2Fwww.optimsoc.org&text=:%20http%3A%2F%2Fwww.optimsoc.org" target="_blank" title="Tweet" onclick="window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(document.title) + ':%20'  + encodeURIComponent(document.URL)); return false;"><img src="/img/flat_web_icon_set/color/Twitter.png"></a></li>
+	<li><a href="https://plus.google.com/share?url=http%3A%2F%2Fwww.optimsoc.org" target="_blank" title="Share on Google+" onclick="window.open('https://plus.google.com/share?url=' + encodeURIComponent(document.URL)); return false;"><img src="/img/flat_web_icon_set/color/Google+.png"></a></li>
+	<li><a href="http://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Fwww.optimsoc.org&title=&summary=&source=http%3A%2F%2Fwww.optimsoc.org" target="_blank" title="Share on LinkedIn" onclick="window.open('http://www.linkedin.com/shareArticle?mini=true&url=' + encodeURIComponent(document.URL) + '&title=' +  encodeURIComponent(document.title)); return false;"><img src="/img/flat_web_icon_set/color/LinkedIn.png"></a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+</div>
+
+
+  <!-- footer -->
+  <hr>
+  <footer class="optimsoc-footer">
+    <p>OpTiMSoC &copy; 2012-2020 OpTiMSoC Maintainers &middot; Imprint</p>
+  </footer>
+
+  <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</body>
+</html>

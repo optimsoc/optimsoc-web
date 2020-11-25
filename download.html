@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Download OpTiMSoC</title>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <!-- external CSS -->
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- our own CSS (must be include after bootstrap.css!) -->
+  <link rel="stylesheet" href="/css/optimsoc.css"/>
+
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+    <script src="/js/html5shiv.js"></script>
+    <script src="/js/respond.min.js"></script>
+  <![endif]-->
+
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/feed.xml" />
+
+  <!-- Google Web Fonts -->
+  <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,400italic,600,700,900" rel="stylesheet" type="text/css">
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro:400,500,600,700" rel="stylesheet" type="text/css">
+  <link href="//fonts.googleapis.com/css?family=Fredericka+the+Great" rel="stylesheet" type="text/css">
+</head>
+<body  data-offset='50' data-spy="scroll" data-target="">
+  <!-- top navigation bar -->
+  <nav class="navbar navbar-fixed-top optimsoc-nav" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/index.html" alt="OpTiMSoC"><span class="wordmark">OpTiMSoC</span></a>
+      </div>
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          <li><a href="/download.html">Download</a></li>
+          <li><a href="/docs/index.html">Documentation</a></li>
+          <li><a href="/getinvolved.html">Get involved</a></li>
+          <li><a href="/about.html">About</a></li>
+          <li><a href="/blog">Blog</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container" id="maincontent">
+  
+
+  
+<h1 id="download-optimsoc">Download OpTiMSoC</h1>
+
+<div class="alert alert-info">
+OpTiMSoC is only tested on Ubuntu 16.04.
+We strongly recommend using the same distribution setup to avoid any additional trouble.
+If you experience problems when using other Linux distributions, please open a <a href="https://github.com/optimsoc/optimsoc/issues">GitHub issue</a>.
+</div>
+
+<h2 id="get-the-latest-release">Get the latest release</h2>
+
+<p>The easiest way to get started is to use our latest release.
+Download it, unzip it and you’re ready to run software on a multi-core System-on-Chip!</p>
+
+<p>You can find all releases on the <a href="https://github.com/optimsoc/optimsoc/releases">GitHub release page</a>.
+Nightly builds can be found in the <a href="https://bintray.com/optimsoc/nightly/">optimsoc/nightly channel on Bintray</a> (these builds can be unstable!).</p>
+
+<p>Read more about installing OpTiMSoC in our <a href="/docs/2018.1/user_guide/installation.html">User Guide</a>.</p>
+
+<h3 id="test-your-installation">Test your installation</h3>
+
+<p>Download the sample applications and build <code class="language-plaintext highlighter-rouge">hello world!</code>:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/optimsoc/baremetal-apps
+<span class="nb">cd </span>baremetal-apps/hello
+make
+<span class="nv">$OPTIMSOC</span>/examples/sim/compute_tile/compute_tile_sim_singlecore <span class="nt">--meminit</span><span class="o">=</span>hello.vmem
+<span class="nb">cat </span>stdout.000
+</code></pre></div></div>
+
+<p>And you should see this:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># OpTiMSoC trace_monitor stdout file
+# [TIME, CORE] MESSAGE
+[               38916, 0] Hello World! Core 0 of 1 in tile 0, my absolute core id is: 0
+[               47764, 0] There are 1 compute tiles:
+[               55972, 0]  rank 0 is tile 0
+</code></pre></div></div>
+
+<h3 id="dive-into-optimsoc">Dive into OpTiMSoC</h3>
+
+<p>Thats right the point where the <a href="/docs/2018.1/user-guide/chap_tutorials.html">tutorials in the User Guide</a> start from.</p>
+
+<h2 id="get-the-sources">Get the sources</h2>
+
+<p>If you want to develop not just software on an existing SoC, but build your own SoC hardware, you need to get the <a href="https://github.com/optimsoc/optimsoc">OpTiMSoC source code</a>.</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/optimsoc/optimsoc.git
+</code></pre></div></div>
+
+</div>
+
+
+  <!-- footer -->
+  <hr>
+  <footer class="optimsoc-footer">
+    <p>OpTiMSoC &copy; 2012-2020 OpTiMSoC Maintainers &middot; Imprint</p>
+  </footer>
+
+  <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</body>
+</html>

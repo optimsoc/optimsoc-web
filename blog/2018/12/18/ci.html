@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Code with Confidence: OpTiMSoC Always Works!</title>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <!-- external CSS -->
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- our own CSS (must be include after bootstrap.css!) -->
+  <link rel="stylesheet" href="/css/optimsoc.css"/>
+
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+    <script src="/js/html5shiv.js"></script>
+    <script src="/js/respond.min.js"></script>
+  <![endif]-->
+
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/feed.xml" />
+
+  <!-- Google Web Fonts -->
+  <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,400italic,600,700,900" rel="stylesheet" type="text/css">
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro:400,500,600,700" rel="stylesheet" type="text/css">
+  <link href="//fonts.googleapis.com/css?family=Fredericka+the+Great" rel="stylesheet" type="text/css">
+</head>
+<body  data-offset='50' data-spy="scroll" data-target="">
+  <!-- top navigation bar -->
+  <nav class="navbar navbar-fixed-top optimsoc-nav" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/index.html" alt="OpTiMSoC"><span class="wordmark">OpTiMSoC</span></a>
+      </div>
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          <li><a href="/download.html">Download</a></li>
+          <li><a href="/docs/index.html">Documentation</a></li>
+          <li><a href="/getinvolved.html">Get involved</a></li>
+          <li><a href="/about.html">About</a></li>
+          <li><a href="/blog">Blog</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container" id="maincontent">
+  
+
+  
+<h1>Code with Confidence: OpTiMSoC Always Works!</h1>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-10">
+      <p>OpTiMSoC is a highly complex system.
+If all goes to plan, software, hardware and tooling work together to form a well-integrated SoC (framework).
+But as so often, the reality is less gloomy: changing a single line of code anywhere could lead to trouble anywhere else.
+Finding out about breakages only weeks of months after the fact makes debugging a nightmare. [1]</p>
+
+<p>Not any more.
+After multiple years of despair and a lot of work we can finally say with confidence: “OpTiMSoC always works!”
+In this blog post we’ll have a look at how we achieved this goal.</p>
+
+<p>The first ingredient to our solution are (automated) tests.
+OpTiMSoC comes with many tests on various levels up to the full system level; just type <code class="language-plaintext highlighter-rouge">make test</code> in your OpTiMSoC source tree to execute them.
+But: the best tests are useless if they’re not run.
+And that’s the problem:
+Compiling all parts of OpTiMSoC and running the tests takes multiple hours.
+Expecting developers to run all of them after every single change is unrealistic.
+So we need a better solution, and the answer is (as so often) automation.
+In this case, the automation is called <a href="https://en.wikipedia.org/wiki/Continuous_integration">Continuous Integration</a>, or CI for short.</p>
+
+<p>CI is is not a new concept, of course.
+It has been used in software development for almost two decades now.
+Unfortunately, testing and CI in the hardware world are a bit more complicated than in the software world.</p>
+
+<p>The first challenge are tools: While many of the tools we’re using are available as open source, not all of them are.
+Particularly the tools to generate FPGA bitstreams (e.g. Xilinx Vivado) are closed source, and some of them require a license to operate.
+Another challenge is the hardware itself: running tests on an FPGA board requires (unsurprisingly) an FPGA board, and a way to connect it to the test machine.
+A third challenge is time: synthesizing an FPGA bitstream takes multiple hours.
+Hence waiting for the full build and test to complete significantly reduces developer productivity.</p>
+
+<p>Despite these challenges, we found a way to have extensive test coverage <em>and</em> fast developer feedback.
+A two-staged solution gets us there.
+The first stage are tests in <a href="http://travis-ci.org/">Travis CI</a>.
+Travis is a commonly used continuous integration service which is free to use for open source projects.
+It integrates nicely into GitHub and can be configured to run a build and test script on every check-in, and on every pull request.</p>
+
+<p>We <a href="https://github.com/optimsoc/optimsoc/blob/master/.travis.yml">configured</a> <a href="https://github.com/optimsoc/optimsoc/blob/master/Dockerfile">Travis</a> to build OpTiMSoC and to run all simulation-based tests using Verilator.
+If a Travis run indicates a successful build and test, we already know that all steps outlined in the <a href="/docs/master/user_guide/tutorials.html">user guide tutorial</a> up to (and including) the <a href="https://www.veripool.org/projects/verilator/wiki/Intro">Verilator</a>-based examples work as expected.</p>
+
+<p>The second stage goes beyond what Travis can provide, as we now need access to commercial tools, associated licenses, and real hardware (e.g. FPGA boards).
+Internally at TUM we have access to a hosted instance of GitLab, which comes with (among many other great things) an integrated continuous integration system, GitLab CI.
+GitLab CI lets you attach “runners” to it.
+A runner is nothing else than a PC with a piece of software installed, connecting it to the central GitLab server.
+We have made a couple machines in our lab a “GitLab runner”.
+All of them have access to our tools installed on a central NFS share, and some of them have FPGA boards connected to them.</p>
+
+<p>Making use of this setup and combining it with <a href="https://github.com/optimsoc/optimsoc-autobuild/blob/master/.gitlab-ci.yml">over 200 lines of configuration file</a> we have created a fully automated continuous integration system.
+Every night, a new build pipeline wakes up (so we don’t need to) and crunches data for more than four hours on up to four machines in parallel.</p>
+
+<p>That’s how it looks in GitLab CI:
+<img src="/img/posts/2018-12-18-ci/gitlab-pipeline.jpg" alt="A look at our build and test pipeline in GitLab CI" title="A look at our build and test pipeline in GitLab CI" /></p>
+
+<p>Looking closer, the build pipeline consists of the following steps.</p>
+
+<ul>
+  <li>Get latest OpTiMSoC source code from the <code class="language-plaintext highlighter-rouge">master</code> branch.</li>
+  <li>Run all cocotb-based hardware tests.</li>
+  <li>Run Spyglass Lint on all hardware.</li>
+  <li>Build OpTiMSoC itself (that’s mostly software tooling)</li>
+  <li>Build seven different Verilator-based simulations models, from a small single-core, single-tile model without debug system up to a 2x2 mesh system with two cores per tile.</li>
+  <li>Build four FPGA bitstreams for the <a href="https://store.digilentinc.com/nexys-4-ddr-artix-7-fpga-trainer-board-recommended-for-ece-curriculum/">Nexys 4 DDR</a> (recently renamed to <a href="https://store.digilentinc.com/nexys-a7-fpga-trainer-board-recommended-for-ece-curriculum/">Nexys A7-100T</a>) and <a href="https://www.xilinx.com/products/boards-and-kits/ek-u1-vcu108-g.html">VCU108</a> boards.</li>
+  <li>Run the system tests in simulation and on real hardware. On real hardware, the tests use the Nexys 4 DDR board to run baremetal software, and to build, flash and boot a full Linux!</li>
+  <li>If all went well, the resulting build artifacts (source files, simulation models, FPGA bistreams) are uploaded to <a href="https://bintray.com/optimsoc/nightly/">Bintray</a>, where anybody can download them.</li>
+</ul>
+
+<p>With all this automation in place you can now write a short script to always get the latest nightly build of OpTiMSoC, including FPGA bitstreams.</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># figure out the latest version of OpTiMSoC [2]</span>
+<span class="nv">LV</span><span class="o">=</span><span class="si">$(</span>curl <span class="nt">-sL</span> https://api.bintray.com/packages/optimsoc/nightly/optimsoc-src/versions/_latest  |  python <span class="nt">-c</span> <span class="s1">'import sys, json; print json.load(sys.stdin)["name"]'</span><span class="si">)</span>
+
+<span class="c"># get the source archive</span>
+curl <span class="nt">-sLO</span> https://dl.bintray.com/optimsoc/nightly/optimsoc-<span class="nv">$LV</span><span class="nt">-src</span>.tar.gz
+
+<span class="c"># get the OpTiMSoC framework</span>
+curl <span class="nt">-sLO</span> https://dl.bintray.com/optimsoc/nightly/optimsoc-<span class="nv">$LV</span><span class="nt">-base</span>.tar.gz
+
+<span class="c"># and finally: get all examples with all bitstreams</span>
+curl <span class="nt">-sLO</span> https://dl.bintray.com/optimsoc/nightly/optimsoc-<span class="nv">$LV</span><span class="nt">-examples</span>.tar.gz
+curl <span class="nt">-sLO</span> https://dl.bintray.com/optimsoc/nightly/optimsoc-<span class="nv">$LV</span><span class="nt">-examples-ext</span>.tar.gz
+</code></pre></div></div>
+
+<p>You can find all CI configuration used for Travis in our <a href="https://github.com/optimsoc/optimsoc">main repository</a> (look for the <code class="language-plaintext highlighter-rouge">.travis.yml</code> and <code class="language-plaintext highlighter-rouge">Dockerfile</code> files).
+The results of the Travis runs are also <a href="https://travis-ci.org/optimsoc/optimsoc">visible online</a>.</p>
+
+<p>The configuration for the GitLab CI is contained in the <a href="https://github.com/optimsoc/optimsoc-autobuild">optimsoc-autobuild repository</a> (look for the <code class="language-plaintext highlighter-rouge">.gitlab-ci.yml</code> file).
+However, this configuration is heavily tailored towards our internal infrastructure and won’t run anywhere else as-is.</p>
+
+<p>So for now, go and give it a try!
+Use OpTiMSoC to learn and teach, to explore and discover.
+Have fun!</p>
+
+<hr />
+
+<p>[1] At least for light debugging. Heavy debugging, typically performed at night, avoids the problem of nightmares in an interesting way: no sleep, no nightmares.</p>
+
+<p>[2] Getting the latest version first is a bit annoying, having a “latest” symlink would be easier of course. This seems to be a <a href="https://bintray.com/docs/api/#_dynamic_download">restriction Bintray has for their non-paying customers</a>. Having an additional line in a script is a fair price to pay a free service.</p>
+
+    </div>
+    <div class="col-md-2 optimsoc-blog-meta">
+      <p>by Philipp Wagner <br/>on 18 December 2018</p>
+      <img class="img-rounded" src="/img/people/philipp.jpg"/>
+      <hr/>
+      <b>Share this post at:</b>
+      <ul class="share-buttons">
+	<li><a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fwww.optimsoc.org&t=" title="Share on Facebook" target="_blank" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(document.URL) + '&t=' + encodeURIComponent(document.URL)); return false;"><img src="/img/flat_web_icon_set/color/Facebook.png"></a></li>
+	<li><a href="https://twitter.com/intent/tweet?source=http%3A%2F%2Fwww.optimsoc.org&text=:%20http%3A%2F%2Fwww.optimsoc.org" target="_blank" title="Tweet" onclick="window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(document.title) + ':%20'  + encodeURIComponent(document.URL)); return false;"><img src="/img/flat_web_icon_set/color/Twitter.png"></a></li>
+	<li><a href="https://plus.google.com/share?url=http%3A%2F%2Fwww.optimsoc.org" target="_blank" title="Share on Google+" onclick="window.open('https://plus.google.com/share?url=' + encodeURIComponent(document.URL)); return false;"><img src="/img/flat_web_icon_set/color/Google+.png"></a></li>
+	<li><a href="http://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Fwww.optimsoc.org&title=&summary=&source=http%3A%2F%2Fwww.optimsoc.org" target="_blank" title="Share on LinkedIn" onclick="window.open('http://www.linkedin.com/shareArticle?mini=true&url=' + encodeURIComponent(document.URL) + '&title=' +  encodeURIComponent(document.title)); return false;"><img src="/img/flat_web_icon_set/color/LinkedIn.png"></a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+</div>
+
+
+  <!-- footer -->
+  <hr>
+  <footer class="optimsoc-footer">
+    <p>OpTiMSoC &copy; 2012-2020 OpTiMSoC Maintainers &middot; Imprint</p>
+  </footer>
+
+  <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</body>
+</html>

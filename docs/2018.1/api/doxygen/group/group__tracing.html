@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>OpTiMSoC tracing</title>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <!-- external CSS -->
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- our own CSS (must be include after bootstrap.css!) -->
+  <link rel="stylesheet" href="/css/optimsoc.css"/>
+
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+    <script src="/js/html5shiv.js"></script>
+    <script src="/js/respond.min.js"></script>
+  <![endif]-->
+
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/feed.xml" />
+
+  <!-- Google Web Fonts -->
+  <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,400italic,600,700,900" rel="stylesheet" type="text/css">
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro:400,500,600,700" rel="stylesheet" type="text/css">
+  <link href="//fonts.googleapis.com/css?family=Fredericka+the+Great" rel="stylesheet" type="text/css">
+</head>
+<body  data-offset='50' data-spy="scroll" data-target="">
+  <!-- top navigation bar -->
+  <nav class="navbar navbar-fixed-top optimsoc-nav" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/index.html" alt="OpTiMSoC"><span class="wordmark">OpTiMSoC</span></a>
+      </div>
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          <li><a href="/download.html">Download</a></li>
+          <li><a href="/docs/index.html">Documentation</a></li>
+          <li><a href="/getinvolved.html">Get involved</a></li>
+          <li><a href="/about.html">About</a></li>
+          <li><a href="/blog">Blog</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container" id="maincontent">
+  
+
+  <div class="optimsoc-section-header">
+  
+  <h1>API Documentation</h1>
+  
+</div>
+
+  
+
+<hr/>
+
+<div class="col-md-3">
+  <div class="optimsoc-doc-mainnav affix" data-spy="affix" data-offset-top="50">
+    <div style="padding-bottom:10px" class="nav">
+      version 2018.1 (<a href="/docs/index.html#document-archive">other versions</a>)
+
+      
+      
+        <p class="caption"><span class="caption-text">Documentation Parts</span></p>
+<ul class="nav current">
+<li class="toctree-l1"><a class="reference internal" href="../../../user_guide/index.html">User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../refman/index.html">Reference Manual</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">API Documentation</a><ul class="nav current">
+<li class="toctree-l2"><a class="reference internal" href="group__utility.html">Utility functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group__system.html">OpTiMSoC system functions</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">OpTiMSoC tracing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group__libbaremetal.html">Baremetal library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group__libmp.html">Message passing library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group__libruntime.html">Runtime library</a></li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+  </div>
+</div>
+
+<div class="col-md-9 optimsoc-doc-body">
+
+ <div class="section" id="optimsoc-tracing">
+<h1>OpTiMSoC tracing<a class="headerlink" href="#optimsoc-tracing" title="Permalink to this headline">¶</a></h1>
+<dl class="group">
+<dt>
+<span class="target" id="group__tracing"></span><em>group</em> <code class="sig-name descname">tracing</code></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Defines</p>
+<dl class="c macro">
+<dt id="c.OPTIMSOC_TRACE">
+<span class="target" id="group__tracing_1gae4114f0902c0a897e7dc36eccc3b2d29"></span><code class="sig-name descname">OPTIMSOC_TRACE</code><span class="sig-paren">(</span><em>id</em>, <em>v</em><span class="sig-paren">)</span><a class="headerlink" href="#c.OPTIMSOC_TRACE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The instruction sequence issued as a trace event</p>
+<p><dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">id</span></code>: The identifier of the trace (static value) </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">v</span></code>: The value of the trace event </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Functions</p>
+<dl class="c function">
+<dt id="c.optimsoc_trace_definesection">
+<span class="target" id="group__tracing_1ga7fe0e0c98386d122238d0da890be60ae"></span>void <code class="sig-name descname">optimsoc_trace_definesection</code><span class="sig-paren">(</span>int <em>id</em>, char *<em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#c.optimsoc_trace_definesection" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Define a section for the software tracing</p>
+<p>This initializes a section with a given id and sets a name, that can be used for display or similar.</p>
+<p><dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">id</span></code>: Section identifier </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">name</span></code>: Name of this section </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="c function">
+<dt id="c.optimsoc_trace_defineglobalsection">
+<span class="target" id="group__tracing_1ga11c5e790b76c7e7057681e4592eafd64"></span>void <code class="sig-name descname">optimsoc_trace_defineglobalsection</code><span class="sig-paren">(</span>int <em>id</em>, char *<em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#c.optimsoc_trace_defineglobalsection" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c function">
+<dt id="c.optimsoc_trace_section">
+<span class="target" id="group__tracing_1ga53b8c774b3d9e029456634e3492c59f2"></span>void <code class="sig-name descname">optimsoc_trace_section</code><span class="sig-paren">(</span>int <em>id</em><span class="sig-paren">)</span><a class="headerlink" href="#c.optimsoc_trace_section" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Trace a section enter</p>
+<p>Enter a section and trace this to the debug system.</p>
+<p><dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">id</span></code>: Section entered </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="c function">
+<dt id="c.optimsoc_trace_kernelsection">
+<span class="target" id="group__tracing_1gaa2053579695d99fa212dbeb20d2eb919"></span>void <code class="sig-name descname">optimsoc_trace_kernelsection</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#c.optimsoc_trace_kernelsection" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Trace a kernel enter</p>
+<p>On entering the kernel trace this to the debug system. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+
+
+</div>
+</div>
+
+
+  <!-- footer -->
+  <hr>
+  <footer class="optimsoc-footer">
+    <p>OpTiMSoC &copy; 2012-2020 OpTiMSoC Maintainers &middot; Imprint</p>
+  </footer>
+
+  <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</body>
+</html>

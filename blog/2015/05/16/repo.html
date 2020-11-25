@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Switch to github organization and Google repo</title>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <!-- external CSS -->
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- our own CSS (must be include after bootstrap.css!) -->
+  <link rel="stylesheet" href="/css/optimsoc.css"/>
+
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+    <script src="/js/html5shiv.js"></script>
+    <script src="/js/respond.min.js"></script>
+  <![endif]-->
+
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/feed.xml" />
+
+  <!-- Google Web Fonts -->
+  <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,400italic,600,700,900" rel="stylesheet" type="text/css">
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro:400,500,600,700" rel="stylesheet" type="text/css">
+  <link href="//fonts.googleapis.com/css?family=Fredericka+the+Great" rel="stylesheet" type="text/css">
+</head>
+<body  data-offset='50' data-spy="scroll" data-target="">
+  <!-- top navigation bar -->
+  <nav class="navbar navbar-fixed-top optimsoc-nav" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/index.html" alt="OpTiMSoC"><span class="wordmark">OpTiMSoC</span></a>
+      </div>
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          <li><a href="/download.html">Download</a></li>
+          <li><a href="/docs/index.html">Documentation</a></li>
+          <li><a href="/getinvolved.html">Get involved</a></li>
+          <li><a href="/about.html">About</a></li>
+          <li><a href="/blog">Blog</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container" id="maincontent">
+  
+
+  
+<h1>Switch to github organization and Google repo</h1>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-10">
+      <p>A few weeks ago we started cutting out the different parts of OpTiMSoC
+from the <a href="https://github.com/tum-lis/optimsoc">original repository</a> to
+separate repositories at the <a href="https://github.com/optimsoc/">new
+organization</a>. The aim is to structure
+it better and have separation of different aspects of OpTiMSoC.</p>
+
+<p>The method of separating subtrees from the original tree with keeping
+the history is straight forward using <code class="language-plaintext highlighter-rouge">git filter-branch</code>. Some parts
+of the history get lost, especially for the system software.
+Nevertheless, we now have cut the original large repository into
+smaller logical units. Some of them are only needed for installation
+if you simply want to run OpTiMSoC, others are needed to build systems
+or for debugging.</p>
+
+<p>Finally, we struggled a bit with still allowing for a unified tree
+layout, which is desirable for the documentation and ease of use. We
+wanted a tree similar to the original layout and inspected <code class="language-plaintext highlighter-rouge">git
+submodule</code> and <code class="language-plaintext highlighter-rouge">git subtree</code>. Unfortunately both did not convince us
+entirely, as we don’t want people to learn new merge strategies etc.</p>
+
+<p>We first started with a simple shell script that initially creates the
+layout. After some more search we came to <a href="https://code.google.com/p/git-repo/">Google
+repo</a>, which is a git wrapper for
+Android developers. While we don’t plan to use the entire feature set,
+we use it to distribute the tree layout. The layout is distributed as
+xml files and it is possible to define groups for different feature
+sets.</p>
+
+<p>To start a layout, simply create an empty folder, download the repo
+script and make it executable:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir optimsoc
+wget https://storage.googleapis.com/git-repo-downloads/repo
+chmod a+x repo
+</code></pre></div></div>
+
+<p>Now you can initialize the repository layout. The script downloads
+some more files from Google’s repositories and reads the remote xml
+description into a local repository of the repository files, both in
+the hidden path <code class="language-plaintext highlighter-rouge">.repo</code>.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./repo init -u https://github.com/optimsoc/optimsoc-repo
+</code></pre></div></div>
+
+<p>You then synchronize the repositories and repo clones and puts them
+into “detached HEAD” state.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> ./repo sync
+</code></pre></div></div>
+
+<p>If you want to create a new feature branch for a part of OpTiMSoC you
+can use the repo infrastructure or simply do this with the usual git
+commands (create branch, stage, commit etc.). We are also still
+experimenting with the best development strategies.</p>
+
+
+    </div>
+    <div class="col-md-2 optimsoc-blog-meta">
+      <p>by Stefan Wallentowitz <br/>on 16 May 2015</p>
+      <img class="img-rounded" src="/img/people/stefan.jpg"/>
+      <hr/>
+      <b>Share this post at:</b>
+      <ul class="share-buttons">
+	<li><a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fwww.optimsoc.org&t=" title="Share on Facebook" target="_blank" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(document.URL) + '&t=' + encodeURIComponent(document.URL)); return false;"><img src="/img/flat_web_icon_set/color/Facebook.png"></a></li>
+	<li><a href="https://twitter.com/intent/tweet?source=http%3A%2F%2Fwww.optimsoc.org&text=:%20http%3A%2F%2Fwww.optimsoc.org" target="_blank" title="Tweet" onclick="window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(document.title) + ':%20'  + encodeURIComponent(document.URL)); return false;"><img src="/img/flat_web_icon_set/color/Twitter.png"></a></li>
+	<li><a href="https://plus.google.com/share?url=http%3A%2F%2Fwww.optimsoc.org" target="_blank" title="Share on Google+" onclick="window.open('https://plus.google.com/share?url=' + encodeURIComponent(document.URL)); return false;"><img src="/img/flat_web_icon_set/color/Google+.png"></a></li>
+	<li><a href="http://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Fwww.optimsoc.org&title=&summary=&source=http%3A%2F%2Fwww.optimsoc.org" target="_blank" title="Share on LinkedIn" onclick="window.open('http://www.linkedin.com/shareArticle?mini=true&url=' + encodeURIComponent(document.URL) + '&title=' +  encodeURIComponent(document.title)); return false;"><img src="/img/flat_web_icon_set/color/LinkedIn.png"></a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+</div>
+
+
+  <!-- footer -->
+  <hr>
+  <footer class="optimsoc-footer">
+    <p>OpTiMSoC &copy; 2012-2020 OpTiMSoC Maintainers &middot; Imprint</p>
+  </footer>
+
+  <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>2016.1 Release: Heart Surgery for FuseSoC and Open SoC Debug</title>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <!-- external CSS -->
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- our own CSS (must be include after bootstrap.css!) -->
+  <link rel="stylesheet" href="/css/optimsoc.css"/>
+
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+    <script src="/js/html5shiv.js"></script>
+    <script src="/js/respond.min.js"></script>
+  <![endif]-->
+
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/feed.xml" />
+
+  <!-- Google Web Fonts -->
+  <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,400italic,600,700,900" rel="stylesheet" type="text/css">
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro:400,500,600,700" rel="stylesheet" type="text/css">
+  <link href="//fonts.googleapis.com/css?family=Fredericka+the+Great" rel="stylesheet" type="text/css">
+</head>
+<body  data-offset='50' data-spy="scroll" data-target="">
+  <!-- top navigation bar -->
+  <nav class="navbar navbar-fixed-top optimsoc-nav" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/index.html" alt="OpTiMSoC"><span class="wordmark">OpTiMSoC</span></a>
+      </div>
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          <li><a href="/download.html">Download</a></li>
+          <li><a href="/docs/index.html">Documentation</a></li>
+          <li><a href="/getinvolved.html">Get involved</a></li>
+          <li><a href="/about.html">About</a></li>
+          <li><a href="/blog">Blog</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container" id="maincontent">
+  
+
+  
+<h1>2016.1 Release: Heart Surgery for FuseSoC and Open SoC Debug</h1>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-10">
+      <p>It’s OpTiMSoC release time! After a bit over half a year of work, we’re proud to announce our first release in this year, 2016.1.
+It comes with many great new features, but two are especially noteworthy: our switch to FuseSoC and the integration of Open SoC Debug.
+Both new features strengthen our collaborations with other projects – because sharing is caring!</p>
+
+<h2 id="part-1-fusesoc">Part 1: FuseSoC</h2>
+<p>Traditionally, every digital hardware project had its own build system and its own way of managing dependencies, and OpTiMSoC was no exception.
+Especially for people coming from the software world with all the nice package managers and module repositories specialized to the various programming languages, this seems a bit arcane.
+Fortunately, our friend Olof Kindgren has put a lot of work into FuseSoC, a tool that fills exactly that gap: a package manager, dependency solver and build system for digital hardware designs.</p>
+
+<p>For this release, we took the chance to perform a bit of heart surgery: rip out our existing build infrastructure based on TCL files, and replace it with FuseSoC’s core description files.</p>
+
+<p>While we restored all the existing functionality, i.e. to run Verilator, Vivado Synthesis and the various simulation tools through FuseSoC, we discovered a couple of issues with FuseSoC that are not all fixed upstream yet. While we work on getting all our changes upstream, we ship OpTiMSoC with a slightly modified FuseSoC version, which is available by calling <code class="language-plaintext highlighter-rouge">optimsoc-fusesoc</code>. One main reason is that we are using the
+new <code class="language-plaintext highlighter-rouge">&lt;vendor&gt;:&lt;library&gt;:&lt;name&gt;:&lt;version&gt;</code> (vlnv) naming scheme that we prototyped
+before it is now also getting into upstream. Beside that, we added
+Vivado and better xsim support, that we will also get into the
+official fusesoc version soon.</p>
+
+<p>So what does that mean for you?
+Synthesizing a 2x2 tiled multi-core system with four compute tiles using Xilinx Vivado is now as simple as</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>optimsoc-fusesoc <span class="nt">--cores-root</span> <span class="nv">$OPTIMSOC_SOURCE</span>/examples build optimsoc:examples:system_2x2_cccc_nexys4ddr
+</code></pre></div></div>
+
+<p>Building and running a Verilator-based simulation of a single compute tile with two mor1kx cores is not much harder:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>optimsoc-fusesoc <span class="nt">--cores-root</span> <span class="nv">$OPTIMSOC_SOURCE</span>/examples sim optimsoc:examples:compute_tile_sim <span class="nt">--NUM_CORES</span> 2
+</code></pre></div></div>
+
+<p>See the <a href="http://www.optimsoc.org/docs/2016.1/user-guide/chap_develop-optimsoc.html#S1">documentation</a> for more examples.</p>
+
+<h2 id="part-1b-sharing-hardware-modules">Part 1b: Sharing Hardware Modules</h2>
+<p>By switching to FuseSoC, we are now able to much easier share hardware modules with other projects.
+In the old days, sharing meant copying HDL files around, and missing updates whenever there were new releases.
+With FuseSoC, it’s easy to simply point to a Git repository containing HDL files, or even download a <a href="https://github.com/wallento/fusesoc_cores/blob/master/cores/micron/mt47h64m16hr-25e/mt47h64m16hr-25e.core">ZIP file with HDL files from a web site (a great usage example of FuseSoC!)</a>.</p>
+
+<p>We use this feature to factor out and share some of our modules.</p>
+
+<ul>
+  <li>
+    <p>We share our board support packages, like the one for the Nexys 4 DDR board, with others.
+You can find them <a href="https://github.com/wallento/fusesoc_cores/">here</a>.</p>
+  </li>
+  <li>
+    <p>We also include the HDL files for GLIP (our host communication library) and Open Soc Debug (more about that below) from their upstream sources.</p>
+  </li>
+</ul>
+
+<p>Right now, we ship all these sources inside our source tree to make changes and editing easier.
+If the rate of changes decreases over time, we can move to directly including these dependencies from upstream.</p>
+
+<h2 id="part-2-open-soc-debug-osd">Part 2: Open SoC Debug (OSD)</h2>
+<p>OpTiMSoC has always included a rather sophisticated trace-based debug infrastructure.
+As it turns out, we’re not the only open source digital hardware project that needs such a infrastructure.
+In order to share effort, we founded, together with the <a href="http://www.lowrisc.org/">LowRISC project</a> and in close cooperation with the <a href="http://www.pulp-platform.org/">PULPino project</a>, <a href="http://opensocdebug.org/">Open SoC Debug</a> (OSD).</p>
+
+<p>The goal of this project is to collaborate on debug and diagnosis components, as they are included in OpTiMSoC: components for instruction traces, system traces, memory initialization, and much more.</p>
+
+<p>In this OpTiMSoC release, we see the first results of this collaboration.
+Our debug infrastructure is now based on OSD.
+All debug features that were available previously are still there, and some features are new:</p>
+
+<ul>
+  <li>System Traces (using <code class="language-plaintext highlighter-rouge">printf()</code> inside the SoC software, or the <code class="language-plaintext highlighter-rouge">OPTISMOC_TRACE</code> macro)</li>
+  <li>Function traces</li>
+  <li>Reading and writing of memories in the system (now with an additional memory test and verify feature)</li>
+  <li>Now you can also write ELF files directly into the memory, without using <code class="language-plaintext highlighter-rouge">objdump</code> to convert them first.</li>
+  <li>Not really a OSD feature, but we still profit from it by using GLIP: You can now use 12 MBaud/s UART to connect to the debug system, in addition to JTAG or USB (depending on the board)</li>
+</ul>
+
+<p>The main visible difference today are new tools to communicate with the OpTiMSoC system.
+Instead of our own tools like <code class="language-plaintext highlighter-rouge">optimsoc-cli</code>, we now use the OSD tools, like <code class="language-plaintext highlighter-rouge">osd-cli</code>.
+You find much more about how to use them in the updated <a href="http://www.optimsoc.org/docs/2016.1/user-guide/chap_tutorials.html">tutorials in the User Guide</a>.</p>
+
+<h2 id="part-3-fpga-synthesis">Part 3: FPGA Synthesis</h2>
+<p>Support for <em>FPGA synthesis</em> and prebuilt example FPGA bitstreams are
+available again. We currently focus on the
+<a href="http://store.digilentinc.com/nexys-4-ddr-artix-7-fpga-trainer-board-recommended-for-ece-curriculum/">Nexys 4 DDR</a>
+and the
+<a href="https://www.xilinx.com/products/boards-and-kits/ek-k7-kc705-g.html">KC705</a>
+boards. But as we have defined a good board abstraction layer now,
+it is a lot easier to support other boards. Please get in
+<a href="/getinvolved.html">touch with us</a> if you want to have another
+board mainline supported.</p>
+
+<h2 id="part-4-the-small-things">Part 4: The small things</h2>
+<p>There were much more small changes throughout the system. Some things without special order.</p>
+
+<ul>
+  <li>We now use much more SystemVerilog. That’s still a bit tricky, because every tool supports a slightly different subset of features, but in general the benefits to code readability are significant.</li>
+  <li>Our build system has improved a lot to the point that we now can build a full release including bitstreams with one command. We use this also to do automated builds on Travis for all checkins.</li>
+</ul>
+
+<h2 id="the-future-is-bright">The future is bright</h2>
+<p>With this release we’ve layed a lot of groundwork for even faster progress in the future.
+Some things are already in the pipeline, including a cool demo with live video streams.</p>
+
+<p>We currently plan a project sprint and
+<a href="https://github.com/optimsoc/sources/milestone/3">plan the next release</a>
+for end of October with the following improvements:</p>
+
+<ul>
+  <li>
+    <p>Re-activation of the <em>Partitioned Global Address Space</em> option</p>
+  </li>
+  <li>
+    <p>Support for the KC705</p>
+  </li>
+  <li>
+    <p>Improved <em>Network-on-Chip configuration</em> for better extendability</p>
+  </li>
+  <li>
+    <p>Re-activation of the <em>multiple clock domains</em> support and maybe
+dynamic clocks</p>
+  </li>
+</ul>
+
+<p>Stay tuned and join us on <a href="/getinvolved.html">IRC or the mailing list</a>.</p>
+
+<h2 id="contributors-to-this-release">Contributors to this release</h2>
+<p>Without the work of many individuals, a project like OpTiMSoC would be impossible. We thank everybody who contributed to this release and the projects that we included into our release.</p>
+
+<ul>
+  <li>Nico Gutmann</li>
+  <li>Olof Kindgren (on FuseSoC)</li>
+  <li>Stefan Rösch</li>
+  <li>Wei Song (on Open Soc Debug)</li>
+  <li>Philipp Wagner</li>
+  <li>Stefan Wallentowitz</li>
+</ul>
+
+<p>(This list is likely to be incomplete; if you’re missing, let us know!)</p>
+
+    </div>
+    <div class="col-md-2 optimsoc-blog-meta">
+      <p>by Philipp Wagner <br/>on 02 September 2016</p>
+      <img class="img-rounded" src="/img/people/philipp.jpg"/>
+      <hr/>
+      <b>Share this post at:</b>
+      <ul class="share-buttons">
+	<li><a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fwww.optimsoc.org&t=" title="Share on Facebook" target="_blank" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(document.URL) + '&t=' + encodeURIComponent(document.URL)); return false;"><img src="/img/flat_web_icon_set/color/Facebook.png"></a></li>
+	<li><a href="https://twitter.com/intent/tweet?source=http%3A%2F%2Fwww.optimsoc.org&text=:%20http%3A%2F%2Fwww.optimsoc.org" target="_blank" title="Tweet" onclick="window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(document.title) + ':%20'  + encodeURIComponent(document.URL)); return false;"><img src="/img/flat_web_icon_set/color/Twitter.png"></a></li>
+	<li><a href="https://plus.google.com/share?url=http%3A%2F%2Fwww.optimsoc.org" target="_blank" title="Share on Google+" onclick="window.open('https://plus.google.com/share?url=' + encodeURIComponent(document.URL)); return false;"><img src="/img/flat_web_icon_set/color/Google+.png"></a></li>
+	<li><a href="http://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Fwww.optimsoc.org&title=&summary=&source=http%3A%2F%2Fwww.optimsoc.org" target="_blank" title="Share on LinkedIn" onclick="window.open('http://www.linkedin.com/shareArticle?mini=true&url=' + encodeURIComponent(document.URL) + '&title=' +  encodeURIComponent(document.title)); return false;"><img src="/img/flat_web_icon_set/color/LinkedIn.png"></a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+</div>
+
+
+  <!-- footer -->
+  <hr>
+  <footer class="optimsoc-footer">
+    <p>OpTiMSoC &copy; 2012-2020 OpTiMSoC Maintainers &middot; Imprint</p>
+  </footer>
+
+  <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</body>
+</html>

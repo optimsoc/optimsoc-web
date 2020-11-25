@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>About OpTiMSoC</title>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <!-- external CSS -->
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- our own CSS (must be include after bootstrap.css!) -->
+  <link rel="stylesheet" href="/css/optimsoc.css"/>
+
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+    <script src="/js/html5shiv.js"></script>
+    <script src="/js/respond.min.js"></script>
+  <![endif]-->
+
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/feed.xml" />
+
+  <!-- Google Web Fonts -->
+  <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,400italic,600,700,900" rel="stylesheet" type="text/css">
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro:400,500,600,700" rel="stylesheet" type="text/css">
+  <link href="//fonts.googleapis.com/css?family=Fredericka+the+Great" rel="stylesheet" type="text/css">
+</head>
+<body  data-offset='50' data-spy="scroll" data-target="">
+  <!-- top navigation bar -->
+  <nav class="navbar navbar-fixed-top optimsoc-nav" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/index.html" alt="OpTiMSoC"><span class="wordmark">OpTiMSoC</span></a>
+      </div>
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          <li><a href="/download.html">Download</a></li>
+          <li><a href="/docs/index.html">Documentation</a></li>
+          <li><a href="/getinvolved.html">Get involved</a></li>
+          <li><a href="/about.html">About</a></li>
+          <li><a href="/blog">Blog</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container" id="maincontent">
+  
+
+  <h1 id="about-optimsoc">About OpTiMSoC</h1>
+<h2 id="motivation">Motivation</h2>
+<p>Tiled manycore System-on-Chip have become a common way to integrate tens or even hundreds of processor cores in future processing platforms. To research and measure enhancements of such platforms a basline system is necessary, ideally at different configurations. As many researches do not have such a system at hand, they are often restricted to (system level) simulation or need to build such a complex system from scratch.</p>
+
+<h2 id="goal">Goal</h2>
+<p>The goal of OpTiMSoC is to create a freely available, open source framework for research on manycore System-on-Chip. By providing basic blocks, such as a Network-on-Chip in different configurations, processing elements (CPU cores), hardware accelerators, and I/O modules creating a new SoC is a matter of plugging the different components together. The resulting hardware can then be simulated on a PC, e.g. in ModelSim, or synthesized and run on an FPGA.</p>
+
+<p>On top of the hardware components, a basic runtime library (“operating system”) as well as a trace-based debug and diagnosis infrastructure enable rapid prototyping.</p>
+
+<p>It is <strong>not</strong> a goal to create a complete and optimized SoC design for production.</p>
+
+<p>A summarizing (and citable) paper can be found at <a href="http://arxiv.org/abs/1304.5081">arXiv:1304.5081</a>.</p>
+
+<h2 id="contact">Contact</h2>
+<p>If you have questions, suggestions or anything else related to OpTiMSoC, please contact <a href="mailto:stefan.wallentowitz@tum.de">Stefan Wallentowitz by mail</a>.</p>
+
+<h2 id="license">License</h2>
+<p>Most of OpTiMSoC is open source and licensed under the <a href="http://opensource.org/licenses/MIT">MIT license</a>. This essentially means (see the appropriate licenses for details and the only authoritative text):</p>
+
+<p>You <strong>can</strong></p>
+
+<ul>
+  <li>freely use OpTiMSoC</li>
+  <li>freely modify OpTiMSoC</li>
+  <li>freely distribute any derived work of OpTiMSoC even for closed source or commercial applications</li>
+</ul>
+
+<p>You <strong>should</strong></p>
+
+<ul>
+  <li>be a nice person and contribute your changes back!</li>
+</ul>
+
+<p>Please note that some code is licensed under the <a href="http://www.gnu.org/licenses/gpl.html">GPLv3+</a> (where necessary due to the usage of certain external libraries) or other open-source licenses. A notable example for this is the OpenRISC processor core, which is licensed under LGPLv2 (OR1200) or <a href="http://juliusbaxter.net/ohdl/">OHDL</a> (mor1kx, OHDL is an MPLv2-derived license with file-based copyleft and no patent clause). Other code might be even more restricted when third-party code was integrated. This is especially true for generated code for FPGA targets, which can usually only be used with the corresponding hardware. (You cannot use Xilinx-generated code on an Altera FPGA for example.) Please be careful, read license headers of the source files and ask a lawyer if in doubt.</p>
+
+<h2 id="the-people-behind-optimsoc">The people behind OpTiMSoC</h2>
+
+<p>OpTiMSoC was developed mainly by a research group at the <a href="http://lis.ei.tum.de">Lehrstuhl für Integrierte Systeme (Institute for Integrated Systems)</a> at the <a href="http://www.tum.de">Technische Universität München (TUM)</a>. We used it there for our research on new manycore System-on-Chip architectures. The project started in 2011 and up to now many researchers and students have contributed to it. Today it is still maintained by us after graduation.</p>
+
+<div class="row optimsoc-about-people">
+  <div class="col-md-2">
+    <img class="img-rounded" src="/img/people/stefan.jpg" />
+  </div>
+  <div class="col-md-10">
+    <h3>Stefan Wallentowitz</h3>
+    Stefan started the project in 2011 and is probably the only person who knows every corner of OpTiMSoC by heart.
+  </div>
+</div>
+
+<div class="row optimsoc-about-people">
+  <div class="col-md-2">
+    <img class="img-rounded" src="/img/people/philipp.jpg" />
+  </div>
+  <div class="col-md-10">
+    <h3>Philipp Wagner</h3>
+    Philipp joined in 2012 and is mainly working on the debug and diagnosis infrastructure.
+  </div>
+</div>
+
+<div class="row optimsoc-about-people">
+  <div class="col-md-2">
+    <img class="img-rounded" src="/img/people/max.jpg" />
+  </div>
+  <div class="col-md-10">
+    <h3>Max Koenen</h3>
+    Max first joined the OpTiMSoC team in 2014 for a research practice. Since 2016 he also works at <a href="http://www.lis.ei.tum.de/?id=koenen">LIS</a> where he researches fault-tolerant Network on Chips for safety-critical real-time systems. Contact him by mail at <a href="mailto:max.koenen@tum.de">max.koenen@tum.de</a>.
+  </div>
+</div>
+
+<div class="row optimsoc-about-people">
+  <div class="col-md-2">
+  </div>
+  <div class="col-md-10">
+    <h3>Many others!</h3>
+    The people listed here are just some who contributed to OpTiMSoC. In total around 30 people contributed in some form, most of them students doing their Bachelor's or Master's thesis.
+  </div>
+</div>
+
+<div class="row optimsoc-about-people">
+  <div class="col-md-2">
+    <img class="img-rounded" src="/img/people/no-image.png" />
+  </div>
+  <div class="col-md-10">
+    <h3>You!</h3>
+    Use OpTiMSoC for your projects, adapt it and contribute back. How? See the <a href="/getinvolved.html">Get involved</a> page!
+  </div>
+</div>
+
+</div>
+
+
+  <!-- footer -->
+  <hr>
+  <footer class="optimsoc-footer">
+    <p>OpTiMSoC &copy; 2012-2020 OpTiMSoC Maintainers &middot; Imprint</p>
+  </footer>
+
+  <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</body>
+</html>

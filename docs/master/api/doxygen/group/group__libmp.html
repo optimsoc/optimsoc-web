@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Message passing library</title>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <!-- external CSS -->
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- our own CSS (must be include after bootstrap.css!) -->
+  <link rel="stylesheet" href="/css/optimsoc.css"/>
+
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+    <script src="/js/html5shiv.js"></script>
+    <script src="/js/respond.min.js"></script>
+  <![endif]-->
+
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/feed.xml" />
+
+  <!-- Google Web Fonts -->
+  <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,400italic,600,700,900" rel="stylesheet" type="text/css">
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro:400,500,600,700" rel="stylesheet" type="text/css">
+  <link href="//fonts.googleapis.com/css?family=Fredericka+the+Great" rel="stylesheet" type="text/css">
+</head>
+<body  data-offset='50' data-spy="scroll" data-target="">
+  <!-- top navigation bar -->
+  <nav class="navbar navbar-fixed-top optimsoc-nav" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/index.html" alt="OpTiMSoC"><span class="wordmark">OpTiMSoC</span></a>
+      </div>
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          <li><a href="/download.html">Download</a></li>
+          <li><a href="/docs/index.html">Documentation</a></li>
+          <li><a href="/getinvolved.html">Get involved</a></li>
+          <li><a href="/about.html">About</a></li>
+          <li><a href="/blog">Blog</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container" id="maincontent">
+  
+
+  <div class="optimsoc-section-header">
+  
+  <h1>API Documentation</h1>
+  
+</div>
+
+  
+
+<hr/>
+
+<div class="col-md-3">
+  <div class="optimsoc-doc-mainnav affix" data-spy="affix" data-offset-top="50">
+    <div style="padding-bottom:10px" class="nav">
+      version master (<a href="/docs/index.html#document-archive">other versions</a>)
+
+      
+      
+        <p class="caption"><span class="caption-text">Documentation Parts</span></p>
+<ul class="nav current">
+<li class="toctree-l1"><a class="reference internal" href="../../../user_guide/index.html">User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../refman/index.html">Reference Manual</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">API Documentation</a><ul class="nav current">
+<li class="toctree-l2"><a class="reference internal" href="group__utility.html">Utility functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group__system.html">OpTiMSoC system functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group__tracing.html">OpTiMSoC tracing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group__libbaremetal.html">Baremetal library</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Message passing library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group__libruntime.html">Runtime library</a></li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+  </div>
+</div>
+
+<div class="col-md-9 optimsoc-doc-body">
+
+ <div class="section" id="message-passing-library">
+<h1>Message passing library<a class="headerlink" href="#message-passing-library" title="Permalink to this headline">¶</a></h1>
+<dl class="group">
+<dt>
+<span class="target" id="group__libmp"></span><em>group</em> <code class="sig-name descname">libmp</code></dt>
+<dd><p>This is the message passing library for inter-tile communication in OpTiMSoC. It abstracts from the hardware and serves as a generic API. The implementation choses the best available hardware. </p>
+<p>Each communication is between two endpoints, which are a tuple: (tile, node, port). The application has to manage nodes and port by itself and tiles are denoted by rank of the compute tile.</p>
+<p>There are two types of communication: Connection-less communication with messages is best suited for adhoc communication between multiple communication partners. The protocol for connection-oriented channel is more efficient if the communication relations are fixed, such as in streaming applications. Here channels establish a fixed communication relation and flow control can be implemented more efficient. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Defines</p>
+<dl class="c macro">
+<dt id="c.OPTIMSOC_MP_CONF_DOMAINS">
+<span class="target" id="group__libmp_1ga1fd9397419f2cfd63c6045ae3a19a23c"></span><code class="sig-name descname">OPTIMSOC_MP_CONF_DOMAINS</code><a class="headerlink" href="#c.OPTIMSOC_MP_CONF_DOMAINS" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt id="c.OPTIMSOC_MP_ERROR_NOT_INITIALIZED">
+<span class="target" id="group__libmp_1gac2599c1b6f63c166942ecaa10a478ee8"></span><code class="sig-name descname">OPTIMSOC_MP_ERROR_NOT_INITIALIZED</code><a class="headerlink" href="#c.OPTIMSOC_MP_ERROR_NOT_INITIALIZED" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt id="c.OPTIMSOC_MP_ERROR_DOMAINS_NOT_SUPPORTED">
+<span class="target" id="group__libmp_1gafb29bbbfb7f667b05eb802f133df4627"></span><code class="sig-name descname">OPTIMSOC_MP_ERROR_DOMAINS_NOT_SUPPORTED</code><a class="headerlink" href="#c.OPTIMSOC_MP_ERROR_DOMAINS_NOT_SUPPORTED" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt id="c.OPTIMSOC_MP_ERROR_BUFFEROVERFLOW">
+<span class="target" id="group__libmp_1ga2859dfae93d8bc70c2875bb058192c6d"></span><code class="sig-name descname">OPTIMSOC_MP_ERROR_BUFFEROVERFLOW</code><a class="headerlink" href="#c.OPTIMSOC_MP_ERROR_BUFFEROVERFLOW" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Typedefs</p>
+<dl class="c type">
+<dt id="c.optimsoc_mp_endpoint_handle">
+<span class="target" id="group__libmp_1gad492ddf0d1dd9d814eb6c1bd1f7e383a"></span><em class="property">typedef </em>uint32_t <code class="sig-name descname">optimsoc_mp_endpoint_handle</code><a class="headerlink" href="#c.optimsoc_mp_endpoint_handle" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>This is the handle for an endpoint</p>
+<p>The endpoint is an opaque type to hide the implementaiton details. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Enums</p>
+<dl class="c enum">
+<dt id="c.optimsoc_endpoint_type">
+<span class="target" id="group__libmp_1gadeab45dd7e673b2ef7e568ca92f0cceb"></span><em class="property">enum </em><code class="sig-name descname">optimsoc_endpoint_type</code><a class="headerlink" href="#c.optimsoc_endpoint_type" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The endpoint types</p>
+<p>Each endpoint is of a certain type and can only be used in a subset of functions. </p>
+<p><em>Values:</em></p>
+<dl class="c enumerator">
+<dt id="c.optimsoc_endpoint_type.OPTIMSOC_MP_EP_CONNECTIONLESS">
+<span class="target" id="group__libmp_1ggadeab45dd7e673b2ef7e568ca92f0cceba0ebf5a9eaa5d714019efc1381d313760"></span><em class="property">enumerator </em><code class="sig-name descname">OPTIMSOC_MP_EP_CONNECTIONLESS</code><a class="headerlink" href="#c.optimsoc_endpoint_type.OPTIMSOC_MP_EP_CONNECTIONLESS" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Connection-less communication </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt id="c.optimsoc_endpoint_type.OPTIMSOC_MP_EP_CHANNEL">
+<span class="target" id="group__libmp_1ggadeab45dd7e673b2ef7e568ca92f0ccebafce964fe00bebd9ec247010c440e3831"></span><em class="property">enumerator </em><code class="sig-name descname">OPTIMSOC_MP_EP_CHANNEL</code><a class="headerlink" href="#c.optimsoc_endpoint_type.OPTIMSOC_MP_EP_CHANNEL" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Connection-oriented communication </p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Functions</p>
+<dl class="c function">
+<dt id="c.optimsoc_mp_initialize">
+<span class="target" id="group__libmp_1ga2036e12595105abbd8eb94b4350034b7"></span>int <code class="sig-name descname">optimsoc_mp_initialize</code><span class="sig-paren">(</span><em class="property">struct</em> <a class="reference internal" href="#c.optimsoc_mp_attributes" title="optimsoc_mp_attributes">optimsoc_mp_attributes</a> *<em>attr</em><span class="sig-paren">)</span><a class="headerlink" href="#c.optimsoc_mp_initialize" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Initialize the message passing subsystem</p>
+<p><dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>0 on success, an error code otherwise </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">attr</span></code>: Configuration attributes (currently ignored) </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="c function">
+<dt id="c.optimsoc_mp_endpoint_create">
+<span class="target" id="group__libmp_1gabc2f3414fb939a2eee5c40f46061effa"></span>int <code class="sig-name descname">optimsoc_mp_endpoint_create</code><span class="sig-paren">(</span><a class="reference internal" href="#c.optimsoc_mp_endpoint_handle" title="optimsoc_mp_endpoint_handle">optimsoc_mp_endpoint_handle</a> *<em>endpoint</em>, uint32_t <em>node</em>, uint32_t <em>port</em>, <a class="reference internal" href="#c.optimsoc_endpoint_type" title="optimsoc_endpoint_type">optimsoc_endpoint_type</a> <em>type</em>, uint32_t <em>buffer_size</em>, int <em>overwrite_max_size</em><span class="sig-paren">)</span><a class="headerlink" href="#c.optimsoc_mp_endpoint_create" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Create an endpoint</p>
+<p>Creates a message passing endpoint in this tile for a specific node on a port. Other endpoints can send messages or connect to the endpoint via the &lt;tile, node, port&gt; tuple.</p>
+<p>The buffer can either be connection-less or connection-oriented. When connection-oriented you need to connect two endpoints to a channel first using optimsoc_mp_channel_connect().</p>
+<p>The buffer_size is the number of messages or packets that can be used. If messages or packets are larger than the default size, the maximum element size can be overwritten for this endpoint.</p>
+<p><dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>0 if success, error code otherwise </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">endpoint</span></code>: Pointer to the handle to initialize </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">node</span></code>: Local node number </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">port</span></code>: Local port number </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">type</span></code>: Type of the endpoint </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">buffer_size</span></code>: Number of messages the endpoint accepts </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">overwrite_max_size</span></code>: Set the maximum message size or 0 for the default </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="c function">
+<dt id="c.optimsoc_mp_endpoint_get">
+<span class="target" id="group__libmp_1ga526a3e07dba2148c92db3bf098f9d9e8"></span>int <code class="sig-name descname">optimsoc_mp_endpoint_get</code><span class="sig-paren">(</span><a class="reference internal" href="#c.optimsoc_mp_endpoint_handle" title="optimsoc_mp_endpoint_handle">optimsoc_mp_endpoint_handle</a> *<em>endpoint</em>, uint32_t <em>tile</em>, uint32_t <em>node</em>, uint32_t <em>port</em><span class="sig-paren">)</span><a class="headerlink" href="#c.optimsoc_mp_endpoint_get" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Retrieve a remote endpoint</p>
+<p>Before communicating with a remote endpoint, an endpoint handle must be configured. This function initializes the endpoint for the remote endpoint.</p>
+<p>The remote tile is the compute tile rank.</p>
+<p>This function blocks until the remote endpoint is available.</p>
+<p><dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>Return 0 on success, an error code otherwise </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">endpoint</span></code>: Handle to initialize </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tile</span></code>: Remote compute tile rank </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">node</span></code>: Node of the remote endpoint </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">port</span></code>: Port of the remote endpoint </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="c function">
+<dt id="c.optimsoc_mp_msg_send">
+<span class="target" id="group__libmp_1gae58c2b10f88be81321df24046ffa9dee"></span>int <code class="sig-name descname">optimsoc_mp_msg_send</code><span class="sig-paren">(</span><a class="reference internal" href="#c.optimsoc_mp_endpoint_handle" title="optimsoc_mp_endpoint_handle">optimsoc_mp_endpoint_handle</a> <em>from</em>, <a class="reference internal" href="#c.optimsoc_mp_endpoint_handle" title="optimsoc_mp_endpoint_handle">optimsoc_mp_endpoint_handle</a> <em>to</em>, uint8_t *<em>data</em>, uint32_t <em>size</em><span class="sig-paren">)</span><a class="headerlink" href="#c.optimsoc_mp_msg_send" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Send a message to a remote endpoint</p>
+<p>A local endpoint is used to store the data locally for an asynchronous transfer if supported. The local endpoint must be created by <a class="reference internal" href="#group__libmp_1gabc2f3414fb939a2eee5c40f46061effa"><span class="std std-ref">optimsoc_mp_endpoint_create()</span></a> with type OPTIMSOC_MP_EP_CONNECTIONLESS. The remote endpoint must be retrieved with <a class="reference internal" href="#group__libmp_1ga526a3e07dba2148c92db3bf098f9d9e8"><span class="std std-ref">optimsoc_mp_endpoint_get()</span></a>.</p>
+<p>The function blocks until the data is stored in another data structure or successfully transfer, i.e., the input buffer can be safely reused.</p>
+<p><dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>0 on success, an error code otherwise </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">from</span></code>: Local endpoint </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">to</span></code>: Remote endpoint </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">data</span></code>: Data to transfer </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">size</span></code>: Size of the data to transfer </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="c function">
+<dt id="c.optimsoc_mp_msg_recv">
+<span class="target" id="group__libmp_1ga3941f62126badfabcc517a38e7eedd90"></span>int <code class="sig-name descname">optimsoc_mp_msg_recv</code><span class="sig-paren">(</span><a class="reference internal" href="#c.optimsoc_mp_endpoint_handle" title="optimsoc_mp_endpoint_handle">optimsoc_mp_endpoint_handle</a> <em>ep</em>, uint8_t *<em>buffer</em>, uint32_t <em>buffer_size</em>, uint32_t *<em>received_size</em><span class="sig-paren">)</span><a class="headerlink" href="#c.optimsoc_mp_msg_recv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Receive a message from a local endpoint</p>
+<p>Receive a message from the local endpoint. The endpoint must be configured by <a class="reference internal" href="#group__libmp_1gabc2f3414fb939a2eee5c40f46061effa"><span class="std std-ref">optimsoc_mp_endpoint_create()</span></a> with type OPTIMSOC_MP_EP_CONNECTIONLESS.</p>
+<p>The function blocks until a message was received.</p>
+<p><dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>0 on success, an error code otherwise </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ep</span></code>: Local endpoint to receive from </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">buffer</span></code>: Output data buffer </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">buffer_size</span></code>: Size of the buffer </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">received_size</span></code>: The actual written data size </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="c function">
+<dt id="c.optimsoc_mp_channel_connect">
+<span class="target" id="group__libmp_1ga8d7907ec79c460cff2d2705e5d932a52"></span>int <code class="sig-name descname">optimsoc_mp_channel_connect</code><span class="sig-paren">(</span><a class="reference internal" href="#c.optimsoc_mp_endpoint_handle" title="optimsoc_mp_endpoint_handle">optimsoc_mp_endpoint_handle</a> <em>from</em>, <a class="reference internal" href="#c.optimsoc_mp_endpoint_handle" title="optimsoc_mp_endpoint_handle">optimsoc_mp_endpoint_handle</a> <em>to</em><span class="sig-paren">)</span><a class="headerlink" href="#c.optimsoc_mp_channel_connect" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c function">
+<dt id="c.optimsoc_mp_channel_send">
+<span class="target" id="group__libmp_1gad8f27438e2b814045c9e2046c73aff61"></span>int <code class="sig-name descname">optimsoc_mp_channel_send</code><span class="sig-paren">(</span><a class="reference internal" href="#c.optimsoc_mp_endpoint_handle" title="optimsoc_mp_endpoint_handle">optimsoc_mp_endpoint_handle</a> <em>from</em>, <a class="reference internal" href="#c.optimsoc_mp_endpoint_handle" title="optimsoc_mp_endpoint_handle">optimsoc_mp_endpoint_handle</a> <em>to</em>, uint8_t *<em>buffer</em>, uint32_t <em>size</em><span class="sig-paren">)</span><a class="headerlink" href="#c.optimsoc_mp_channel_send" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c function">
+<dt id="c.optimsoc_mp_channel_recv">
+<span class="target" id="group__libmp_1ga4155adf68ec3b6db0bd330b6db5f5328"></span>int <code class="sig-name descname">optimsoc_mp_channel_recv</code><span class="sig-paren">(</span><a class="reference internal" href="#c.optimsoc_mp_endpoint_handle" title="optimsoc_mp_endpoint_handle">optimsoc_mp_endpoint_handle</a> <em>ep</em>, uint8_t *<em>buffer</em>, uint32_t <em>buffer_size</em>, uint32_t *<em>received_size</em><span class="sig-paren">)</span><a class="headerlink" href="#c.optimsoc_mp_channel_recv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c function">
+<dt id="c.optimsoc_mp_channel_pause">
+<span class="target" id="group__libmp_1gaefc02311556616481726ad3b8e752799"></span>int <code class="sig-name descname">optimsoc_mp_channel_pause</code><span class="sig-paren">(</span><a class="reference internal" href="#c.optimsoc_mp_endpoint_handle" title="optimsoc_mp_endpoint_handle">optimsoc_mp_endpoint_handle</a> <em>ep</em><span class="sig-paren">)</span><a class="headerlink" href="#c.optimsoc_mp_channel_pause" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c function">
+<dt id="c.optimsoc_mp_channel_continue">
+<span class="target" id="group__libmp_1ga02b015f2f786cd54fc773083a252505b"></span>int <code class="sig-name descname">optimsoc_mp_channel_continue</code><span class="sig-paren">(</span><a class="reference internal" href="#c.optimsoc_mp_endpoint_handle" title="optimsoc_mp_endpoint_handle">optimsoc_mp_endpoint_handle</a> <em>ep</em><span class="sig-paren">)</span><a class="headerlink" href="#c.optimsoc_mp_channel_continue" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c function">
+<dt id="c.optimsoc_mp_error_string">
+<span class="target" id="group__libmp_1ga28a19c552a18e2a6ec7e98b8ae684c89"></span>char *<code class="sig-name descname">optimsoc_mp_error_string</code><span class="sig-paren">(</span>int <em>errno</em><span class="sig-paren">)</span><a class="headerlink" href="#c.optimsoc_mp_error_string" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<dl class="c struct">
+<dt id="c.optimsoc_mp_attributes">
+<span class="target" id="structoptimsoc__mp__attributes"></span><em class="property">struct </em><code class="sig-name descname">optimsoc_mp_attributes</code><a class="headerlink" href="#c.optimsoc_mp_attributes" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;optimsoc-mp.h&gt;</em><p>Configuration attributes</p>
+<p>Currently not used. </p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+</div>
+</div>
+
+
+  <!-- footer -->
+  <hr>
+  <footer class="optimsoc-footer">
+    <p>OpTiMSoC &copy; 2012-2020 OpTiMSoC Maintainers &middot; Imprint</p>
+  </footer>
+
+  <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Direct Memory Access support</title>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <!-- external CSS -->
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- our own CSS (must be include after bootstrap.css!) -->
+  <link rel="stylesheet" href="/css/optimsoc.css"/>
+
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+    <script src="/js/html5shiv.js"></script>
+    <script src="/js/respond.min.js"></script>
+  <![endif]-->
+
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/feed.xml" />
+
+  <!-- Google Web Fonts -->
+  <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,400italic,600,700,900" rel="stylesheet" type="text/css">
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro:400,500,600,700" rel="stylesheet" type="text/css">
+  <link href="//fonts.googleapis.com/css?family=Fredericka+the+Great" rel="stylesheet" type="text/css">
+</head>
+<body  data-offset='50' data-spy="scroll" data-target="">
+  <!-- top navigation bar -->
+  <nav class="navbar navbar-fixed-top optimsoc-nav" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/index.html" alt="OpTiMSoC"><span class="wordmark">OpTiMSoC</span></a>
+      </div>
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          <li><a href="/download.html">Download</a></li>
+          <li><a href="/docs/index.html">Documentation</a></li>
+          <li><a href="/getinvolved.html">Get involved</a></li>
+          <li><a href="/about.html">About</a></li>
+          <li><a href="/blog">Blog</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container" id="maincontent">
+  
+
+  <div class="optimsoc-section-header">
+  
+  <h1>API Documentation</h1>
+  
+</div>
+
+  
+
+<hr/>
+
+<div class="col-md-3">
+  <div class="optimsoc-doc-mainnav affix" data-spy="affix" data-offset-top="50">
+    <div style="padding-bottom:10px" class="nav">
+      version master (<a href="/docs/index.html#document-archive">other versions</a>)
+
+      
+      
+        <p class="caption"><span class="caption-text">Documentation Parts</span></p>
+<ul class="nav current">
+<li class="toctree-l1"><a class="reference internal" href="../../../user_guide/index.html">User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../refman/index.html">Reference Manual</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">API Documentation</a><ul class="nav current">
+<li class="toctree-l2"><a class="reference internal" href="group__utility.html">Utility functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group__system.html">OpTiMSoC system functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group__tracing.html">OpTiMSoC tracing</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="group__libbaremetal.html">Baremetal library</a><ul class="nav current">
+<li class="toctree-l3"><a class="reference internal" href="group__userio.html">User I/O</a></li>
+<li class="toctree-l3"><a class="reference internal" href="group__sync.html">Support for atomic operations and synchronization</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Direct Memory Access support</a></li>
+<li class="toctree-l3"><a class="reference internal" href="group__mpsimple.html">Simple message passing buffers support</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="group__libmp.html">Message passing library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group__libruntime.html">Runtime library</a></li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+  </div>
+</div>
+
+<div class="col-md-9 optimsoc-doc-body">
+
+ <div class="section" id="direct-memory-access-support">
+<h1>Direct Memory Access support<a class="headerlink" href="#direct-memory-access-support" title="Permalink to this headline">¶</a></h1>
+<dl class="group">
+<dt>
+<span class="target" id="group__dma"></span><em>group</em> <code class="sig-name descname">dma</code></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Typedefs</p>
+<dl class="c type">
+<dt id="c.dma_transfer_handle_t">
+<span class="target" id="group__dma_1gadcb22e37b3fad53ba310719d0f3d256f"></span><em class="property">typedef </em>uint32_t <code class="sig-name descname">dma_transfer_handle_t</code><a class="headerlink" href="#c.dma_transfer_handle_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>DMA transfer handle</p>
+<p>The DMA transfer handle is used when calling the DMA functions </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Enums</p>
+<dl class="c enum">
+<dt id="c.dma_success_t">
+<span class="target" id="group__dma_1ga038399092f4d10563fd33dd798af5a9d"></span><em class="property">enum </em><code class="sig-name descname">dma_success_t</code><a class="headerlink" href="#c.dma_success_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>OpTiMSoC dma success code</p>
+<p>The OpTiMSoC dma success code indicated the success of an operation. </p>
+<p><em>Values:</em></p>
+<dl class="c enumerator">
+<dt id="c.dma_success_t.DMA_SUCCESS">
+<span class="target" id="group__dma_1gga038399092f4d10563fd33dd798af5a9dadd96aa9eac27e28c78ee7332291e1e7e"></span><em class="property">enumerator </em><code class="sig-name descname">DMA_SUCCESS</code><a class="headerlink" href="#c.dma_success_t.DMA_SUCCESS" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Successful operation </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt id="c.dma_success_t.DMA_ERR_NOTINITIALIZED">
+<span class="target" id="group__dma_1gga038399092f4d10563fd33dd798af5a9dae2696c3be7e8ea429339caad49fc8b36"></span><em class="property">enumerator </em><code class="sig-name descname">DMA_ERR_NOTINITIALIZED</code><a class="headerlink" href="#c.dma_success_t.DMA_ERR_NOTINITIALIZED" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Driver not initialized </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt id="c.dma_success_t.DMA_ERR_NOSLOT">
+<span class="target" id="group__dma_1gga038399092f4d10563fd33dd798af5a9daf94afea7a754644ae18ae46ebb733574"></span><em class="property">enumerator </em><code class="sig-name descname">DMA_ERR_NOSLOT</code><a class="headerlink" href="#c.dma_success_t.DMA_ERR_NOSLOT" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>No slot available </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt id="c.dma_success_t.DMA_ERR_NOTALLOCATED">
+<span class="target" id="group__dma_1gga038399092f4d10563fd33dd798af5a9da0108b9612eb94c65a69a1cbfb9dc3066"></span><em class="property">enumerator </em><code class="sig-name descname">DMA_ERR_NOTALLOCATED</code><a class="headerlink" href="#c.dma_success_t.DMA_ERR_NOTALLOCATED" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Slot not allocated </p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="c enum">
+<dt id="c.dma_direction_t">
+<span class="target" id="group__dma_1gae74016a7b3bcbf0e673abd66366adc9d"></span><em class="property">enum </em><code class="sig-name descname">dma_direction_t</code><a class="headerlink" href="#c.dma_direction_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The direction of a DMA transfer</p>
+<p>The direction of a DMA transfer is either from local to a remote tile or vice versa </p>
+<p><em>Values:</em></p>
+<dl class="c enumerator">
+<dt id="c.dma_direction_t.LOCAL2REMOTE">
+<span class="target" id="group__dma_1ggae74016a7b3bcbf0e673abd66366adc9da113822d41f782e56f7d9e98b736904ee"></span><em class="property">enumerator </em><code class="sig-name descname">LOCAL2REMOTE</code><a class="headerlink" href="#c.dma_direction_t.LOCAL2REMOTE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Transfer data from local to remote </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt id="c.dma_direction_t.REMOTE2LOCAL">
+<span class="target" id="group__dma_1ggae74016a7b3bcbf0e673abd66366adc9dae4e35e2558d085f7929ebc56dc373d54"></span><em class="property">enumerator </em><code class="sig-name descname">REMOTE2LOCAL</code><a class="headerlink" href="#c.dma_direction_t.REMOTE2LOCAL" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Transfer data from remore to local </p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Functions</p>
+<dl class="c function">
+<dt id="c.dma_init">
+<span class="target" id="group__dma_1ga1c9e133b825bded7bf8039c43b49d2c7"></span>void <code class="sig-name descname">dma_init</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#c.dma_init" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Initialize DMA driver</p>
+<p>Initialize the DMA driver. Necessary before calling it the first time </p>
+</dd></dl>
+
+<dl class="c function">
+<dt id="c.dma_alloc">
+<span class="target" id="group__dma_1ga0d5110ebb63694fac3889e1de5e4b66b"></span><a class="reference internal" href="#c.dma_success_t" title="dma_success_t">dma_success_t</a> <code class="sig-name descname">dma_alloc</code><span class="sig-paren">(</span><a class="reference internal" href="#c.dma_transfer_handle_t" title="dma_transfer_handle_t">dma_transfer_handle_t</a> *<em>id</em><span class="sig-paren">)</span><a class="headerlink" href="#c.dma_alloc" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Allocate a DMA transfer slot and get handle</p>
+<p>This function allocates a DMA slot. DMA transfers are handled asynchronously and each of the ongoing transfers is controlled by one slot in the DMA controller. You therefore need to allocate a slot before starting transfers.</p>
+<p><dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>Success code </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">[out]</span> <span class="pre">id</span></code>: The handle of this slot </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="c function">
+<dt id="c.dma_free">
+<span class="target" id="group__dma_1gaadbd852d4ec52cae5e0b411f9ce3f2d7"></span><a class="reference internal" href="#c.dma_success_t" title="dma_success_t">dma_success_t</a> <code class="sig-name descname">dma_free</code><span class="sig-paren">(</span><a class="reference internal" href="#c.dma_transfer_handle_t" title="dma_transfer_handle_t">dma_transfer_handle_t</a> <em>id</em><span class="sig-paren">)</span><a class="headerlink" href="#c.dma_free" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Free a pre-allocated DMA transfer slot</p>
+<p><dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>DMA_SUCCESS if successful, any other value indicates an error </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">id</span></code>: the handle to free </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="c function">
+<dt id="c.dma_transfer">
+<span class="target" id="group__dma_1ga52037e748b8c97cfa5580dac8032f7ec"></span><a class="reference internal" href="#c.dma_success_t" title="dma_success_t">dma_success_t</a> <code class="sig-name descname">dma_transfer</code><span class="sig-paren">(</span>void *<em>local</em>, uint32_t <em>remote_tile</em>, void *<em>remote</em>, size_t <em>size</em>, <a class="reference internal" href="#c.dma_direction_t" title="dma_direction_t">dma_direction_t</a> <em>dir</em>, <a class="reference internal" href="#c.dma_transfer_handle_t" title="dma_transfer_handle_t">dma_transfer_handle_t</a> <em>id</em><span class="sig-paren">)</span><a class="headerlink" href="#c.dma_transfer" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Initiate a DMA transfer</p>
+<p>This function initiates a DMA transfer between the local address in this tile to remote_tile address remote of size. The direction of the transfer is determined by dir. The slot id will be used for this transfer.</p>
+<p><dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>Success code </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">local</span></code>: Local address </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">remote_tile</span></code>: Remote tile </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">remote</span></code>: Remote address </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">size</span></code>: Size of the transfer </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dir</span></code>: Direction of the transfer </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">id</span></code>: Handle of the slot as allocated by dma_alloc </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="c function">
+<dt id="c.dma_wait">
+<span class="target" id="group__dma_1ga5a616f7e41738d9d61ac47d4146861f9"></span><a class="reference internal" href="#c.dma_success_t" title="dma_success_t">dma_success_t</a> <code class="sig-name descname">dma_wait</code><span class="sig-paren">(</span><a class="reference internal" href="#c.dma_transfer_handle_t" title="dma_transfer_handle_t">dma_transfer_handle_t</a> <em>id</em><span class="sig-paren">)</span><a class="headerlink" href="#c.dma_wait" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Blocking wait for DMA transfer</p>
+<p>Wait for a DMA transfer to finish and block.</p>
+<p><dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>Success code </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">id</span></code>: The handle of the transfer slot </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+
+
+</div>
+</div>
+
+
+  <!-- footer -->
+  <hr>
+  <footer class="optimsoc-footer">
+    <p>OpTiMSoC &copy; 2012-2020 OpTiMSoC Maintainers &middot; Imprint</p>
+  </footer>
+
+  <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</body>
+</html>

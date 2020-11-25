@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Utility functions</title>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <!-- external CSS -->
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- our own CSS (must be include after bootstrap.css!) -->
+  <link rel="stylesheet" href="/css/optimsoc.css"/>
+
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+    <script src="/js/html5shiv.js"></script>
+    <script src="/js/respond.min.js"></script>
+  <![endif]-->
+
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/feed.xml" />
+
+  <!-- Google Web Fonts -->
+  <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,400italic,600,700,900" rel="stylesheet" type="text/css">
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro:400,500,600,700" rel="stylesheet" type="text/css">
+  <link href="//fonts.googleapis.com/css?family=Fredericka+the+Great" rel="stylesheet" type="text/css">
+</head>
+<body  data-offset='50' data-spy="scroll" data-target="">
+  <!-- top navigation bar -->
+  <nav class="navbar navbar-fixed-top optimsoc-nav" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/index.html" alt="OpTiMSoC"><span class="wordmark">OpTiMSoC</span></a>
+      </div>
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          <li><a href="/download.html">Download</a></li>
+          <li><a href="/docs/index.html">Documentation</a></li>
+          <li><a href="/getinvolved.html">Get involved</a></li>
+          <li><a href="/about.html">About</a></li>
+          <li><a href="/blog">Blog</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container" id="maincontent">
+  
+
+  <div class="optimsoc-section-header">
+  
+  <h1>API Documentation</h1>
+  
+</div>
+
+  
+
+<hr/>
+
+<div class="col-md-3">
+  <div class="optimsoc-doc-mainnav affix" data-spy="affix" data-offset-top="50">
+    <div style="padding-bottom:10px" class="nav">
+      version 2018.1 (<a href="/docs/index.html#document-archive">other versions</a>)
+
+      
+      
+        <p class="caption"><span class="caption-text">Documentation Parts</span></p>
+<ul class="nav current">
+<li class="toctree-l1"><a class="reference internal" href="../../../user_guide/index.html">User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../refman/index.html">Reference Manual</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">API Documentation</a><ul class="nav current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Utility functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group__system.html">OpTiMSoC system functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group__tracing.html">OpTiMSoC tracing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group__libbaremetal.html">Baremetal library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group__libmp.html">Message passing library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group__libruntime.html">Runtime library</a></li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+  </div>
+</div>
+
+<div class="col-md-9 optimsoc-doc-body">
+
+ <div class="section" id="utility-functions">
+<h1>Utility functions<a class="headerlink" href="#utility-functions" title="Permalink to this headline">¶</a></h1>
+<dl class="group">
+<dt>
+<span class="target" id="group__utility"></span><em>group</em> <code class="sig-name descname">utility</code></dt>
+<dd><p>Utility functions. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Functions</p>
+<dl class="c function">
+<dt id="c.extract_bits">
+<span class="target" id="group__utility_1gaa759aba5a757059c71fe1c2677a94b1f"></span>unsigned int <code class="sig-name descname">extract_bits</code><span class="sig-paren">(</span>uint32_t <em>x</em>, uint32_t <em>msb</em>, uint32_t <em>lsb</em><span class="sig-paren">)</span><a class="headerlink" href="#c.extract_bits" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>extract bits between MSB and LSB (including)</p>
+<p><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">return</span> <span class="n">x</span><span class="p">[</span><span class="n">MSB</span><span class="p">:</span><span class="n">LSB</span><span class="p">];</span>
+</pre></div>
+</div>
+</p>
+<p><dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>extracted value (aligned to lsb=0) </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">x</span></code>: Value to extract from </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">msb</span></code>: MSB of extraction </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lsb</span></code>: LSB of extraction </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="c function">
+<dt id="c.set_bits">
+<span class="target" id="group__utility_1ga0415f93ba2dcfefe1882334968cdee8e"></span>void <code class="sig-name descname">set_bits</code><span class="sig-paren">(</span>uint32_t *<em>x</em>, uint32_t <em>v</em>, uint32_t <em>msb</em>, uint32_t <em>lsb</em><span class="sig-paren">)</span><a class="headerlink" href="#c.set_bits" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set bits in variable between MSB and LSB (including)</p>
+<p><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="p">[</span><span class="n">MSB</span><span class="p">:</span><span class="n">LSB</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span><span class="p">;</span>
+</pre></div>
+</div>
+</p>
+<p><dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">x</span></code>: Pointer to value where to set </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">v</span></code>: Value to set </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">msb</span></code>: MSB of part to set </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lsb</span></code>: LSB of part to set </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="c function">
+<dt id="c.optimsoc_get_seed">
+<span class="target" id="group__utility_1ga998595e5c3c7f59ab0c39cc791731ea6"></span>uint32_t <code class="sig-name descname">optimsoc_get_seed</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#c.optimsoc_get_seed" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get a random seed for randomization</p>
+<p>This function is used to obtain a random seed from the simulation environment for randomization tests. It has no function when executing in hardware.</p>
+<p>It is only random when the actual simulation is seeded with a non-static value.</p>
+<p><dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>(random) seed </p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+
+
+</div>
+</div>
+
+
+  <!-- footer -->
+  <hr>
+  <footer class="optimsoc-footer">
+    <p>OpTiMSoC &copy; 2012-2020 OpTiMSoC Maintainers &middot; Imprint</p>
+  </footer>
+
+  <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</body>
+</html>

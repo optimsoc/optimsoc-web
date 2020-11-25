@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Simple message passing buffers support</title>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <!-- external CSS -->
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- our own CSS (must be include after bootstrap.css!) -->
+  <link rel="stylesheet" href="/css/optimsoc.css"/>
+
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+    <script src="/js/html5shiv.js"></script>
+    <script src="/js/respond.min.js"></script>
+  <![endif]-->
+
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/feed.xml" />
+
+  <!-- Google Web Fonts -->
+  <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,400italic,600,700,900" rel="stylesheet" type="text/css">
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro:400,500,600,700" rel="stylesheet" type="text/css">
+  <link href="//fonts.googleapis.com/css?family=Fredericka+the+Great" rel="stylesheet" type="text/css">
+</head>
+<body  data-offset='50' data-spy="scroll" data-target="">
+  <!-- top navigation bar -->
+  <nav class="navbar navbar-fixed-top optimsoc-nav" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/index.html" alt="OpTiMSoC"><span class="wordmark">OpTiMSoC</span></a>
+      </div>
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          <li><a href="/download.html">Download</a></li>
+          <li><a href="/docs/index.html">Documentation</a></li>
+          <li><a href="/getinvolved.html">Get involved</a></li>
+          <li><a href="/about.html">About</a></li>
+          <li><a href="/blog">Blog</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container" id="maincontent">
+  
+
+  <div class="optimsoc-section-header">
+  
+  <h1>API Documentation</h1>
+  
+</div>
+
+  
+
+<hr/>
+
+<div class="col-md-3">
+  <div class="optimsoc-doc-mainnav affix" data-spy="affix" data-offset-top="50">
+    <div style="padding-bottom:10px" class="nav">
+      version 2018.1 (<a href="/docs/index.html#document-archive">other versions</a>)
+
+      
+      
+        <p class="caption"><span class="caption-text">Documentation Parts</span></p>
+<ul class="nav current">
+<li class="toctree-l1"><a class="reference internal" href="../../../user_guide/index.html">User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../refman/index.html">Reference Manual</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">API Documentation</a><ul class="nav current">
+<li class="toctree-l2"><a class="reference internal" href="group__utility.html">Utility functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group__system.html">OpTiMSoC system functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group__tracing.html">OpTiMSoC tracing</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="group__libbaremetal.html">Baremetal library</a><ul class="nav current">
+<li class="toctree-l3"><a class="reference internal" href="group__userio.html">User I/O</a></li>
+<li class="toctree-l3"><a class="reference internal" href="group__sync.html">Support for atomic operations and synchronization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="group__dma.html">Direct Memory Access support</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Simple message passing buffers support</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="group__libmp.html">Message passing library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group__libruntime.html">Runtime library</a></li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+  </div>
+</div>
+
+<div class="col-md-9 optimsoc-doc-body">
+
+ <div class="section" id="simple-message-passing-buffers-support">
+<h1>Simple message passing buffers support<a class="headerlink" href="#simple-message-passing-buffers-support" title="Permalink to this headline">¶</a></h1>
+<dl class="group">
+<dt>
+<span class="target" id="group__mpsimple"></span><em>group</em> <code class="sig-name descname">mpsimple</code></dt>
+<dd><p>The simple message passing buffer (mpbuffer) is a hardware device that can be used to communicate among compute tiles. They are useful to build efficient or optimized message passing applications, but in most cases the message passing library is recommended as it first encapsulates the actual message passing protocol (end-to-end flow control control etc.), and second uses the available hardware accelerators which are more performant than the message passing buffers. </p>
+<p>The message passing buffers are hardware FIFOs and the software directly writes and reads network packets into the FIFOs. There are multiple endpoints to mitigate message-dependent deadlocks. Your software can query the number of available endpoints with <a class="reference internal" href="#group__mpsimple_1ga48e2595b4ad69f319a33f7788ea27ae4"><span class="std std-ref">optimsoc_mp_simple_num_endpoints()</span></a>.</p>
+<p>Software can send a packet on an endpoint using <a class="reference internal" href="#group__mpsimple_1ga45e23df8452741a6d9cb2aa4e7e8f780"><span class="std std-ref">optimsoc_mp_simple_send()</span></a>. To receive incoming packets, the software registers a handler for incoming messages using <a class="reference internal" href="#group__mpsimple_1ga18a50c8b9db241084c9e4abf4be05f24"><span class="std std-ref">optimsoc_mp_simple_addhandler()</span></a>. Messages from all endpoints invoke the handler, but you can register different handlers for different message classes.</p>
+<p><dl class="simple">
+<dt><strong>Note</strong></dt><dd><p>Be careful with selecting classes, because they may be occupied by other hardware. If you are not sure, use class 0. </p>
+</dd>
+</dl>
+</p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Functions</p>
+<dl class="c function">
+<dt id="c.optimsoc_mp_simple_init">
+<span class="target" id="group__mpsimple_1ga12cc8cca986b931b25de15f7cf808630"></span>void <code class="sig-name descname">optimsoc_mp_simple_init</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#c.optimsoc_mp_simple_init" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Initialize simple message passing buffers </p>
+</dd></dl>
+
+<dl class="c function">
+<dt id="c.optimsoc_mp_simple_num_endpoints">
+<span class="target" id="group__mpsimple_1ga48e2595b4ad69f319a33f7788ea27ae4"></span>uint16_t <code class="sig-name descname">optimsoc_mp_simple_num_endpoints</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#c.optimsoc_mp_simple_num_endpoints" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Query the number of endpoints.</p>
+<p><dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>Number of endpoints </p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="c function">
+<dt id="c.optimsoc_mp_simple_enable">
+<span class="target" id="group__mpsimple_1ga19f747dc817cd0054b4aac6999c42c06"></span>void <code class="sig-name descname">optimsoc_mp_simple_enable</code><span class="sig-paren">(</span>uint16_t <em>endpoint</em><span class="sig-paren">)</span><a class="headerlink" href="#c.optimsoc_mp_simple_enable" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Enable the endpoint to receive packets</p>
+<p>The hardware will only be able to receive packets after it was enabled. Hence you need to check the endpoint from the remote using <a class="reference internal" href="#group__mpsimple_1ga19f747dc817cd0054b4aac6999c42c06"><span class="std std-ref">optimsoc_mp_simple_enable()</span></a> before calling <a class="reference internal" href="#group__mpsimple_1ga45e23df8452741a6d9cb2aa4e7e8f780"><span class="std std-ref">optimsoc_mp_simple_send()</span></a>.</p>
+<p><dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">endpoint</span></code>: Endpoint buffer to enable </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="c function">
+<dt id="c.optimsoc_mp_simple_ctready">
+<span class="target" id="group__mpsimple_1ga00e3f0f49762ca084d25fb2d2c5c57a5"></span>int <code class="sig-name descname">optimsoc_mp_simple_ctready</code><span class="sig-paren">(</span>uint32_t <em>rank</em>, uint16_t <em>endpoint</em><span class="sig-paren">)</span><a class="headerlink" href="#c.optimsoc_mp_simple_ctready" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Check if an endpoint at another compute tile is ready</p>
+<p>This function must be called before calling <a class="reference internal" href="#group__mpsimple_1ga45e23df8452741a6d9cb2aa4e7e8f780"><span class="std std-ref">optimsoc_mp_simple_send()</span></a>. The function is non-blocking, meaning that with the first call it will always return 0. It sends a message to the remote to check the state. Further calls will then return immediately if a successfull response was received, otherwise try again.</p>
+<p>The receiver must enable the endpoint using <a class="reference internal" href="#group__mpsimple_1ga19f747dc817cd0054b4aac6999c42c06"><span class="std std-ref">optimsoc_mp_simple_enable()</span></a>.</p>
+<p><dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>Endpoint status (0: not ready, 1: enabled) </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">rank</span></code>: Compute tile rank to check </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">endpoint</span></code>: Endpoint buffer to check </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="c function">
+<dt id="c.optimsoc_mp_simple_send">
+<span class="target" id="group__mpsimple_1ga45e23df8452741a6d9cb2aa4e7e8f780"></span>void <code class="sig-name descname">optimsoc_mp_simple_send</code><span class="sig-paren">(</span>uint16_t <em>endpoint</em>, size_t <em>size</em>, uint32_t *<em>buf</em><span class="sig-paren">)</span><a class="headerlink" href="#c.optimsoc_mp_simple_send" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Send a message</p>
+<p>Sends a message of size from buf.</p>
+<p><dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">endpoint</span></code>: The endpoint to send the message on </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">size</span></code>: Size of the message in (word-sized) flits </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">buf</span></code>: Message buffer containint size flits </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="c function">
+<dt id="c.optimsoc_mp_simple_addhandler">
+<span class="target" id="group__mpsimple_1ga18a50c8b9db241084c9e4abf4be05f24"></span>void <code class="sig-name descname">optimsoc_mp_simple_addhandler</code><span class="sig-paren">(</span>uint8_t <em>cls</em>, void (*<em>hnd</em>)<span class="sig-paren">(</span>uint32_t*, size_t<span class="sig-paren">)</span><span class="sig-paren">)</span><a class="headerlink" href="#c.optimsoc_mp_simple_addhandler" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Add a handler for a class of incoming messages</p>
+<p>A message header contains a class. This class field can be used to mix different kinds of message services. For each class you are using in your system you need to add a class handler. As there is no default class handler all remaining classes are dropped.</p>
+<p><dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">cls</span></code>: Class to register </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">hnd</span></code>: Function pointer to handler for this class </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+
+
+</div>
+</div>
+
+
+  <!-- footer -->
+  <hr>
+  <footer class="optimsoc-footer">
+    <p>OpTiMSoC &copy; 2012-2020 OpTiMSoC Maintainers &middot; Imprint</p>
+  </footer>
+
+  <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</body>
+</html>

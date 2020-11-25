@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>OpTiMSoC system functions</title>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <!-- external CSS -->
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- our own CSS (must be include after bootstrap.css!) -->
+  <link rel="stylesheet" href="/css/optimsoc.css"/>
+
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+    <script src="/js/html5shiv.js"></script>
+    <script src="/js/respond.min.js"></script>
+  <![endif]-->
+
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/feed.xml" />
+
+  <!-- Google Web Fonts -->
+  <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,400italic,600,700,900" rel="stylesheet" type="text/css">
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro:400,500,600,700" rel="stylesheet" type="text/css">
+  <link href="//fonts.googleapis.com/css?family=Fredericka+the+Great" rel="stylesheet" type="text/css">
+</head>
+<body  data-offset='50' data-spy="scroll" data-target="">
+  <!-- top navigation bar -->
+  <nav class="navbar navbar-fixed-top optimsoc-nav" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/index.html" alt="OpTiMSoC"><span class="wordmark">OpTiMSoC</span></a>
+      </div>
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          <li><a href="/download.html">Download</a></li>
+          <li><a href="/docs/index.html">Documentation</a></li>
+          <li><a href="/getinvolved.html">Get involved</a></li>
+          <li><a href="/about.html">About</a></li>
+          <li><a href="/blog">Blog</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container" id="maincontent">
+  
+
+  <div class="optimsoc-section-header">
+  
+  <h1>API Documentation</h1>
+  
+</div>
+
+  
+
+<hr/>
+
+<div class="col-md-3">
+  <div class="optimsoc-doc-mainnav affix" data-spy="affix" data-offset-top="50">
+    <div style="padding-bottom:10px" class="nav">
+      version 2018.1 (<a href="/docs/index.html#document-archive">other versions</a>)
+
+      
+      
+        <p class="caption"><span class="caption-text">Documentation Parts</span></p>
+<ul class="nav current">
+<li class="toctree-l1"><a class="reference internal" href="../../../user_guide/index.html">User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../refman/index.html">Reference Manual</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">API Documentation</a><ul class="nav current">
+<li class="toctree-l2"><a class="reference internal" href="group__utility.html">Utility functions</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">OpTiMSoC system functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group__tracing.html">OpTiMSoC tracing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group__libbaremetal.html">Baremetal library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group__libmp.html">Message passing library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group__libruntime.html">Runtime library</a></li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+  </div>
+</div>
+
+<div class="col-md-9 optimsoc-doc-body">
+
+ <div class="section" id="optimsoc-system-functions">
+<h1>OpTiMSoC system functions<a class="headerlink" href="#optimsoc-system-functions" title="Permalink to this headline">¶</a></h1>
+<dl class="group">
+<dt>
+<span class="target" id="group__system"></span><em>group</em> <code class="sig-name descname">system</code></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Typedefs</p>
+<dl class="c type">
+<dt id="c.optimsoc_conf">
+<span class="target" id="group__system_1gafdb357a38d87ecfabb0f60bd28517528"></span><em class="property">typedef </em><em class="property">struct</em> <a class="reference internal" href="#c.optimsoc_conf" title="optimsoc_conf">optimsoc_conf</a> <code class="sig-name descname">optimsoc_conf</code><a class="headerlink" href="#c.optimsoc_conf" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Functions</p>
+<dl class="c function">
+<dt id="c.optimsoc_init">
+<span class="target" id="group__system_1ga9c8d0217e736fc204eebcc002abd2004"></span>void <code class="sig-name descname">optimsoc_init</code><span class="sig-paren">(</span><a class="reference internal" href="#c.optimsoc_conf" title="optimsoc_conf">optimsoc_conf</a> *<em>config</em><span class="sig-paren">)</span><a class="headerlink" href="#c.optimsoc_init" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c function">
+<dt id="c.optimsoc_get_tileid">
+<span class="target" id="group__system_1gaa0a264c277d58101b7c66093e4674321"></span>uint32_t <code class="sig-name descname">optimsoc_get_tileid</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#c.optimsoc_get_tileid" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the tile identifier</p>
+<p><dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>Identifier of this tile, which is the rank inside all tiles </p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="c function">
+<dt id="c.optimsoc_get_numtiles">
+<span class="target" id="group__system_1ga90320d73e5c88272e71756e445ab4403"></span>uint32_t <code class="sig-name descname">optimsoc_get_numtiles</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#c.optimsoc_get_numtiles" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the total number of tiles</p>
+<p><dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>Number of tiles in this system </p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="c function">
+<dt id="c.optimsoc_get_numct">
+<span class="target" id="group__system_1ga116b3232ddde7435baaecad80ded2a51"></span>uint32_t <code class="sig-name descname">optimsoc_get_numct</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#c.optimsoc_get_numct" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the number of compute tiles</p>
+<p><dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>Number of compute tiles </p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="c function">
+<dt id="c.optimsoc_get_ctrank">
+<span class="target" id="group__system_1gaffde74b2f3c83db636089a1180376513"></span>int <code class="sig-name descname">optimsoc_get_ctrank</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#c.optimsoc_get_ctrank" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Generate rank of this compute tile in all compute tiles</p>
+<p>This gives the rank in the set of compute tiles. For example in a system where a compute tile is at position 0 and one at position 3, they will get this output tile 0 -&gt; ctrank 0 tile 3 -&gt; ctrank 1</p>
+<p><dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>rank of this tile </p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="c function">
+<dt id="c.optimsoc_get_tilerank">
+<span class="target" id="group__system_1gab3b8932aed5860c062a0544d3c6805e8"></span>int <code class="sig-name descname">optimsoc_get_tilerank</code><span class="sig-paren">(</span>unsigned int <em>tile</em><span class="sig-paren">)</span><a class="headerlink" href="#c.optimsoc_get_tilerank" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Generate rank of given compute tile in all compute tiles</p>
+<p>This gives the rank in the set of compute tiles. For example in a system where a compute tile is at position 0 and one at position 3, they will get this output tile 0 -&gt; ctrank 0 tile 3 -&gt; ctrank 1</p>
+<p><dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>rank of this tile </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">tile</span></code>: Tile to look up </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="c function">
+<dt id="c.optimsoc_get_ranktile">
+<span class="target" id="group__system_1ga2de564f8f7bf83f5d3f7ca7bb1a36ed9"></span>int <code class="sig-name descname">optimsoc_get_ranktile</code><span class="sig-paren">(</span>unsigned int <em>rank</em><span class="sig-paren">)</span><a class="headerlink" href="#c.optimsoc_get_ranktile" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the tile that has the given rank</p>
+<p>This is the reverse of optimsoc_tilerank and generates the tile identifier for the given rank.</p>
+<p><dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">rank</span></code>: The rank to lookup </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="c function">
+<dt id="c.optimsoc_get_relcoreid">
+<span class="target" id="group__system_1ga92c66c9f781e38f9213b3433cf841402"></span>unsigned int <code class="sig-name descname">optimsoc_get_relcoreid</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#c.optimsoc_get_relcoreid" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the core id, relative in this tile</p>
+<p><dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>relative core identifier </p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="c function">
+<dt id="c.optimsoc_get_tilenumcores">
+<span class="target" id="group__system_1ga8a58e7704fc27880e243e6729a847154"></span>unsigned int <code class="sig-name descname">optimsoc_get_tilenumcores</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#c.optimsoc_get_tilenumcores" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the number of cores in this tile</p>
+<p><dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>Number of cores in this tile </p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="c function">
+<dt id="c.optimsoc_get_abscoreid">
+<span class="target" id="group__system_1ga26e1c34f73e782c98db299800c5a06af"></span>unsigned int <code class="sig-name descname">optimsoc_get_abscoreid</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#c.optimsoc_get_abscoreid" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the absolute core id of this core</p>
+<p>The absolute core id in the whole system is started from the first compute tile, core 0 and counted up. This may be useful in shared memory systems.</p>
+<p><dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>Absolute core id </p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="c function">
+<dt id="c.optimsoc_get_mainmem_size">
+<span class="target" id="group__system_1gaec18b59943235f34398d9a3138b06b20"></span>uint32_t <code class="sig-name descname">optimsoc_get_mainmem_size</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#c.optimsoc_get_mainmem_size" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the size of global memory (if any)</p>
+<p>Return the size of globally accessible memory. This memory is not directly accessed, but can only be accessed with DMA transfers. If the system has no global memory, return 0.</p>
+<p><dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>Size of memory (or 0, if no memory) </p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="c function">
+<dt id="c.optimsoc_get_mainmem_tile">
+<span class="target" id="group__system_1ga08929ffe9e78605bf091468d12b9e6c8"></span>uint32_t <code class="sig-name descname">optimsoc_get_mainmem_tile</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#c.optimsoc_get_mainmem_tile" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the tile ID of the global memory</p>
+<p>If the system has global memory (optimsoc_get_mainmem_size() &gt; 0), this function returns the tile identifier, where the memory is installed.</p>
+<p><dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>Main memory tile identifier </p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="c function">
+<dt id="c.optimsoc_get_localmem_size">
+<span class="target" id="group__system_1ga70daedefbcc704a7dd87080753bbaf8b"></span>uint32_t <code class="sig-name descname">optimsoc_get_localmem_size</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#c.optimsoc_get_localmem_size" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get size of local memory</p>
+<p>Get the size of memory available (and addressed) in this tile.</p>
+<p><dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>Size of local memory </p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+<dl class="c struct">
+<dt>
+<span class="target" id="structoptimsoc__conf"></span><em class="property">struct </em><code class="sig-name descname">optimsoc_conf</code><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+</div>
+</div>
+
+
+  <!-- footer -->
+  <hr>
+  <footer class="optimsoc-footer">
+    <p>OpTiMSoC &copy; 2012-2020 OpTiMSoC Maintainers &middot; Imprint</p>
+  </footer>
+
+  <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</body>
+</html>

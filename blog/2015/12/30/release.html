@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>2015.1 Release and Back to Unified Tree</title>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <!-- external CSS -->
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- our own CSS (must be include after bootstrap.css!) -->
+  <link rel="stylesheet" href="/css/optimsoc.css"/>
+
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+    <script src="/js/html5shiv.js"></script>
+    <script src="/js/respond.min.js"></script>
+  <![endif]-->
+
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/feed.xml" />
+
+  <!-- Google Web Fonts -->
+  <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,400italic,600,700,900" rel="stylesheet" type="text/css">
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro:400,500,600,700" rel="stylesheet" type="text/css">
+  <link href="//fonts.googleapis.com/css?family=Fredericka+the+Great" rel="stylesheet" type="text/css">
+</head>
+<body  data-offset='50' data-spy="scroll" data-target="">
+  <!-- top navigation bar -->
+  <nav class="navbar navbar-fixed-top optimsoc-nav" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/index.html" alt="OpTiMSoC"><span class="wordmark">OpTiMSoC</span></a>
+      </div>
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          <li><a href="/download.html">Download</a></li>
+          <li><a href="/docs/index.html">Documentation</a></li>
+          <li><a href="/getinvolved.html">Get involved</a></li>
+          <li><a href="/about.html">About</a></li>
+          <li><a href="/blog">Blog</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container" id="maincontent">
+  
+
+  
+<h1>2015.1 Release and Back to Unified Tree</h1>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-10">
+      <p>Good news first: We have a put out a regular release and we promise to
+do this more often. Until now there was not much sense to make
+releases, because everything was in a flow and there was not even an
+installation package. But this has changed, from now on regular
+releases can be found on
+<a href="https://github.com/optimsoc/sources/releases">github</a>. The release
+numbers are numbered throughout the year (2015.1 on December 30 will
+hopefully not happen again..).</p>
+
+<p>We have also accordingly updated the <a href="/download.html">download
+instruction</a>, pretty simple now, right?</p>
+
+<p>Now to the kind of “bad” news: We are moving back from Google repo to
+a unified source tree, plus extra repositories for demo apps, FPGA
+target code, etc. It simply turned out that for people new to git, the
+usage of repo is too challenging and time-consuming. Hence, you can
+now find the unified source tree
+<a href="https://github.com/optimsoc/sources">github</a>. We have brought in all
+changes from the distributed repos again.</p>
+
+<p>But to turn it into good news again, you can install from sources with
+one simple installer script (a better one to come in 2016):</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/optimsoc/sources optimsoc-sources
+./optimsoc-sources/tools/install.py -d /opt/optimsoc/current
+</code></pre></div></div>
+
+<p>We are looking forward to a more active 2016 and wish you all a Happy
+New Year!</p>
+
+
+    </div>
+    <div class="col-md-2 optimsoc-blog-meta">
+      <p>by Stefan Wallentowitz <br/>on 30 December 2015</p>
+      <img class="img-rounded" src="/img/people/stefan.jpg"/>
+      <hr/>
+      <b>Share this post at:</b>
+      <ul class="share-buttons">
+	<li><a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fwww.optimsoc.org&t=" title="Share on Facebook" target="_blank" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(document.URL) + '&t=' + encodeURIComponent(document.URL)); return false;"><img src="/img/flat_web_icon_set/color/Facebook.png"></a></li>
+	<li><a href="https://twitter.com/intent/tweet?source=http%3A%2F%2Fwww.optimsoc.org&text=:%20http%3A%2F%2Fwww.optimsoc.org" target="_blank" title="Tweet" onclick="window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(document.title) + ':%20'  + encodeURIComponent(document.URL)); return false;"><img src="/img/flat_web_icon_set/color/Twitter.png"></a></li>
+	<li><a href="https://plus.google.com/share?url=http%3A%2F%2Fwww.optimsoc.org" target="_blank" title="Share on Google+" onclick="window.open('https://plus.google.com/share?url=' + encodeURIComponent(document.URL)); return false;"><img src="/img/flat_web_icon_set/color/Google+.png"></a></li>
+	<li><a href="http://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Fwww.optimsoc.org&title=&summary=&source=http%3A%2F%2Fwww.optimsoc.org" target="_blank" title="Share on LinkedIn" onclick="window.open('http://www.linkedin.com/shareArticle?mini=true&url=' + encodeURIComponent(document.URL) + '&title=' +  encodeURIComponent(document.title)); return false;"><img src="/img/flat_web_icon_set/color/LinkedIn.png"></a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+</div>
+
+
+  <!-- footer -->
+  <hr>
+  <footer class="optimsoc-footer">
+    <p>OpTiMSoC &copy; 2012-2020 OpTiMSoC Maintainers &middot; Imprint</p>
+  </footer>
+
+  <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</body>
+</html>

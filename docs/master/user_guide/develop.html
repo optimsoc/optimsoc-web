@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Develop OpTiMSoC</title>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <!-- external CSS -->
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- our own CSS (must be include after bootstrap.css!) -->
+  <link rel="stylesheet" href="/css/optimsoc.css"/>
+
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+    <script src="/js/html5shiv.js"></script>
+    <script src="/js/respond.min.js"></script>
+  <![endif]-->
+
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/feed.xml" />
+
+  <!-- Google Web Fonts -->
+  <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,400italic,600,700,900" rel="stylesheet" type="text/css">
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro:400,500,600,700" rel="stylesheet" type="text/css">
+  <link href="//fonts.googleapis.com/css?family=Fredericka+the+Great" rel="stylesheet" type="text/css">
+</head>
+<body  data-offset='50' data-spy="scroll" data-target="">
+  <!-- top navigation bar -->
+  <nav class="navbar navbar-fixed-top optimsoc-nav" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/index.html" alt="OpTiMSoC"><span class="wordmark">OpTiMSoC</span></a>
+      </div>
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          <li><a href="/download.html">Download</a></li>
+          <li><a href="/docs/index.html">Documentation</a></li>
+          <li><a href="/getinvolved.html">Get involved</a></li>
+          <li><a href="/about.html">About</a></li>
+          <li><a href="/blog">Blog</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container" id="maincontent">
+  
+
+  <div class="optimsoc-section-header">
+  
+  <h1>User Guide</h1>
+  
+</div>
+
+  
+
+<hr/>
+
+<div class="col-md-3">
+  <div class="optimsoc-doc-mainnav affix" data-spy="affix" data-offset-top="50">
+    <div style="padding-bottom:10px" class="nav">
+      version master (<a href="/docs/index.html#document-archive">other versions</a>)
+
+      
+      
+        <p class="caption"><span class="caption-text">Documentation Parts</span></p>
+<ul class="nav current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">User Guide</a><ul class="nav current">
+<li class="toctree-l2"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html">Installation &amp; Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials.html">Tutorials</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Develop OpTiMSoC</a><ul class="nav">
+<li class="toctree-l3"><a class="reference internal" href="#building-hardware">Building Hardware</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#linting-hardware">Linting Hardware</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#choosing-an-editor-ide">Choosing an Editor/IDE</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="changes.html">Document Changes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../refman/index.html">Reference Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/index.html">API Documentation</a></li>
+</ul>
+
+      
+    </div>
+  </div>
+</div>
+
+<div class="col-md-9 optimsoc-doc-body">
+
+ <div class="section" id="develop-optimsoc">
+<h1>Develop OpTiMSoC<a class="headerlink" href="#develop-optimsoc" title="Permalink to this headline">¶</a></h1>
+<p>After you have worked through some, or even all, of the tutorials in the previous chapter, you’re now ready to bring your own ideas to live using OpTiMSoC.
+This chapter gives you a quick introduction on how to setup your development environment, like editors and the revision control system, and how to contribute back to the OpTiMSoC project.</p>
+<p>We assumed in this whole tutorial that you are working on Linux.
+While it is certainly possible to use Windows or macOS for development, we cannot provide help for those systems and you’re on your own.</p>
+<div class="section" id="building-hardware">
+<h2>Building Hardware<a class="headerlink" href="#building-hardware" title="Permalink to this headline">¶</a></h2>
+<p>When building software, engineers have gotten used to tools like <code class="docutils literal notranslate"><span class="pre">make</span></code>, CMake and similar build systems.
+Such build tools ensure that all dependencies of a software project are met, and then start the various tools (such as the compiler, linker, etc.) to produce the output files, e.g. the program binary.
+In the hardware world, no standard tool for this job exists.
+A new, but very promising contestent in this sector is is <em>FuseSoC</em>.</p>
+<p>FuseSoC allows developers to write <em>core files</em>: short declarative files in an INI-like format that describe which components are required to build a hardware design.
+When you look around in <code class="docutils literal notranslate"><span class="pre">$OPTIMSOC/soc/hw</span></code> you’ll find such core files for all components that make up the SoC.
+But the core files not only describe the modules inside the SoC design, they are also used to describe the toplevel SoC.</p>
+<p>For example, let’s have a look at the file path{$OPTIMSOC_SRC/examples/sim/compute_tile/compute_tile_sim.core} inside the OpTiMSoC source tree (it’s not installed!).
+In there you find all dependencies that are needed to build the system with only one compute tile.
+You also find the toplevel files that are used to simulate the system in Verilator and in XSIM (the Vivado built-in simulator).</p>
+<p>The great benefit of using FuseSoC is that you can now simply compile and run the system with one simple command.</p>
+<p>Before we start, two notes:</p>
+<ul class="simple">
+<li><p>We set an environment variable (<code class="docutils literal notranslate"><span class="pre">$FUSESOC_CORES</span></code>) during the installation that makes FuseSoC find all OpTiMSoC hardware modules. You do not need to add a special configuration for this. However, the examples inside <code class="docutils literal notranslate"><span class="pre">$OPTIMSOC_SRC</span></code> are not part of this search path.</p></li>
+<li><p>You can call <code class="docutils literal notranslate"><span class="pre">fusesoc</span></code> from any directory. We recommend <strong>not</strong> calling FuseSoC from inside your source directory. (This allows you to just delete the build folder and retain a clean source folder.)</p></li>
+</ul>
+<p>So let’s look at a couple of examples how to build a SoC hardware with fusesoc.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>All the examples require an OpTiMSoC source tree to be available at <code class="docutils literal notranslate"><span class="pre">$OPTIMSOC_SRC</span></code>.</p>
+</div>
+<ul>
+<li><p>Build and run a Verilator-based simulation of a single compute tile.</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> some/directory
+fusesoc --cores-root <span class="nv">$OPTIMSOC_SRC</span>/examples sim optimsoc:examples:compute_tile_sim
+</pre></div>
+</div>
+</li>
+<li><p>Only build a Verilator simulation of a single compute tile</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>fusesoc --cores-root <span class="nv">$OPTIMSOC_SRC</span>/examples sim --build-only optimsoc:examples:compute_tile_sim
+</pre></div>
+</div>
+</li>
+<li><p>Set the parameter <code class="docutils literal notranslate"><span class="pre">NUM_CORES</span></code> to 2 to create a system with two CPU cores inside the compute tile.
+You can have a look inside the top-level source file path{$OPTIMSOC_SRC/examples/sim/compute_tile/tb_compute_tile.sv} for other parameters that are available.</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>fusesoc --cores-root <span class="nv">$OPTIMSOC_SRC</span>/examples sim --build-only optimsoc:examples:compute_tile_sim --NUM_CORES <span class="m">2</span>
+</pre></div>
+</div>
+</li>
+<li><p>Synthesize a 2x2 system with four compute tiles for the Nexys 4 DDR board using Xilinx Vivado.
+This step requires Vivado to be installed and working, and a lot of time (approx. 30 minutes, depending on your machine).</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>fusesoc --cores-root <span class="nv">$OPTIMSOC_SRC</span>/examples build optimsoc:examples:system_2x2_cccc_nexys4ddr
+</pre></div>
+</div>
+</li>
+<li><p>Now flash the bitstream that the previous step generated to the FPGA.</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>fusesoc --cores-root <span class="nv">$OPTIMSOC_SRC</span>/examples pgm optimsoc:examples:system_2x2_cccc_nexys4ddr
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="linting-hardware">
+<h2>Linting Hardware<a class="headerlink" href="#linting-hardware" title="Permalink to this headline">¶</a></h2>
+<p>When writing hardware code it’s easy to make small mistakes which result in a non-working design.
+A great help to write working code are static analysis or lint tools.
+Such tools go through the Verilog code and check if certain rules of “good programming” are obeyed.</p>
+<p>The OpTiMSoC source code supports two lint tools, the commercial Synopsys Spyglass tools, and the open source Verilator tool.</p>
+<div class="section" id="linting-with-spyglass">
+<h3>Linting with Spyglass<a class="headerlink" href="#linting-with-spyglass" title="Permalink to this headline">¶</a></h3>
+<p>Synopsys Spyglass offers an extensive set of lint rules.
+To run Spyglass, the fusesoc core file of the design must be prepared for it.
+We did that in all our example systems; just look at them to learn about the required settings.</p>
+<p>To run Spyglass use <code class="docutils literal notranslate"><span class="pre">fusesoc</span> <span class="pre">run</span></code> with the <code class="docutils literal notranslate"><span class="pre">--target=lint</span></code> argument and specify that you want to use Spyglass by adding the option <code class="docutils literal notranslate"><span class="pre">--tool=spyglass</span></code> to it.
+The full command line to lint a simple <code class="docutils literal notranslate"><span class="pre">compute_tile</span></code> system for the Nexys 4 DDR board looks like this.</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="c1"># --no-export is useful for development and waiving messages.</span>
+<span class="c1"># Do not use it when running lint in CI environments.</span>
+fusesoc --cores-root <span class="nv">$OPTIMSOC_SRC</span>/examples run --target<span class="o">=</span>lint --tool<span class="o">=</span>spyglass --no-export optimsoc:examples:compute_tile_nexys4ddr
+</pre></div>
+</div>
+<p>At the end of the process Spyglass writes a summary of its findings.
+It could look like this:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>---------------------------------------------------------------------------------------------------
+   Goal Violation Summary:
+       Waived   Messages:                      2 Errors,      0 Warnings,      0 Infos
+       Reported Messages:         0 Fatals,  153 Errors,    521 Warnings,     10 Infos
+---------------------------------------------------------------------------------------------------
+</pre></div>
+</div>
+<p>If any warnings, errors, or fatal errors are found, we consider the linting “failed” and fusesoc returns a non-zero exit code.
+Hence you need to fix all those messages.
+You have two options for that: either fix the source code, or tell Spyglass that this message is bogous by “waiving” the message.</p>
+<p>To make things easier, Spyglass offers a nice GUI.
+Open it in the following way:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> build/optimsoc_examples_compute_tile_nexys4ddr_0/lint-spyglass
+make run-gui
+</pre></div>
+</div>
+<p>You can then graphically view the violations and waive them as needed.
+Be aware that waivers are by default saved into a new file within the build directory.
+To be permanent, you need to copy them from there to the <code class="docutils literal notranslate"><span class="pre">spyglass-waiver.awl</span></code> file in the OpTiMSoC source directory.</p>
+</div>
+</div>
+<div class="section" id="choosing-an-editor-ide">
+<h2>Choosing an Editor/IDE<a class="headerlink" href="#choosing-an-editor-ide" title="Permalink to this headline">¶</a></h2>
+<p>When editing code, an editor or IDE usually comes handy.
+While there is clearly no “best” or even “recommended” editor or IDE, we will present two or our choices here, together with some settings that make working on OpTiMSoC a pleasant experience.
+Feel free to adapt these recommendations to your personal preferences!</p>
+<div class="section" id="eclipse">
+<h3>Eclipse<a class="headerlink" href="#eclipse" title="Permalink to this headline">¶</a></h3>
+<p>Eclipse gives you a nice and integrated development across the different parts of the code base by using a couple of plugins.
+But be aware, Eclipse likes memory and is not exactly “lightweight”, but if you have enough memory available (in the area of 500~MB for Eclipse) it can be a very powerful and productive choice.</p>
+<div class="section" id="installation-and-basic-setup">
+<h4>Installation and Basic Setup<a class="headerlink" href="#installation-and-basic-setup" title="Permalink to this headline">¶</a></h4>
+<p>First of all, get Eclipse itself. Go to <a class="reference external" href="http://www.eclipse.org/downloads/">http://www.eclipse.org/downloads/</a> and get the “Eclipse IDE for C/C++ Developers” package or install it from your distribution’s package manager.
+All the following steps were tested with Eclipse Kepler (4.3).</p>
+<p>Now start Eclipse and first go to <em>Help - Check for Updates</em>.
+Install all available updates.</p>
+<p>For Verilog syntax highlighting we use a plugin called “VEditor”.
+Go to “Help - Install New Software…” In the field “Work with” enter the URL of the installation site: <a class="reference external" href="http://veditor.sourceforge.net/update">http://veditor.sourceforge.net/update</a>.
+Now press the return key and after a couple of seconds, the entry “VEditor Plugin” appears below.
+Select it and click on the “Next” button until the installation is finished.
+To complete the process you need to restart Eclipse.</p>
+<p>Every project has different preferences regarding the styling of the code.
+Therefore every editor can be configured to some extend.
+First, we’ll set the general settings for Eclipse, and then for Verilog and C.</p>
+<p>Start by clicking on <em>Window - Preferences</em> inside Eclipse.
+There, choose <em>Editors - Text Editors</em>.
+You should set the following settings:</p>
+<ul class="simple">
+<li><p>Check <em>Insert spaces for tabs</em></p></li>
+<li><p>Check <em>Show print margin</em></p></li>
+<li><p>Set the <em>Print margin column</em> to 80</p></li>
+<li><p>Check <em>Show line numbers</em></p></li>
+</ul>
+<p>Just leave the other settings as they are, or change them to your liking.</p>
+<p>For the Verilog settings, go to <em>Verilog/VHDL Editor - Code Style</em>.
+There, select <em>Space as Indent Character</em> and set the <em>Indent Size</em> to 3.</p>
+<p>For the C style used in liboptimsochost and other libraries we have prepared a settings file.
+Go to <em>C/C++ - Code Style - Formatter</em> and click on <em>Import…</em>, choose the settings file <code class="docutils literal notranslate"><span class="pre">doc/resources/optimsoc-eclipse-cdt-codestyle.xml</span></code> inside the OpTiMSoC source tree.
+Now you should have a new profile “OpTiMSoC” in the list of profiles.
+Choose this one for all work on the C code.</p>
+</div>
+<div class="section" id="creating-the-optimsoc-hdl-project">
+<h4>Creating the OpTiMSoC HDL Project<a class="headerlink" href="#creating-the-optimsoc-hdl-project" title="Permalink to this headline">¶</a></h4>
+<p>Now that all the basic settings are in place, we can create the projects inside Eclipse.
+First, we will create a project for editing the HDL (Verilog) code.</p>
+<p>In the <em>Project Explorer</em> (on the left side), right click and select <em>New - Project…</em>.
+A new dialog window shows.
+In this window, select <em>Verilog/VHDL - Verilog/VHDL project</em> and click <em>Next</em>.
+Now enter a project name, e.g. “OpTiMSoC”.
+Uncheck the option <em>Use default location</em> and click on <em>Browse</em> to choose your OpTiMSoC source directory (the location where you cloned the Git repository to).</p>
+<p>The OpTiMSoC source tree not only contains RTL code, but also the necessary software components like liboptimsochost and the OpTiMSoC GUI.
+This code is better edited in a separate project and should be excluded from the project you just created.
+To do that, choose <em>Project - Properties</em> from the main menu.
+Navigate to <em>Resource - Resource Filters</em> and click on the <em>Add…</em> button.
+There, choose the following settings:</p>
+<ul class="simple">
+<li><p>Choose <em>Exclude all</em> in the group <em>Filter type</em></p></li>
+<li><p>Choose <em>Folders</em> in the group <em>Applies to</em></p></li>
+<li><p>Check <em>All children (recursive)</em></p></li>
+<li><p>In the group <em>File and Folder Attributes</em> select <em>Project Relative Path</em> <em>matches</em> <code class="docutils literal notranslate"><span class="pre">src/sw</span></code>.</p></li>
+</ul>
+<p>Now click on <em>OK</em> to finish editing the filter.</p>
+<p>Then repeat the steps above to create a new resource filter but as path use <code class="docutils literal notranslate"><span class="pre">src/sysc</span></code> this time.</p>
+<p>After you’re done with the second filter, click <em>OK</em> again to close the dialog.</p>
+</div>
+<div class="section" id="creating-a-c-project">
+<h4>Creating a C Project<a class="headerlink" href="#creating-a-c-project" title="Permalink to this headline">¶</a></h4>
+<p>Eclipse is also a great choice for editing C code.
+As an example, we’ll setup Eclipse for the OpTiMSoC baremetal library, <code class="docutils literal notranslate"><span class="pre">libbaremetal</span></code>.</p>
+<p>In the main menu, click on <em>File - New - Project</em>.
+A dialog window is shown. There, nagivate to <em>C/C++ - Makefile Project with Existing Code</em> and click on the <em>Next</em> button.
+Type <code class="docutils literal notranslate"><span class="pre">libbaremetal</span></code> as <em>Project Name</em> and click on <em>Browse…</em> to select the source code location of the library.
+It should be inside your OpTiMSoC code in the folder <code class="docutils literal notranslate"><span class="pre">src/soc/sw/baremetal-libs</span></code>.
+Uncheck <em>C++</em> in the <em>Languages</em> group and select <em>GNU Autotools Toolchain</em> in the box below.
+Now click on <em>Finish</em> to close the dialog.</p>
+<p>Before you start coding, double-check if the code style settings are correct.
+Select the newly created liboptimsochost project from the <em>Project Navigator</em> on the left, right-click and choose <em>Properties</em>.
+Nagivate to <em>C/C++ General - Formatter</em> and check if <code class="docutils literal notranslate"><span class="pre">OpTiMSoC</span></code> is selected as style.
+If not, click on <em>Enable project specific settings</em> and choose <code class="docutils literal notranslate"><span class="pre">OpTiMSoC</span></code> from the list (if there is no such entry, go back to the basic Eclipse setup and import the style file properly).</p>
+</div>
+</div>
+<div class="section" id="emacs">
+<h3>Emacs<a class="headerlink" href="#emacs" title="Permalink to this headline">¶</a></h3>
+<div class="admonition-todo admonition" id="id1">
+<p class="admonition-title">Todo</p>
+<p>This section will be added shortly.</p>
+</div>
+</div>
+<div class="section" id="verilog-mode">
+<h3>Verilog-mode<a class="headerlink" href="#verilog-mode" title="Permalink to this headline">¶</a></h3>
+<p>Sometimes, writing Verilog means writing the same information twice in
+different places of a source file, one example being the port of a module. To
+save you as developer some typing time, a tool called <em>Verilog-mode</em> has been
+invented. It allows you to specify comments inside your code where information
+should be placed, and this information is then calculated and inserted
+automatically. For more information about what it is and how it works, see
+<a class="reference external" href="http://www.veripool.org/wiki/verilog-mode/">http://www.veripool.org/wiki/verilog-mode/</a>.</p>
+<p>Verilog-mode is used extensively throughout the project. Even though using it
+is not required (the sources can be edited and compiled without it just fine),
+it will save you a lot of time during development and is highly recommended.</p>
+<p>Installation is rather easy, as it comes bundled with GNU Emacs. Simply install
+Emacs as described above and you’re ready to go. To support our coding style,
+you will need to adjust the Emacs configuration (even though it is the Emacs
+configuration, it also configures Verilog-mode).</p>
+<p>Open the file <code class="docutils literal notranslate"><span class="pre">~/.emacs</span></code> and add the following lines at the end:</p>
+<div class="highlight-lisp notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;verilog-mode-hook</span> <span class="o">&#39;</span><span class="p">(</span><span class="k">lambda</span> <span class="p">()</span>
+  <span class="c1">;; Don&#39;t auto-insert spaces after &quot;;&quot;</span>
+  <span class="p">(</span><span class="k">setq</span> <span class="nv">verilog-auto-newline</span> <span class="no">nil</span><span class="p">)</span>
+  <span class="c1">;; Don&#39;t indent with tabs!</span>
+  <span class="p">(</span><span class="k">setq</span> <span class="nv">indent-tabs-mode</span> <span class="no">nil</span><span class="p">)))</span>
+<span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;verilog-mode-hook</span> <span class="o">&#39;</span><span class="p">(</span><span class="k">lambda</span> <span class="p">()</span>
+  <span class="c1">;; Remove any tabs from file when saving</span>
+  <span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;write-file-functions</span> <span class="p">(</span><span class="k">lambda</span><span class="p">()</span>
+    <span class="p">(</span><span class="nv">untabify</span> <span class="p">(</span><span class="nv">point-min</span><span class="p">)</span> <span class="p">(</span><span class="nv">point-max</span><span class="p">))</span>
+    <span class="no">nil</span><span class="p">))))</span>
+</pre></div>
+</div>
+<p>If you also use Emacs as your code editor, Verilog-mode is already
+enabled and you can read through the <cite>documentation
+&lt;http://www.veripool.org/wiki/verilog-mode/Documentation&gt;</cite> to learn
+how to use it.</p>
+<div class="section" id="verilog-mode-in-eclipse">
+<h4>Verilog-mode in Eclipse<a class="headerlink" href="#verilog-mode-in-eclipse" title="Permalink to this headline">¶</a></h4>
+<p>Even if you use Eclipse, you do not need to switch editors to get the
+benefits of Verilog-mode; you can run Verilog-mode in batch mode to
+resolve all the AUTO comments. This will require some manual setup, but
+afterwards it can be used quite easily.</p>
+<p>First, you need to figure out where your <code class="docutils literal notranslate"><span class="pre">verilog-mode.el</span></code> or
+<code class="docutils literal notranslate"><span class="pre">verilog-mode.elc</span></code> file is located. If you want to use the
+Verilog-mode which is part of your Emacs installation, it is probably located
+somewhere in <code class="docutils literal notranslate"><span class="pre">/usr/share/emacs</span></code>, e.g.
+<code class="docutils literal notranslate"><span class="pre">/usr/share/emacs/24.3/lisp/progmodes/verilog-mode.elc</span></code> on Ubuntu 14.04.
+You can run</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$&gt; find /usr/share/emacs -name <span class="s1">&#39;verilog-mode.el*&#39;</span>
+</pre></div>
+</div>
+<p>to search for it. If you found it, write down the path as we’ll need it later.
+If you installed Verilog-mode from source, just note the path where you put
+your <code class="docutils literal notranslate"><span class="pre">verilog-mode.el</span></code> file (e.g. somewhere in your home directory).</p>
+<p>In Eclipse, we will setup Verilog-mode as “Builder”. To do so, click in the
+main menu on <em>Project - Properties</em> and nagivate to
+<em>Builders</em>. There, click on the <em>New…</em> button and select
+<em>Program</em> as configuration type in the shown dialog. After pressing
+<em>OK</em>, enter “verilog-mode” into the field <em>Name</em>. In the <em>Main</em>
+tab, write <code class="docutils literal notranslate"><span class="pre">/usr/bin/emacs</span></code> into the field <em>Location</em>. Leave the field
+<em>Working Directory</em> empty and enter the following string into the field
+<em>Arguments</em>:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>--batch --no-site-file -u <span class="si">${</span><span class="nv">env_var</span><span class="p">:</span><span class="nv">USER</span><span class="si">}</span>
+-l /usr/share/emacs/24.3/lisp/progmodes/verilog-mode.elc
+<span class="s2">&quot;</span><span class="si">${</span><span class="nv">selected_resource_loc</span><span class="si">}</span><span class="s2">&quot;</span> -f verilog-auto -f save-buffer
+</pre></div>
+</div>
+<p>Replace the path to the <code class="docutils literal notranslate"><span class="pre">verilog-mode.el</span></code> or <code class="docutils literal notranslate"><span class="pre">verilog-mode.elc</span></code>
+file with your own path you found out above.</p>
+<p>Now, switch to the tab <em>Refresh</em>, check the box <em>Refresh resources
+upon completion</em> and select <em>The selected resource</em>. Since we don’t need
+to change anything in the last two tabs, you can now close the dialog by
+clicking on the <em>OK</em> button and on <em>OK</em> again to close the project
+properties dialog.</p>
+<p>To test if it all works, navigate to
+<code class="docutils literal notranslate"><span class="pre">src/rtl/compute_tile_dm/verilog/compute_tile_dm.v</span></code> and change the word
+“Outputs” in the comment right at the beginning of the file to something
+else. Then press CTRL-B (or go to <em>Project - Build All</em>) and
+after a couple of seconds, you should see the word “Outputs” restored and
+some output messages in the <em>Console</em> view at the bottom. Also check if
+there were no tabs inserted (e.g. at the instantiation of <code class="docutils literal notranslate"><span class="pre">u_core0</span></code>). If
+there are tabs then you probably did not setup your <code class="docutils literal notranslate"><span class="pre">~/.emacs</span></code> file
+correctly.</p>
+</div>
+</div>
+</div>
+</div>
+
+
+</div>
+</div>
+
+
+  <!-- footer -->
+  <hr>
+  <footer class="optimsoc-footer">
+    <p>OpTiMSoC &copy; 2012-2020 OpTiMSoC Maintainers &middot; Imprint</p>
+  </footer>
+
+  <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</body>
+</html>

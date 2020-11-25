@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Thread Management</title>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <!-- external CSS -->
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- our own CSS (must be include after bootstrap.css!) -->
+  <link rel="stylesheet" href="/css/optimsoc.css"/>
+
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+    <script src="/js/html5shiv.js"></script>
+    <script src="/js/respond.min.js"></script>
+  <![endif]-->
+
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/feed.xml" />
+
+  <!-- Google Web Fonts -->
+  <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,400italic,600,700,900" rel="stylesheet" type="text/css">
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro:400,500,600,700" rel="stylesheet" type="text/css">
+  <link href="//fonts.googleapis.com/css?family=Fredericka+the+Great" rel="stylesheet" type="text/css">
+</head>
+<body  data-offset='50' data-spy="scroll" data-target="">
+  <!-- top navigation bar -->
+  <nav class="navbar navbar-fixed-top optimsoc-nav" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/index.html" alt="OpTiMSoC"><span class="wordmark">OpTiMSoC</span></a>
+      </div>
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          <li><a href="/download.html">Download</a></li>
+          <li><a href="/docs/index.html">Documentation</a></li>
+          <li><a href="/getinvolved.html">Get involved</a></li>
+          <li><a href="/about.html">About</a></li>
+          <li><a href="/blog">Blog</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container" id="maincontent">
+  
+
+  <div class="optimsoc-section-header">
+  
+  <h1>API Documentation</h1>
+  
+</div>
+
+  
+
+<hr/>
+
+<div class="col-md-3">
+  <div class="optimsoc-doc-mainnav affix" data-spy="affix" data-offset-top="50">
+    <div style="padding-bottom:10px" class="nav">
+      version 2018.1 (<a href="/docs/index.html#document-archive">other versions</a>)
+
+      
+      
+        <p class="caption"><span class="caption-text">Documentation Parts</span></p>
+<ul class="nav current">
+<li class="toctree-l1"><a class="reference internal" href="../../../user_guide/index.html">User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../refman/index.html">Reference Manual</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">API Documentation</a><ul class="nav current">
+<li class="toctree-l2"><a class="reference internal" href="group__utility.html">Utility functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group__system.html">OpTiMSoC system functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group__tracing.html">OpTiMSoC tracing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group__libbaremetal.html">Baremetal library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group__libmp.html">Message passing library</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="group__libruntime.html">Runtime library</a><ul class="nav current">
+<li class="toctree-l3"><a class="reference internal" href="group__initconfig.html">Initialization and Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="group__paging.html">Page Handling</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Thread Management</a></li>
+<li class="toctree-l3"><a class="reference internal" href="group__syscall.html">Syscall Handling</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+  </div>
+</div>
+
+<div class="col-md-9 optimsoc-doc-body">
+
+ <div class="section" id="thread-management">
+<h1>Thread Management<a class="headerlink" href="#thread-management" title="Permalink to this headline">¶</a></h1>
+<dl class="group">
+<dt>
+<span class="target" id="group__thread"></span><em>group</em> <code class="sig-name descname">thread</code></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Defines</p>
+<dl class="c macro">
+<dt id="c.OPTIMSOC_THREAD_FLAG_IDLE_THREAD">
+<span class="target" id="group__thread_1gabf5369239eff6e98bbe6814c1e41e2ac"></span><code class="sig-name descname">OPTIMSOC_THREAD_FLAG_IDLE_THREAD</code><a class="headerlink" href="#c.OPTIMSOC_THREAD_FLAG_IDLE_THREAD" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt id="c.OPTIMSOC_THREAD_FLAG_PIN">
+<span class="target" id="group__thread_1gac4ffdd7e7a0c79011cd4770d165f95bd"></span><code class="sig-name descname">OPTIMSOC_THREAD_FLAG_PIN</code><a class="headerlink" href="#c.OPTIMSOC_THREAD_FLAG_PIN" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt id="c.OPTIMSOC_THREAD_FLAG_CORE_MASK">
+<span class="target" id="group__thread_1gaa9fd0195df5102bd175a1587e33f2034"></span><code class="sig-name descname">OPTIMSOC_THREAD_FLAG_CORE_MASK</code><a class="headerlink" href="#c.OPTIMSOC_THREAD_FLAG_CORE_MASK" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt id="c.OPTIMSOC_THREAD_FLAG_FORCEID">
+<span class="target" id="group__thread_1ga8c548f4000720a4e65ef5a78ee4cb1e6"></span><code class="sig-name descname">OPTIMSOC_THREAD_FLAG_FORCEID</code><a class="headerlink" href="#c.OPTIMSOC_THREAD_FLAG_FORCEID" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt id="c.OPTIMSOC_THREAD_FLAG_KERNEL">
+<span class="target" id="group__thread_1gadf211d6b3abb152384686d464280895d"></span><code class="sig-name descname">OPTIMSOC_THREAD_FLAG_KERNEL</code><a class="headerlink" href="#c.OPTIMSOC_THREAD_FLAG_KERNEL" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt id="c.OPTIMSOC_THREAD_FLAG_CREATE_SUSPENDED">
+<span class="target" id="group__thread_1ga293f2652ebda980dbe016b24abebc238"></span><code class="sig-name descname">OPTIMSOC_THREAD_FLAG_CREATE_SUSPENDED</code><a class="headerlink" href="#c.OPTIMSOC_THREAD_FLAG_CREATE_SUSPENDED" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Typedefs</p>
+<dl class="c type">
+<dt id="c.optimsoc_thread_t">
+<span class="target" id="group__thread_1gac955b87b90004feab5adee013c589247"></span><em class="property">typedef </em><em class="property">struct</em> optimsoc_thread *<code class="sig-name descname">optimsoc_thread_t</code><a class="headerlink" href="#c.optimsoc_thread_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Thread identifier.</p>
+<p>The internals are not exposed. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Functions</p>
+<dl class="c function">
+<dt id="c.optimsoc_thread_attr_init">
+<span class="target" id="group__thread_1ga4881d862010172c19bc632a77ca67e82"></span>void <code class="sig-name descname">optimsoc_thread_attr_init</code><span class="sig-paren">(</span><em class="property">struct</em> <a class="reference internal" href="#c.optimsoc_thread_attr" title="optimsoc_thread_attr">optimsoc_thread_attr</a> *<em>attr</em><span class="sig-paren">)</span><a class="headerlink" href="#c.optimsoc_thread_attr_init" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c function">
+<dt id="c.optimsoc_thread_create">
+<span class="target" id="group__thread_1gada00b3e18e2ef512639d60baae8ddb58"></span>int <code class="sig-name descname">optimsoc_thread_create</code><span class="sig-paren">(</span><a class="reference internal" href="#c.optimsoc_thread_t" title="optimsoc_thread_t">optimsoc_thread_t</a> *<em>thread</em>, void (*<em>start</em>)<span class="sig-paren">(</span>void*<span class="sig-paren">)</span>, <em class="property">struct</em> <a class="reference internal" href="#c.optimsoc_thread_attr" title="optimsoc_thread_attr">optimsoc_thread_attr</a> *<em>attr</em>, <span class="sig-paren">)</span><a class="headerlink" href="#c.optimsoc_thread_create" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Create a new thread.</p>
+<p>The function allocates a thread data structure in the runtime system and stores the pointer to it at the given address. The function specified by start is called and the argument arg given to it. The function is automatically added to the ready queue. </p>
+</dd></dl>
+
+<dl class="c function">
+<dt id="c.optimsoc_thread_current">
+<span class="target" id="group__thread_1ga63f66ae5f03a2928155614a178da491e"></span><a class="reference internal" href="#c.optimsoc_thread_t" title="optimsoc_thread_t">optimsoc_thread_t</a> <code class="sig-name descname">optimsoc_thread_current</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#c.optimsoc_thread_current" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Identify the thread currently running. </p>
+</dd></dl>
+
+<dl class="c function">
+<dt id="c.optimsoc_thread_yield">
+<span class="target" id="group__thread_1ga41decbdefc92099daac9f4af5697b9f7"></span>void <code class="sig-name descname">optimsoc_thread_yield</code><span class="sig-paren">(</span><a class="reference internal" href="#c.optimsoc_thread_t" title="optimsoc_thread_t">optimsoc_thread_t</a> <em>thread</em><span class="sig-paren">)</span><a class="headerlink" href="#c.optimsoc_thread_yield" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Yield thread.</p>
+<p>The specified thread is put at the end of the schedule. If the thread is the current thread (what makes most sense), the thread yields its remaining quantum and is scheduled to be executed later again (e.g., when waiting for I/O). </p>
+</dd></dl>
+
+<dl class="c function">
+<dt id="c.optimsoc_thread_suspend">
+<span class="target" id="group__thread_1ga1cc4ecbb6c2b4e124307eb086177f063"></span>void <code class="sig-name descname">optimsoc_thread_suspend</code><span class="sig-paren">(</span><a class="reference internal" href="#c.optimsoc_thread_t" title="optimsoc_thread_t">optimsoc_thread_t</a> <em>thread</em><span class="sig-paren">)</span><a class="headerlink" href="#c.optimsoc_thread_suspend" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Suspend thread.</p>
+<p>The specified thread is suspended until it gets reactivated. </p>
+</dd></dl>
+
+<dl class="c function">
+<dt id="c.optimsoc_thread_exit">
+<span class="target" id="group__thread_1ga2707c59a29b9d37574fd1062a6da2697"></span>void <code class="sig-name descname">optimsoc_thread_exit</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#c.optimsoc_thread_exit" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Exit current thread’s execution. </p>
+</dd></dl>
+
+<dl class="c function">
+<dt id="c.optimsoc_thread_resume">
+<span class="target" id="group__thread_1gabc6740c704eb8178540358e56b75c133"></span>void <code class="sig-name descname">optimsoc_thread_resume</code><span class="sig-paren">(</span><a class="reference internal" href="#c.optimsoc_thread_t" title="optimsoc_thread_t">optimsoc_thread_t</a> <em>thread</em><span class="sig-paren">)</span><a class="headerlink" href="#c.optimsoc_thread_resume" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Resume a suspended thread. </p>
+</dd></dl>
+
+<dl class="c function">
+<dt id="c.optimsoc_thread_add">
+<span class="target" id="group__thread_1ga43cc5543de37bfb473298ffe4d66dc23"></span>void <code class="sig-name descname">optimsoc_thread_add</code><span class="sig-paren">(</span><a class="reference internal" href="#c.optimsoc_thread_t" title="optimsoc_thread_t">optimsoc_thread_t</a> <em>thread</em><span class="sig-paren">)</span><a class="headerlink" href="#c.optimsoc_thread_add" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Insert a thread in the system. </p>
+</dd></dl>
+
+<dl class="c function">
+<dt id="c.optimsoc_thread_remove">
+<span class="target" id="group__thread_1gab1004c51fecc98e020164cd9848f85f8"></span>void <code class="sig-name descname">optimsoc_thread_remove</code><span class="sig-paren">(</span><a class="reference internal" href="#c.optimsoc_thread_t" title="optimsoc_thread_t">optimsoc_thread_t</a> <em>thread</em><span class="sig-paren">)</span><a class="headerlink" href="#c.optimsoc_thread_remove" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Remove a thread from the system. </p>
+</dd></dl>
+
+<dl class="c function">
+<dt id="c.optimsoc_thread_dma_copy">
+<span class="target" id="group__thread_1ga68bd2cee8d93f0bbe8660a6c6d5cd0ec"></span><a class="reference internal" href="#c.optimsoc_thread_t" title="optimsoc_thread_t">optimsoc_thread_t</a> <code class="sig-name descname">optimsoc_thread_dma_copy</code><span class="sig-paren">(</span>uint32_t <em>remote_tile</em>, void *<em>remote_addr</em><span class="sig-paren">)</span><a class="headerlink" href="#c.optimsoc_thread_dma_copy" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Copy a remote thread with DMA </p>
+</dd></dl>
+
+<dl class="c function">
+<dt id="c.optimsoc_thread_join">
+<span class="target" id="group__thread_1ga2317cbb28269d13fa1aecbb9fbd9a7c1"></span>int <code class="sig-name descname">optimsoc_thread_join</code><span class="sig-paren">(</span><a class="reference internal" href="#c.optimsoc_thread_t" title="optimsoc_thread_t">optimsoc_thread_t</a> <em>thread</em>, <a class="reference internal" href="#c.optimsoc_thread_t" title="optimsoc_thread_t">optimsoc_thread_t</a> <em>waitforthread</em><span class="sig-paren">)</span><a class="headerlink" href="#c.optimsoc_thread_join" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Wait for a thread until it exits.</p>
+<p>If the thread is still running, the function blocks and waits for the finish of the thread. If it is already finished, the function returns immediately. </p>
+</dd></dl>
+
+<dl class="c function">
+<dt id="c.optimsoc_thread_set_extra_data">
+<span class="target" id="group__thread_1gaa96f991d74d08685473fc9bd088a86d4"></span>void <code class="sig-name descname">optimsoc_thread_set_extra_data</code><span class="sig-paren">(</span><a class="reference internal" href="#c.optimsoc_thread_t" title="optimsoc_thread_t">optimsoc_thread_t</a> <em>thread</em>, void *<em>extra_data</em><span class="sig-paren">)</span><a class="headerlink" href="#c.optimsoc_thread_set_extra_data" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Extra data associated with a thread</p>
+<p>The user or runtime system can set extra data with the thread.This can be a pointer to a process structure or similar.</p>
+<p><dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">thread</span></code>: Thread to assign the data pointer to </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">extra_data</span></code>: Pointer to the data </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="c function">
+<dt id="c.optimsoc_thread_get_extra_data">
+<span class="target" id="group__thread_1gac4cf33db9d32f0be609f7fe3f545b8c1"></span>void *<code class="sig-name descname">optimsoc_thread_get_extra_data</code><span class="sig-paren">(</span><a class="reference internal" href="#c.optimsoc_thread_t" title="optimsoc_thread_t">optimsoc_thread_t</a> <em>thread</em><span class="sig-paren">)</span><a class="headerlink" href="#c.optimsoc_thread_get_extra_data" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get extra data pointer</p>
+<p>Retrieve the pointer to the extra data assigned to a thread.</p>
+<p><dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>Associated data pointer </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">thread</span></code>: Thread to get data pointer from </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="c function">
+<dt id="c.optimsoc_thread_set_pagedir">
+<span class="target" id="group__thread_1ga87add1eda305e6114dc89052cb03e8c3"></span>void <code class="sig-name descname">optimsoc_thread_set_pagedir</code><span class="sig-paren">(</span><a class="reference internal" href="#c.optimsoc_thread_t" title="optimsoc_thread_t">optimsoc_thread_t</a> <em>thread</em>, <a class="reference internal" href="group__paging.html#c.optimsoc_page_dir_t" title="optimsoc_page_dir_t">optimsoc_page_dir_t</a> <em>dir</em><span class="sig-paren">)</span><a class="headerlink" href="#c.optimsoc_thread_set_pagedir" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set page directory for thread</p>
+<p>Assign a page directory to a thread.</p>
+<p><dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">thread</span></code>: Thread to assign page directory to </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dir</span></code>: Page directory to assign </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="c function">
+<dt id="c.optimsoc_thread_get_pagedir">
+<span class="target" id="group__thread_1ga8d34f3811993a78424f3872ec370d389"></span><a class="reference internal" href="group__paging.html#c.optimsoc_page_dir_t" title="optimsoc_page_dir_t">optimsoc_page_dir_t</a> <code class="sig-name descname">optimsoc_thread_get_pagedir</code><span class="sig-paren">(</span><a class="reference internal" href="#c.optimsoc_thread_t" title="optimsoc_thread_t">optimsoc_thread_t</a> <em>thread</em><span class="sig-paren">)</span><a class="headerlink" href="#c.optimsoc_thread_get_pagedir" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Retrieve page directory of thread</p>
+<p>Get the page directory associated with a thread</p>
+<p><dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>Page directory </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">thread</span></code>: Thread to get page directory of </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+<dl class="c struct">
+<dt id="c.optimsoc_thread_attr">
+<span class="target" id="structoptimsoc__thread__attr"></span><em class="property">struct </em><code class="sig-name descname">optimsoc_thread_attr</code><a class="headerlink" href="#c.optimsoc_thread_attr" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+</div>
+</div>
+
+
+  <!-- footer -->
+  <hr>
+  <footer class="optimsoc-footer">
+    <p>OpTiMSoC &copy; 2012-2020 OpTiMSoC Maintainers &middot; Imprint</p>
+  </footer>
+
+  <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</body>
+</html>

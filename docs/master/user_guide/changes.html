@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Document Changes</title>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <!-- external CSS -->
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- our own CSS (must be include after bootstrap.css!) -->
+  <link rel="stylesheet" href="/css/optimsoc.css"/>
+
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+    <script src="/js/html5shiv.js"></script>
+    <script src="/js/respond.min.js"></script>
+  <![endif]-->
+
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/feed.xml" />
+
+  <!-- Google Web Fonts -->
+  <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,400italic,600,700,900" rel="stylesheet" type="text/css">
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro:400,500,600,700" rel="stylesheet" type="text/css">
+  <link href="//fonts.googleapis.com/css?family=Fredericka+the+Great" rel="stylesheet" type="text/css">
+</head>
+<body  data-offset='50' data-spy="scroll" data-target="">
+  <!-- top navigation bar -->
+  <nav class="navbar navbar-fixed-top optimsoc-nav" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/index.html" alt="OpTiMSoC"><span class="wordmark">OpTiMSoC</span></a>
+      </div>
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          <li><a href="/download.html">Download</a></li>
+          <li><a href="/docs/index.html">Documentation</a></li>
+          <li><a href="/getinvolved.html">Get involved</a></li>
+          <li><a href="/about.html">About</a></li>
+          <li><a href="/blog">Blog</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container" id="maincontent">
+  
+
+  <div class="optimsoc-section-header">
+  
+  <h1>User Guide</h1>
+  
+</div>
+
+  
+
+<hr/>
+
+<div class="col-md-3">
+  <div class="optimsoc-doc-mainnav affix" data-spy="affix" data-offset-top="50">
+    <div style="padding-bottom:10px" class="nav">
+      version master (<a href="/docs/index.html#document-archive">other versions</a>)
+
+      
+      
+        <p class="caption"><span class="caption-text">Documentation Parts</span></p>
+<ul class="nav current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">User Guide</a><ul class="nav current">
+<li class="toctree-l2"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html">Installation &amp; Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials.html">Tutorials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="develop.html">Develop OpTiMSoC</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Document Changes</a><ul class="nav">
+<li class="toctree-l3"><a class="reference internal" href="#id1">2018.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">2016.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">2015.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#june-20-2013">June 20, 2013</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#january-28-2013">January 28, 2013</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../refman/index.html">Reference Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/index.html">API Documentation</a></li>
+</ul>
+
+      
+    </div>
+  </div>
+</div>
+
+<div class="col-md-9 optimsoc-doc-body">
+
+ <div class="section" id="document-changes">
+<h1>Document Changes<a class="headerlink" href="#document-changes" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id1">
+<h2>2018.1<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>Released on 2018-12-20.</p>
+<ul class="simple">
+<li><p>Don’t ship our own FuseSoC any more, upstream is now sufficiently stable.</p></li>
+<li><p>Deprecate OpTiMSoC GUI. It has not seen development over the last years and has no users we know of.</p></li>
+<li><p>Simplify the installation instructions and their documentation.</p></li>
+<li><p>Imported new versions of Open SoC Debug, GLIP, and mor1kx to pick up significant improvements there</p></li>
+<li><p>Implement and document building Linux for OpTiMSoC</p></li>
+<li><p>Added examples for the VCU108 FPGA board</p></li>
+<li><p>Refactored and partially rewritten NoC implementation</p></li>
+</ul>
+</div>
+<div class="section" id="id2">
+<h2>2016.1<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>Released on 2016-09-02.</p>
+<ul class="simple">
+<li><p>Switched to FuseSoC-based build system</p></li>
+<li><p>Merged our own debug infrastructure with Open SoC Debug</p></li>
+<li><p>Port the basic 2x2 example to the Nexys 4 DDR board</p></li>
+<li><p>Adjust the tutorial and the installation instructions.</p></li>
+</ul>
+</div>
+<div class="section" id="id3">
+<h2>2015.1<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<p>Released on 2015-12-30.</p>
+<ul class="simple">
+<li><p>Fresh restart with package-based installation (S. Wallentowitz)</p></li>
+<li><p>Update old tutorials (S. Wallentowitz)</p></li>
+<li><p>Extend tutorial for FPGA (P. Wagner and S. Wallentowitz)</p></li>
+</ul>
+</div>
+<div class="section" id="june-20-2013">
+<h2>June 20, 2013<a class="headerlink" href="#june-20-2013" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Add installation and configuration description (S. Wallentowitz)</p></li>
+<li><p>Update old tutorials (S. Wallentowitz)</p></li>
+<li><p>Add host software (GUI) in tutorials (S. Wallentowitz)</p></li>
+<li><p>Add development tutorials (P. Wagner)</p></li>
+</ul>
+</div>
+<div class="section" id="january-28-2013">
+<h2>January 28, 2013<a class="headerlink" href="#january-28-2013" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Initial version of the document</p></li>
+<li><p>First tutorial steps for distributed memory systems</p></li>
+</ul>
+</div>
+</div>
+
+
+</div>
+</div>
+
+
+  <!-- footer -->
+  <hr>
+  <footer class="optimsoc-footer">
+    <p>OpTiMSoC &copy; 2012-2020 OpTiMSoC Maintainers &middot; Imprint</p>
+  </footer>
+
+  <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</body>
+</html>

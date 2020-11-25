@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Syscall Handling</title>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <!-- external CSS -->
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- our own CSS (must be include after bootstrap.css!) -->
+  <link rel="stylesheet" href="/css/optimsoc.css"/>
+
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+    <script src="/js/html5shiv.js"></script>
+    <script src="/js/respond.min.js"></script>
+  <![endif]-->
+
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/feed.xml" />
+
+  <!-- Google Web Fonts -->
+  <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,400italic,600,700,900" rel="stylesheet" type="text/css">
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro:400,500,600,700" rel="stylesheet" type="text/css">
+  <link href="//fonts.googleapis.com/css?family=Fredericka+the+Great" rel="stylesheet" type="text/css">
+</head>
+<body  data-offset='50' data-spy="scroll" data-target="">
+  <!-- top navigation bar -->
+  <nav class="navbar navbar-fixed-top optimsoc-nav" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/index.html" alt="OpTiMSoC"><span class="wordmark">OpTiMSoC</span></a>
+      </div>
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          <li><a href="/download.html">Download</a></li>
+          <li><a href="/docs/index.html">Documentation</a></li>
+          <li><a href="/getinvolved.html">Get involved</a></li>
+          <li><a href="/about.html">About</a></li>
+          <li><a href="/blog">Blog</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container" id="maincontent">
+  
+
+  <div class="optimsoc-section-header">
+  
+  <h1>API Documentation</h1>
+  
+</div>
+
+  
+
+<hr/>
+
+<div class="col-md-3">
+  <div class="optimsoc-doc-mainnav affix" data-spy="affix" data-offset-top="50">
+    <div style="padding-bottom:10px" class="nav">
+      version master (<a href="/docs/index.html#document-archive">other versions</a>)
+
+      
+      
+        <p class="caption"><span class="caption-text">Documentation Parts</span></p>
+<ul class="nav current">
+<li class="toctree-l1"><a class="reference internal" href="../../../user_guide/index.html">User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../refman/index.html">Reference Manual</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">API Documentation</a><ul class="nav current">
+<li class="toctree-l2"><a class="reference internal" href="group__utility.html">Utility functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group__system.html">OpTiMSoC system functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group__tracing.html">OpTiMSoC tracing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group__libbaremetal.html">Baremetal library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group__libmp.html">Message passing library</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="group__libruntime.html">Runtime library</a><ul class="nav current">
+<li class="toctree-l3"><a class="reference internal" href="group__initconfig.html">Initialization and Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="group__paging.html">Page Handling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="group__thread.html">Thread Management</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Syscall Handling</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+  </div>
+</div>
+
+<div class="col-md-9 optimsoc-doc-body">
+
+ <div class="section" id="syscall-handling">
+<h1>Syscall Handling<a class="headerlink" href="#syscall-handling" title="Permalink to this headline">¶</a></h1>
+<dl class="group">
+<dt>
+<span class="target" id="group__syscall"></span><em>group</em> <code class="sig-name descname">syscall</code></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Typedefs</p>
+<dl class="c type">
+<dt id="c.optimsoc_syscall_handler_fptr">
+<span class="target" id="group__syscall_1gaa2e412444da7003cb54d683424e8119a"></span><em class="property">typedef </em>void (*<code class="sig-name descname">optimsoc_syscall_handler_fptr</code>)<span class="sig-paren">(</span><em class="property">struct</em> <a class="reference internal" href="#c.optimsoc_syscall" title="optimsoc_syscall">optimsoc_syscall</a> *sysc<span class="sig-paren">)</span><a class="headerlink" href="#c.optimsoc_syscall_handler_fptr" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Syscall handler function</p>
+<p>The user or the runtime system registers the syscall handler function that is called with a pointer to the syscall data.</p>
+<p><dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">[inout]</span> <span class="pre">sysc</span></code>: The syscall data </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Functions</p>
+<dl class="c function">
+<dt id="c.optimsoc_syscall_handler_set">
+<span class="target" id="group__syscall_1ga92d011fb26791e375ac4a0bca743cfce"></span>void <code class="sig-name descname">optimsoc_syscall_handler_set</code><span class="sig-paren">(</span><a class="reference internal" href="#c.optimsoc_syscall_handler_fptr" title="optimsoc_syscall_handler_fptr">optimsoc_syscall_handler_fptr</a> <em>handler</em><span class="sig-paren">)</span><a class="headerlink" href="#c.optimsoc_syscall_handler_set" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Register a syscall handler</p>
+<p><dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">handler</span></code>: The syscall handler function to call on syscall exceptions. </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+<dl class="c struct">
+<dt id="c.optimsoc_syscall">
+<span class="target" id="structoptimsoc__syscall"></span><em class="property">struct </em><code class="sig-name descname">optimsoc_syscall</code><a class="headerlink" href="#c.optimsoc_syscall" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;optimsoc-runtime.h&gt;</em><p>Syscall data</p>
+<p>The syscall data is an identifier, up to six parameters and a return value. </p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+</div>
+</div>
+
+
+  <!-- footer -->
+  <hr>
+  <footer class="optimsoc-footer">
+    <p>OpTiMSoC &copy; 2012-2020 OpTiMSoC Maintainers &middot; Imprint</p>
+  </footer>
+
+  <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</body>
+</html>

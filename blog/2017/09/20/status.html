@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>What's going on at OpTiMSoC?</title>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <!-- external CSS -->
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- our own CSS (must be include after bootstrap.css!) -->
+  <link rel="stylesheet" href="/css/optimsoc.css"/>
+
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+    <script src="/js/html5shiv.js"></script>
+    <script src="/js/respond.min.js"></script>
+  <![endif]-->
+
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/feed.xml" />
+
+  <!-- Google Web Fonts -->
+  <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,400italic,600,700,900" rel="stylesheet" type="text/css">
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro:400,500,600,700" rel="stylesheet" type="text/css">
+  <link href="//fonts.googleapis.com/css?family=Fredericka+the+Great" rel="stylesheet" type="text/css">
+</head>
+<body  data-offset='50' data-spy="scroll" data-target="">
+  <!-- top navigation bar -->
+  <nav class="navbar navbar-fixed-top optimsoc-nav" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/index.html" alt="OpTiMSoC"><span class="wordmark">OpTiMSoC</span></a>
+      </div>
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          <li><a href="/download.html">Download</a></li>
+          <li><a href="/docs/index.html">Documentation</a></li>
+          <li><a href="/getinvolved.html">Get involved</a></li>
+          <li><a href="/about.html">About</a></li>
+          <li><a href="/blog">Blog</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container" id="maincontent">
+  
+
+  
+<h1>What's going on at OpTiMSoC?</h1>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-10">
+      <p>Each year in September or early October the OpTiMSoC team attends <a href="https://orconf.org/">ORConf</a>, and this year was no exception.
+In addition to exchanging a lot of ideas with friends and other open source enthusiasts, ORConf presents itself as a good opportunity to reflect on what has happened in OpTiMSoC land over the last year.</p>
+
+<p>As it turns out, there’s a lot we forgot to talk about before!</p>
+
+<ul>
+  <li>OpTiMSoC got initial Linux support, thanks to the great work of <a href="https://sites.google.com/view/ppenna/">Pedro</a> during his Google Summer of Code. See <a href="/blog/2017/09/04/gsoc2917.html">this blog post</a> for more details. Also, none of this work would have been possible without the great support of Stafford Horne, the maintainer of the OpenRISC architecture on Linux.</li>
+  <li>Our system-level tests are run continuously in Travis and make sure that the steps outlined in the tutorial documentation always work. Even though these tests are in simulation only, they are at least able to ensure that we don’t fundamentally break the code base when making changes.</li>
+  <li>We extended the <a href="https://optimsoc.org/docs/master/refman/index.html">Reference Manual</a> and added <a href="https://optimsoc.org/docs/master/api/index.html">auto-generated API documentation</a> to the homepage.</li>
+  <li>Stefan reimplemented the NoC. While the functionality stayed largely the same, the code is now easier to maintain.</li>
+  <li>The Xilinx VCU108 board is now supported.</li>
+  <li>A lot of debugging work, sweat and tears went into GLIP, especially the USB 3.0 transport (Cypress FX3). A huge thanks to Max for leading the effort on this and spending weeks on debugging tiny little bugs between the FPGA, the FX3 chip, its firmware and the host. Using USB 3 we can more than 100 MByte/s trace streams off-chip, which helped significantly in getting the Linux port up and running.</li>
+  <li>Finally: We went over 1024 commits!</li>
+</ul>
+
+<p>The future is always hard to predict (and history has told us many times that we’re particularly bad at predictions), but some serious things are cooking and might come to you soon.</p>
+
+<ul>
+  <li>Multi-core Linux support. The required Linux patches are currently under review and are scheduled to get into Linux in the 4.15 release.</li>
+  <li>Debug infrastructure improvements. Most of that work is happening over at Open SoC Debug, but we’re actively involved and are constantly merging when things get ready.</li>
+  <li>More NoC and network adapter improvements. We have quite a bit of research going on in this area, and we’ll try to make the results available as soon as they’re sufficiently usable in the general case.</li>
+</ul>
+
+<p>As always, if you have questions, let us know!
+In addition to the <a href="mailto:optimsoc@lists.lrz.de">mailing list</a> you can find us on <a href="https://gitter.im/optimsoc/Lobby">Gitter in the optimsoc/Lobby channel</a>.</p>
+
+    </div>
+    <div class="col-md-2 optimsoc-blog-meta">
+      <p>by Philipp Wagner <br/>on 20 September 2017</p>
+      <img class="img-rounded" src="/img/people/philipp.jpg"/>
+      <hr/>
+      <b>Share this post at:</b>
+      <ul class="share-buttons">
+	<li><a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fwww.optimsoc.org&t=" title="Share on Facebook" target="_blank" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(document.URL) + '&t=' + encodeURIComponent(document.URL)); return false;"><img src="/img/flat_web_icon_set/color/Facebook.png"></a></li>
+	<li><a href="https://twitter.com/intent/tweet?source=http%3A%2F%2Fwww.optimsoc.org&text=:%20http%3A%2F%2Fwww.optimsoc.org" target="_blank" title="Tweet" onclick="window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(document.title) + ':%20'  + encodeURIComponent(document.URL)); return false;"><img src="/img/flat_web_icon_set/color/Twitter.png"></a></li>
+	<li><a href="https://plus.google.com/share?url=http%3A%2F%2Fwww.optimsoc.org" target="_blank" title="Share on Google+" onclick="window.open('https://plus.google.com/share?url=' + encodeURIComponent(document.URL)); return false;"><img src="/img/flat_web_icon_set/color/Google+.png"></a></li>
+	<li><a href="http://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Fwww.optimsoc.org&title=&summary=&source=http%3A%2F%2Fwww.optimsoc.org" target="_blank" title="Share on LinkedIn" onclick="window.open('http://www.linkedin.com/shareArticle?mini=true&url=' + encodeURIComponent(document.URL) + '&title=' +  encodeURIComponent(document.title)); return false;"><img src="/img/flat_web_icon_set/color/LinkedIn.png"></a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+</div>
+
+
+  <!-- footer -->
+  <hr>
+  <footer class="optimsoc-footer">
+    <p>OpTiMSoC &copy; 2012-2020 OpTiMSoC Maintainers &middot; Imprint</p>
+  </footer>
+
+  <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>OpTiMSoC</title>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <!-- external CSS -->
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- our own CSS (must be include after bootstrap.css!) -->
+  <link rel="stylesheet" href="/css/optimsoc.css"/>
+
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+    <script src="/js/html5shiv.js"></script>
+    <script src="/js/respond.min.js"></script>
+  <![endif]-->
+
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/feed.xml" />
+
+  <!-- Google Web Fonts -->
+  <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,400italic,600,700,900" rel="stylesheet" type="text/css">
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro:400,500,600,700" rel="stylesheet" type="text/css">
+  <link href="//fonts.googleapis.com/css?family=Fredericka+the+Great" rel="stylesheet" type="text/css">
+</head>
+<body  data-offset='50' data-spy="scroll" data-target="">
+  <!-- top navigation bar -->
+  <nav class="navbar navbar-fixed-top optimsoc-nav" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/index.html" alt="OpTiMSoC"><span class="wordmark">OpTiMSoC</span></a>
+      </div>
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          <li><a href="/download.html">Download</a></li>
+          <li><a href="/docs/index.html">Documentation</a></li>
+          <li><a href="/getinvolved.html">Get involved</a></li>
+          <li><a href="/about.html">About</a></li>
+          <li><a href="/blog">Blog</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- "claim" -->
+<div class="optimsoc-claim">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-1"></div>
+      <div class="col-md-6 text-left">
+        <h1>OpTiMSoC gives you all building blocks you need to create your own manycore System-on-Chip.</h1>
+        <p class="lead">And it comes with some complete example systems to run in RTL simulation and on an FPGA, too.</p>
+      </div>
+      <div class="col-md-4 visible-md visible-lg">
+        <img class="optimsoc-claim-img" src="img/buildingblocks.jpg">
+      </div>
+      <div class="col-md-1"></div>
+    </div>
+  </div>
+</div>
+
+<!-- 3 columns with main messages -->
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">
+      <h2>What is OpTiMSoC?</h2>
+      <p>OpTiMSoC stands for <em>Open Tiled Manycore System-on-Chip</em>. It is an open-source framework primarily written in Verilog which allows you to build your own manycore System-on-Chip by connecting tiles like processors and memories through a Network-on-Chip. The resulting system can then be simulated on a PC or synthesized for an FPGA. You want to know how a SoC really works by taking a deep look inside? You want to evaluate the benefit of a new hardware accelerator? You want to test algorithms to assign tasks efficiently to different processing cores? OpTiMSoC gets you started!</p>
+      <p><a class="btn btn-default" href="about.html">Learn more about OpTiMSoC &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+      <h2>Get started!</h2>
+      <p>OpTiMSoC comes with an ever growing documentation as well as a lot of sample code that you can use to get started quickly. Depending on the hardware and software you have available, you can start by running a small existing system on an FPGA or simulating it (with Verilator or ModelSim).</p>
+      <p><a class="btn btn-default" href="/docs">Read the introduction tutorial &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+      <h2>Get involved!</h2>
+      <p>If you want to stay in touch, give feedback, ask questions or just stay informed, please subscribe to our mailing list!</p>
+      <p><form method="post" action="https://lists.lrz.de/mailman/subscribe/optimsoc">
+	  <div class="input-group">
+	    <input type="text" class="form-control" placeholder="your-email@example.com" name="email">
+	    <span class="input-group-btn">
+              <button class="btn btn-default" type="submit">Go!</button>
+	    </span>
+	  </div><!-- /input-group -->
+      </form></p>
+      <hr />
+      <div class="text-center">
+	<b>Share OpTiMSoC at:</b>
+	<ul class="share-buttons">
+	  <li><a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fwww.optimsoc.org&t=" title="Share on Facebook" target="_blank" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(document.URL) + '&t=' + encodeURIComponent(document.URL)); return false;"><img src="/img/flat_web_icon_set/color/Facebook.png"></a></li>
+	  <li><a href="https://twitter.com/intent/tweet?source=http%3A%2F%2Fwww.optimsoc.org&text=:%20http%3A%2F%2Fwww.optimsoc.org" target="_blank" title="Tweet" onclick="window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(document.title) + ':%20'  + encodeURIComponent(document.URL)); return false;"><img src="/img/flat_web_icon_set/color/Twitter.png"></a></li>
+	  <li><a href="https://plus.google.com/share?url=http%3A%2F%2Fwww.optimsoc.org" target="_blank" title="Share on Google+" onclick="window.open('https://plus.google.com/share?url=' + encodeURIComponent(document.URL)); return false;"><img src="/img/flat_web_icon_set/color/Google+.png"></a></li>
+	  <li><a href="http://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Fwww.optimsoc.org&title=&summary=&source=http%3A%2F%2Fwww.optimsoc.org" target="_blank" title="Share on LinkedIn" onclick="window.open('http://www.linkedin.com/shareArticle?mini=true&url=' + encodeURIComponent(document.URL) + '&title=' +  encodeURIComponent(document.title)); return false;"><img src="/img/flat_web_icon_set/color/LinkedIn.png"></a></li>
+	</ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  <!-- footer -->
+  <hr>
+  <footer class="optimsoc-footer">
+    <p>OpTiMSoC &copy; 2012-2020 OpTiMSoC Maintainers &middot; Imprint</p>
+  </footer>
+
+  <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</body>
+</html>

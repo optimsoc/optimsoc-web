@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Configuration</title>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <!-- external CSS -->
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- our own CSS (must be include after bootstrap.css!) -->
+  <link rel="stylesheet" href="/css/optimsoc.css"/>
+
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+    <script src="/js/html5shiv.js"></script>
+    <script src="/js/respond.min.js"></script>
+  <![endif]-->
+
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/feed.xml" />
+
+  <!-- Google Web Fonts -->
+  <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,400italic,600,700,900" rel="stylesheet" type="text/css">
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro:400,500,600,700" rel="stylesheet" type="text/css">
+  <link href="//fonts.googleapis.com/css?family=Fredericka+the+Great" rel="stylesheet" type="text/css">
+</head>
+<body  data-offset='50' data-spy="scroll" data-target="">
+  <!-- top navigation bar -->
+  <nav class="navbar navbar-fixed-top optimsoc-nav" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/index.html" alt="OpTiMSoC"><span class="wordmark">OpTiMSoC</span></a>
+      </div>
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          <li><a href="/download.html">Download</a></li>
+          <li><a href="/docs/index.html">Documentation</a></li>
+          <li><a href="/getinvolved.html">Get involved</a></li>
+          <li><a href="/about.html">About</a></li>
+          <li><a href="/blog">Blog</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container" id="maincontent">
+  
+
+  <div class="optimsoc-section-header">
+  
+  <h1>Reference Manual</h1>
+  
+</div>
+
+  
+
+<hr/>
+
+<div class="col-md-3">
+  <div class="optimsoc-doc-mainnav affix" data-spy="affix" data-offset-top="50">
+    <div style="padding-bottom:10px" class="nav">
+      version 2018.1 (<a href="/docs/index.html#document-archive">other versions</a>)
+
+      
+      
+        <p class="caption"><span class="caption-text">Documentation Parts</span></p>
+<ul class="nav current">
+<li class="toctree-l1"><a class="reference internal" href="../user_guide/index.html">User Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Reference Manual</a><ul class="nav current">
+<li class="toctree-l2"><a class="reference internal" href="porting.html">Porting OpTiMSoC</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Configuration</a><ul class="nav">
+<li class="toctree-l3"><a class="reference internal" href="#configuration-items">Configuration Items</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">System Configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="networkonchip.html">Network-on-Chip</a></li>
+<li class="toctree-l2"><a class="reference internal" href="maintainer/release-howto.html">OpTiMSoC Release HOWTO</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../api/index.html">API Documentation</a></li>
+</ul>
+
+      
+    </div>
+  </div>
+</div>
+
+<div class="col-md-9 optimsoc-doc-body">
+
+ <div class="section" id="configuration">
+<h1>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h1>
+<p>A hardware instance is configured using a single configuration
+structure. It is passed as a SystemVerilog packed struct through the
+system hierarchy. In the following you find the configuration items
+with a description and how they become visible in software if
+applicable.</p>
+<p>There are two types of configuration items: base configuration items
+are set by the designer and derived configuration items are derived by
+the OpTiMSoC structure.</p>
+<div class="section" id="configuration-items">
+<h2>Configuration Items<a class="headerlink" href="#configuration-items" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="system-configuration">
+<h3>System Configuration<a class="headerlink" href="#system-configuration" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="number-of-tiles-numtiles">
+<h4>Number of Tiles (<code class="docutils literal notranslate"><span class="pre">NUMTILES</span></code>)<a class="headerlink" href="#number-of-tiles-numtiles" title="Permalink to this headline">¶</a></h4>
+<p><strong>Type</strong> Base item, integer.</p>
+<p><strong>Description</strong> This sets the total number of tiles. It does not
+serve as generator input, but is essentially for information purposes.</p>
+<p><strong>Usage</strong> As informational field in the network adapter.</p>
+<p><strong>Software</strong> Accessible via <code class="docutils literal notranslate"><span class="pre">num_tiles()</span></code>.</p>
+</div>
+<div class="section" id="number-of-compute-tiles-numcts">
+<h4>Number of Compute Tiles (<code class="docutils literal notranslate"><span class="pre">NUMCTS</span></code>)<a class="headerlink" href="#number-of-compute-tiles-numcts" title="Permalink to this headline">¶</a></h4>
+<p><strong>Type</strong> Base item, integer.</p>
+<p><strong>Description</strong> This sets the number of compute tiles. It does not
+serve as generator input, but is essentially for information purposes.</p>
+<p><strong>Usage</strong> As informational field in the network adapter.</p>
+<p><strong>Software</strong> Accessible via <code class="docutils literal notranslate"><span class="pre">num_cts()</span></code>.</p>
+</div>
+<div class="section" id="list-of-compute-tiles-ctlist">
+<h4>List of Compute Tiles (<code class="docutils literal notranslate"><span class="pre">CTLIST</span></code>)<a class="headerlink" href="#list-of-compute-tiles-ctlist" title="Permalink to this headline">¶</a></h4>
+<p><strong>Type</strong> Base item, packed multi-dimensional array (64 of 16 bit).</p>
+<p><strong>Description</strong> Provide a map of compute tiles (max. 64 currently)
+with the tile id at the index of the array. Be careful that it is
+sorted as little endian (“from right to left”).</p>
+<p><strong>Usage</strong> As informational field in the network adapter.</p>
+<div class="admonition-todo admonition" id="id1">
+<p class="admonition-title">Todo</p>
+<p>Software</p>
+</div>
+</div>
+<div class="section" id="cores-per-tile-cores-per-tile">
+<h4>Cores per tile (<code class="docutils literal notranslate"><span class="pre">CORES_PER_TILE</span></code>)<a class="headerlink" href="#cores-per-tile-cores-per-tile" title="Permalink to this headline">¶</a></h4>
+<p><strong>Type</strong> Base item, integer.</p>
+<p><strong>Description</strong> Sets the number of cores per compute tile.</p>
+<p><strong>Usage</strong> As generator for the core instantiations in the tiles and
+base core id in each tile. Both can be queried as informational field
+in the network adapter.</p>
+<p><strong>Software</strong> Can be queried as ? and influences the values of
+<code class="docutils literal notranslate"><span class="pre">or1k_coreid()</span></code> and <code class="docutils literal notranslate"><span class="pre">or1k_numcores()</span></code>.</p>
+</div>
+<div class="section" id="global-memory-size-gmem-size">
+<h4>Global memory size (<code class="docutils literal notranslate"><span class="pre">GMEM_SIZE</span></code>)<a class="headerlink" href="#global-memory-size-gmem-size" title="Permalink to this headline">¶</a></h4>
+<p><strong>Type</strong> Base item, integer.</p>
+<p><strong>Description</strong> Sets the size of the global memory. Used by PGAS.</p>
+<p><strong>Usage</strong> As configuration value or descriptive at memory tile.</p>
+</div>
+<div class="section" id="global-memory-tile-gmem-tile">
+<h4>Global memory tile (<code class="docutils literal notranslate"><span class="pre">GMEM_TILE</span></code>)<a class="headerlink" href="#global-memory-tile-gmem-tile" title="Permalink to this headline">¶</a></h4>
+<p><strong>Type</strong> Base item, integer.</p>
+<p><strong>Description</strong> Sets the tile identifier of the global memory
+tile. Used by PGAS.</p>
+<p><strong>Usage</strong> Configures the PGAS load-store unit.</p>
+</div>
+<div class="section" id="total-number-of-cores-total-num-cores">
+<h4>Total number of cores (<code class="docutils literal notranslate"><span class="pre">TOTAL_NUM_CORES</span></code>)<a class="headerlink" href="#total-number-of-cores-total-num-cores" title="Permalink to this headline">¶</a></h4>
+<p><strong>Type</strong> Derived item, calculated as <code class="docutils literal notranslate"><span class="pre">NUMCTS</span> <span class="pre">*</span> <span class="pre">CORES_PER_TILE</span></code>.</p>
+</div>
+</div>
+<div class="section" id="network-on-chip">
+<h3>Network-on-Chip<a class="headerlink" href="#network-on-chip" title="Permalink to this headline">¶</a></h3>
+<div class="admonition-todo admonition" id="id2">
+<p class="admonition-title">Todo</p>
+<p>Describe</p>
+</div>
+</div>
+<div class="section" id="compute-tile-configuration">
+<h3>Compute Tile Configuration<a class="headerlink" href="#compute-tile-configuration" title="Permalink to this headline">¶</a></h3>
+<div class="admonition-todo admonition" id="id3">
+<p class="admonition-title">Todo</p>
+<p>Describe</p>
+</div>
+</div>
+<div class="section" id="network-adapter">
+<h3>Network Adapter<a class="headerlink" href="#network-adapter" title="Permalink to this headline">¶</a></h3>
+<div class="admonition-todo admonition" id="id4">
+<p class="admonition-title">Todo</p>
+<p>Describe</p>
+</div>
+</div>
+<div class="section" id="debug">
+<h3>Debug<a class="headerlink" href="#debug" title="Permalink to this headline">¶</a></h3>
+<div class="admonition-todo admonition" id="id5">
+<p class="admonition-title">Todo</p>
+<p>Describe</p>
+</div>
+</div>
+</div>
+<div class="section" id="id6">
+<h2>System Configuration<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
+<div class="admonition-todo admonition" id="id7">
+<p class="admonition-title">Todo</p>
+<p>Example of configuration in System Verilog</p>
+</div>
+</div>
+</div>
+
+
+</div>
+</div>
+
+
+  <!-- footer -->
+  <hr>
+  <footer class="optimsoc-footer">
+    <p>OpTiMSoC &copy; 2012-2020 OpTiMSoC Maintainers &middot; Imprint</p>
+  </footer>
+
+  <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</body>
+</html>
