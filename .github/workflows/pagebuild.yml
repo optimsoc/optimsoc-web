@@ -1,0 +1,30 @@
+name: pagebuild
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install packaged dependencies
+        run: sudo apt-get install libffi-dev python3 python3-venv ruby ruby-bundler
+
+      - name: Install dependencies through bundler
+        run: bundle install --path=vendor/bundle
+
+      - name: Build docs
+        run: ./build-docs.sh
+
+      - name: Build site
+        run: bundle exec jekyll build
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./_site
