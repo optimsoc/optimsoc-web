@@ -1,3 +1,0 @@
-{% assign doc_version_current_dev = "master" %}
-{% assign doc_version_current_release = '2016.1' %}
-{% assign doc_versions = ' master 2016.1 2015.1'  | split: ' ' %}
