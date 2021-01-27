@@ -16,6 +16,8 @@ exclude:
   - Gemfile*
   - vendor
 
+excerpt_separator: <!--more-->
+
 include: ["_images"]
 
 # blog authors
@@ -29,3 +31,6 @@ authors:
   ppenna:
     display_name: Pedro H. Penna
     picture: /img/people/ppenna.jpg
+  max:
+    display_name: Max Koenen
+    picture: /img/people/max.jpg
