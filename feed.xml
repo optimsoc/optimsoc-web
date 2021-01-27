@@ -7,6 +7,68 @@
 <atom:link href="http://www.optimsoc.org/feed.xml" rel="self" type="application/rss+xml" />
 
 <item>
+<title>OpTiMSoC Enabled Demonstrator System with Fault-Tolerant NoC</title>
+<description>&lt;p&gt;Although it has been silent around OpTiMSoC in recent months, some development is still ongoing.
+Based on OpTiMSoC, a demonstrator system has been developed in the scope of the &lt;a href=&quot;https://www.aramis2.org/&quot;&gt;ARAMiS II&lt;/a&gt; research project and has since been further improved.
+This blog post describes the demonstrator system, its architecture and building blocks, and the alterations and extensions made to OpTiMSoC in order to build it.
+&lt;!--more--&gt;&lt;/p&gt;
+&lt;h2 id=&quot;purpose-of-the-demonstrator&quot;&gt;Purpose of the demonstrator&lt;/h2&gt;
+
+&lt;p&gt;The demonstrator was implemented to demonstrate the capabilities of a newly developed Network on Chip (NoC).
+This network is a hybrid packet-switched and Time-Division-Multiplexed (TDM) NoC using TDM channels with protection switching to implement fault-tolerance and hard real-time guarantees for safety-critical traffic in a mixed-critical environment.&lt;/p&gt;
+
+&lt;p&gt;The goal of the demonstrator is to:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;demonstrate fault-tolerance of critical communication in the NoC&lt;/li&gt;
+  &lt;li&gt;demonstrate isolation between critical and non-critical traffic in the NOC&lt;/li&gt;
+  &lt;li&gt;visualize the current status of the NoC&lt;/li&gt;
+  &lt;li&gt;allow interaction with the system and the applications running&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;overview&quot;&gt;Overview&lt;/h2&gt;
+
+&lt;p&gt;The following picture gives an overview of the different parts of the demonstrator.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/posts/2021-01-26-demonstrator/overview.jpg&quot; alt=&quot;An overview of the demonstrator system&quot; title=&quot;An overview of the demonstrator system&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The demonstrator has two main parts: an OpTiMSoC-based tiled 3x3 many-core system implemented on FPGA and a “Host PC” to control the system and visualize its current state.
+The 3x3 system is implemented on a &lt;a href=&quot;https://www.xilinx.com/products/boards-and-kits/ek-u1-vcu108-g.html&quot;&gt;VCU108 Evaluation Board&lt;/a&gt; from Xilinx and connected to the Host PC via the &lt;a href=&quot;https://www.cypress.com/products/ez-usb-fx3-superspeed-usb-30-peripheral-controller&quot;&gt;Cypress EZ-USB FX3&lt;/a&gt; peripheral controller.&lt;/p&gt;
+
+&lt;p&gt;A special bridge module connects the debug system to the NoC and acts as I/O tile to allow communication between the Host PC and the other tiles.
+The remaining 8 tiles are compute tiles that each contain an OpenRISC CPU.
+Three of these tiles run a pedestrian detection algorithm to represent a safety critical application, the remaining five tiles run an application that produces uniform random background traffic in the NoC.
+Furthermore, in order to demonstrate a globally asynchronous locally synchronous (GALS) architecture, the critical tiles, the non-critical tiles, and the NoC are all in different clock domains.&lt;/p&gt;
+
+&lt;p&gt;The application on the Host PC is split in two major parts: a control part to handle the communication with the target, load the applications into the local memory of the compute tiles, and handle the frame distribution for the pedestrian detection, and a monitoring part to observe and interact with the NoC.
+The control part is written in Python and makes heavy use of the glip Python bindings, the monitoring part is displayed in a browser using a local Flask server.&lt;/p&gt;
+
+&lt;p&gt;The video shows the demonstrator in action and the necessary steps to get it running.&lt;/p&gt;
+&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/IdkbkLiwBRc&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+
+&lt;h2 id=&quot;optimsoc-extensionsalterations&quot;&gt;OpTiMSoC extensions/alterations&lt;/h2&gt;
+
+&lt;p&gt;Several new hardware modules were implemented and some existing OpTiMSoC modules altered for the demonstrator system.
+Most notably:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;A completely new NoC has been implemented. The NoC uses TDM for critical traffic and packet-switching for non-critical traffic. The packet-switched part can use either source-routing or distributed routing (defined at design time). 1+1 protection switching can be used to guarantee fault-tolerance for critical communication.&lt;/li&gt;
+  &lt;li&gt;An I/O tile allowing communication between a Host PC and the compute tiles of a system via the NoC.&lt;/li&gt;
+  &lt;li&gt;Modules for fault-detection of NoC flits based on parity, as well as modules to generate the parity information for NoC flits.&lt;/li&gt;
+  &lt;li&gt;Fault injection modules to test the fault-tolerance of the NoC.&lt;/li&gt;
+  &lt;li&gt;A monitoring module to trace the utilization of individual NoC links for both TDM and packet-switched traffic.&lt;/li&gt;
+  &lt;li&gt;Clock-domain-crossing capabilities between the NoC, the compute tiles, and the debug interconnect as well as for the reset signals.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;so-whats-next&quot;&gt;So, what’s next?&lt;/h2&gt;
+
+&lt;p&gt;As of now, the new and altered modules are not available in the public OpTiMSoC repository as some of them are specific to the demonstrator system and some are still being worked on.
+However, we plan to add the hybrid NoC, the I/O tile, and the support for different clock domains and will hopefully have a new release this year.&lt;/p&gt;
+</description>
+<pubDate>Tue, 26 Jan 2021 00:00:00 +0000</pubDate>
+<link>http://www.optimsoc.org/blog/2021/01/26/demonstrator.html</link>
+<guid isPermaLink="true">http://www.optimsoc.org/blog/2021/01/26/demonstrator.html</guid>
+</item>
+
+<item>
 <title>OpTiMSoC wins the Eurolab4HPC Open Source Project Award!</title>
 <description>&lt;p&gt;How exciting!
 At the &lt;a href=&quot;https://fossi-foundation.org/wosh/&quot;&gt;Week of Open Source Hardware (WOSH)&lt;/a&gt; in Zürich, OpTiMSoC co-won the &lt;a href=&quot;https://www.eurolab4hpc.eu/open-source/call/&quot;&gt;Eurolab4HPC Open Source Project Award&lt;/a&gt;!
@@ -832,36 +894,6 @@ experimenting with the best development strategies.&lt;/p&gt;
 <pubDate>Sat, 16 May 2015 00:00:00 +0000</pubDate>
 <link>http://www.optimsoc.org/blog/2015/05/16/repo.html</link>
 <guid isPermaLink="true">http://www.optimsoc.org/blog/2015/05/16/repo.html</guid>
-</item>
-
-<item>
-<title>Website updates and mailing list</title>
-<description>&lt;p&gt;Maybe not visible to the outside, but there has been a change in the
-website rcently. We have updated the documentation, moved the entire
-site to &lt;a href=&quot;https://github.com/optimsoc/optimsoc.github.io&quot;&gt;github pages&lt;/a&gt;
-and added some social media buttons to share the website or our blog
-posts.&lt;/p&gt;
-
-&lt;p&gt;Also very important to mention we want to (re-)activate the mailing
-list (&lt;a href=&quot;mailto:optimsoc@lists.lrz.de&quot;&gt;optimsoc.lists.lrz.de&lt;/a&gt;). So if
-you have any feedback, questions or ideas please feel free to send a
-mail there. You can also subsribe to the list and always stay updated:&lt;/p&gt;
-
-&lt;form class=&quot;form-inline&quot; method=&quot;post&quot; action=&quot;https://lists.lrz.de/mailman/subscribe/optimsoc&quot;&gt;
-  &lt;div class=&quot;form-group&quot;&gt;
-    &lt;label class=&quot;sr-only&quot; for=&quot;email&quot;&gt;e-mail address&lt;/label&gt;
-    &lt;input type=&quot;text&quot; class=&quot;form-control&quot; placeholder=&quot;your-email@example.com&quot; name=&quot;email&quot; /&gt;
-  &lt;/div&gt;
-  &lt;button class=&quot;btn btn-primary&quot; type=&quot;submit&quot;&gt;Subscribe me!&lt;/button&gt;
-&lt;/form&gt;
-
-&lt;p&gt;As you might have noticed, we are also preparing a release, this time
-seriously ;)&lt;/p&gt;
-
-</description>
-<pubDate>Tue, 12 May 2015 00:00:00 +0000</pubDate>
-<link>http://www.optimsoc.org/blog/2015/05/12/website.html</link>
-<guid isPermaLink="true">http://www.optimsoc.org/blog/2015/05/12/website.html</guid>
 </item>
 
 </channel>

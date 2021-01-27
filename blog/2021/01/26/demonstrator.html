@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>OpTiMSoC Enabled Demonstrator System with Fault-Tolerant NoC</title>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <!-- external CSS -->
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- our own CSS (must be include after bootstrap.css!) -->
+  <link rel="stylesheet" href="/css/optimsoc.css"/>
+
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+    <script src="/js/html5shiv.js"></script>
+    <script src="/js/respond.min.js"></script>
+  <![endif]-->
+
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/feed.xml" />
+
+  <!-- Google Web Fonts -->
+  <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,400italic,600,700,900" rel="stylesheet" type="text/css">
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro:400,500,600,700" rel="stylesheet" type="text/css">
+  <link href="//fonts.googleapis.com/css?family=Fredericka+the+Great" rel="stylesheet" type="text/css">
+</head>
+<body  data-offset='50' data-spy="scroll" data-target="">
+  <!-- top navigation bar -->
+  <nav class="navbar navbar-fixed-top optimsoc-nav" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/index.html" alt="OpTiMSoC"><span class="wordmark">OpTiMSoC</span></a>
+      </div>
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          <li><a href="/download.html">Download</a></li>
+          <li><a href="/docs/index.html">Documentation</a></li>
+          <li><a href="/getinvolved.html">Get involved</a></li>
+          <li><a href="/about.html">About</a></li>
+          <li><a href="/blog">Blog</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container" id="maincontent">
+  
+
+  
+<h1>OpTiMSoC Enabled Demonstrator System with Fault-Tolerant NoC</h1>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-10">
+      <p>Although it has been silent around OpTiMSoC in recent months, some development is still ongoing.
+Based on OpTiMSoC, a demonstrator system has been developed in the scope of the <a href="https://www.aramis2.org/">ARAMiS II</a> research project and has since been further improved.
+This blog post describes the demonstrator system, its architecture and building blocks, and the alterations and extensions made to OpTiMSoC in order to build it.
+<!--more--></p>
+<h2 id="purpose-of-the-demonstrator">Purpose of the demonstrator</h2>
+
+<p>The demonstrator was implemented to demonstrate the capabilities of a newly developed Network on Chip (NoC).
+This network is a hybrid packet-switched and Time-Division-Multiplexed (TDM) NoC using TDM channels with protection switching to implement fault-tolerance and hard real-time guarantees for safety-critical traffic in a mixed-critical environment.</p>
+
+<p>The goal of the demonstrator is to:</p>
+<ul>
+  <li>demonstrate fault-tolerance of critical communication in the NoC</li>
+  <li>demonstrate isolation between critical and non-critical traffic in the NOC</li>
+  <li>visualize the current status of the NoC</li>
+  <li>allow interaction with the system and the applications running</li>
+</ul>
+
+<h2 id="overview">Overview</h2>
+
+<p>The following picture gives an overview of the different parts of the demonstrator.</p>
+
+<p><img src="/img/posts/2021-01-26-demonstrator/overview.jpg" alt="An overview of the demonstrator system" title="An overview of the demonstrator system" /></p>
+
+<p>The demonstrator has two main parts: an OpTiMSoC-based tiled 3x3 many-core system implemented on FPGA and a “Host PC” to control the system and visualize its current state.
+The 3x3 system is implemented on a <a href="https://www.xilinx.com/products/boards-and-kits/ek-u1-vcu108-g.html">VCU108 Evaluation Board</a> from Xilinx and connected to the Host PC via the <a href="https://www.cypress.com/products/ez-usb-fx3-superspeed-usb-30-peripheral-controller">Cypress EZ-USB FX3</a> peripheral controller.</p>
+
+<p>A special bridge module connects the debug system to the NoC and acts as I/O tile to allow communication between the Host PC and the other tiles.
+The remaining 8 tiles are compute tiles that each contain an OpenRISC CPU.
+Three of these tiles run a pedestrian detection algorithm to represent a safety critical application, the remaining five tiles run an application that produces uniform random background traffic in the NoC.
+Furthermore, in order to demonstrate a globally asynchronous locally synchronous (GALS) architecture, the critical tiles, the non-critical tiles, and the NoC are all in different clock domains.</p>
+
+<p>The application on the Host PC is split in two major parts: a control part to handle the communication with the target, load the applications into the local memory of the compute tiles, and handle the frame distribution for the pedestrian detection, and a monitoring part to observe and interact with the NoC.
+The control part is written in Python and makes heavy use of the glip Python bindings, the monitoring part is displayed in a browser using a local Flask server.</p>
+
+<p>The video shows the demonstrator in action and the necessary steps to get it running.</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/IdkbkLiwBRc" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+
+<h2 id="optimsoc-extensionsalterations">OpTiMSoC extensions/alterations</h2>
+
+<p>Several new hardware modules were implemented and some existing OpTiMSoC modules altered for the demonstrator system.
+Most notably:</p>
+<ul>
+  <li>A completely new NoC has been implemented. The NoC uses TDM for critical traffic and packet-switching for non-critical traffic. The packet-switched part can use either source-routing or distributed routing (defined at design time). 1+1 protection switching can be used to guarantee fault-tolerance for critical communication.</li>
+  <li>An I/O tile allowing communication between a Host PC and the compute tiles of a system via the NoC.</li>
+  <li>Modules for fault-detection of NoC flits based on parity, as well as modules to generate the parity information for NoC flits.</li>
+  <li>Fault injection modules to test the fault-tolerance of the NoC.</li>
+  <li>A monitoring module to trace the utilization of individual NoC links for both TDM and packet-switched traffic.</li>
+  <li>Clock-domain-crossing capabilities between the NoC, the compute tiles, and the debug interconnect as well as for the reset signals.</li>
+</ul>
+
+<h2 id="so-whats-next">So, what’s next?</h2>
+
+<p>As of now, the new and altered modules are not available in the public OpTiMSoC repository as some of them are specific to the demonstrator system and some are still being worked on.
+However, we plan to add the hybrid NoC, the I/O tile, and the support for different clock domains and will hopefully have a new release this year.</p>
+
+    </div>
+    <div class="col-md-2 optimsoc-blog-meta">
+      <p>by Max Koenen <br/>on 26 January 2021</p>
+      <img class="img-rounded" src="/img/people/max.jpg"/>
+      <hr/>
+      <b>Share this post at:</b>
+      <ul class="share-buttons">
+	<li><a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fwww.optimsoc.org&t=" title="Share on Facebook" target="_blank" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(document.URL) + '&t=' + encodeURIComponent(document.URL)); return false;"><img src="/img/flat_web_icon_set/color/Facebook.png"></a></li>
+	<li><a href="https://twitter.com/intent/tweet?source=http%3A%2F%2Fwww.optimsoc.org&text=:%20http%3A%2F%2Fwww.optimsoc.org" target="_blank" title="Tweet" onclick="window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(document.title) + ':%20'  + encodeURIComponent(document.URL)); return false;"><img src="/img/flat_web_icon_set/color/Twitter.png"></a></li>
+	<li><a href="https://plus.google.com/share?url=http%3A%2F%2Fwww.optimsoc.org" target="_blank" title="Share on Google+" onclick="window.open('https://plus.google.com/share?url=' + encodeURIComponent(document.URL)); return false;"><img src="/img/flat_web_icon_set/color/Google+.png"></a></li>
+	<li><a href="http://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Fwww.optimsoc.org&title=&summary=&source=http%3A%2F%2Fwww.optimsoc.org" target="_blank" title="Share on LinkedIn" onclick="window.open('http://www.linkedin.com/shareArticle?mini=true&url=' + encodeURIComponent(document.URL) + '&title=' +  encodeURIComponent(document.title)); return false;"><img src="/img/flat_web_icon_set/color/LinkedIn.png"></a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+</div>
+
+
+  <!-- footer -->
+  <hr>
+  <footer class="optimsoc-footer">
+    <p>OpTiMSoC &copy; 2012-2021 OpTiMSoC Maintainers &middot; Imprint</p>
+  </footer>
+
+  <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</body>
+</html>
